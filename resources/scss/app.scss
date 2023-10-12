@@ -1,0 +1,370 @@
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  
+}
+body {
+  background-color: #FFFFFF;
+}
+main {
+  padding: 0!important;
+}
+
+.proximamente {
+  font-family: Arial, sans-serif;
+  background-color: #f3f3f3;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+}
+.proximamente h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 10px;
+}
+.proximamente p {
+  font-size: 18px;
+  color: #777;
+}
+// Zona Navbar 
+// Mintur
+
+.mintur p {
+  margin: 0;
+  font-size: 10px;
+}
+
+// Fin Mintur
+nav {
+  background-color: rgb(255, 205, 53);  
+  border-bottom: 12px solid #f5ee68;  
+}
+nav ul li a {
+  text-decoration: none;
+}
+nav li {
+  margin-left: 25px;
+}
+
+.logo-navbar .titulo-logo {
+  font-size: 20px;
+  margin-left: 30px;
+}
+.logo-navbar .agv {
+  font-size: 10px;
+  margin-bottom: 15px;
+  margin-left: 30px;
+}
+.logo-navbar p {
+  margin: 0;
+}
+.logo-navbar:hover {
+  color: #ffffff;
+  
+}
+.content-navbar {
+  background-color: #e9b003;
+  border-radius: 10px;
+}
+.navbar li a {
+  color: white;
+}
+.navbar li a:hover {
+  color: white;  
+}
+.inicia_sesion i {
+  font-size: 25px;
+  color: white;
+  vertical-align: top;
+}
+.inicia_sesion a {
+//background-color: rgb(255, 255, 255);
+background-color: rgb(255, 205, 53); //9e9e9e
+outline: none;
+color: #ffffff;
+border: 3px solid #ffffff;
+font-weight: bold;
+text-decoration: none;
+padding: 5px;
+border-radius: 10px;
+margin-left: 10px;
+}
+.inicia_sesion a:active {
+  background: #265301;
+  color: #CDFEAA
+}
+.bienvenido-user a {
+  text-decoration: none;
+  color: white;
+}
+.menu-login {
+  background-color: rgba(255, 255, 255, 0.565);
+}
+.menu-login li a {
+  color: blueviolet;
+  font-weight: bold;
+}
+.menu-login li a:hover {
+   color: white;
+  background-color: rgba(255, 68, 0, 0.8);
+}
+// Fin Navbar ******
+// Zona Login 
+.conten-login {
+  border: 2px solid rgb(91, 89, 89);
+  border-radius: 20px;
+  padding: 25px;
+  margin: 50px 0;
+  box-shadow: 0px 0px 8px rgb(71, 68, 74);
+}
+// Zona Footer
+footer {
+  background-color: #ffffff;
+}
+.fa-youtube {
+    color: red;
+}
+
+.fa-facebook-f {
+    color: #1771E6;
+}
+
+.fa-instagram {
+    color: #E56479;
+}
+.fa-tiktok {
+  color: black;
+}
+footer a {
+  text-decoration: none;
+}
+nav p {
+  margin-bottom: 0;  
+}
+nav ul li a div {
+padding-top: 12px;
+}
+
+// Fin Zona Footer *****
+// Formulario Edicion *****
+.contenido-opcion-bandera {
+        align-items: center;
+        cursor: pointer;
+        padding: 8px;
+    }
+
+    .contenido-opcion-bandera img {
+        margin-right: 8px;
+    }
+.card {
+  border: none; 
+}
+.mas i {
+  color: #ff4400;
+}
+.mas i span {
+  color: black;
+  font-size: 12px;
+  margin-left: 10px;
+
+}
+.collapse-form {
+  //background-color: #E9ECEF;
+  border: 2px solid #E9ECEF;
+ }
+ .conten-login form button {
+  border: none;
+  background-color: green;
+ }
+ .conten-login form button:hover {
+  background-color: green;
+ }
+// Fin Formulario Edicion *****
+// Oportunidad de trabajo Remoto
+.presentacion button{
+  color: red;
+  font-weight: bold;
+}
+.cita-pascal .titulo-contenido p{
+font-family: 'Oswald', sans-serif;;
+  }
+.cita-pascal p span{
+  color: orangered;
+  text-shadow: 0px 0px 3px black;
+}  
+.presentacion {
+  background-color: #fff7f7;
+  padding: 30px;
+  border: 1px solid;
+  border-radius: 10px;
+  //text-align: center;
+  margin: 20px auto;
+}
+.contenido img {
+ border-radius: 10px;
+}
+.presentacion .titulo h2 {   
+  font-size: 24px;
+  font-weight: bold;
+  color: #6c6c6d;
+}
+.presentacion .titulo h2 span {
+  color: orangered;
+  text-shadow: 0px 0px 3px black;
+}
+.presentacion hr{
+  border-width: 2px;
+}
+.presentacion-contenido p span, .presentacion p span {
+   color: orangered;
+  text-shadow: 0px 0px 2px black;
+}
+
+// FIN Oportunidad de trabajo Remoto
+// Verify Emails
+.verify_email {
+   font-family: Arial, sans-serif;
+}
+.verify_email .container {
+   background-color: #f2f2f2;
+   padding: 20px;
+   text-align: center;
+}
+.verify_email .header {
+   background-color: #3498db;
+   color: #ffffff;
+   padding: 10px;
+}
+.verify_email .content {
+   padding: 20px;
+}
+.verify_email .button {
+   background-color: #3498db;
+   color: #ffffff;
+    text-decoration: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+}
+// FIN Verify Emails
+// welcome suppliers
+.welcome_suppliers {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+.logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: logo-grow 4s ease-in-out forwards, fade-in 1s ease-in-out 1s forwards;
+            opacity: 0;
+        }
+
+        .logo {
+            width: 0;
+            height: 0;
+            border: 100px solid transparent;
+            border-bottom: 100px solid #0074d9; /* Cambia el color de fondo según tu preferencia */
+        }
+
+        .welcome-text {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        @keyframes logo-grow {
+            0% {
+                width: 0;
+                height: 0;
+            }
+           
+             100% {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+             
+            100% {
+                opacity: 1;
+            }
+        }
+.container-welcome {
+            display: none; /* La tabla se oculta inicialmente */
+        }
+.content-datos {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   // margin: 10px;
+    max-width: 100%; /* Ocupar todo el ancho disponible */
+    text-align: left;
+    overflow: hidden; /* Evita que el contenido se desborde fuera del card en pantallas pequeñas */
+}
+
+/* Estilos para el contenido del card */
+.content-datos p {
+    padding: 5px;
+    background-color: #ffcd36;
+}
+
+
+.container-welcome .image-container {
+            width: 100%;
+            background: linear-gradient(90deg, rgba(245,169,60,1) 31%, rgba(233,176,3,1) 62%, rgba(255,205,54,1) 89%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+           // padding: 20px 0;
+        }
+
+        /* Estilo para hacer circular la imagen */
+        .circular-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            opacity: 0; /* Comienza con una opacidad de 0 para ocultar la imagen */
+            transition: opacity 1s ease-in-out;
+        }
+
+        .circular-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+// fin welcome suppliers
+
+// **** Medias Querys
+// Navbar
+
+@media (max-width: 768px) {
+.logo-movil{
+ width: 75%;
+}
+.form-movil {
+  width: 100%!important;
+}
+.content-min p {
+  font-size: 8px;
+} 
+}
+
+// Fin Medias Querys

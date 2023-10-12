@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.mintur p {
+  margin: 0;
+  font-size: 10px;
+}
+
+nav {
+  background-color: rgb(255, 68, 0);
+  border-bottom: 12px solid blueviolet;
+}
+
+nav ul li a {
+  text-decoration: none;
+}
+
+nav li {
+  margin-left: 25px;
+}
+
+.logo-navbar {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.logo-navbar .titulo-logo {
+  font-size: 20px;
+  margin-left: 30px;
+}
+
+.logo-navbar .agv {
+  font-size: 10px;
+  margin-bottom: 15px;
+  margin-left: 30px;
+}
+
+.logo-navbar p {
+  margin: 0;
+}
+
+.logo-navbar:hover {
+  color: #ffffff;
+}
+
+.navbar li a {
+  color: white;
+}
+
+.navbar li a:hover {
+  color: white;
+}
+
+.inicia_sesion {
+  padding-top: 15px;
+}
+
+.inicia_sesion i {
+  font-size: 25px;
+  color: white;
+  vertical-align: top;
+}
+
+.inicia_sesion a {
+  background-color: rgb(255, 255, 255);
+  outline: none;
+  color: orangered;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.inicia_sesion a:active {
+  background: #265301;
+  color: #CDFEAA;
+}
+
+.bienvenido-user a {
+  text-decoration: none;
+  color: white;
+}
+
+.menu-login {
+  background-color: rgba(255, 255, 255, 0.565);
+}
+
+.menu-login li a {
+  color: blueviolet;
+  font-weight: bold;
+}
+
+.menu-login li a:hover {
+  color: white;
+  background-color: rgba(255, 68, 0, 0.8);
+}
+
+.conten-login {
+  border: 2px solid rgb(91, 89, 89);
+  border-radius: 20px;
+  padding: 25px;
+  margin: 50px 0;
+  box-shadow: 0px 0px 8px rgb(71, 68, 74);
+}
+
+footer {
+  background-color: #ffffff;
+}
+
+.fa-youtube {
+  color: red;
+}
+
+.fa-facebook-f {
+  color: #1771E6;
+}
+
+.fa-instagram {
+  color: #E56479;
+}
+
+.fa-tiktok {
+  color: black;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+.contenido-opcion-bandera {
+  align-items: center;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.contenido-opcion-bandera img {
+  margin-right: 8px;
+}
+
+.card {
+  border: none;
+}
+
+.mas i {
+  color: #ff4400;
+}
+
+.mas i span {
+  color: black;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.collapse-form {
+  border: 2px solid #E9ECEF;
+}
+
+.conten-login form button {
+  border: none;
+  background-color: green;
+}
+
+.conten-login form button:hover {
+  background-color: green;
+}/*# sourceMappingURL=app.css.map */

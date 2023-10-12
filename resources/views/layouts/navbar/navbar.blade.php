@@ -1,0 +1,150 @@
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">    
+      <div class="pe-3">
+        <a class="logo-navbar" href="/">
+          <img class="logo-movil" src="assets/img/logo_amarillo2.png" alt="">          
+        </a> 
+      </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse content-navbar" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2">
+        <li class="nav-item">
+          <a class="" aria-current="page" href="#">
+            <div class="text-center text-left">
+              <i class="fa-solid fa-house"></i>
+              <p class="cw">Home</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="" aria-current="page" href="#">
+            <div class="text-center text-left">
+              <i class="fa fa-plane"></i>
+              <p class="cw">Vuelos</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="#">
+            <div class="text-center text-left">
+              <i class="fa-solid fa-hotel"></i>
+              <p class="cw">Hoteles</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="conoce-argentina">
+            <div class="text-center text-left">
+              <img class="bandera-arg" src="assets/img_banderas/argentina_nav.png" alt="">
+              <p>Tur-Arg</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="#">
+            <div class="text-center text-left">
+              <i class="fa-solid fa-suitcase"></i>
+              <p class="cw">Paquetes</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="#">
+            <div class="text-center text-left">
+              <i class="fa-solid fa-suitcase-medical"></i>
+              <p class="cw">Assist</p>
+            </div>
+          </a>
+        </li>        
+      </ul>        
+      <ul class="navbar-nav me-5 mb-2 mb-lg-0">      
+        @guest()
+        @if (Auth::guard('client')->check())
+        @else
+          <p class="inicia_sesion"><i class="fa-solid fa-right-to-bracket"></i><a href="login_client">Clientes</a></p>
+        @endif
+          @endguest 
+        @if (Auth::check())
+        @php
+        $userId = Auth::user()->id;
+         @endphp
+        @endif
+        
+        @if (@auth())           
+             @if (Auth::user())
+               @if (Auth::user()->id_rango === '1') 
+                   <li class="bienvenido-user nav-item dropdown">
+                   <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bienvenido
+                   {{auth()->user()->usuario}}
+                   </a>                   
+                   <ul class="dropdown-menu menu-login">
+                     <li><a class="dropdown-item" href="{{ route('user.edit') }}">Mi Perfil</a></li>
+                     <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
+                     <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
+                     <li><a class="dropdown-item" href="upload">Uploads</a></li>
+                     <li><a class="dropdown-item" href="{{ route('user.presentation', ['lider_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
+                     <li><hr class="dropdown-divider"></li>
+                     <li><a class="dropdown-item" href="/logout">Salir</a></li>
+                   </ul>
+                  </li>
+               @elseif (Auth::user()->id_rango === null)    
+                  <li class="bienvenido-user nav-item dropdown">
+                  <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bienvenido
+                  {{auth()->user()->usuario}}
+                  </a>
+                  <ul class="dropdown-menu menu-login">
+                    <li><a class="dropdown-item" href="{{ route('user.edit') }}">Mi Perfil</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/logout">Salir</a></li>
+                  </ul>
+                </li>    
+               @elseif (Auth::user()->id_rango === '2' || Auth::user()->id_rango === '3')
+                  <li class="bienvenido-user nav-item dropdown">
+                   <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bienvenido
+                     {{auth()->user()->usuario}}
+                   </a>
+                   <ul class="dropdown-menu menu-login">
+                     <li><a class="dropdown-item" href="{{ route('user.edit') }}">Mi Perfil</a></li>
+                     <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
+                     <li><a class="dropdown-item" href="#">Contenidos</a></li>
+                     <li><hr class="dropdown-divider"></li>
+                     <li><a class="dropdown-item" href="/logout">Salir</a></li>
+                   </ul>
+                  </li>
+               @elseif (Auth::user()->id_rango > 3)
+                  <li class="bienvenido-user nav-item dropdown">
+                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bienvenido
+                     {{auth()->user()->usuario}}
+                    </a>
+                    <ul class="dropdown-menu menu-login">
+                      <li><a class="dropdown-item" href="{{ route('user.edit') }}">Mi Perfil</a></li>
+                      <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
+                      <li><a class="dropdown-item" href="#">Contenidos</a></li>
+                      <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
+                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['lider_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/logout">Salir</a></li>
+                    </ul>
+                  </li>       
+               @endif 
+            @elseif (Auth::guard('client')->check())
+              <li class="bienvenido-user nav-item dropdown">
+              <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bienvenido
+               {{ Auth::guard('client')->user()->usuario }}
+              </a>
+               <ul class="dropdown-menu menu-login">
+                   <li><a class="dropdown-item" href="{{ route('client.edit') }}">Mi Perfil</a></li>
+                   <li><a class="dropdown-item" href="#">Mis Compras</a></li>
+                   <li><hr class="dropdown-divider"></li>
+                   <li><a class="dropdown-item" href="/logout">Salir</a></li>
+               </ul>
+              </li>  
+            @endif               
+        @endif       
+      </ul>      
+    </div>
+  </div>
+</nav>

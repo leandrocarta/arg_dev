@@ -1,0 +1,267 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Pais;
+use App\Models\Provincia;
+use App\Models\Rango;
+use App\Notifications\VerifyEmailUser;
+use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
+
+
+
+class UserRegisterController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        // return view('user.userRegister');
+    }
+    public function welcome()
+    {
+        return view('bienvenidos');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show()
+    {
+        if (Auth::check()) {
+            return redirect('/userHome');
+        }
+        return view('user.register_emprendedor_digital');
+    }
+    public function register(UserRequest $request)
+    {
+        $user = User::create($request->except('link_kappo', 'link_argtravels', 'link_sumate'));
+
+        $urlKappo = 'www.kappo/gastronomiaig/...?cuentaoficial=';
+        $linkKappo = $urlKappo . $user->id;
+        // En desuso por el momento
+        $user->link_kappo = $linkKappo;
+        $user->save();
+
+        $urlArgTravels = 'www.argtravels.tur.ar/conoce-argentina?promotorOficialVerificado=';
+        $linkArgTravels = $urlArgTravels . $user->id;
+
+        $user->link_argtravels = $linkArgTravels;
+        $user->save();
+
+        $urlEquipo = 'www.argtravels.tur.ar/oportunidad_trabajo_remoto_turismo?reclutador_equipo_oficial=';
+        $link_sumate = $urlEquipo . $user->id;
+
+        $user->link_sumate = $link_sumate;
+        $user->save();
+
+        // Enviar la notificación de verificación por correo electrónico
+        $user->notify(new VerifyEmailUser($user->id));
+        return redirect('/bienvenidos');
+    }
+    public function verification()
+    {
+        return view('user.verification_success');
+    }
+
+    public function verifyEmail(Request $request, $id)
+    {
+        // Buscar al usuario por su ID
+        $user = User::find($id);
+
+        if (!$user) {
+            abort(404, 'User not found'); // O maneja el caso en el que el usuario no se encuentre.
+        }
+
+        // Verificar la firma temporal de la URL
+        if (!hash_equals(sha1($user->getEmailForVerification()), $request->hash)) {
+            abort(403, 'Unauthorized'); // O maneja el error de URL no válida de acuerdo a tus necesidades.
+        }
+
+        // Verificar si el usuario ya ha verificado su correo electrónico
+        if ($user->hasVerifiedEmail()) {
+            return redirect('/'); // O redirige al usuario a la página de inicio u otra que desees.
+        }
+
+        // Marcar el correo electrónico como verificado
+        $user->markEmailAsVerified();
+        return redirect()->route('verificacion.success');
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function editForm()
+    {
+        $user = Auth::user(); // Obtener el usuario autenticado
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $rangos = Rango::all();
+        $id_pais = $user->provincia->id_pais ?? null;
+        $codigo_pais = $user->pais->cod_pais ?? null;
+        $nombre_pais = $user->pais->nombre ?? null;
+        $nombre_img = $user->pais->nombre_img ?? null;
+        return view('user.edit', compact('user', 'paises', 'provincias', 'rangos', 'id_pais', 'codigo_pais', 'nombre_pais', 'nombre_img')); // Pasar la variable $user a la vista
+    }
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        if (Auth::user()->img_profile === '' || Auth::user()->img_profile === null) {
+            try {                
+                // Subir y almacenar el nombre de la imagen de perfil si se proporcionó
+                $uploadedFile = $request->file('profile_image');
+                if ($uploadedFile) {                   
+                    $extension = strtolower($uploadedFile->getClientOriginalExtension());
+                    if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {                         
+                        Session::flash('error_message', 'Ooops10!!! Hubo un error, revisa el formulario.');
+                        return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
+                    } else {                         
+                        $timestamp = time();
+                        $originalFileName = $timestamp . '_' . $uploadedFile->getClientOriginalName();
+                        
+                        $image = Image::make($uploadedFile);
+                        
+                        if ($image->width() > 500 || $image->height() > 500) {
+                            $image->fit(500, 500);
+                        } else {
+                            $image->fit(500, 500);
+                        }
+                        $image->save(public_path('assets/img_profile/' . $originalFileName));
+                        
+                        // Guardar el nombre original en la base de datos
+                        $user->img_profile = $originalFileName;
+                        $user->save();
+                        $user->nombre = $request->input('nombre');
+                        $user->apellido = $request->input('apellido');
+                        $user->dni_select = $request->input('dni_select');
+                        $user->dni_num = $request->input('dni_num');
+                        $user->movil_area = $request->input('cod_area');
+                        $user->movil_num = $request->input('movil');
+
+                        $user->direccion = $request->input('direccion');
+                        $user->ciudad = $request->input('ciudad');
+                        $user->id_provincia = $request->input('provincia');
+                        $user->id_pais = $request->input('pais');
+                        $user->id_rango = $request->input('rango');
+                        $user->save();
+                    }
+                } else {
+                    Session::flash('error_message', 'Ooops!!! Hubo un error, revisa el formulario.');
+                    return back()->withErrors(['profile_image' => 'Debes seleccionar una imagen de perfil.']);
+                }
+            } catch (\Exception $e) {
+                // Manejar el error general  
+                Session::flash('error_message', 'Ooops Ooops !!! Hubo un error, revisa el formulario.');
+            }
+        } else {
+            try {
+                // Subir y almacenar el nombre de la imagen de perfil si se proporcionó
+                $uploadedFile = $request->file('profile_image');
+
+                if ($uploadedFile) {
+                    $extension = strtolower($uploadedFile->getClientOriginalExtension());
+                    if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {
+                        Session::flash('error_message', 'Ooops!!! Hubo un error, revisa el formulario.');
+                        return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
+                    } else {
+                        $timestamp = time();
+                        $originalFileName = $timestamp . '_' . $uploadedFile->getClientOriginalName();
+                        $image = Image::make($uploadedFile);
+                        if ($image->width() > 500 || $image->height() > 500) {
+                            $image->fit(500, 500);
+                        } else {
+                            $image->fit(500, 500);
+                        }
+                        $image->save(public_path('assets/img_profile/' . $originalFileName), 99);
+                        $user->img_profile = $originalFileName;
+                        $user->save();
+                        $user->nombre = $request->input('nombre');
+                        $user->apellido = $request->input('apellido');
+                        $user->dni_select = $request->input('dni_select');
+                        $user->dni_num = $request->input('dni_num');
+                        $user->movil_area = $request->input('cod_area');
+                        $user->movil_num = $request->input('movil');
+
+                        $user->direccion = $request->input('direccion');
+                        $user->ciudad = $request->input('ciudad');
+                        $user->id_provincia = $request->input('provincia');
+                        $user->id_pais = $request->input('pais');
+                        $user->id_rango = $request->input('rango');
+                        $user->save();
+                        return redirect()->route('user.edit')->with('success', 'Tus datos se actualizaron correctamente!!!');
+                    }
+                } else {
+                    $user->nombre = $request->input('nombre');
+                    $user->apellido = $request->input('apellido');
+                    $user->dni_select = $request->input('dni_select');
+                    $user->dni_num = $request->input('dni_num');
+                    $user->movil_area = $request->input('cod_area');
+                    $user->movil_num = $request->input('movil');
+
+                    $user->direccion = $request->input('direccion');
+                    $user->ciudad = $request->input('ciudad');
+                    $user->id_provincia = $request->input('provincia');
+                    $user->id_pais = $request->input('pais');
+                    $user->id_rango = $request->input('rango');
+                    $user->save();
+                }
+            } catch (\Exception $e) {
+                // Manejar el error general  
+                Session::flash('error_message', 'Ooops, se produjo en error.');
+            }
+        }
+        return redirect()->route('user.edit')->with('success', 'Sus datos se actualizaron correctamente!!!');
+    }
+
+    public function destroy(string $id)
+    {
+        //
+    }
+    public function update2(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        try {
+            $user->nombre = $request->input('nombre');
+            $user->apellido = $request->input('apellido');
+            $user->dni_select = $request->input('dni_select');
+            $user->dni_num = $request->input('dni_num');
+            $user->movil_area = $request->input('cod_area');
+            $user->movil_num = $request->input('movil');
+
+            $user->direccion = $request->input('direccion');
+            $user->ciudad = $request->input('ciudad');
+            $user->id_provincia = $request->input('provincia');
+            $user->id_pais = $request->input('pais');
+            $user->id_rango = $request->input('rango');
+            $user->save();
+            return redirect()->route('user.edit')->with('success', 'Tus datos se actualizaron correctamente!!!');
+        } catch (\Exception $e) {
+            // Manejar el error general  
+            Session::flash('error_message', 'Ooops, se produjo en error.');
+        }
+        return redirect()->route('user.edit')->with('success', 'Sus datos se actualizaron correctamente!!!');
+    }
+}
