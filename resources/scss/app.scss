@@ -149,6 +149,21 @@ padding-top: 12px;
 
 // Fin Zona Footer *****
 // Formulario Edicion *****
+.edit button {  
+  font-size: 13px; 
+  padding-left: 5px; 
+  padding-right: 5px;
+  color: white;
+  font-weight: bold;
+}
+.button-content {
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+}
+.button-content i {
+  margin-left: 5px; /* Ajusta el valor del margen a tu preferencia */
+}
 .contenido-opcion-bandera {
         align-items: center;
         cursor: pointer;
@@ -176,10 +191,11 @@ padding-top: 12px;
  }
  .conten-login form button {
   border: none;
-  background-color: green;
+  background-color: #E9B003;
+  
  }
  .conten-login form button:hover {
-  background-color: green;
+  background-color: #FFCD35;
  }
 // Fin Formulario Edicion *****
 // Oportunidad de trabajo Remoto

@@ -19,7 +19,7 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
                 @method('PUT')
-                <p style="color: grey;"><b><u>EDITAR MIS DATOS</u></b></p>
+                <p style="color: grey;"><b>ES NECESARIO COMPLETAR TUS DATOS</b></p>
                     <div class="mb-3">                      
                       <input name="username" type="text" placeholder="" class="form-control" value="{{auth()->user()->usuario}}" disabled> 
                    <div class="form-text">Nombre Usuario: No Editable.</div>
@@ -33,7 +33,7 @@
                          <i class="fa-solid fa-circle-plus"><span>Aquí tus Links</span></i>
                        </a>                      
                      </p>
-                     <div class="collapse mb-3" id="collapseExample">                      
+                     <div class="collapse mb-3 edit" id="collapseExample">                      
                        <div class="card card-body collapse-form">
                           <!--
                           <div class="mb-3">
@@ -52,36 +52,65 @@
                           @if ($user->id_rango === null)    
                          <div class="mb-3">                                               
                           <p>Seleccione un Rango y Guarde los Cambios</p>
-                         </div>     
-                          @elseif ($user->id_rango === '2')    
-                         <div class="mb-3">
-                          <input type="text" class="form-control" value="{{auth()->user()->link_kappo}}" disabled>                      
-                          <div class="form-text">Link de ventas MarketPlace: No Editable.</div>
+                         </div>    
+                         @elseif ($user->id_rango === 3)                         
+                          <div class="mb-3" style="position: relative;">
+                            <div style="display: flex;">
+                              <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_mundo}}" id="myInput4" disabled>
+                              <button type="button" onclick="copyToClipboard('myInput4', this)">
+                                <div class="button-content">
+                                  <span>Copiar</span>                                    
+                                </div></button>
+                            </div>
+                           <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
+                         </div>
+                          <div class="mb-3" style="position: relative;">
+                            <div style="display: flex;">
+                              <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_argtravels}}" id="myInput3" disabled>
+                              <button type="button" onclick="copyToClipboard('myInput3', this)">
+                                <div class="button-content">
+                                  <span>Copiar</span>                                    
+                                </div></button>
+                            </div>
+                           <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
                          </div>   
-                         @elseif ($user->id_rango === '3')                         
-                         <div class="mb-3">
-                          <input type="text" class="form-control" value="{{auth()->user()->link_argtravels}}" disabled>                      
-                          <div class="form-text">Link de ventas Turismo: No Editable.</div>
-                         </div> 
-                         @elseif($user->id_rango === '1' || $user->id_rango >= '4')       
-                        <!-- <div class="mb-3">
-                          <input type="text" class="form-control" value="{{auth()->user()->link_kappo}}" disabled>                      
-                          <div class="form-text">Link de ventas MarketPlace: No Editable.</div>
-                         </div> -->
-                         <div class="mb-3">
-                          <input type="text" class="form-control" value="{{auth()->user()->link_argtravels}}" disabled>                      
-                          <div class="form-text">Link de ventas Turismo: No Editable.</div>
-                         </div>                      
-                         <div class="mb-3">
-                          <input type="text" class="form-control" value="{{auth()->user()->link_sumate}}" disabled>                      
-                          <div class="form-text">Link para reclutamiento de equipo: No Editable.</div>
-                         </div> 
+                         @elseif($user->id_rango === 1 || $user->id_rango >= 4)                             
+                         <div class="mb-3" style="position: relative;">
+                            <div style="display: flex;">
+                              <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_mundo}}" id="myInput1" disabled>
+                              <button type="button" onclick="copyToClipboard('myInput1', this)">
+                                <div class="button-content">
+                                  <span>Copiar</span>                                    
+                                </div></button>
+                            </div>
+                           <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
+                         </div>
+                         <div class="mb-3" style="position: relative;">
+                            <div style="display: flex;">
+                              <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_argtravels}}" id="myInput2" disabled>
+                              <button type="button" onclick="copyToClipboard('myInput2', this)">
+                                <div class="button-content">
+                                  <span>Copiar</span>                                    
+                                </div></button>
+                            </div>
+                           <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
+                         </div>         
+                         <div class="mb-3" style="position: relative;">
+                            <div style="display: flex;">
+                              <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_sumate}}" id="myInput5" disabled>
+                              <button type="button" onclick="copyToClipboard('myInput5', this)">
+                                <div class="button-content">
+                                  <span>Copiar</span>                                    
+                                </div></button>
+                            </div>
+                           <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
+                         </div>  
                          @endif                  
                        </div>
                     </div>    
                     <div class="mb-3 form-floating">                    
                      <select name="rango" class="form-select">                        
-                          @if ($user->id_rango === '1')
+                          @if ($user->id_rango === 1)
                                @php
                                    $count = 1;
                                @endphp
@@ -94,13 +123,13 @@
                                    @php
                                        $count++;
                                    @endphp
-                               @endforeach
-                          @elseif ($user->id_rango === '2' || $user->id_rango === '3' || $user->id_rango === null )
+                               @endforeach                           
+                            @elseif ($user->id_rango === 2 || $user->id_rango === 3 || $user->id_rango === null )
                                @php
                                    $count = 1;
                                @endphp
                                @foreach ($rangos as $rango)
-                               @if ($count > 1)
+                               @if ($count > 2)
                                    @if ($rango->id === 2 || $rango->id === 3 || $rango->id === 4)                                       
                                        <option value="{{ $rango->id }}" {{ $user->id_rango == $rango->id ? 'selected' : '' }}>
                                            {{ $rango->nombre }}
@@ -115,12 +144,12 @@
                                        $count++;
                                    @endphp
                                @endforeach
-                            @elseif ($user->id_rango === '4')
+                            @elseif ($user->id_rango === 4)
                                @php
                                    $count = 1;
                                @endphp
                                @foreach ($rangos as $rango)
-                               @if ($count > 1)
+                               @if ($count > 2)
                                    @if ($rango->id === 4 || $rango->id === 5)                                       
                                        <option value="{{ $rango->id }}" {{ $user->id_rango == $rango->id ? 'selected' : '' }}>
                                            {{ $rango->nombre }}
@@ -135,12 +164,12 @@
                                        $count++;
                                    @endphp
                                @endforeach
-                            @elseif ($user->id_rango === '5')
+                            @elseif ($user->id_rango === 5)
                                @php
                                    $count = 1;
                                @endphp
                                @foreach ($rangos as $rango)
-                               @if ($count > 1)
+                               @if ($count > 2)
                                    @if ($rango->id === 5 || $rango->id === 6)                                       
                                        <option value="{{ $rango->id }}" {{ $user->id_rango == $rango->id ? 'selected' : '' }}>
                                            {{ $rango->nombre }}
@@ -155,12 +184,12 @@
                                        $count++;
                                    @endphp
                                @endforeach
-                            @elseif ($user->id_rango === '6')
+                            @elseif ($user->id_rango === 6)
                                @php
                                    $count = 1;
                                @endphp
                                @foreach ($rangos as $rango)
-                               @if ($count > 1)
+                               @if ($count > 2)
                                    @if ($rango->id === 6 || $rango->id === 7)                                       
                                        <option value="{{ $rango->id }}" {{ $user->id_rango == $rango->id ? 'selected' : '' }}>
                                            {{ $rango->nombre }}
@@ -175,12 +204,12 @@
                                        $count++;
                                    @endphp
                                @endforeach
-                            @elseif ($user->id_rango === '7')
+                            @elseif ($user->id_rango === 7)
                                @php
                                    $count = 1;
                                @endphp
                                @foreach ($rangos as $rango)
-                               @if ($count > 1)
+                               @if ($count > 2)
                                    @if ($rango->id === 7 || $rango->id === 8)                                       
                                        <option value="{{ $rango->id }}" {{ $user->id_rango == $rango->id ? 'selected' : '' }}>
                                            {{ $rango->nombre }}
@@ -195,12 +224,12 @@
                                        $count++;
                                    @endphp
                                @endforeach
-                            @elseif ($user->id_rango === '8')
+                            @elseif ($user->id_rango === 8)
                                @php
                                    $count = 1;
                                @endphp
                                @foreach ($rangos as $rango)
-                               @if ($count > 1)
+                               @if ($count > 2)
                                    @if ($rango->id === 8 || $rango->id === 9)                                       
                                        <option value="{{ $rango->id }}" {{ $user->id_rango == $rango->id ? 'selected' : '' }}>
                                            {{ $rango->nombre }}
@@ -215,13 +244,33 @@
                                        $count++;
                                    @endphp
                                @endforeach
-                            @elseif ($user->id_rango === '9')
+                            @elseif ($user->id_rango === 9)
                                @php
                                    $count = 1;
                                @endphp
                                @foreach ($rangos as $rango)
-                               @if ($count > 1)
-                                   @if ($rango->id === 9)                                       
+                               @if ($count > 2)
+                                   @if ($rango->id === 9 || $rango->id === 10)                                       
+                                       <option value="{{ $rango->id }}" {{ $user->id_rango == $rango->id ? 'selected' : '' }}>
+                                           {{ $rango->nombre }}
+                                       </option>
+                                   @else
+                                       <option value="{{ $rango->id }}" disabled>
+                                       {{ $rango->nombre }}
+                                       </option>    
+                                   @endif
+                               @endif
+                                   @php
+                                       $count++;
+                                   @endphp
+                               @endforeach                   
+                            @elseif ($user->id_rango === 10)
+                               @php
+                                   $count = 1;
+                               @endphp
+                               @foreach ($rangos as $rango)
+                               @if ($count > 2)
+                                   @if ($rango->id === 10)                                       
                                        <option value="{{ $rango->id }}" {{ $user->id_rango == $rango->id ? 'selected' : '' }}>
                                            {{ $rango->nombre }}
                                        </option>
@@ -254,13 +303,51 @@
                        </select>     
                       <label for="provincia" class="form-label">Rango Actual</label>
                       <div class="form-text">Accede al Siguiente Rango para Ampliar tu Equipo.</div>
+                    </div>  
+                @if ($user->id_rango === 1)
+                    <div class="mb-3 form-floating">
+                      <input type="number" name="comision" placeholder="comision" class="form-control" value="{{auth()->user()->comision}}" min="0" max="5" step="0.05">
+                      <label for="comision" class="form-label">Comisión directa Max.(2%)</label>                                            
+                    </div>  
+                    <div class="mb-3 form-floating">
+                      <input type="number" name="regalia" placeholder="regalia" class="form-control" value="{{auth()->user()->regalia}}" min="0" max="2" step="0.05">
+                      <label for="regalia" class="form-label">Comisión Equipo (%)</label>                                            
+                    </div> 
+                    
+                @elseif ($user->id_rango === 3)    
+                     <div class="mb-3 form-floating">
+                      <input type="number" name="comision" placeholder="comision" class="form-control" value="{{auth()->user()->comision}}" min="0" max="2" step="0.05">
+                      <label for="comision" class="form-label">Comisión Directa (2%)</label>                                            
+                    </div>  
+                    <div class="mb-3 form-floating">
+                      <input type="number" name="regalia" placeholder="regalia" class="form-control" value="{{auth()->user()->regalia}}" min="0" max="0" step="0.05" disabled>
+                      <label for="regalia" class="form-label">Comisión Equipo a Partir Nivel 2</label>                                            
+                    </div>                        
+                @elseif ($user->id_rango >= 3 && $user->id_rango <= 6)    
+                     <div class="mb-3 form-floating">
+                      <input type="number" name="comision" placeholder="comision" class="form-control" value="{{auth()->user()->comision}}" min="0" max="2" step="0.05">
+                      <label for="comision" class="form-label">Comisión Max Directa (2%)</label>                                            
+                    </div>  
+                    <div class="mb-3 form-floating">
+                      <input type="number" name="regalia" placeholder="regalia" class="form-control" value="{{auth()->user()->regalia}}" min="0" max="1" step="0.05">
+                      <label for="regalia" class="form-label">Comisión Max Equipo (1%), Editala.</label>                                            
+                    </div>     
+                @elseif ($user->id_rango >= 7 && $user->id_rango <= 10)    
+                     <div class="mb-3 form-floating">
+                      <input type="number" name="comision" placeholder="comision" class="form-control" value="{{auth()->user()->comision}}" min="0" max="2.25" step="0.05">
+                      <label for="comision" class="form-label">Comisión Max Directa (2.25%), Editala.</label>                                            
                     </div>                     
+                    <div class="mb-3 form-floating">
+                      <input type="number" name="regalia" placeholder="regalia" class="form-control" value="{{auth()->user()->regalia}}" min="0" max="1.25" step="0.05">
+                      <label for="regalia" class="form-label">Comisión Max Equipo (1.25%), Editala.</label>                                            
+                    </div> 
+                @endif     
                     <div class="mb-3 form-floating">
                       <input type="text" name="nombre" placeholder="Nombre" class="form-control" 
                       @if (auth()->user()->nombre)
                       value="{{ auth()->user()->nombre }}"
                       @else
-                      value="{{ old('nombre') }}"
+                      value="{{ old('nombre') }}" 
                       @endif >                      
                       <label for="nombre" class="form-label">Nombre/s</label>                                            
                     </div>
@@ -373,6 +460,57 @@
     </div>
   @endauth  
   @endsection
+  <script>
+function copyToClipboard(inputId, button) {
+  var inputField = document.getElementById(inputId);
+
+  // Crear un área de texto temporal
+  var tempTextArea = document.createElement("textarea");
+  tempTextArea.value = inputField.value;
+
+  // Agregar el área de texto temporal al documento
+  document.body.appendChild(tempTextArea);
+
+  // Seleccionar y copiar el texto del área de texto temporal
+  tempTextArea.select();
+  document.execCommand("copy");
+
+  // Remover el área de texto temporal
+  document.body.removeChild(tempTextArea);
+
+  // Cambiar el texto del botón a "Copiado"
+  button.innerHTML = '<div class="button-content"><span>Copiado</span> <i class="fa-solid fa-check"></i></div>';
+
+  // Restaurar el texto del botón después de 2 segundos
+  setTimeout(function() {
+    button.textContent = "Copiar";
+  }, 2000);
+}
+</script>
+  <!--
+<script>
+function copyToClipboard() {
+  // Obtener el campo de entrada
+  var inputField = document.getElementById("myInput");
+
+  // Crear un área de texto temporal
+  var tempTextArea = document.createElement("textarea");
+  tempTextArea.value = inputField.value;
+
+  // Agregar el área de texto temporal al documento
+  document.body.appendChild(tempTextArea);
+
+  // Seleccionar y copiar el texto del área de texto temporal
+  tempTextArea.select();
+  document.execCommand("copy");
+
+  // Remover el área de texto temporal
+  document.body.removeChild(tempTextArea);
+
+  alert("Texto copiado al portapapeles: " + inputField.value);
+}
+</script> -->
+
 <script>
   function mostrarBandera(selectElement) {
     var banderaElement = document.getElementById('bandera-img');

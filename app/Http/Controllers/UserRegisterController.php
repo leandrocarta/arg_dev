@@ -57,12 +57,12 @@ class UserRegisterController extends Controller
     }
     public function register(UserRequest $request)
     {
-        $user = User::create($request->except('link_kappo', 'link_argtravels', 'link_sumate'));
+        $user = User::create($request->except('link_mundo', 'link_argtravels', 'link_sumate', 'comision', 'regalia'));
 
-        $urlKappo = 'www.kappo/gastronomiaig/...?cuentaoficial=';
-        $linkKappo = $urlKappo . $user->id;
+        $urlMundo = 'www.argtravels.tur.ar/por-el-mundo?promotorOficialVerificado=';
+        $linkMundo = $urlMundo . $user->id;
         // En desuso por el momento
-        $user->link_kappo = $linkKappo;
+        $user->link_mundo = $linkMundo;
         $user->save();
 
         $urlArgTravels = 'www.argtravels.tur.ar/conoce-argentina?promotorOficialVerificado=';
@@ -76,7 +76,14 @@ class UserRegisterController extends Controller
 
         $user->link_sumate = $link_sumate;
         $user->save();
+                
+        $comision = 2;
+        $user->comision = $comision;
+        $user->save();
 
+        $regalia = 0;
+        $user->regalia = $regalia;
+        $user->save();
         // Enviar la notificación de verificación por correo electrónico
         $user->notify(new VerifyEmailUser($user->id));
         return redirect('/bienvenidos');
@@ -154,6 +161,8 @@ class UserRegisterController extends Controller
                         // Guardar el nombre original en la base de datos
                         $user->img_profile = $originalFileName;
                         $user->save();
+                        $user->comision = 2.00;
+                        $user->regalia = 0.00;
                         $user->nombre = $request->input('nombre');
                         $user->apellido = $request->input('apellido');
                         $user->dni_select = $request->input('dni_select');
@@ -169,7 +178,7 @@ class UserRegisterController extends Controller
                         $user->save();
                     }
                 } else {
-                    Session::flash('error_message', 'Ooops!!! Hubo un error, revisa el formulario.');
+                    Session::flash('error_message', 'Ooops!!! Hubo un error, revisa el formulario pero debes subir una imagen de perfil.');
                     return back()->withErrors(['profile_image' => 'Debes seleccionar una imagen de perfil.']);
                 }
             } catch (\Exception $e) {
@@ -181,12 +190,21 @@ class UserRegisterController extends Controller
                 // Subir y almacenar el nombre de la imagen de perfil si se proporcionó
                 $uploadedFile = $request->file('profile_image');
 
+                $oldImageName = $user->img_profile;
+               // dd('Nombre imagen anterior: ', $oldImageName);
+
                 if ($uploadedFile) {
                     $extension = strtolower($uploadedFile->getClientOriginalExtension());
                     if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {
                         Session::flash('error_message', 'Ooops!!! Hubo un error, revisa el formulario.');
                         return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
                     } else {
+                        if ($oldImageName) {
+                           $oldImagePath = public_path('assets/img_profile/' . $oldImageName);
+                           if (file_exists($oldImagePath)) {
+                               unlink($oldImagePath);
+                            }
+                        }
                         $timestamp = time();
                         $originalFileName = $timestamp . '_' . $uploadedFile->getClientOriginalName();
                         $image = Image::make($uploadedFile);
@@ -198,6 +216,13 @@ class UserRegisterController extends Controller
                         $image->save(public_path('assets/img_profile/' . $originalFileName), 99);
                         $user->img_profile = $originalFileName;
                         $user->save();
+                        $user->comision = $request->input('comision');
+                        $user->regalia = $request->input('regalia');
+                        $regalia = $request->input('regalia');
+                        if ($regalia === null || $regalia === '') {
+                        $regalia = 0.00;
+                        $user->regalia = $regalia;
+                        }
                         $user->nombre = $request->input('nombre');
                         $user->apellido = $request->input('apellido');
                         $user->dni_select = $request->input('dni_select');
@@ -214,6 +239,14 @@ class UserRegisterController extends Controller
                         return redirect()->route('user.edit')->with('success', 'Tus datos se actualizaron correctamente!!!');
                     }
                 } else {
+                    
+                    $user->comision = $request->input('comision');
+                    $user->regalia = $request->input('regalia');
+                    $regalia = $request->input('regalia');
+                    if ($regalia === null || $regalia === '') {
+                    $regalia = 0.00;
+                    $user->regalia = $regalia;
+                    }
                     $user->nombre = $request->input('nombre');
                     $user->apellido = $request->input('apellido');
                     $user->dni_select = $request->input('dni_select');

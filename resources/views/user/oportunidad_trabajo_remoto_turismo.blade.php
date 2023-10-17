@@ -3,7 +3,7 @@
     <!-- Otros datos del usuario que desees mostrar -->
 <section class="container mt-5 presentacion">    
         <div class="titulo">
-          <h2>Únete a la emocionante revolución digital en una de las industrias de mayor crecimiento a nivel global: <span>'EL TURISMO'.</span> Conviértete en un <span>'PROMOTOR DIGITAL - HOME OFFICE'</span> priorizando tu independencia profesional y transformando tus sueños en oportunidades ilimitadas. ¡Inicia hoy la construcción de tu futuro en tus propios términos!</h2>          
+          <h2><span>TRABAJO REMOTO: </span>Únete a la emocionante revolución digital en una de las industrias de mayor crecimiento a nivel global: <span>'EL TURISMO'.</span> Conviértete en un <span>'PROMOTOR DIGITAL'</span> priorizando tu independencia y transformando tus sueños en oportunidades ilimitadas. ¡Inicia hoy la construcción de tu futuro en tus propios términos!</h2>          
           <p><span>NO NECESITAS INVERTIR DINERO PARA UNIRTE</span>. Valoramos tu actitud y tu deseo de crecer por encima de todo.
            Creemos en tu potencial y te ofrecemos el apoyo y la capacitación que necesitas. No dejes que las preocupaciones sobre inversiones te detengan.
            ¡Estás en el lugar adecuado para comenzar este emocionante viaje!
@@ -11,8 +11,41 @@
         </div>   
         <hr>
         <div class="row contenido">
-            <div class="col-md-5 mt-2">  
+          <div class="col-md-5 mt-2">  
+             @if (!auth()->check())                   
                @if ($user)
+                 <img class="img-fluid" src="{{ asset('assets/img_profile/' . $user->img_profile) }}" alt="{{ $user->nombre }}">
+                 <p class="mb-0"><b>NOMBRE:</b> {{ $user->nombre }} {{ $user->apellido }}</p> 
+                 @if ($rango = $rangos->where('id', $user->id_rango)->first())
+                   <p class="mb-0"><b>CARGO:</b> {{ $rango->nombre }}</p>
+                 @else
+                   <p></p>
+                 @endif       
+                 @if ($pais = $paises->where('cod_pais', $user->id_pais)->first())
+                   <p class="mb-0"><b>PAÍS RESIDENCIA</b>: {{ $pais->nombre_img }}</p>
+                 @else
+                   <p>País no encontrado</p>
+                 @endif  
+                 <div class="mb-3 border-bottom" id="bandera-container">
+                       @if ($user->id_pais)
+                          <?php
+                           $pais_editado = $paises->firstWhere('cod_pais', $user->id_pais);
+                           ?>
+                         @if ($pais_editado)
+                           <div class="contenido-opcion-bandera d-flex">
+                           <img id="bandera-img" src="{{ asset('assets/img_banderas/' . $pais_editado->nombre . '.png') }}" alt="Bandera del país" width="50">
+                           <!-- Para Produccion anteponer la carpeta public -->
+                           <!-- <img id="bandera-img" src="{{ asset('public/assets/img_banderas/' . $pais_editado->nombre . '.png') }}" alt="Bandera del país" width="50"> -->
+                           </div>
+                         @endif
+                       @endif
+                 </div>                   
+               @endif     
+             @else 
+               @php
+                $user = auth()->user();
+                @endphp
+                @if ($user)
                <img class="img-fluid" src="{{ asset('assets/img_profile/' . $user->img_profile) }}" alt="{{ $user->nombre }}">
                 <p class="mb-0"><b>NOMBRE:</b> {{ $user->nombre }} {{ $user->apellido }}</p> 
                  @if ($rango = $rangos->where('id', $user->id_rango)->first())
@@ -39,7 +72,8 @@
                        @endif
                        @endif
                 </div>                   
-               @endif               
+               @endif     
+        @endif          
                 
                 <div class="row">
                    <div class="col-md-12">
@@ -59,7 +93,10 @@
                   <div class="col p-2 m-1 border bg-danger rounded">
                     <form action="{{ route('user.presentation_registro')}}" method="post">
                       @csrf
-                      <input type="hidden" name="lider_equipo_oficial" value="{{ request('lider_equipo_oficial') }}">
+                      @php
+                        $reclutador_equipo_oficial = request()->cookie('reclutador_equipo_oficial', '');
+                      @endphp
+                     <input type="hidden" name="reclutador_equipo_oficial" value="{{ $reclutador_equipo_oficial }}">
                       <!-- Agrega aquí tus campos de formulario -->
                       <div class="form-floating my-2">
                           <input type="email" class="form-control" placeholder="Danos tu mejor email" name="email" required>
@@ -88,13 +125,13 @@
             <div class="col-md-7 border-start presentacion-contenido"> 
               <div class="row">
                 <div class="col">
-                   <h5>TRABAJO REMOTO Y LIBERTAD FINANCIERA:</h5>
-                   <p>Imagina un mundo en el que tú controlas tu horario, tus ingresos y tu lugar de trabajo. En nuestro modelo de negocio, el trabajo remoto es la norma, lo que significa que puedes disfrutar de la comodidad de gestionar tu tiempo a tu manera. ¿Quieres pasar más tiempo con tu familia? ¿Viajar más? ¿O simplemente trabajar desde la comodidad de tu hogar? La elección es tuya. Además, en las próspera industria del turismo, <span>las oportunidades son ilimitadas</span>, y <span>tus ganancias también lo son</span>. Descubre un mundo de posibilidades y potencial financiero que puede ser tuyo en este emocionante camino como <span>PROMOTOR DIGITAL</span>.</p>
+                   <h4>TRABAJO REMOTO Y LIBERTAD FINANCIERA:</h4>
+                   <p>Imagina un mundo en el que tú controlas tus horario, tus ingresos y tu lugar de trabajo. En nuestro modelo de negocio, el <span>trabajo remoto </span>es la norma, lo que significa que puedes disfrutar de la comodidad de gestionar tu tiempo a tu manera. ¿Quieres pasar más tiempo con tu familia? ¿Viajar más? ¿O simplemente trabajar desde la comodidad de tu hogar? La elección es tuya. Además, en las próspera industria del turismo, <span>las oportunidades son ilimitadas</span>, y <span>tus ganancias también lo son</span>. Descubre un mundo de posibilidades y potencial financiero que puede ser tuyo en este emocionante camino como <span>PROMOTOR DIGITAL</span>.</p>
              
-                   <h5>VENTAJAS DE VENDER PRODUCTOS TURÍSTICOS:</h5>
+                   <h4>VENTAJAS DE VENDER PRODUCTOS TURÍSTICOS:</h4>
                    <p>Nuestra especialización se centra en la venta de productos turísticos, una de las industrias más emocionantes y prósperas en todo el mundo, con un crecimiento del 33% en ventas en línea en los últimos años. Esto significa que tendrás la oportunidad de conectar a las personas con experiencias únicas y al mismo tiempo generar ingresos significativos.</p>
     
-                   <h5>CRECIMIENTO EN EL MODELO MULTINIVEL:</h5>
+                   <h4>CRECIMIENTO EN EL MODELO MULTINIVEL:</h4>
                    <p>En nuestro modelo de negocio multinivel, tu éxito es nuestro éxito. Aquí, no solo construyes tu propio negocio, sino que también tienes la oportunidad de liderar y apoyar a otros en su camino hacia el éxito. <span>"Liderar un equipo es una pieza fundamental; es el punto de partida para acelerar tu emprendimiento y generar ingresos pasivos sin que tengas que trabajar incansablemente por tu cuenta. Tu equipo trabajará contigo y para ti, contribuyendo al éxito de todos"</span>.</p>
     
                    <h4>VENDER EN TODO EL MUNDO:</h4>

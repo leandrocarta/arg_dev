@@ -75,7 +75,7 @@
         
         @if (@auth())           
              @if (Auth::user())
-               @if (Auth::user()->id_rango === '1') 
+               @if (Auth::user()->id_rango === 1) 
                    <li class="bienvenido-user nav-item dropdown">
                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bienvenido
                    {{auth()->user()->usuario}}
@@ -85,7 +85,7 @@
                      <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
                      <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
                      <li><a class="dropdown-item" href="upload">Uploads</a></li>
-                     <li><a class="dropdown-item" href="{{ route('user.presentation', ['lider_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
+                     <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>
                    </ul>
@@ -101,7 +101,7 @@
                     <li><a class="dropdown-item" href="/logout">Salir</a></li>
                   </ul>
                 </li>    
-               @elseif (Auth::user()->id_rango === '2' || Auth::user()->id_rango === '3')
+               @elseif (Auth::user()->id_rango === 2 || Auth::user()->id_rango === 3)
                   <li class="bienvenido-user nav-item dropdown">
                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bienvenido
                      {{auth()->user()->usuario}}
@@ -124,7 +124,7 @@
                       <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
                       <li><a class="dropdown-item" href="#">Contenidos</a></li>
                       <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
-                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['lider_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
+                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="/logout">Salir</a></li>
                     </ul>

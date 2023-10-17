@@ -11,7 +11,7 @@ class UserLoginController extends Controller
     public function show()
     {
         if (Auth::check()) {
-            return redirect('/userHome');
+            return redirect('/');
         }
         return view('user.login_emprendedor_digital');
     }
@@ -27,16 +27,20 @@ class UserLoginController extends Controller
                 // return redirect('/login')->with('error', 'Debe verificar su correo electrónico ');
             }
             if ($request->hasCookie('reclutador_equipo_oficial')) { 
-                dd("Loguin, existe Cookie");
+                if (Auth::user()->id_user_lider === null) {
+                    $userId = $request->cookie('reclutador_equipo_oficial');
+                    Auth::user()->id_user_lider = $userId;
+                    Auth::user()->save();                
+                }
             }
              
             // Usuario verificado, redirigir al panel
-            return redirect('/userHome');
+            return redirect('/');
         }
         return back()->withErrors(['email' => 'Los datos ingresados no son validos']);
     }
     public function authenticated(Request $request, $user)
     {
-        return redirect('/userHome');
+        return redirect('/');
     }
 }

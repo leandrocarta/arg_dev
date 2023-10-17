@@ -15,48 +15,31 @@ class UserPresentationController extends Controller
     {                
         $paises = Pais::all();
         $rangos = Rango::all(); 
-         if ($request->hasCookie('reclutador_equipo_oficial')) { 
+         if ($request->hasCookie('reclutador_equipo_oficial')) {             
              $userId = $request->cookie('reclutador_equipo_oficial');
              $user = User::find($userId); 
-             $elim_cookie = 'reclutador_equipo_oficial';
-             setcookie($elim_cookie, '', time() - 3600, '/');
+            // $elim_cookie = 'reclutador_equipo_oficial';
+            // setcookie($elim_cookie, '', time() - 3600, '/');
+            // dd('Cookie de usuario eliminada: ' . $userId);
              return response()->view('user.oportunidad_trabajo_remoto_turismo', compact('user', 'paises', 'rangos')); 
-         } else {
-           $userId = $request->query('reclutador_equipo_oficial');
-           $user = User::find($userId);  
-           if ($userId) {                                
-                 if (!$user) {                    
-                    $empresa = 1;
-                    $userId = $empresa;           
-                 } else {
-                   $cookie = cookie('reclutador_equipo_oficial', $userId, 60 * 24 * 30 * 12); 
-                   return response()->view('user.oportunidad_trabajo_remoto_turismo', compact('user', 'paises', 'rangos'))->withCookie($cookie);
-                 }
-           } else {
-            $empresa = 1;
-            $userId = $empresa;
-            $cookie = cookie('reclutador_equipo_oficial', $userId, 60 * 24 * 30 * 12); 
-            return response()->view('user.oportunidad_trabajo_remoto_turismo', compact('user', 'paises', 'rangos'))->withCookie($cookie);
-           }
-          }
-
-        $userId = $request->query('reclutador_equipo_oficial'); 
-       
-        $paises = Pais::all();
-        $rangos = Rango::all();
-        if ($user) {
-            return view('user.oportunidad_trabajo_remoto_turismo', compact('user', 'paises', 'rangos'));
-        } else {
-            return view('user.oportunidad_trabajo_remoto_turismo', ['user' => $user ? $user : User::find(1), 'paises' => $paises, 'rangos' => $rangos]);
-        }
+         } else {    
+           $userId = $request->query('reclutador_equipo_oficial', 1);  
+           $user = User::find($userId); 
+           if (!$user) {
+           $userId = 1;
+           $user = User::find(1);
+           }            
+           $cookie = cookie('reclutador_equipo_oficial', $userId, 60 * 24 * 30 * 12); 
+           return response()->view('user.oportunidad_trabajo_remoto_turismo', compact('user', 'paises', 'rangos'))->withCookie($cookie);  
+          }     
     }
     public function registro(Request $request)
     {
-        $liderEquipoOficial = $request->input('lider_equipo_oficial');
-        if ($liderEquipoOficial) {
-            $liderEquipoOficial = $request->input('lider_equipo_oficial');
+        $reclutadorEquipoOficial = $request->input('reclutador_equipo_oficial');
+        if ($reclutadorEquipoOficial) {
+            $reclutadorEquipoOficial = $request->input('reclutador_equipo_oficial');
         } else {
-            $liderEquipoOficial = 1; // Valor predeterminado            
+            $reclutadorEquipoOficial = 1; // Valor predeterminado            
         }
         //  dd($request->all());
 
@@ -66,10 +49,10 @@ class UserPresentationController extends Controller
         $reunion->name = $request->input('name');
         $reunion->email = $request->input('email');
         $reunion->pais = $request->input('pais');
-        $reunion->id_user_lider = $liderEquipoOficial;
+        $reunion->id_user_lider = $reclutadorEquipoOficial;
         $reunion->fecha_presentacion = $request->input('fecha_presentacion');
 
         $reunion->save();
-        return Redirect::route('user.presentation', ['lider_equipo_oficial' => $request->input('lider_equipo_oficial')]);
+        return Redirect::route('user.presentation', ['reclutador_equipo_oficial' => $request->input('reclutador_equipo_oficial')]);
     }
 }

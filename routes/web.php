@@ -84,6 +84,7 @@ Route::post('/contacto/{id?}', [ContactosController::class, 'contactAccion'])->n
 
 // Promociones productos
 Route::get('/conoce-argentina', [PromocionController::class, 'cookie_conoceArgentina']);
+Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
 // Qr
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);
 // Cookie promotor digital

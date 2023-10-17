@@ -38,10 +38,11 @@ class User extends Authenticatable
         'movil_area',
         'movil_num',
         'id_rango',
-        'link_kappo',
+        'link_mundo',
         'link_argtravels',
         'link_sumate',
-        'verificado',
+        'comision',
+        'regalia',
         'id_user_lider',
         'img_perfil',
     ];

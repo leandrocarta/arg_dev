@@ -16,17 +16,23 @@ class ClientLoginController extends Controller
     }
     public function login(ClientLoginRequest $request)
     {
-        // dd('Cliente autenticado con éxito');
-        Auth::guard('client')->logout(); // Cerrar la sesión actual antes de iniciar sesión con otro cliente
-
-        //$credentials = $request->getCredentials();
+        Auth::guard('client')->logout(); 
         $credentials = $request->getLoginCredentials();
-        //dd($credentials);
         if (Auth::guard('client')->attempt($credentials)) {
             // dd($ver);
             if (Auth::guard('client')->user()->email_verified_at === null) {
                 Auth::guard('client')->logout();
                 return back()->withErrors(['email' => 'Para Iniciar Sesión debes validar tu cuenta siguiendo el Link que te enviamos al correo electrónico.']);
+            }
+            if ($request->hasCookie('promotorOficialVerificado')) { 
+                if (Auth::guard('client')->user()->id_user === null) {
+                    $userId = $request->cookie('promotorOficialVerificado');
+                   $user = Auth::guard('client')->user();
+                   if ($user) {
+                       $user->id_user = $userId;
+                       $user->save();
+                   }               
+                }
             }
             return redirect('/');
         }
