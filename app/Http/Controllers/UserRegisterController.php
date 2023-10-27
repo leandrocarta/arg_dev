@@ -238,8 +238,7 @@ class UserRegisterController extends Controller
                         $user->save();
                         return redirect()->route('user.edit')->with('success', 'Tus datos se actualizaron correctamente!!!');
                     }
-                } else {
-                    
+                } else {                    
                     $user->comision = $request->input('comision');
                     $user->regalia = $request->input('regalia');
                     $regalia = $request->input('regalia');

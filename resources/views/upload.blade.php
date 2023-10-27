@@ -1,10 +1,10 @@
 @extends('layouts.app-master')
 @section('content')
 @guest()
-  <p>Debes INICIAR SESION para acceder a tu cuenta.</p>
+  <p>SOLO PERSONAL AUTORIZADO!!!</p>
 @endguest
 @auth()
-@if (Auth::user()->id_rango === '1')
+@if (Auth::user()->id_rango === 1)
  <div class="container w-50 form-edit">
     <div class="row">
         <div class="col conten-login">  
@@ -17,8 +17,6 @@
         </div>
     </div>
  </div> 
- @else () 
-<h3>No estas autorizado a esta seccion</h3>
 @endif        
 @endauth    
 @endsection

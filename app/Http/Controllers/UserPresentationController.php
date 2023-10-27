@@ -20,7 +20,6 @@ class UserPresentationController extends Controller
              $user = User::find($userId); 
             // $elim_cookie = 'reclutador_equipo_oficial';
             // setcookie($elim_cookie, '', time() - 3600, '/');
-            // dd('Cookie de usuario eliminada: ' . $userId);
              return response()->view('user.oportunidad_trabajo_remoto_turismo', compact('user', 'paises', 'rangos')); 
          } else {    
            $userId = $request->query('reclutador_equipo_oficial', 1);  
@@ -41,11 +40,9 @@ class UserPresentationController extends Controller
         } else {
             $reclutadorEquipoOficial = 1; // Valor predeterminado            
         }
-        //  dd($request->all());
 
         $reunion = new Reunions();
 
-        // Asignar los datos del formulario a los campos del modelo
         $reunion->name = $request->input('name');
         $reunion->email = $request->input('email');
         $reunion->pais = $request->input('pais');

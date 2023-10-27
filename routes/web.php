@@ -15,6 +15,7 @@ use App\Http\Controllers\ContactosController;
 use App\Http\Controllers\PromocionController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\ProductoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,6 @@ Route::get('/verify-email-client/{id}', [ClientRegisterController::class, 'verif
 Route::get('/verify-email-user/{id}', [UserRegisterController::class, 'verifyEmail'])->name('verify.email.user');
 // User Emprendedores
 //Route::resource('/user', UserRegisterController::class);
-
 Route::post('/register_emprendedor_digital', [UserRegisterController::class, 'register']);
 Route::get('/register_emprendedor_digital', [UserRegisterController::class, 'show']);
 Route::get('/verificacion_success', [UserRegisterController::class, 'verification'])->name('verificacion.success');
@@ -82,9 +82,20 @@ Route::post('/reclamos/{id}', [ContactosController::class, 'reclamo_save'])->nam
 Route::get('/contacto', [ContactosController::class, 'contactForm'])->name('client.contacto');
 Route::post('/contacto/{id?}', [ContactosController::class, 'contactAccion'])->name('client.contacto.save');
 
-// Promociones productos
+// Promociones productos turisticos
 Route::get('/conoce-argentina', [PromocionController::class, 'cookie_conoceArgentina']);
 Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
 // Qr
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);
 // Cookie promotor digital
+//Alta Hoteles
+Route::get('/hotel_news', [ProductoController::class, 'showFormHotel'])->name('hotel.store');
+Route::post('/hotel_news', [ProductoController::class, 'createHotel'])->name('hotel.store');
+//Alta Paquetes
+Route::get('/create_producto', [ProductoController::class, 'showFormProd'])->name('producto.create');
+Route::post('/create_producto', [ProductoController::class, 'createProd'])->name('producto.create');
+Route::get('/read_producto', [ProductoController::class, 'mostrarProductos'])->name('producto.show');
+Route::get('/update_producto/{id}', [ProductoController::class, 'formUpdateProductos'])->name('producto.update');
+Route::post('/editar_producto/{id}', [ProductoController::class, 'editarProducto'])->name('producto.updateProcess');
+Route::post('/delete_producto/{id}', [ProductoController::class, 'deleteProductos'])->name('producto.delete');
+

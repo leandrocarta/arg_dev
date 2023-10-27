@@ -84,7 +84,9 @@
                      <li><a class="dropdown-item" href="{{ route('user.edit') }}">Mi Perfil</a></li>
                      <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
                      <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
-                     <li><a class="dropdown-item" href="upload">Uploads</a></li>
+                     <li><a class="dropdown-item" href="/read_producto">Productos</a></li>
+                   <!--  <li><a class="dropdown-item" href="upload">Uploads Provincias con exel</a></li> -->
+                     <li><a class="dropdown-item" href="/hotel_news">Alta Hoteles</a></li>
                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>
