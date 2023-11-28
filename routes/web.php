@@ -16,28 +16,24 @@ use App\Http\Controllers\PromocionController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ProductoController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\HotelController;
+use App\Http\Controllers\CotizacionController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     //return view('layouts.construccion.construccion');
     return view('home');
 });
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/welcome_suppliers', function () {
     return view('welcome_suppliers');
 });
 Route::get('/certificado_habilitante', function () {
     return view('layouts.construccion.certificado_habilitante');
 });
+Route::get('/cotizacion_update/{id}', [CotizacionController::class, 'formUpdateCotizacion'])->name('cotizacion.update');
+Route::post('/cotizacion_update/{id}', [CotizacionController::class, 'editarCotizacion'])->name('cotizacion.updateProcess');
+
 //Auth::routes(['verify' => true]);
 Route::get('/upload', [ProvinciaController::class, 'showUploadForm'])->name('upload.form');
 Route::post('/import', [ProvinciaController::class, 'import'])->name('import.excel');
@@ -89,8 +85,19 @@ Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);
 // Cookie promotor digital
 //Alta Hoteles
-Route::get('/hotel_news', [ProductoController::class, 'showFormHotel'])->name('hotel.store');
-Route::post('/hotel_news', [ProductoController::class, 'createHotel'])->name('hotel.store');
+Route::get('/read_hotel', [HotelController::class, 'mostrarHoteles'])->name('hotel.show');
+Route::get('/hotel_news', [HotelController::class, 'showFormHotel'])->name('hotel.store');
+Route::post('/hotel_news', [HotelController::class, 'createHotel'])->name('hotel.store');
+Route::get('/hotel_update/{id}', [HotelController::class, 'formUpdateHotel'])->name('hotel.update');
+Route::post('/hotel_update/{id}', [HotelController::class, 'editarHotel'])->name('hotel.updateProcess');
+Route::post('/hotel_delete/{id}', [HotelController::class, 'hotelDelete'])->name('hotel.delete');
+// Paises
+Route::get('/read_pais', [PaisController::class, 'mostrarPaises'])->name('pais.show');
+Route::get('/pais_news', [PaisController::class, 'showFormPais'])->name('pais.store');
+Route::post('/pais_news', [PaisController::class, 'createPais'])->name('pais.store');
+Route::get('/pais_update/{id}', [PaisController::class, 'formUpdatePais'])->name('pais.update');
+Route::post('/pais_update/{id}', [PaisController::class, 'editarPais'])->name('pais.updateProcess');
+Route::post('/pais_delete/{id}', [PaisController::class, 'paisDelete'])->name('pais.delete');
 //Alta Paquetes
 Route::get('/create_producto', [ProductoController::class, 'showFormProd'])->name('producto.create');
 Route::post('/create_producto', [ProductoController::class, 'createProd'])->name('producto.create');
@@ -98,4 +105,4 @@ Route::get('/read_producto', [ProductoController::class, 'mostrarProductos'])->n
 Route::get('/update_producto/{id}', [ProductoController::class, 'formUpdateProductos'])->name('producto.update');
 Route::post('/editar_producto/{id}', [ProductoController::class, 'editarProducto'])->name('producto.updateProcess');
 Route::post('/delete_producto/{id}', [ProductoController::class, 'deleteProductos'])->name('producto.delete');
-
+Route::get('/detalles_productos/{id}', [ProductoController::class, 'detalle_producto'])->name('producto.detalles');

@@ -11,17 +11,20 @@ class Producto extends Model
         'nombre',
         'codigo',
         'imagen',
+        'habitacion',
         'tipo_producto',
         'pais_destino',
         'ciudad_destino',
         'origen_salida',
-        'transporte',
         'precio_total',
         'precio_comisionable',
-        'hotel',
-        'categoria_hotel',
-        'duracion',
-        'solo_adultos',
+        'moneda',
+        'id_hotel',
+        'estadia',
+        'fecha_baja',
     ];
-    
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class, 'id_hotel');
+    }
 }

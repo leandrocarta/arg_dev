@@ -6,19 +6,41 @@
         <div class="row">
            <div class="col conten-login">   
             <p>ALTA DE HOTELES</p>       
-                 <form class="form-horizontal" method="POST" action="{{ route('hotel.store') }}">
+                 <form class="form-horizontal" method="POST" action="{{ route('hotel.store') }}" enctype="multipart/form-data">
                      {{ csrf_field() }}
                      <div class="form-group">
-                         <label for="nombre" class="control-label">Nombre del Hotel</label>
+                         <label for="nombre" class="control-label">Nombre del Hotel</label>                         
                          <div>
-                             <input id="nombre" type="text" class="form-control" name="nombre" required>
+                             <input type="text" class="form-control" name="nombre" required>
                         </div>
                      </div>
                      <label for="categoria" class="control-label">Categoría del Hotel</label>
                      <div>
-                        <input id="categoria" type="number" class="form-control" name="categoria" required>
-                     </div>    
-                     <div class="mt-2">
+                        <input type="number" class="form-control" name="categoria" required>
+                     </div>   
+                     <div class="form-group">
+                           <label for="publico" class="col-md-4 control-label">¿Apto todo Publico?</label>
+                            <div class="">
+                                <select name="publico" class="form-select" aria-label="Default select example">  
+                                   <option value="Publico">Apto Publico</option>
+                                   <option value="Niños Mayores de 6 años">Niños Mayores de 6 años</option>
+                                   <option value="Solo Adultos">Solo Adultos</option>
+                                </select>  
+                            </div>
+                     </div>     
+                     <div class="form-group">
+                            <label for="img_banner" class="col-md-4 control-label">Imagen Principal Banner (1350x500)</label>
+                            <div class="">
+                                <input type="file" class="form-control" name="img_banner" value="{{ old('img_banner') }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagenes" class="col-md-4 control-label">Imagenes Secundarias</label>
+                            <div class="">
+                                <input type="file" class="form-control" name="imagenes[]" accept="image/*" value="{{ old('imagenes') }}" multiple> 
+                            </div>
+                        </div>                          
+                        <div class="mt-2">
                         <button type="submit" class="btn btn-primary">
                             Crear Producto Hotel
                         </button>

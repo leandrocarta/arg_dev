@@ -14,11 +14,15 @@ use Illuminate\Http\Request;
 class ClientRegisterController extends Controller
 {
     public function register(ClientRequest $request)
-    {
-        //dd($request);              
+    {             
         $validatedData = $request->validated();
-        try {
+        $userId = $request->cookie('comercioAdherido');
+        try {            
             $client = Client::create($validatedData);
+            if ($userId) {
+            $client->fk_users_id  = $userId;
+            $client->save();
+        }
         } catch (QueryException $e) {
             if (strpos($e->getMessage(), 'clients_usuario_unique') !== false || strpos($e->getMessage(), 'clients_email_unique') !== false) {
                 return redirect()->back()->withErrors(['error' => 'El usuario o el correo electrónico ya existen'])->withInput();

@@ -109,25 +109,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="categoria_hotel" class="col-md-4 control-label">Categoría Hotel</label>
-                            <div class="">
-                                <input id="categoria_hotel" type="number" class="form-control" name="categoria_hotel" value="{{ $producto->categoria_hotel }}">
-                            </div>
-                        </div>
+                        </div>                          
                         <div class="form-group">
                             <label for="duracion" class="col-md-4 control-label">Estadía Noches</label>
                             <div class="">
                                 <input id="duracion" type="number" class="form-control" name="duracion" value="{{ $producto->duracion }}">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="solo_adultos" class="col-md-4 control-label">¿Solo Para Adultos?</label>
-                            <div class="">
-                                <input id="solo_adultos" type="checkbox" name="solo_adultos" value="1" {{ $producto->solo_adultos ? 'checked' : '' }}>
-                            </div>
-                        </div> 
+                        </div>                        
                         <div class="mt-2">
                            <button type="submit" class="btn btn-primary">
                                Guardar Producto

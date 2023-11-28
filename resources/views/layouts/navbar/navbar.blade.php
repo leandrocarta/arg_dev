@@ -1,9 +1,11 @@
-
+<div class="promo-container">
+  <p class="promo-text">Regístrate y podrás acceder a promociones exclusivas únicamente para nuestra comunidad.</p>
+</div>
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">    
-      <div class="pe-3">
+      <div class="pe-3 content-logo">
         <a class="logo-navbar" href="/">
-          <img class="logo-movil" src="assets/img/logo_amarillo2.png" alt="">          
+          <img class="logo-movil" src="../assets/img/Logo-banner-blanco.png" alt="">          
         </a> 
       </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,52 +21,52 @@
             </div>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="" aria-current="page" href="#">
-            <div class="text-center text-left">
-              <i class="fa fa-plane"></i>
-              <p class="cw">Vuelos</p>
-            </div>
-          </a>
-        </li>
         <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="#">
+          <a class="" aria-current="page" href="/conoce-argentina">
             <div class="text-center text-left">
-              <i class="fa-solid fa-hotel"></i>
-              <p class="cw">Hoteles</p>
-            </div>
-          </a>
-        </li>
-        <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="conoce-argentina">
-            <div class="text-center text-left">
-              <img class="bandera-arg" src="assets/img_banderas/argentina_nav.png" alt="">
+              <img class="bandera-arg" src="../assets/img_banderas/argentina_nav.png" alt="">
               <p>Tur-Arg</p>
             </div>
           </a>
         </li>
         <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="/conoce-brasil">
+            <div class="text-center text-left">
+              <img class="bandera-arg" src="../assets/img_banderas/brasil_nav.png" alt="">
+              <p>Brasil</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="" aria-current="page" href="#">
             <div class="text-center text-left">
-              <i class="fa-solid fa-suitcase"></i>
-              <p class="cw">Paquetes</p>
+              <i class="fa-solid fa-umbrella-beach"></i>
+              <p class="cw">Caribe</p>
             </div>
           </a>
         </li>
         <li class="nav-item ms-4">
           <a class="" aria-current="page" href="#">
             <div class="text-center text-left">
-              <i class="fa-solid fa-suitcase-medical"></i>
-              <p class="cw">Assist</p>
+              <i class="fa-solid fa-landmark"></i>
+              <p class="cw">Europa</p>
             </div>
           </a>
         </li>        
+        <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="#">
+            <div class="text-center text-left">
+              <i class="fa-solid fa-dragon"></i>
+              <p class="cw">Asia</p>
+            </div>
+          </a>
+        </li>           
       </ul>        
       <ul class="navbar-nav me-5 mb-2 mb-lg-0">      
         @guest()
         @if (Auth::guard('client')->check())
         @else
-          <p class="inicia_sesion"><i class="fa-solid fa-right-to-bracket"></i><a href="login_client">Clientes</a></p>
+          <p class="inicia_sesion"><i class="fa-solid fa-right-to-bracket"></i><a href="login_client">Login</a></p>
         @endif
           @endguest 
         @if (Auth::check())
@@ -86,7 +88,7 @@
                      <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
                      <li><a class="dropdown-item" href="/read_producto">Productos</a></li>
                    <!--  <li><a class="dropdown-item" href="upload">Uploads Provincias con exel</a></li> -->
-                     <li><a class="dropdown-item" href="/hotel_news">Alta Hoteles</a></li>
+                     <li><a class="dropdown-item" href="/read_hotel">Alta Hoteles</a></li>
                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>

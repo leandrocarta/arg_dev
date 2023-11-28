@@ -16,10 +16,7 @@ use Intervention\Image\Facades\Image;
 
 
 class UserRegisterController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
+{    
     public function index()
     {
         // return view('user.userRegister');
@@ -28,26 +25,18 @@ class UserRegisterController extends Controller
     {
         return view('bienvenidos');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
-        //
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        //
+        
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show()
     {
         if (Auth::check()) {
@@ -59,19 +48,19 @@ class UserRegisterController extends Controller
     {
         $user = User::create($request->except('link_mundo', 'link_argtravels', 'link_sumate', 'comision', 'regalia'));
 
-        $urlMundo = 'www.argtravels.tur.ar/por-el-mundo?promotorOficialVerificado=';
+        $urlMundo = 'www.argtravels.tur.ar/?=';
         $linkMundo = $urlMundo . $user->id;
         // En desuso por el momento
         $user->link_mundo = $linkMundo;
         $user->save();
 
-        $urlArgTravels = 'www.argtravels.tur.ar/conoce-argentina?promotorOficialVerificado=';
+        $urlArgTravels = 'www.argtravels.tur.ar/?comercioAdherido=';
         $linkArgTravels = $urlArgTravels . $user->id;
 
         $user->link_argtravels = $linkArgTravels;
         $user->save();
 
-        $urlEquipo = 'www.argtravels.tur.ar/oportunidad_trabajo_remoto_turismo?reclutador_equipo_oficial=';
+        $urlEquipo = 'www.argtravels.tur.ar/oportunidad_trabajo_remoto_turismo?comercioAdherido=';
         $link_sumate = $urlEquipo . $user->id;
 
         $user->link_sumate = $link_sumate;
@@ -94,36 +83,28 @@ class UserRegisterController extends Controller
     }
 
     public function verifyEmail(Request $request, $id)
-    {
-        // Buscar al usuario por su ID
+    {       
         $user = User::find($id);
 
         if (!$user) {
-            abort(404, 'User not found'); // O maneja el caso en el que el usuario no se encuentre.
+            abort(404, 'User not found'); 
         }
-
-        // Verificar la firma temporal de la URL
+        
         if (!hash_equals(sha1($user->getEmailForVerification()), $request->hash)) {
-            abort(403, 'Unauthorized'); // O maneja el error de URL no válida de acuerdo a tus necesidades.
+            abort(403, 'Unauthorized'); 
         }
 
-        // Verificar si el usuario ya ha verificado su correo electrónico
         if ($user->hasVerifiedEmail()) {
-            return redirect('/'); // O redirige al usuario a la página de inicio u otra que desees.
+            return redirect('/'); 
         }
 
-        // Marcar el correo electrónico como verificado
         $user->markEmailAsVerified();
         return redirect()->route('verificacion.success');
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function editForm()
     {
-        $user = Auth::user(); // Obtener el usuario autenticado
+        $user = Auth::user(); 
         $paises = Pais::all();
         $provincias = Provincia::all();
         $rangos = Rango::all();

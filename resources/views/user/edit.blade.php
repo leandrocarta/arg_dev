@@ -28,7 +28,7 @@
                       <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{auth()->user()->email}}" disabled>
                    <div class="form-text">Email Registrado: No Editable.</div>
                    </div>
-                     <p class="mas">
+                     <p class="mas my-2">
                        <a class="btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                          <i class="fa-solid fa-circle-plus"><span>Aquí tus Links</span></i>
                        </a>                      
@@ -371,7 +371,7 @@
                     </div>
                     <div class="mb-3 form-floating">
                       <input type="text" name="dni_num" placeholder="Apellido" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{auth()->user()->dni_num}}">
-                      <label for="dni" class="form-label">Numero Documento</label>                                            
+                      <label for="dni_num" class="form-label">Numero Documento</label>                                            
                     </div>
                     <div class="mb-3 form-floating">
                       <input type="text" name="cod_area" placeholder="Código Area Telefónica" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{auth()->user()->movil_area}}">
