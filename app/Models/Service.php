@@ -10,7 +10,7 @@ class Service extends Model
     
     protected $table = 'services';
     protected $fillable = [
-        'codigo',
+        'id_prod',
         'transporte_int',
         'traslados_orig',
         'traslados_dest',
@@ -18,4 +18,8 @@ class Service extends Model
         'comidas',
         'seguro',
     ];
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id_producto');
+    }
 }

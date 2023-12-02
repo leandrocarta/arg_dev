@@ -26,5 +26,15 @@ class Producto extends Model
     public function hotel()
     {
         return $this->belongsTo(Hotel::class, 'id_hotel');
-    }
+    }    
+    public function service()
+{
+    return $this->hasOne(Service::class, 'id_prod', 'id');
+}
+    public function itinerario()
+{
+    return $this->hasOne(Service::class, 'id_prod', 'id');
+}
+
+
 }

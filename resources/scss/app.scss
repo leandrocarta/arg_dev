@@ -14,6 +14,33 @@ main {
   padding: 0!important;
 }
 // Home //
+.barra-movil {
+    display: flex;
+    overflow: hidden;
+}
+.titulo-barra-movil h2 {
+font-weight: bold;
+}
+.titulo-barra-movil h2 span{
+ color: #1D4D8B; 
+}
+.titulo-barra-movil {
+  
+    width: 100vw; 
+    flex-shrink: 0; 
+    color: gray;
+    padding: 10px;
+    text-align: center;
+    animation: desplazamiento_barra 15s linear infinite; 
+}
+@keyframes desplazamiento_barra {
+    0% {
+        transform: translateX(100%); 
+    }
+    100% {
+        transform: translateX(-100%); 
+    }
+}
 .comercioAdherido h5 a {
   font-family: 'Great Vibes', cursive;
   font-size: 28px;
@@ -178,24 +205,24 @@ margin-left: 10px;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: 100; /* Ajusta el valor según sea necesario */
 }
 
 .filtro img {
     position: relative;
-    z-index: 1; /* Ajusta el valor según sea necesario */
-    width: 100%; /* Ajusta el ancho al 100% para asegurar que la imagen llene el contenedor */
+    z-index: 1; 
+    width: 100%; 
 }
 
 .titulo-detalles-prod {
     position: absolute;
-    top: 13%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
-    z-index: 102; /* Ajusta el valor según sea necesario */
+    z-index: 102; 
 }
 
 /* Agrega estilos a la imagen */
@@ -427,15 +454,14 @@ font-family: 'Oswald', sans-serif;;
   text-transform: capitalize;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
-.fa-sun, .fa-star, .fa-bed {
+.fa-sun, .fa-bed, .fa-hotel, .fa-bell-concierge, .fa-mug-saucer, .fa-utensils,
+.fa-hot-tub-person, .fa-dumbbell, .fa-cloud-moon, .fa-bus, .fa-plane-departure {
+  color: #878683;
+}
+.fa-star {
   color: #E9B003;
 }
-.fa-plane-departure, .fa-bus {
-  color: #E9B003;
-}
-.productos .fa-hotel {
-  color: #E9B003;
-}
+
 .productos .card-body {
   display: flex;
   justify-content: start;
@@ -561,6 +587,25 @@ font-family: 'Oswald', sans-serif;;
 // Navbar
 
 @media (max-width: 768px) {
+  .titulo-barra-movil h1 {
+    font-size: 11px; 
+    color: gray;
+    padding: 10px;
+    text-align: center;
+    animation: desplazamiento_barra 10s linear infinite; 
+}
+  .titulo-detalles-prod h1 {
+  font-size: 20px;
+}
+.titulo-detalles-prod h4 {
+  font-size: 15px;
+}
+.titulo-detalles-prod {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+}
 .logo-movil{
  width: 75%;
 }

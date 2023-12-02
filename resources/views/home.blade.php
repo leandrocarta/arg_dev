@@ -8,8 +8,12 @@
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="5000">
+    <div class="carousel-item active" data-bs-interval="5000">      
       <img src="assets/img_banner/Cancun-min.png" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1></h1>
+          <p></p>
+        </div>
       <div class="carousel-caption d-none d-md-block">
         <h5></h5>
         <p></p>
@@ -46,16 +50,27 @@
     <span class="visually-hidden">Next</span>
   </button>
  </div>
-  <div class="container my-5 m-auto productos-detalles">
+ <!-- Barra movil 
+ <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+       <div class="barra-movil">
+         <div class="titulo-barra-movil"><h2>TODOS LOS DESTINOS AL MEJOR PRECIO, ENCONTRÁ EL TUYO y VIAJA TRANQUILO</span></h2></div>  
+       </div>
+    </div>
+  </div>
+ </div>
+ -->
+  <div class="container my-3 m-auto productos-detalles">
      <div class="titulo text-center">
        <h4 class="display-4"></h4>
      </div>
      <div class="row">
-      @php
-      $productosAleatorios = $productos->shuffle()->take(6);
-      @endphp
-     @foreach ($productosAleatorios as $producto)
-     <div class="col-md-4 p-2">
+       @php
+       $productosAleatorios = $productos->shuffle()->take(6);
+       @endphp
+       @foreach ($productosAleatorios as $producto)
+       <div class="col-md-4 p-2">
        <div class="card productos">
          <div class="card-img-container">
             @if($producto->tipo_producto == 'Salida Grupal')
@@ -77,26 +92,20 @@
                 <p class="precio-total">Precio: {{ $producto->moneda }} {{ $producto->precio_total }}</p>
               </div>
          </div>      
-         <div>        
-            @php
-            $codigo_producto = $producto->codigo;
-            $servicio_encontrado = $servicios->firstWhere('codigo', $codigo_producto);
-            @endphp
-            <p class="ms-2">
-            @if ($servicio_encontrado)  
-               @if ($servicio_encontrado->transporte_int == 'Aéreos' || $servicio_encontrado->transporte_int == 'Aéreos con escala')                                        
-               <i class="fas fa-plane-departure"></i>
-               @elseif ($servicio_encontrado->transporte_int == 'Micro') 
-               <i class="fas fa-bus"></i>
-               @elseif ($servicio_encontrado->transporte_int == 'Sin Traslados')               
-               @endif 
-            @endif:
-             <span>{{ $producto->origen_salida }} ⇌ {{ $producto->ciudad_destino }}</span>
-           </p>
+         <div>      
+            <p class="ms-2">  
+              @if ($producto->service && ($producto->service->transporte_int == 'Aéreos' || $producto->service->transporte_int == 'Aéreos con escala'))                                        
+                  <i class="fas fa-plane-departure"></i>
+              @elseif ($producto->service && $producto->service->transporte_int == 'Micro') 
+                  <i class="fas fa-bus"></i>
+              @elseif ($producto->service && $producto->service->transporte_int == 'Sin Traslados')               
+              @endif 
+              <span>{{ $producto->origen_salida }} ⇌ {{ $producto->ciudad_destino }}</span>
+            </p>
            <p class="ms-2">
              <i class="fa-solid fa-bus"></i> : <span>Aeropuerto ⇌ Hotel</span>
            </p>
-          <p class="ms-2">
+           <p class="ms-2">
               <span>
                   @if ($producto->hotel) {{-- Verifica si hay una relación con un hotel --}}
                       <i class="fa-solid fa-hotel"></i> :
@@ -120,7 +129,10 @@
        </div>
       </div>
      @endforeach
-   </div>      
+   </div>   
+   <div class="row">
+    
+  </div>   
   </div>
 @if($mostrarModal)
 <div class="modal fade comercioAdherido" id="miModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

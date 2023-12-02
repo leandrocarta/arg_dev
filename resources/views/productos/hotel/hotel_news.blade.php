@@ -39,7 +39,25 @@
                             <div class="">
                                 <input type="file" class="form-control" name="imagenes[]" accept="image/*" value="{{ old('imagenes') }}" multiple> 
                             </div>
-                        </div>                          
+                        </div>    
+                        <div class="form-group">
+                           <label for="gym" class="col-md-4 control-label">¿Área de Gimnasio?</label>
+                            <div class="">
+                                <select name="gym" class="form-select" aria-label="Default select example">                                      
+                                   <option value="Sin Gimnasio">Sin Gimnasio</option>
+                                   <option value="Área de Gimnasio">Área de Gimnasio</option>
+                                </select>  
+                            </div>
+                        </div>     
+                        <div class="form-group">
+                           <label for="spa" class="col-md-4 control-label">¿Área de Spa?</label>
+                            <div class="">
+                                <select name="spa" class="form-select" aria-label="Default select example">                                      
+                                   <option value="Sin Spa">Sin Spa</option>
+                                   <option value="Área de Spa">Área de Spa</option>
+                                </select>  
+                            </div>
+                        </div>                       
                         <div class="mt-2">
                         <button type="submit" class="btn btn-primary">
                             Crear Producto Hotel

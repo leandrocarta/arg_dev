@@ -145,7 +145,6 @@ class ProductoController extends Controller
         }
 
         $itinerario = new Itinerario;
-        $itinerario->codigo = $request->input('codigo');
         $itinerario->dia1 = $request->input('dia1');
         $itinerario->dia2 = $request->input('dia2');
         $itinerario->dia3 = $request->input('dia3');
@@ -162,40 +161,34 @@ class ProductoController extends Controller
         $itinerario->dia14 = $request->input('dia14');
         $itinerario->dia15 = $request->input('dia15');
         if ($itinerario->dia1) {
-            $itinerario->save();
+        $itinerario->id_prod = $producto->id;
+        $itinerario->save();
         }
         $service = new Service;
-        $service->codigo = $request->input('codigo');
         $service->transporte_int = $request->input('transporte_int');
         $service->traslados_orig = $request->input('traslados_orig');
         $service->traslados_dest = $request->input('traslados_dest');
         $service->estadía = $request->input('estadía');
         $service->comidas = $request->input('comidas');
         $service->seguro = $request->input('seguro');
+        $service->id_prod = $producto->id;
         $service->save();
 
         return redirect('/read_producto')->with('success', 'EL PRODUCTO SE CREÓ CORRECTAMENTE');
     }
     public function detalle_producto($id)
 {
-    $paises = Pais::all();
-
-    // Modifica la consulta para cargar la relación hotel de manera específica
-    $productos = Producto::with('hotel')->find($id);
-    $servicios = Service::all();
-
-    // Agregar esta línea para depuración
-   // dd($producto->hotel);
+    $productos = Producto::with(['hotel', 'service'])->find($id);
 
     if (!$productos) {
         // Manejo del caso en que el producto no existe
     } else {
-        $hoteles = Hotel::all();  // Opcional si deseas cargar todos los hoteles sin relación
+      //  $hoteles = Hotel::all();  // Opcional si deseas cargar todos los hoteles sin relación
 
         // Agregar estas líneas para depuración
        // dd($producto);
 
-        return view('productos.detalles.detalles_productos', compact('productos', 'paises', 'hoteles', 'servicios'));
+        return view('productos.detalles.detalles_productos', compact('productos'));
     }
 }
 

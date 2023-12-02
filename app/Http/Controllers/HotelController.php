@@ -43,6 +43,9 @@ class HotelController extends Controller
         $hotel->categoria = $request->categoria;
         $hotel->publico = $request->publico;
         $hotel->img_banner = $originalFileName;
+        $hotel->gym = $request->gym;
+        $hotel->spa = $request->spa;
+        
         $hotel->save();
         
       if ($request->hasFile('imagenes')) {

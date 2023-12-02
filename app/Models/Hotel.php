@@ -22,7 +22,20 @@ class Hotel extends Model
         'img8',
         'img9',
         'img10',
+        'gym',
+        'spa',
     ];
+     public function getImagenes()
+    {
+        $imagenes = [];
+        for ($i = 1; $i <= 10; $i++) { // asumo que hay hasta 3 imágenes
+            $campoImagen = "img" . $i;
+            if ($this->$campoImagen) {
+                $imagenes[] = $this->$campoImagen;
+            }
+        }
+        return $imagenes;
+    }
     public function productos()
     {
         return $this->hasMany(Producto::class, 'id_hotel');

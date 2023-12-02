@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use App\Models\Hotel;
 use App\Models\Service;
 use App\Models\Itinerario;
 use App\Models\Client;
@@ -15,9 +16,10 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {        
-        $productos = Producto::all();
-        $itinerarios = Itinerario::all();
-        $servicios = Service::all();
+       // $productos = Producto::all();
+        //$itinerarios = Itinerario::all();
+        //$servicios = Service::all();
+         $productos = Producto::with(['hotel', 'service', 'itinerario'])->get();
         $mostrarModal = false;
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
@@ -42,7 +44,7 @@ class HomeController extends Controller
             // $elim_cookie = 'comercioAdherido';
             // setcookie($elim_cookie, '', time() - 3600, '/');
             // dd('se elimino la cookie: ', $userId);
-            return view('home', compact('productos', 'mostrarModal', 'nombreUsuario', 'servicios', 'itinerarios'));
+            return view('home', compact('productos', 'mostrarModal', 'nombreUsuario'));
         } else {
             $userId = $request->query('comercioAdherido') ?? 1;
             $user = User::find($userId);
@@ -68,7 +70,7 @@ class HomeController extends Controller
             $mostrarModal = true;
             }
             return response()
-                ->view('home', compact('productos', 'mostrarModal', 'nombreUsuario', 'servicios', 'itinerarios'))
+                ->view('home', compact('productos', 'mostrarModal', 'nombreUsuario'))
                 ->withCookie($cookie);
         }
         return view('home', compact('productos'));
