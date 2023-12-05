@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="3000">
-      <img src="assets/img_banner/turquia-min.png" class="d-block w-100" alt="...">
+      <img src="assets/img_banner/Africa-min.png" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5></h5>
         <p></p>
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="3000">
-      <img src="assets/img_banner/grecia-min.png" class="d-block w-100" alt="...">
+      <img src="assets/img_banner/europa-min.png" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5></h5>
         <p></p>
@@ -129,10 +129,32 @@
        </div>
       </div>
      @endforeach
-   </div>   
-   <div class="row">
-    
-  </div>   
+    </div>   
+  </div>
+  <div class="container-fluid container-servicios bg-gris">
+    <div class="row">
+      <hr>     
+      <h1 class="text-center">Descubrí el Placer de Viajar</h1>      
+      <div class="col-md-3 container-servicio">
+        <h3>Vuelos</h3>
+        <div class="overlay">
+          <a href="form_vuelos" class="">Cotizar Vuelos!!</a>
+        </div>
+        <img class="img-fluid" src="assets/img/vuelos.png" alt="">
+      </div>
+      <div class="col-md-3 container-servicio">
+         <h3>Paquetes Turísticos</h3>        
+        <img class="img-fluid" src="assets/img/Paquetes.png" alt="">
+      </div>
+      <div class="col-md-3 container-servicio">
+         <h3>Salidas Grupales</h3>        
+        <img class="img-fluid" src="assets/img/Grupales.png" alt="">
+      </div>
+      <div class="col-md-3 container-servicio">
+         <h3>Viajes a Medida</h3>        
+        <img class="img-fluid" src="assets/img/TuViaje.png" alt="">
+      </div>
+    </div>
   </div>
 @if($mostrarModal)
 <div class="modal fade comercioAdherido" id="miModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

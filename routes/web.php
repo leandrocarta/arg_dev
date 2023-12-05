@@ -106,3 +106,5 @@ Route::get('/update_producto/{id}', [ProductoController::class, 'formUpdateProdu
 Route::post('/editar_producto/{id}', [ProductoController::class, 'editarProducto'])->name('producto.updateProcess');
 Route::post('/delete_producto/{id}', [ProductoController::class, 'deleteProductos'])->name('producto.delete');
 Route::get('/detalles_productos/{id}', [ProductoController::class, 'detalle_producto'])->name('producto.detalles');
+Route::get('/form_vuelos', [ProductoController::class, 'showFormVuelos'])->name('form.vuelos');
+Route::post('/form_vuelos', [ProductoController::class, 'avisoVuelo'])->name('aviso.vuelo');

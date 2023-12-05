@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
+    public function showFormVuelos() {      
+        return view('form_vuelos');
+    }
+    public function avisoVuelo() {    
+              
+        return view('form_vuelos');
+    }
 
     public function mostrarProductos()
     {
