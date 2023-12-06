@@ -24,6 +24,11 @@ class ProductoController extends Controller
         $productos = Producto::with(['hotel', 'service'])->get();
         return view('productos.paquetes.paquetes', compact('productos'));
     }
+    public function grupales()
+    {       
+        $productos = Producto::with(['hotel', 'service'])->get();
+        return view('productos.grupales.grupales', compact('productos'));
+    }
     public function showFormProd()
     {
         $hoteles = Hotel::all();

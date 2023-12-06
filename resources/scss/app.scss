@@ -594,7 +594,17 @@ font-family: 'Oswald', sans-serif;;
 .card-img-container {
     position: relative;
 }
-
+.titulo-paquetes h2 {
+ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ font-weight: bold;
+}
+.titulo-paquetes h2 span {
+  color: #1D4D8B;
+}
+.titulo-paquetes p span {
+  color: red;
+  font-weight: bold;
+}
 /* FIN Estilos para productos */
 /* Estilos para el contenido del card */
 .content-datos p {

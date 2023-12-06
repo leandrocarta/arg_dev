@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">  
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Smooch&display=swap" rel="stylesheet">
+  
   <!-- Bootstrap CSS v5.2.1 -->
   <link rel="stylesheet" href="{{url('assets/css/bootstrap.min.css')}}">
    @vite(['resources/scss/app.scss', 'resources/css/app.css', 'resources/js/app.js'])

@@ -109,5 +109,6 @@ Route::post('/editar_producto/{id}', [ProductoController::class, 'editarProducto
 Route::post('/delete_producto/{id}', [ProductoController::class, 'deleteProductos'])->name('producto.delete');
 Route::get('/detalles_productos/{id}', [ProductoController::class, 'detalle_producto'])->name('producto.detalles');
 Route::get('/paquetes', [ProductoController::class, 'paquetes']);
+Route::get('/grupales', [ProductoController::class, 'grupales']);
 //Aereos
 Route::post('/cotizar_vuelos', [AereosController::class, 'guardarDatos'])->name('cotizar.vuelos');

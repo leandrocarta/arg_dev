@@ -15,6 +15,8 @@ class AereosController extends Controller
             'origen' => 'required|string',
             'destino' => 'required|string',
             'email' => 'required|email',
+            'aclaracion' => 'string',
+            'estado' => 'integer',
         ]);
 
         Aereo::create([
@@ -23,6 +25,8 @@ class AereosController extends Controller
             'origen' => $request->origen,
             'destino' => $request->destino,
             'email' => $request->email,
+            'aclaracion' => $request->aclaracion,
+            'estado' => 1,
         ]);
        // return redirect()->route('/home');
          return redirect('/')->with('success', 'Recibimos su consulta, en breve será respondida. Muchas Gracias');

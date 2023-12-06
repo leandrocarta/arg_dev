@@ -144,13 +144,15 @@
       </div>
       <div class="col-md-3 container-servicio">
          <h3>Paquetes Turísticos</h3>   
-         <a href="paquetes">     
+         <a href="paquetes#paquetes">     
          <img class="img-fluid" src="assets/img/Paquetes.png" alt="">
          </a>
       </div>
       <div class="col-md-3 container-servicio">
-         <h3>Salidas Grupales</h3>        
+         <h3>Salidas Grupales</h3>       
+         <a href="grupales#grupales"> 
         <img class="img-fluid" src="assets/img/Grupales.png" alt="">
+        </a>
       </div>
       <div class="col-md-3 container-servicio">
          <h3>Viajes a Medida</h3>        
@@ -192,6 +194,11 @@
             <input type="email" name="email" placeholder="Email de Contacto" class="form-control" required>
             <label for="email" class="form-label">Email de Contacto:</label>
           </div>
+          <div class="form-floating mb-3">
+            <textarea name="aclaracion" placeholder="Tenes algo para aclararnos?" class="form-control"></textarea>
+            <label for="email" class="form-label">Tenes algo que aclarar?</label>
+          </div>
+
           <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
       </div>
@@ -221,18 +228,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><i class="fa fa-check-circle"></i></h5>
+        <h6 class="modal-title"><i class="fa fa-check-circle"></i>
+        Recibimos tu consulta, en breve te responderemos, Muchas Gracias!!
+        </h6>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"></span>
         </button>
       </div>
-      <div class="modal-body">
-        <!-- Aquí mostrarás el mensaje de éxito -->
-        @if(session('success'))
-          <div class="alert alert-success">
-            {{ session('success') }}
-          </div>
-        @endif
+        <div class="modal-body">        
+            <img src="assets/img/Vuelos-min.png" alt="Vuelos!!!" class="img-fluid">        
       </div>
     </div>
   </div>

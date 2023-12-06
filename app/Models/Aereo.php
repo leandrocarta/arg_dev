@@ -14,5 +14,7 @@ class Aereo extends Model
         'origen', 
         'destino', 
         'email',
+        'aclaracion',
+        'estado',
     ];
 }

@@ -50,15 +50,17 @@
     <span class="visually-hidden">Next</span>
   </button>
  </div> 
-  <div class="container my-3 m-auto productos-detalles" id="paquetes">
+  <div class="container my-3 m-auto productos-detalles" id="grupales">
      <div class="titulo-paquetes">
-       <h2 class="">LOS MEJORES PAQUETES TURÍSTICOS <span>AL MEJOR PRECIO</span></h2>
-     <hr>
+       <h2 class="">LAS MEJORES SALIDAS GRUPALES <span>POR TODO EL MUNDO</span></h2>
+       <p>Te invitamos a explorar nuestra extraordinaria colección de productos diseñados para satisfacer las expectativas de cada tipo de viajero.<span> Presta especial atención a nuestras ofertas</span>, ya que contamos con una línea cuidadosamente seleccionada que incorpora un toque exclusivo en cada destino.</p>
+       <p>Al explorar nuestra amplia gama de productos, encontrarás opciones que destacan no solo por los destinos fascinantes que visitarás, sino también por experiencias enriquecidas gracias a <span>guías de habla hispana</span> expertos en cultura e historia. Estos expertos están aquí para transformar cada momento de tu viaje en una inmersión auténtica en la riqueza cultural de cada lugar.</p>
+       <hr>
       </div>
      <div class="row">
        @php
         $productosPaquetes = $productos->filter(function ($producto) {
-        return $producto->tipo_producto === 'Paquete Turístico';
+        return $producto->tipo_producto === 'Salida Grupal' | $producto->tipo_producto === 'Salida Grupal - Idioma Español';
        });
        $productosAleatorios = $productosPaquetes->shuffle();
        @endphp
@@ -66,18 +68,15 @@
        <div class="col-md-4 p-2">
        <div class="card productos">
          <div class="card-img-container">
-            @if($producto->tipo_producto == 'Salida Grupal')
+            @if($producto->tipo_producto == 'Salida Grupal') 
             <div class="barra-horizontal-grupal">
               <p class="leyenda">Salida Grupal</p>
-            </div>
-            @elseif ($producto->tipo_producto == 'Family Plan')
-            <div class="barra-horizontal-family">
-              <p class="leyenda">Family Plan</p>
-            </div>
-             @elseif ($producto->tipo_producto == 'Paquete Turístico')
-            <div class="barra-horizontal-paquete">
-              <p class="leyenda">Paquete Turístico</p>
-            </div>
+            </div>            
+            @endif
+             @if($producto->tipo_producto == 'Salida Grupal - Idioma Español')
+            <div class="barra-horizontal-grupal">
+              <p class="leyenda">Salida Grupal | Guía Hispanohablante</p>
+            </div>            
             @endif
             <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}">
               <div class="card-img-overlay titulo-prod">
