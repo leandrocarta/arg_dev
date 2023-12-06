@@ -75,9 +75,10 @@ font-weight: bold;
   }
   .container-servicio .overlay a {
     padding: 5px;
-    background-color: rgba($color: #FFFFFF, $alpha: 0.3);
+    background-color: rgba($color: #FFFFFF, $alpha: 0.5);
     border-radius: 10px; 
-
+    color: rgb(12, 30, 226);
+    font-weight: bold;
   }
 .container-servicio img {
   max-width: 100%; 
@@ -88,7 +89,7 @@ font-weight: bold;
 }
 
 .container-servicio img:hover {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); 
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7); 
 }
 .container-servicio h3 {
   color: #ffffff; 

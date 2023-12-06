@@ -33,6 +33,11 @@
        $('#miModal').modal('show');
    });
   </script>
+  <script>  
+    $(document).ready(function() {
+      $('#modalExito').modal('show');
+    });
+</script>
  <script>
   document.addEventListener('DOMContentLoaded', function() {
     var promoContainer = document.querySelector('.promo-container');

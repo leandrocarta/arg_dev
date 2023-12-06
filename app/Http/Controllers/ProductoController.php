@@ -14,20 +14,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
-    public function showFormVuelos() {      
-        return view('form_vuelos');
-    }
-    public function avisoVuelo() {    
-              
-        return view('form_vuelos');
-    }
-
     public function mostrarProductos()
-    {
-       
+    {       
         $productos = Producto::all();
-
         return view('productos.crud.read_producto', compact('productos'));
+    }
+    public function paquetes()
+    {       
+        $productos = Producto::with(['hotel', 'service'])->get();
+        return view('productos.paquetes.paquetes', compact('productos'));
     }
     public function showFormProd()
     {

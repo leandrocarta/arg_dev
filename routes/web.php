@@ -19,6 +19,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AereosController;
 
 Route::get('/', function () {
     //return view('layouts.construccion.construccion');
@@ -81,6 +82,7 @@ Route::post('/contacto/{id?}', [ContactosController::class, 'contactAccion'])->n
 // Promociones productos turisticos
 Route::get('/conoce-argentina', [PromocionController::class, 'cookie_conoceArgentina']);
 Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
+
 // Qr
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);
 // Cookie promotor digital
@@ -106,5 +108,6 @@ Route::get('/update_producto/{id}', [ProductoController::class, 'formUpdateProdu
 Route::post('/editar_producto/{id}', [ProductoController::class, 'editarProducto'])->name('producto.updateProcess');
 Route::post('/delete_producto/{id}', [ProductoController::class, 'deleteProductos'])->name('producto.delete');
 Route::get('/detalles_productos/{id}', [ProductoController::class, 'detalle_producto'])->name('producto.detalles');
-Route::get('/form_vuelos', [ProductoController::class, 'showFormVuelos'])->name('form.vuelos');
-Route::post('/form_vuelos', [ProductoController::class, 'avisoVuelo'])->name('aviso.vuelo');
+Route::get('/paquetes', [ProductoController::class, 'paquetes']);
+//Aereos
+Route::post('/cotizar_vuelos', [AereosController::class, 'guardarDatos'])->name('cotizar.vuelos');

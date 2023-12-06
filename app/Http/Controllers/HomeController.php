@@ -16,10 +16,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {        
-       // $productos = Producto::all();
-        //$itinerarios = Itinerario::all();
-        //$servicios = Service::all();
-         $productos = Producto::with(['hotel', 'service', 'itinerario'])->get();
+        $productos = Producto::with(['hotel', 'service', 'itinerario'])->get();
         $mostrarModal = false;
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
