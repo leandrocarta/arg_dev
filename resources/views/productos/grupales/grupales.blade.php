@@ -60,7 +60,7 @@
      <div class="row">
        @php
         $productosPaquetes = $productos->filter(function ($producto) {
-        return $producto->tipo_producto === 'Salida Grupal' | $producto->tipo_producto === 'Salida Grupal - Idioma Español';
+        return $producto->tipo_producto === 'Salida Grupal' | $producto->tipo_producto === 'Grupal con Guía Hispanohablante';
        });
        $productosAleatorios = $productosPaquetes->shuffle();
        @endphp
@@ -71,11 +71,10 @@
             @if($producto->tipo_producto == 'Salida Grupal') 
             <div class="barra-horizontal-grupal">
               <p class="leyenda">Salida Grupal</p>
-            </div>            
-            @endif
-             @if($producto->tipo_producto == 'Salida Grupal - Idioma Español')
-            <div class="barra-horizontal-grupal">
-              <p class="leyenda">Salida Grupal | Guía Hispanohablante</p>
+            </div> 
+             @elseif($producto->tipo_producto == 'Grupal con Guía Hispanohablante')
+            <div class="barra-horizontal-grupal-hispano">
+              <p class="leyenda">Grupal con Guía Hispanohablante</p>
             </div>            
             @endif
             <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}">

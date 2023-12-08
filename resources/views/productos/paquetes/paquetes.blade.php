@@ -53,12 +53,13 @@
   <div class="container my-3 m-auto productos-detalles" id="paquetes">
      <div class="titulo-paquetes">
        <h2 class="">LOS MEJORES PAQUETES TURÍSTICOS <span>AL MEJOR PRECIO</span></h2>
+       <p>En Argtravels, comprendemos que tus viajes son mucho más que simples momentos en el calendario; son capítulos emocionantes en el libro de tu vida. No nos limitamos a ofrecer paquetes turísticos, sino que nos dedicamos a <span>crear experiencias que transformarán tus viajes</span> en memorias imborrables. Estamos encantados de presentarte nuestra distintiva colección de paquetes turísticos, cuidadosamente diseñados para aquellos que buscan algo más que la típica travesía a destinos exquisitos.</p>
      <hr>
       </div>
      <div class="row">
        @php
         $productosPaquetes = $productos->filter(function ($producto) {
-        return $producto->tipo_producto === 'Paquete Turístico';
+        return $producto->tipo_producto === 'Paquete Turístico' | $producto->tipo_producto === 'Family Plan';
        });
        $productosAleatorios = $productosPaquetes->shuffle();
        @endphp

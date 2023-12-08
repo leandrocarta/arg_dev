@@ -561,6 +561,19 @@ font-family: 'Oswald', sans-serif;;
     color: #ffffff;
     font-weight: bold;
 }
+.barra-horizontal-grupal-hispano {
+    height: 35px; 
+    background-color: rgba(0, 51, 255, 0.6); 
+    width: 100%; 
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+}
 .barra-horizontal-family {
     height: 35px; 
     background-color: rgba(17, 0, 252, 0.45); 

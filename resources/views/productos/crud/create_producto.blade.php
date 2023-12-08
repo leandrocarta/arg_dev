@@ -53,7 +53,7 @@
                                 <select name="tipo_producto" class="form-select" aria-label="Default select example">  
                                     <option value="Paquete Turístico" @if(old('tipo_producto') == 'Paquete Turístico') selected @endif>Paquete Turístico</option>
                                     <option value="Salida Grupal" @if(old('tipo_producto') == 'Salida Grupal') selected @endif>Salida Grupal</option>
-                                    <option value="Salida Grupal - Idioma Español" @if(old('tipo_producto') == 'Salida Grupal - Idioma Español') selected @endif>Salida Grupal</option>
+                                    <option value="Grupal Idioma Español" @if(old('tipo_producto') == 'Salida Grupal - Idioma Español') selected @endif>Salida Grupal - Idioma Español</option>
                                     <option value="Family Plan" @if(old('tipo_producto') == 'Family Plan') selected @endif>Family Plan</option>
                                 </select>                                 
                             </div>

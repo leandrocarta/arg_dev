@@ -77,6 +77,10 @@
             <div class="barra-horizontal-grupal">
               <p class="leyenda">Salida Grupal</p>
             </div>
+            @elseif($producto->tipo_producto == 'Grupal con Guía Hispanohablante')
+            <div class="barra-horizontal-grupal-hispano">
+              <p class="leyenda">Grupal con Guía Hispanohablante</p>
+            </div>
             @elseif ($producto->tipo_producto == 'Family Plan')
             <div class="barra-horizontal-family">
               <p class="leyenda">Family Plan</p>
