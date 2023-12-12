@@ -110,7 +110,7 @@
               </span>
           </p>
             <p class="">
-              <i class="fa-solid fa-bed ms-2"></i> : {{ $producto->habitacion }} <span> ({{ $producto->estadia }} <i class="fa-solid fa-cloud-moon"></i>)</span>        
+              <i class="fa-solid fa-bed ms-2"></i> : {{ $producto->habitacion }} <span> ({{ $producto->estadiaTotal }} <i class="fa-solid fa-cloud-moon"></i>)</span>        
               </span>           
             </p>   
          </div>

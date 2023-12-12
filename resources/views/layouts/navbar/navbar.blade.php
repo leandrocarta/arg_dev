@@ -14,13 +14,21 @@
     <div class="collapse navbar-collapse content-navbar" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2">
         <li class="nav-item">
-          <a class="" aria-current="page" href="#">
+          <a class="" aria-current="page" href="/">
             <div class="text-center text-left">
               <i class="fa-solid fa-house"></i>
               <p class="cw">Home</p>
             </div>
           </a>
         </li>
+         <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="#modalVuelos" data-bs-toggle="modal" data-bs-target="#modalVuelos">
+            <div class="text-center text-left">
+              <i class="fa-solid fa-plane"></i>
+              <p class="cw">Vuelos</p>
+            </div>
+          </a>
+        </li>     
         <li class="nav-item ms-4">
           <a class="" aria-current="page" href="/conoce-argentina">
             <div class="text-center text-left">
@@ -56,8 +64,8 @@
         <li class="nav-item ms-4">
           <a class="" aria-current="page" href="#">
             <div class="text-center text-left">
-              <i class="fa-solid fa-dragon"></i>
-              <p class="cw">Asia</p>
+              <i class="fa-solid fa-earth-asia"></i>
+              <p class="cw">MundoTravels</p>
             </div>
           </a>
         </li>           

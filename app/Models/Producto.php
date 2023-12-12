@@ -13,6 +13,7 @@ class Producto extends Model
         'imagen',
         'habitacion',
         'tipo_producto',
+        'destinoGral',
         'pais_destino',
         'ciudad_destino',
         'origen_salida',
@@ -21,7 +22,12 @@ class Producto extends Model
         'moneda',
         'id_hotel',
         'estadia',
+        'id_hotel2',
+        'estadia_dos',
+        'id_hotel3',
+        'estadia_tres',
         'fecha_baja',
+        'estadiaTotal',
     ];
     public function hotel()
     {

@@ -53,7 +53,7 @@
                                 <select name="tipo_producto" class="form-select" aria-label="Default select example">  
                                     <option value="Paquete Turístico" @if(old('tipo_producto') == 'Paquete Turístico') selected @endif>Paquete Turístico</option>
                                     <option value="Salida Grupal" @if(old('tipo_producto') == 'Salida Grupal') selected @endif>Salida Grupal</option>
-                                    <option value="Grupal Idioma Español" @if(old('tipo_producto') == 'Salida Grupal - Idioma Español') selected @endif>Salida Grupal - Idioma Español</option>
+                                    <option value="Grupal con Guía Hispanohablante" @if(old('tipo_producto') == 'Grupal con Guía Hispanohablante') selected @endif>Grupal con Guía Hispanohablante</option>
                                     <option value="Family Plan" @if(old('tipo_producto') == 'Family Plan') selected @endif>Family Plan</option>
                                 </select>                                 
                             </div>
@@ -203,9 +203,21 @@
                           </div>  
                         </div>  
                         <div class="form-group">
+                            <label for="destinoGral" class="col-md-4 control-label">Destino General</label>
+                            <div class="">
+                                <select name="destinoGral" class="form-select" aria-label="Default select example">  
+                                    <option value="Mundo" @if(old('destinoGral') == 'Mundo') selected @endif>Mundo</option>
+                                    <option value="Tur-Arg" @if(old('destinoGral') == 'Tur-Arg') selected @endif>Tur-Arg</option>
+                                    <option value="Brasil" @if(old('destinoGral') == 'Brasil') selected @endif>Brasil</option>
+                                    <option value="Caribe" @if(old('destinoGral') == 'Caribe') selected @endif>Caribe</option>
+                                    <option value="Europa" @if(old('destinoGral') == 'Europa') selected @endif>Europa</option>                                    
+                                </select>                                 
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="pais_destino" class="col-md-4 control-label">País Destino</label>
                             <div class="">                            
-                                <select name="pais_destino" class="form-select">
+                                <select name="pais_destino" class="form-select">                                    
                                     @foreach ($paises as $pais)
                                         <option value="{{ $pais->nombre_img }}" {{ (old('pais_destino') == $pais->nombre_img) ? 'selected' : '' }}>
                                             {{ $pais->nombre_img }}
@@ -253,11 +265,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="hotel" class="col-md-4 control-label">Hoteles</label>
+                            <label for="hotel_principal" class="col-md-4 control-label">Hotel Principal</label>
                             <div class="">
-                               <select name="hotel" class="form-select">
+                               <select name="hotel_principal" class="form-select">
                                     @foreach ($hoteles as $hotel)
-                                        <option value="{{ $hotel->id }}" {{ (old('hotel') == $hotel->id) ? 'selected' : '' }}>
+                                        <option value="{{ $hotel->id }}" {{ (old('hotel_principal') == $hotel->id) ? 'selected' : '' }}>
                                             {{ $hotel->nombre }}
                                         </option>
                                     @endforeach
@@ -265,11 +277,53 @@
                             </div>
                         </div>  
                         <div class="form-group">
-                            <label for="estadia" class="col-md-4 control-label">Estadía Noches</label>
+                            <label for="estadia_principal" class="col-md-4 control-label">Estadía Principal</label>
                             <div class="">
-                                <input type="number" class="form-control" name="estadia" value="{{ old('estadia') }}" required>
+                                <input type="number" class="form-control" name="estadia_principal" value="{{ old('estadia_principal') }}" required>
+                            </div>
+                        </div>    
+                        <div class="form-group">
+                            <label for="hotel_dos" class="col-md-4 control-label">Hotel 2</label>
+                            <div class="">
+                               <select name="hotel_dos" class="form-select">
+                                    @foreach ($hoteles as $hotel)
+                                        <option value="{{ $hotel->id }}" {{ (old('hotel_dos') == $hotel->id) ? 'selected' : '' }}>
+                                            {{ $hotel->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="estadia_dos" class="col-md-4 control-label">Estadía Hotel 2</label>
+                            <div class="">
+                                <input value="0" type="number" class="form-control" name="estadia_dos" value="{{ old('estadia_dos') }}">
                             </div>
                         </div>                        
+                        <div class="form-group">
+                            <label for="hotel_tres" class="col-md-4 control-label">Hotel 3</label>
+                            <div class="">
+                               <select name="hotel_tres" class="form-select">
+                                    @foreach ($hoteles as $hotel)
+                                        <option value="{{ $hotel->id }}" {{ (old('hotel_tres') == $hotel->id) ? 'selected' : '' }}>
+                                            {{ $hotel->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="estadia_tres" class="col-md-4 control-label">Estadía Hotel 3</label>
+                            <div class="">
+                                <input value="0" type="number" class="form-control" name="estadia_tres" value="{{ old('estadia_tres') }}">
+                            </div>
+                        </div>    
+                        <div class="form-group">
+                            <label for="estadiaTotal" class="col-md-4 control-label">Estadía Total</label>
+                            <div class="">
+                                <input type="number" class="form-control" name="estadiaTotal" value="{{ old('estadiaTotal') }}" required>
+                            </div>
+                        </div>                                            
                         <div class="mt-2">
                            <button type="submit" class="btn btn-primary">
                                Guardar Producto

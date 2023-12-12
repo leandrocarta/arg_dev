@@ -103,15 +103,21 @@ class ProductoController extends Controller
             'imagen' => 'image|mimes:jpeg,png,jpg',
             'habitacion' => 'string',
             'tipo_producto' => 'string',
+            'destinoGral' => 'string',
             'pais_destino' => 'string',
             'ciudad_destino' => 'string',
             'origen_salida' => 'string',
             'precio_total' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
             'precio_comisionable' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
             'moneda' => 'string',
-            'hotel' => 'string',
-            'estadia' => 'integer',
+            'hotel_principal' => 'string',
+            'estadia_principal' => 'integer',
+            'hotel_dos' => 'string',
+            'estadia_dos' => 'integer',
+            'hotel_tres' => 'string',
+            'estadia_tres' => 'integer',
             'fecha_vencimiento' => 'date',
+            'estadiaTotal' => 'integer',
         ], $messages);
         $uploadedFile = $request->file('imagen');
 
@@ -137,15 +143,21 @@ class ProductoController extends Controller
             $producto->imagen = $originalFileName;
             $producto->habitacion = $request->habitacion;
             $producto->tipo_producto = $request->tipo_producto;
+            $producto->destinoGral = $request->destinoGral;
             $producto->pais_destino = $request->pais_destino;
             $producto->ciudad_destino = $request->ciudad_destino;
             $producto->origen_salida = $request->origen_salida;
             $producto->precio_total = $request->precio_total;
             $producto->precio_comisionable = $request->precio_comisionable;
             $producto->moneda = $request->moneda;
-            $producto->id_hotel = $request->hotel;
-            $producto->estadia = $request->estadia;
+            $producto->id_hotel = $request->hotel_principal;
+            $producto->estadia = $request->estadia_principal;
+            $producto->id_hotel2 = $request->hotel_dos;
+            $producto->estadia_dos = $request->estadia_dos;
+            $producto->id_hotel3 = $request->hotel_tres;
+            $producto->estadia_tres = $request->estadia_tres;
             $producto->fecha_vencimiento = $request->fecha_vencimiento;
+            $producto->estadiaTotal = $request->estadiaTotal;
 
             //$producto->solo_adultos = $request->has('solo_adultos') ? true : false;
             $producto->save();
