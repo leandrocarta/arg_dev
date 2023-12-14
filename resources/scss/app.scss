@@ -242,8 +242,6 @@ margin-left: 10px;
   width: 100%;
   max-height: 500px;
 }
-/* Agrega estilos a la clase .filtro */
-/* Estilos CSS */
 .filtro {
     position: relative;
 }
@@ -256,7 +254,7 @@ margin-left: 10px;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
-    z-index: 100; /* Ajusta el valor según sea necesario */
+    z-index: 100; 
 }
 
 .filtro img {
@@ -274,11 +272,45 @@ margin-left: 10px;
     color: white;
     z-index: 102; 
 }
-.titulo-detalles-prod .fa-cloud-moon {
-  color: white;
+.campo-detalles {
+    background-color: #f8f9fa; /* Color de fondo para el bloque principal */
+    padding: 21px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra */
 }
 
-/* Agrega estilos a la imagen */
+.titulo-seccion {
+    color: #007bff; /* Color del título */
+    text-decoration: underline; /* Subrayado */
+}
+
+.detalle-hotel {
+    margin-top: 20px; /* Espaciado superior entre hoteles */
+}
+
+.subtitulo-hotel {
+    color: #dc3545; /* Color del subtítulo del hotel */
+    text-decoration: underline; /* Subrayado */
+}
+
+.info-hotel p {
+    margin-bottom: 8px; /* Espaciado inferior entre párrafos */    
+}
+
+.info-hotel i {
+    margin-right: 8px; /* Espaciado derecho entre el icono y el texto */
+    color: black;
+}
+
+
+.subtitulo-hotel {
+    color: #007bff; /* Cambia el color del subtitulo del hotel */
+}
+
+.info-hotel p {
+    margin: 5px 0; /* Añade un espacio superior e inferior entre párrafos de información del hotel */
+}
+
 
 
 // Zona Footer
@@ -509,7 +541,7 @@ font-family: 'Oswald', sans-serif;;
 }
 .fa-sun, .fa-bed, .fa-hotel, .fa-bell-concierge, .fa-mug-saucer, .fa-utensils,
 .fa-hot-tub-person, .fa-dumbbell, .fa-cloud-moon, .fa-bus, .fa-plane-departure {
-  color: #878683;
+  color: #ffffff;
 }
 .fa-star {
   color: #E9B003;

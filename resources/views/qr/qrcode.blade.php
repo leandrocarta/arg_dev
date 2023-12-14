@@ -11,7 +11,7 @@
             <div class="border">
               <h1 style="color: #E9B003">COMERCIO ADHERIDO</h1>
                {!! $qrCode !!}
-              <h1 style="color: #E9B003">FUN-0004</h1>
+              <h1 style="color: #E9B003">FUN-0051</h1>
             </div>
         </div>
     </div>    

@@ -8,7 +8,7 @@
         foreach(['id_hotel', 'id_hotel2', 'id_hotel3'] as $campoHotel) {
             $idHotel = $productos->$campoHotel;
 
-            if ($idHotel !== 0) {
+            if ($idHotel !== 1) {
                 $hotelRelacionado = App\Models\Hotel::find($idHotel);
 
                 if ($hotelRelacionado) {
@@ -34,7 +34,7 @@
                 <div class="titulo-detalles-prod">
                     <h4><i class="fa-solid fa-location-dot me-2"></i>{{ $productos->pais_destino }} - {{ $productos->ciudad_destino }}</h4>
                     <h1>{{ $hotelData['hotel']->nombre }}</h1>
-                    <h4><i class="fa-solid fa-cloud-moon"></i> Estadía: {{ $hotelData['estadia'] }} noches</h4>
+                    <h4>Estadía: {{ $hotelData['estadia'] }} noches <i class="fa-solid fa-cloud-moon"></i></h4>
                 </div>
             </div>
         @endforeach
@@ -44,106 +44,62 @@
 </div>
 </div>
   <div class="container-fluid my-3 m-auto productos-detalles">
-    <div class="row px-2">
-        <!--
-      <div class="col-md-5 bg-light border rounded">
-        <h3>Características del Viaje</h3>
-        <p><i class="fa-solid fa-hotel"></i> :
-           {{ $productos->hotel->nombre }}
-        </p>
-        <p class=""> @if ($productos->service->comidas == 'All Inclusive')
-                <i class="fa-solid fa-bell-concierge"></i> : {{ $productos->service->comidas }}
-                @elseif ($productos->service->comidas == 'Desayuno')
-                <i class="fa-solid fa-mug-saucer"></i> : {{ $productos->service->comidas }}
-                @elseif ($productos->service->comidas == 'Media Pensión')
-                <i class="fa-solid fa-utensils"></i> : {{ $productos->service->comidas }} 
-              @endif   
-        </p> 
-        <p class=""><i class="fa-solid fa-bed"></i> : Habitación  
-           {{ $productos->habitacion }}   
-        </p> 
-        <p class=""><i class="fa-solid fa-cloud-moon"></i> : 
-            {{ $productos->estadia }}  Noches</span>        
-           </span>           
-        </p> 
-        @if ($productos->hotel->gym == 'Área de Gimnasio' || $productos->hotel->spa == 'Área de Spa')
-        <h3>Otros Servicios</h3>
-        <p> @if ($productos->hotel->gym == 'Área de Gimnasio')
-            <i class="fa-solid fa-dumbbell"></i> : {{ $productos->hotel->gym }}
-            @endif
-        </p>
-        <p>
-            @if ($productos->hotel->spa == 'Área de Spa')
-            <i class="fa-solid fa-hot-tub-person"></i> : {{ $productos->hotel->spa }}                 
-            @endif   
-        </p> 
-        @endif
-      </div> -->
-      <div class="col-md-5 bg-light border rounded">
-    <h3>Características del Viaje</h3>
-    @php
-        $hotelesRelacionados = collect();
-        $camposOrdenados = [
-            'id_hotel', 'estadia',
-            'id_hotel2', 'estadia_dos',
-            'id_hotel3', 'estadia_tres',
-        ];
-        foreach ($camposOrdenados as $campo) {
-            $idHotel = $productos->$campo;
-            if ($idHotel !== 1) {
-                $hotelRelacionado = App\Models\Hotel::find($idHotel);
-                if ($hotelRelacionado) {
-                    $campoEstadia = "estadia";
-                    if (str_contains($campo, 'id_hotel2')) {
-                        $campoEstadia = "estadia_dos";
-                    } elseif (str_contains($campo, 'id_hotel3')) {
-                        $campoEstadia = "estadia_tres";
-                    }
-
-                    $estadiaHotel = $productos->$campoEstadia;
-
-                    $hotelesRelacionados->push([
-                        'hotel' => $hotelRelacionado,
-                        'estadia' => $estadiaHotel,
-                    ]);
-                }
-            }
-        }
-    @endphp
-
-    @foreach ($hotelesRelacionados as $hotelData)
-        <p><i class="fa-solid fa-hotel"></i> : {{ $hotelData['hotel']->nombre }}</p>
-        <p class=""><i class="fa-solid fa-cloud-moon"></i> : {{ $hotelData['estadia'] }} Noches</span></p>
-        <p class=""><i class="fa-solid fa-bed"></i> : Habitación {{ $productos->habitacion }}</p>
-        <p class="">
-            @if ($productos->service->comidas == 'All Inclusive')
-                <i class="fa-solid fa-bell-concierge"></i> : {{ $productos->service->comidas }}
-            @elseif ($productos->service->comidas == 'Desayuno')
-                <i class="fa-solid fa-mug-saucer"></i> : {{ $productos->service->comidas }}
-            @elseif ($productos->service->comidas == 'Media Pensión')
-                <i class="fa-solid fa-utensils"></i> : {{ $productos->service->comidas }} 
-            @endif
-        </p>
-        
-        
-
-        @if ($hotelData['hotel']->gym == 'Área de Gimnasio' || $hotelData['hotel']->spa == 'Área de Spa')
-            <h3>Otros Servicios</h3>
-            <p>
-                @if ($hotelData['hotel']->gym == 'Área de Gimnasio')
-                    <i class="fa-solid fa-dumbbell"></i> : {{ $hotelData['hotel']->gym }}
-                @endif
-            </p>
-            <p>
-                @if ($hotelData['hotel']->spa == 'Área de Spa')
-                    <i class="fa-solid fa-hot-tub-person"></i> : {{ $hotelData['hotel']->spa }}
-                @endif
-            </p>
-        @endif
-    @endforeach
-</div>
-
-      
+    <div class="row px-2">        
+      <div class="col-md-5 campo-detalles">
+        <h3 class="titulo-seccion">CARACTERÍSTICAS DEL VIAJE</h3>
+           @php
+           $camposOrdenados = [
+               'id_hotel' => 'estadia',
+               'id_hotel2' => 'estadia_dos',
+               'id_hotel3' => 'estadia_tres',
+           ];
+           @endphp
+           @foreach ($camposOrdenados as $campoHotel => $campoEstadia)
+           @php
+           $idHotel = $productos->$campoHotel;
+           @endphp
+           @if ($idHotel !== 1)
+           @php
+           $hotelRelacionado = App\Models\Hotel::find($idHotel);
+           @endphp
+           @if ($hotelRelacionado)
+            <div class="detalle-hotel">
+                <h5 class="subtitulo-hotel">
+                    @if ($campoHotel === 'id_hotel')
+                    <u>ALOJAMIENTO:</u>
+                    @else
+                    <u>ALOJAMIENTO:</u>
+                    @endif
+                </h5>
+                 <div class="info-hotel">
+                     <p><i class="fa-solid fa-hotel"></i>: {{ $productos->$campoEstadia }} Noches
+                         - {{ $hotelRelacionado->nombre }}             
+                     </p>
+                     <p class=""><i class="fa-solid fa-bed"></i> : Habitación {{ $productos->habitacion }}
+                      @if ($productos->service->comidas == 'All Inclusive')
+                         Con {{ $productos->service->comidas }}
+                         @elseif ($productos->service->comidas == 'Desayuno')
+                         <i class="fa-solid fa-mug-saucer"></i> : {{ $productos->service->comidas }}
+                         @elseif ($productos->service->comidas == 'Media Pensión')
+                         <i class="fa-solid fa-utensils"></i> : {{ $productos->service->comidas }}
+                         @endif
+                     </p>
+                     @if ($hotelRelacionado->gym == 'Área de Gimnasio' || $hotelRelacionado->spa == 'Área de Spa')
+                     <p>
+                         @if ($hotelRelacionado->gym == 'Área de Gimnasio')
+                         <i class="fa-solid fa-dumbbell"></i> : {{ $hotelRelacionado->gym }}
+                         @endif
+                         @if ($hotelRelacionado->spa == 'Área de Spa')
+                         - <i class="fa-solid fa-hot-tub-person"></i> : {{ $hotelRelacionado->spa }}
+                         @endif
+                     </p>
+                     @endif
+                 </div>
+             </div>
+             @endif
+             @endif
+             @endforeach
+      </div>
       <div class="col-md-7">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
