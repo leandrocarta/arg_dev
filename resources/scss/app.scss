@@ -272,16 +272,18 @@ margin-left: 10px;
     color: white;
     z-index: 102; 
 }
+
 .campo-detalles {
-    background-color: #f8f9fa; /* Color de fondo para el bloque principal */
-    padding: 21px; /* Espaciado interno */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra */
-}
+    background-color: #f8f9fa; 
+    padding: 21px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    margin: 5px;
+} 
 
 .titulo-seccion {
     color: #007bff; /* Color del título */
-    text-decoration: underline; /* Subrayado */
+    text-decoration: underline; /* Subrayado */ 
 }
 
 .detalle-hotel {
@@ -543,6 +545,10 @@ font-family: 'Oswald', sans-serif;;
 .fa-hot-tub-person, .fa-dumbbell, .fa-cloud-moon, .fa-bus, .fa-plane-departure {
   color: #ffffff;
 }
+.home-iconos, .fa-sun, .fa-bed, .fa-hotel, .fa-bell-concierge, .fa-mug-saucer, .fa-utensils,
+.fa-hot-tub-person, .fa-dumbbell, .fa-cloud-moon, .fa-bus, .fa-plane-departure {
+  color: #474646;
+} 
 .fa-star {
   color: #E9B003;
 }
@@ -722,6 +728,9 @@ font-family: 'Oswald', sans-serif;;
 .content-min p {
   font-size: 8px;
 } 
+.mt-2-movil {
+  margin-top: 10px;
+}
 }
 
 // Fin Medias Querys

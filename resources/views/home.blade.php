@@ -45,7 +45,7 @@
   </div>
  </div>
  -->
-  <div class="container my-3 m-auto productos-detalles">
+  <div class="container my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
        <h4 class="display-4"></h4>
      </div>
@@ -272,7 +272,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="padding-bottom: 0">
-        <h5 class="modal-title" style="margin-bottom: 3px;" ><a type="button" class="btn" href="http://127.0.0.1:8000/register_client">Registrate:</a><i>Precios y Ofertas exclusivas para la comunidad</i></h5> 
+        <h5 class="modal-title"><i>Precios y Ofertas exclusivas para la comunidad de Viajeros</i></h5> 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
