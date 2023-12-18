@@ -70,7 +70,7 @@
                                    <label for="transporte_int" class="col-md-4 control-label">Transporte Internacional</label>
                                       <div class="">
                                           <select name="transporte_int" class="form-select" aria-label="Default select example"> 
-                                            <option value="Aéreos" @if(old('transporte_int') == 'Aéreos') selected @endif>Aéreos</option>
+                                            <option value="Aéreo Directo" @if(old('transporte_int') == 'Aéreo Directo') selected @endif>Aéreo Directo</option>
                                             <option value="Aéreos con escala" @if(old('transporte_int') == 'Aéreos con escala') selected @endif>Aéreos con escala</option>
                                             <option value="Micro" @if(old('transporte_int') == 'Micro') selected @endif>Micro</option>
                                             <option value="Otro" @if(old('transporte_int') == 'Otro') selected @endif>Otro</option>
@@ -83,7 +83,7 @@
                                       <div class="">
                                           <select name="traslados_orig" class="form-select" aria-label="Default select example"> 
                                             <option value="Sin Traslados" @if(old('traslados_orig') == 'Sin Traslados') selected @endif>Sin Traslados</option>
-                                            <option value="Micro" @if(old('traslados_orig') == 'Micro') selected @endif>Micro</option>
+                                            <option value="Micro - Vans" @if(old('traslados_orig') == 'Micro - Vans') selected @endif>Micro - Vans</option>
                                             <option value="Aéreos" @if(old('traslados_orig') == 'Aéreos') selected @endif>Aéreos</option>
                                             <option value="Otro" @if(old('traslados_orig') == 'Otro') selected @endif>Otro</option>                                            
                                           </select>  
@@ -93,7 +93,7 @@
                                    <label for="traslados_dest" class="col-md-4 control-label">Traslados en Destino</label>
                                       <div class="">
                                           <select name="traslados_dest" class="form-select" aria-label="Default select example"> 
-                                            <option value="Micro" @if(old('traslados_dest') == 'Micro') selected @endif>Micro</option>
+                                            <option value="Micro - Vans" @if(old('traslados_dest') == 'Micro - Vans') selected @endif>Micro - Vans</option>
                                             <option value="Sin Traslados" @if(old('traslados_dest') == 'Sin Traslados') selected @endif>Sin Traslados</option>
                                           </select>  
                                       </div>
@@ -104,6 +104,7 @@
                                           <select name="estadía" class="form-select" aria-label="Default select example"> 
                                             <option value="Hotel" @if(old('estadía') == 'Hotel') selected @endif>Hotel</option>
                                             <option value="Apart" @if(old('estadía') == 'Apart') selected @endif>Apart</option>
+                                            <option value="Departamento" @if(old('estadía') == 'Departamento') selected @endif>Departamento</option>
                                             <option value="Otro" @if(old('estadía') == 'Otro') selected @endif>Otro</option>
                                           </select>  
                                       </div>
@@ -124,7 +125,7 @@
                                       <div class="">
                                           <select name="seguro" class="form-select" aria-label="Default select example"> 
                                             <option value="Asistencia al viajero" @if(old('seguro') == 'Asistencia al viajero') selected @endif>Asistencia al viajero</option>
-                                            <option value="Asistencia al viajero" @if(old('seguro') == 'Asistencia al viajero') selected @endif>SIN Asistencia al viajero</option>
+                                            <option value="SIN Asistencia al viajero" @if(old('seguro') == 'SIN Asistencia al viajero') selected @endif>SIN Asistencia al viajero</option>
                                           </select>  
                                       </div>
                                   </div>                   

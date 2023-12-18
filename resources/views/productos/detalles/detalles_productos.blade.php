@@ -45,24 +45,38 @@
   </div>
 </div>
 <div class="container mt-4">
-    <div class="row">
-        <div class="col">
-            <hr>
-            <h2 class="mb-4">Datos Generales</h2>
+    <div class="row datos-generales">
+        <hr>
+            <h2 class="mb-4">Información General</h2>
+        <div class="col-md-5">            
             <p>
-                <strong><i class="fas fa-bus me-1"></i> -  Traslados Origen:</strong> {{ $productos->service->traslados_orig }}
+                <strong><i class="fas fa-bus me-1"></i> -  Traslados Origen:</strong> Domicilio ⮂ {{ $productos->origen_salida }} {{ $productos->service->traslados_orig }}
             </p>
             <p class="">
-                @if ($productos->service && ($productos->service->transporte_int == 'Aéreos' || $productos->service->transporte_int == 'Aéreos con escala'))                                        
+                @if ($productos->service)
+                @php
+                    $transporteAereo = $productos->service->transporte_int;
+                @endphp
+
+                @if ($transporteAereo == 'Aéreo Directo')
                     <i class="fas fa-plane-departure me-1"></i> -
-                @elseif ($productos->service && $productos->service->transporte_int == 'Micro') 
+                @elseif ($transporteAereo == 'Aéreos con escala')
+                    <i class="fas fa-plane-departure me-1"></i> - 
+                @endif
+    
+                @if ($transporteAereo == 'Micro - Vans') 
                     <i class="fas fa-bus"></i> 
-                @elseif ($productos->service && $productos->service->transporte_int == 'Sin Traslados')               
-                @endif 
-                <span>{{ $productos->origen_salida }} ⇌ {{ $productos->ciudad_destino }}</span>                 
+                @endif
+    
+                @if ($transporteAereo == 'Sin Traslados')               
+                    <!-- Agregar código específico si es necesario -->
+                @endif
+            @endif
+
+            <span>{{ $productos->service->transporte_int }} desde {{ $productos->origen_salida }} ⮂ {{ $productos->ciudad_destino }}</span>                 
             </p>
             <p class="">                
-                <strong><i class="fas fa-bus me-1"></i> - Traslados Destino:</strong> {{ $productos->service->traslados_dest }} <span>Aeropuerto ⇌ Hotel</span>           
+                <strong><i class="fas fa-bus me-1"></i> - Traslados Destino:</strong> {{ $productos->service->traslados_dest }} desde <span>Aeropuerto ⮂ Hotel</span>           
             </p>     
             <p>
                 <strong><i class="fa-solid fa-cloud-moon"></i> - </strong> Estadía Total {{ $productos->estadiaTotal }} Noches.
@@ -72,11 +86,62 @@
             </p>
             <hr>
         </div>
+        <div class="col-md-7">
+        <h3>Destino: {{ $productos->ciudad_destino }}</h3>
+        <p>
+            <strong>Detalle General:</strong> 
+            @if($productos->destinos)
+                {{ $productos->destinos->detalle_gral ?? 'Información no disponible' }}
+            @else
+                Información no disponible
+            @endif
+        </p>
+        <p>
+            <strong>Ubicación:</strong>
+            @if($productos->destinos)
+                {{ $productos->destinos->ubicacion ?? 'Información no disponible' }}
+            @else
+                Información no disponible
+            @endif
+        </p>
+        <p>
+            <strong>Playas:</strong>
+            @if($productos->destinos)
+                {{ $productos->destinos->playas ?? 'Información no disponible' }}
+            @else
+                Información no disponible
+            @endif
+        </p>
+        <p>
+            <strong>Gastronomía:</strong>
+            @if($productos->destinos)
+                {{ $productos->destinos->gastronomia ?? 'Información no disponible' }}
+            @else
+                Información no disponible
+            @endif
+        </p>
+        <p>
+            <strong>Atracciones:</strong>
+            @if($productos->destinos)
+                {{ $productos->destinos->atracciones ?? 'Información no disponible' }}
+            @else
+                Información no disponible
+            @endif
+        </p>
+        <p>
+            <strong>Historia:</strong>
+            @if($productos->destinos)
+                {{ $productos->destinos->historia ?? 'Información no disponible' }}
+            @else
+                Información no disponible
+            @endif
+        </p>
+    </div>
+
     </div>
 </div>
-
-  <div class="container-fluid my-3 m-auto productos-detalles">
-    <div class="row px-2 campo-detalles">        
+<div class="container-fluid my-3 m-auto productos-detalles">
+   <div class="row px-2 campo-detalles datos-generales">        
       <div class="col-md-5 ">
            @php
            $camposOrdenados = [
@@ -97,9 +162,9 @@
             <div class="detalle-hotel">
                 <h5 class="subtitulo-hotel">
                     @if ($campoHotel === 'id_hotel')
-                    <u>HOSPEDAJE PRINCIPAL:</u>
+                    HOSPEDAJE PRINCIPAL:
                     @else
-                    <u>OTROS:</u>
+                    OTROS:
                     @endif
                 </h5>
                  <div class="info-hotel">

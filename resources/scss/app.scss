@@ -280,6 +280,14 @@ margin-left: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
     margin: 5px;
 } 
+.datos-generales h2, .datos-generales h5 {
+  //display: inline-block;
+  color: white;
+  padding: 10px;
+  background-color: #2866B7;
+  border-radius: 10px;
+  text-align: center;
+}
 
 .titulo-seccion {
     color: #007bff; /* Color del título */
@@ -288,11 +296,6 @@ margin-left: 10px;
 
 .detalle-hotel {
     margin-top: 20px; /* Espaciado superior entre hoteles */
-}
-
-.subtitulo-hotel {
-    color: #dc3545; /* Color del subtítulo del hotel */
-    text-decoration: underline; /* Subrayado */
 }
 
 .info-hotel p {

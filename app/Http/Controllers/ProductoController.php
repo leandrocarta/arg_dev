@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use App\Models\Producto;
 use App\Models\Service;
 use App\Models\Itinerario;
+use App\Models\Destino;
 use App\Models\Pais;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
@@ -21,12 +22,12 @@ class ProductoController extends Controller
     }
     public function paquetes()
     {       
-        $productos = Producto::with(['hotel', 'service'])->get();
+        $productos = Producto::with(['hotel', 'service','destinos'])->get();
         return view('productos.paquetes.paquetes', compact('productos'));
     }
     public function grupales()
     {       
-        $productos = Producto::with(['hotel', 'service'])->get();
+        $productos = Producto::with(['hotel', 'service','destinos'])->get();
         return view('productos.grupales.grupales', compact('productos'));
     }
     public function showFormProd()
@@ -197,7 +198,7 @@ class ProductoController extends Controller
     }
     public function detalle_producto($id)
 {
-    $productos = Producto::with(['hotel', 'service'])->find($id);
+    $productos = Producto::with(['hotel', 'service', 'destinos'])->find($id);
 
     if (!$productos) {
         // Manejo del caso en que el producto no existe

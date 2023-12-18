@@ -41,6 +41,9 @@ class Producto extends Model
 {
     return $this->hasOne(Service::class, 'id_prod', 'id');
 }
-
+ public function destinos()
+    {
+        return $this->belongsTo(Destino::class, 'id_destino'); 
+    }
 
 }

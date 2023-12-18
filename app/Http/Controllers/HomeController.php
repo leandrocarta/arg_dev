@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\Hotel;
 use App\Models\Service;
 use App\Models\Itinerario;
+use App\Models\Destinos;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {        
-        $productos = Producto::with(['hotel', 'service', 'itinerario'])->get();
+        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
         $mostrarModal = false;
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
