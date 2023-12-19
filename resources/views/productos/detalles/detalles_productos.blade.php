@@ -1,5 +1,6 @@
 @extends('layouts.app-master')
 @section('content')
+<div class="detalles_productos">
  <div class="carousel carousel-dark slide" data-bs-ride="carousel">    
    <div class="carousel-inner img-prod-banner">
     @php
@@ -44,15 +45,21 @@
         @endif
   </div>
 </div>
-<div class="container mt-4">
+<div class="container">
     <div class="row datos-generales">
         <hr>
-        <h2 class="mb-4">Información General</h2>
-        <div class="col-md-5 info-paquete d-flex flex-column">
-            <div class="card bg-light px-2 border rounded flex-grow-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                   <h2 class="mb-4">Información General</h2>
+                </div>
+            </div>
+        </div>        
+        <div class="col-md-6 info-paquete d-flex flex-column mb1-movil">
+            <div class="px-2 flex-grow-1 bg-light-detalles">
                 <h4 class="mb-2">Información del Paquete</h4>
                 <p>
-                    <strong><i class="fas fa-bus"></i> - Origen:</strong> Domicilio ⮂ {{ $productos->origen_salida }} {{ $productos->service->traslados_orig }}
+                    <i class="fas fa-bus"></i> Origen: Domicilio ⮂ {{ $productos->origen_salida }} {{ $productos->service->traslados_orig }}
                 </p>
                 <p class="">
                     @if ($productos->service)
@@ -61,9 +68,9 @@
                         @endphp
 
                         @if ($transporteAereo == 'Aéreo Directo')
-                            <i class="fas fa-plane-departure me-1"></i> -
+                            <i class="fas fa-plane-departure me-1"></i>
                         @elseif ($transporteAereo == 'Aéreos con escala')
-                            <i class="fas fa-plane-departure me-1"></i> - 
+                            <i class="fas fa-plane-departure me-1"></i> 
                         @endif
 
                         @if ($transporteAereo == 'Micro - Vans') 
@@ -75,21 +82,21 @@
                         @endif
                     @endif
 
-                    <span><strong>{{ $productos->service->transporte_int }}:</strong> desde {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->nombre_destino }}</span>                 
+                    {{ $productos->service->transporte_int }}: desde {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->nombre_destino }}                 
                 </p>
                 <p class="">                
-                    <strong><i class="fas fa-bus me-1"></i> - Destino:</strong> {{ $productos->service->traslados_dest }} desde <span>Aeropuerto ⮂ Hotel</span>           
+                    <i class="fas fa-bus me-1"></i> Destino: {{ $productos->service->traslados_dest }} desde <span>Aeropuerto ⮂ Hotel</span>           
                 </p>     
                 <p>
-                    <strong><i class="fa-solid fa-cloud-moon"></i> - Estadía Total:</strong> {{ $productos->estadiaTotal }} Noches.
+                    <i class="fa-solid fa-cloud-moon"></i> Estadía Total: {{ $productos->estadiaTotal }} Noches.
                 </p>       
                 <p class="mb-2">
-                    <strong><i class="fa-solid fa-kit-medical me-1"></i> - {{ $productos->service->seguro }} </strong>
+                    <i class="fa-solid fa-kit-medical me-1"></i> {{ $productos->service->seguro }} 
                 </p>                
             </div>
         </div>
-        <div class="col-md-7 info-paquete d-flex flex-column">
-            <div class="card bg-light px-2 border rounded flex-grow-1">
+        <div class="col-md-6 info-paquete d-flex flex-column">
+            <div class="bg-light-detalles px-2 flex-grow-1">
                 <h4 class="mb-2">{{ $productos->destinos->nombre_destino }}</h4>
                 <p class="mb-2">            
                     @if($productos->destinos->detalle_gral)
@@ -103,53 +110,65 @@
         </div>
     </div>
 </div>
-<div class="collapse" id="collapseExample">
-    <div class="card card-body">
-        <div class="container">
-            <div class="row bg-light border rounded">
-                <div class="col-md-6">                            
-                    @if($productos->destinos->ubicacion)
-                        <p class="mb-2 border rounded p-1 m-2">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span class="ms-2 fw-bold">Ubicación:</span>
-                            {{ $productos->destinos->ubicacion }}
-                        </p>                            
-                    @endif
-                    @if($productos->destinos->playas)
-                        <p class="mb-2 border rounded p-1 m-2">
-                            <i class="fa-solid fa-umbrella-beach"></i>
-                            <span class="ms-2 fw-bold">Playas:</span>
-                            {{ $productos->destinos->playas }}
-                        </p>                            
-                    @endif
-                    @if($productos->destinos->gastronomia)
-                        <p class="mb-2 border rounded p-1 m-2">
-                            <i class="fas fa-utensils"></i>
-                            <span class="ms-2 fw-bold">Gastronomía:</span>
-                            {{ $productos->destinos->gastronomia }}
-                        </p>
-                    @endif
+<div class="container mt-4">
+    <div class="row datos-generales">    
+        <div class="collapse" id="collapseExample">
+            <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                   <h2 class="">Aprende más de tu destino</h2>
                 </div>
-                <div class="col-md-6">
-                    @if($productos->destinos->atracciones)
-                        <p class="mb-2 border rounded p-1 m-2">  
-                            <i class="fas fa-camera"></i>
-                            <span class="ms-2 fw-bold">Atracciones:</span>
-                            {{ $productos->destinos->atracciones }}
-                        </p>
-                    @endif
-                    @if($productos->destinos->historia)
-                        <p class="mb-2 border rounded p-1 m-2"> 
-                            <i class="fas fa-book"></i> 
-                            <span class="ms-2 fw-bold">Historia:</span>
-                            {{ $productos->destinos->historia }}                
-                        </p>
-                    @endif
+            </div>
+        </div>  
+            <div class="">
+                <div class="container mt-4">
+                    <div class="row bg-light-detalles">
+                        <div class="col-md-6">                            
+                            @if($productos->destinos->ubicacion)
+                                <p class="mb-2 borde-cajas">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span class="fw-bold">Ubicación:</span>
+                                    {{ $productos->destinos->ubicacion }}
+                                </p>                            
+                            @endif
+                            @if($productos->destinos->playas)
+                                <p class="borde-cajas">
+                                    <i class="fa-solid fa-umbrella-beach"></i>
+                                    <span class="fw-bold">Playas:</span>
+                                    {{ $productos->destinos->playas }}
+                                </p>                            
+                            @endif
+                            @if($productos->destinos->gastronomia)
+                                <p class="mb-2 borde-cajas">
+                                    <i class="fas fa-utensils"></i>
+                                    <span class="fw-bold">Gastronomía:</span>
+                                    {{ $productos->destinos->gastronomia }}
+                                </p>
+                            @endif
+                        </div>
+                        <div class="col-md-6">
+                            @if($productos->destinos->atracciones)
+                                <p class="mb-2 borde-cajas">  
+                                    <i class="fas fa-camera"></i>
+                                    <span class="fw-bold">Atracciones:</span>
+                                    {{ $productos->destinos->atracciones }}
+                                </p>
+                            @endif
+                            @if($productos->destinos->historia)
+                                <p class="mb-2 borde-cajas"> 
+                                    <i class="fas fa-book"></i> 
+                                    <span class="ms-2 fw-bold">Historia:</span>
+                                    {{ $productos->destinos->historia }}                
+                                </p>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="container-fluid my-3 m-auto productos-detalles">
    <div class="row px-2 campo-detalles datos-generales">        
@@ -179,25 +198,25 @@
                     @endif
                 </h5>
                  <div class="info-hotel">
-                     <p><i class="fa-solid fa-hotel"></i>: {{ $productos->$campoEstadia }} Noches
-                         - {{ $hotelRelacionado->nombre }}             
+                     <p><i class="fa-solid fa-hotel"></i> {{ $productos->$campoEstadia }} Noches
+                         {{ $hotelRelacionado->nombre }}             
                      </p>
-                     <p class=""><i class="fa-solid fa-bed"></i> : Habitación {{ $productos->habitacion }}
+                     <p class=""><i class="fa-solid fa-bed"></i> Habitación {{ $productos->habitacion }}
                       @if ($productos->service->comidas == 'All Inclusive')
                          Con {{ $productos->service->comidas }}
                          @elseif ($productos->service->comidas == 'Desayuno')
-                         <i class="fa-solid fa-mug-saucer"></i> : {{ $productos->service->comidas }}
+                         <i class="fa-solid fa-mug-saucer"></i> {{ $productos->service->comidas }}
                          @elseif ($productos->service->comidas == 'Media Pensión')
-                         <i class="fa-solid fa-utensils"></i> : {{ $productos->service->comidas }}
+                         <i class="fa-solid fa-utensils"></i> {{ $productos->service->comidas }}
                          @endif
                      </p>
                      @if ($hotelRelacionado->gym == 'Área de Gimnasio' || $hotelRelacionado->spa == 'Área de Spa')
                      <p>
                          @if ($hotelRelacionado->gym == 'Área de Gimnasio')
-                         <i class="fa-solid fa-dumbbell"></i> : {{ $hotelRelacionado->gym }}
+                         <i class="fa-solid fa-dumbbell"></i> {{ $hotelRelacionado->gym }}
                          @endif
                          @if ($hotelRelacionado->spa == 'Área de Spa')
-                         - <i class="fa-solid fa-hot-tub-person"></i> : {{ $hotelRelacionado->spa }}
+                         - <i class="fa-solid fa-hot-tub-person"></i> {{ $hotelRelacionado->spa }}
                          @endif
                      </p>
                      @endif
@@ -211,7 +230,7 @@
                 <div class="row">
                     <div class="col-md-7">
                         <p>
-                          <strong>PRECIO TOTAL: </strong> - {{ $productos->moneda }} {{ $productos->precio_total }}
+                          <strong>PRECIO TOTAL </strong> ( {{ $productos->moneda }} {{ $productos->precio_total }} )
                         </p>
                     </div>
                     <div class="col-md-5">
@@ -248,6 +267,7 @@
       </div>
     </div>         
   </div> 
+  </div>
 @endsection
 
         

@@ -5,6 +5,11 @@
   margin: 0;  
 }
 
+.bg-light-detalles {
+  background-color: #e2e3e4;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 8px;
+}
 p {
   margin: 0;
 }
@@ -132,10 +137,10 @@ font-weight: bold;
 }
 @keyframes slideIn {
   from {
-    transform: translateX(100%); /* Inicia fuera del contenedor a la derecha */
+    transform: translateX(100%); 
   }
   to {
-    transform: translateX(0); /* Se desliza hacia la izquierda hasta su posición final */
+    transform: translateX(0); 
   }
 }
 
@@ -198,8 +203,7 @@ nav li {
   vertical-align: top;
 }
 .inicia_sesion a {
-//background-color: rgb(255, 255, 255);
-background-color: #2866b7; //9e9e9e
+background-color: #2866b7; 
 outline: none;
 color: #ffffff;
 border: 1px solid #ffffff;
@@ -294,34 +298,51 @@ margin-left: 10px;
 }
 
 .titulo-seccion {
-    color: #007bff; /* Color del título */
-    text-decoration: underline; /* Subrayado */ 
+    color: #007bff; 
+    text-decoration: underline;  
 }
 
 .detalle-hotel {
-    margin-top: 20px; /* Espaciado superior entre hoteles */
+    margin-top: 20px; 
 }
 
 .info-hotel p {
-    margin-bottom: 8px; /* Espaciado inferior entre párrafos */    
+    margin-bottom: 8px;     
 }
 
 .info-hotel i {
-    margin-right: 8px; /* Espaciado derecho entre el icono y el texto */
+    margin-right: 8px; 
     color: black;
 }
 
 
 .subtitulo-hotel {
-    color: #007bff; /* Cambia el color del subtitulo del hotel */
+    color: #007bff; 
 }
 
 .info-hotel p {
-    margin: 5px 0; /* Añade un espacio superior e inferior entre párrafos de información del hotel */
+    margin: 5px 0; 
 }
 
+// Pagina Detalle Productos
+.detalles_productos .datos-generales p i {
+  color: rgb(130, 130, 131);
+}
+.detalles_productos .datos-generales p span {
+  color: gray;
+}
+.detalles_productos i {
+  margin-right: 5px;
+}
+.borde-cajas {
+  border: 2px solid black;
+  border-radius: 8px;
+  margin: 5px;
+  padding: 5px;
+  
+}
 
-
+// Fin Pagina Detalle Productos
 // Zona Footer
 footer {
   background-color: #ffffff;
@@ -707,6 +728,7 @@ font-family: 'Oswald', sans-serif;;
 // **** Medias Querys
 // Navbar
 
+
 @media (max-width: 768px) {
   .titulo-barra-movil h1 {
     font-size: 11px; 
@@ -737,6 +759,9 @@ font-family: 'Oswald', sans-serif;;
 } 
 .mt-2-movil {
   margin-top: 10px;
+}
+.mb1-movil {
+  margin-bottom: 5px;
 }
 }
 
