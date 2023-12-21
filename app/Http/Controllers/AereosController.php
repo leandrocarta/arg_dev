@@ -10,24 +10,32 @@ class AereosController extends Controller
     public function guardarDatos(Request $request)
     {
         $request->validate([
-            'fecha_ida' => 'required|date',
-            'fecha_regreso' => 'date',
-            'origen' => 'required|string',
-            'destino' => 'required|string',
-            'email' => 'required|email',
-            'aclaracion' => 'string',
-            'estado' => 'integer',
-        ]);
+    'fecha_ida' => 'required|date',
+    'fecha_regreso' => 'nullable|date', // Hacer la fecha de regreso opcional
+    'origen' => 'required|string',
+    'destino' => 'required|string',
+    'email' => 'required|email',
+    'aclaracion' => 'string',
+    'estado' => 'integer',
+]);
 
-        Aereo::create([
-            'fecha_ida' => $request->fecha_ida,
-            'fecha_regreso' => $request->fecha_regreso,
-            'origen' => $request->origen,
-            'destino' => $request->destino,
-            'email' => $request->email,
-            'aclaracion' => $request->aclaracion,
-            'estado' => 1,
-        ]);
+// Crear un array con los valores que deseas asignar
+$aereoData = [
+    'fecha_ida' => $request->fecha_ida,
+    'origen' => $request->origen,
+    'destino' => $request->destino,
+    'email' => $request->email,
+    'aclaracion' => $request->aclaracion,
+    'estado' => 1,
+];
+
+// Agregar la fecha de regreso solo si está presente
+if ($request->has('fecha_regreso')) {
+    $aereoData['fecha_regreso'] = $request->fecha_regreso;
+}
+
+Aereo::create($aereoData);
+
        // return redirect()->route('/home');
          return redirect('/')->with('success', 'Recibimos su consulta, en breve será respondida. Muchas Gracias');
     }

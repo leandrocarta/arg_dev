@@ -338,8 +338,14 @@ margin-left: 10px;
   border: 2px solid black;
   border-radius: 8px;
   margin: 5px;
-  padding: 5px;
-  
+  padding: 5px;  
+}
+.a-confirmar {
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.fa-question-circle {
+  color: red;
 }
 
 // Fin Pagina Detalle Productos

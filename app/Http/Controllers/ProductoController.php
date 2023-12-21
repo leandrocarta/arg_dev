@@ -201,12 +201,8 @@ class ProductoController extends Controller
     $productos = Producto::with(['hotel', 'service', 'destinos'])->find($id);
 
     if (!$productos) {
-        // Manejo del caso en que el producto no existe
-    } else {
-      //  $hoteles = Hotel::all();  // Opcional si deseas cargar todos los hoteles sin relación
 
-        // Agregar estas líneas para depuración
-       // dd($producto);
+    } else {     
 
         return view('productos.detalles.detalles_productos', compact('productos'));
     }

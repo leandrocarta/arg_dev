@@ -82,13 +82,13 @@
          </div>      
          <div>      
             <p class="ms-2">  
-              @if ($producto->service && ($producto->service->transporte_int == 'Aéreos' || $producto->service->transporte_int == 'Aéreos con escala'))                                        
+              @if ($producto->service && ($producto->service->transporte_int == 'Aéreo Directo' || $producto->service->transporte_int == 'Aéreos con escala'))                                        
                   <i class="fas fa-plane-departure"></i>
               @elseif ($producto->service && $producto->service->transporte_int == 'Micro') 
                   <i class="fas fa-bus"></i>
               @elseif ($producto->service && $producto->service->transporte_int == 'Sin Traslados')               
               @endif 
-              <span>{{ $producto->origen_salida }} ⇌ {{ $producto->ciudad_destino }}</span>
+              <span>{{ $producto->origen_salida }} ⇌ {{ $producto->destinos->nombre_destino }}</span>
             </p>
            <p class="ms-2">
              <i class="fa-solid fa-bus"></i> : <span>Aeropuerto ⇌ Hotel</span>
@@ -185,13 +185,13 @@
          </div>      
          <div>      
             <p class="ms-2">  
-              @if ($producto->service && ($producto->service->transporte_int == 'Aéreos' || $producto->service->transporte_int == 'Aéreos con escala'))                                        
+              @if ($producto->service && ($producto->service->transporte_int == 'Aéreo Directo' || $producto->service->transporte_int == 'Aéreos con escala'))                                        
                   <i class="fas fa-plane-departure"></i>
               @elseif ($producto->service && $producto->service->transporte_int == 'Micro') 
                   <i class="fas fa-bus"></i>
               @elseif ($producto->service && $producto->service->transporte_int == 'Sin Traslados')               
               @endif 
-              <span>{{ $producto->origen_salida }} ⇌ {{ $producto->ciudad_destino }}</span>
+              <span>{{ $producto->origen_salida }} ⇌ {{ $producto->destinos->nombre_destino }}</span>
             </p>
            <p class="ms-2">
              <i class="fa-solid fa-bus"></i> : <span>Aeropuerto ⇌ Hotel</span>
@@ -241,8 +241,8 @@
             <label for="fecha_ida" class="form-label">Fecha Partida:</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="date" name="fecha_regreso" placeholder="Fecha Regreso" class="form-control">
-            <label for="fecha_regreso" class="form-label">Fecha Regreso:</label>
+            <input type="date" name="fecha_regreso" placeholder="Fecha Regreso si Corresponde" class="form-control">
+            <label for="fecha_regreso" class="form-label">Fecha Regreso si Corresponde :</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" name="origen" placeholder="Ciudad de Origen" class="form-control" required>
@@ -260,7 +260,6 @@
             <textarea name="aclaracion" placeholder="Tenes algo para aclararnos?" class="form-control"></textarea>
             <label for="email" class="form-label">Tenes algo que aclarar?</label>
           </div>
-
           <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
       </div>

@@ -20,11 +20,12 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AereosController;
+use App\Http\Controllers\ViajeController;
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     //return view('layouts.construccion.construccion');
     return view('home');
-});
+});*/
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/welcome_suppliers', function () {
     return view('welcome_suppliers');
@@ -112,3 +113,5 @@ Route::get('/paquetes', [ProductoController::class, 'paquetes']);
 Route::get('/grupales', [ProductoController::class, 'grupales']);
 //Aereos
 Route::post('/cotizar_vuelos', [AereosController::class, 'guardarDatos'])->name('cotizar.vuelos');
+// Viajes consultas
+Route::post('/consulta_viaje', [ViajeController::class, 'guardarDatos'])->name('consulta_viaje');

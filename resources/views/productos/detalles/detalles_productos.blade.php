@@ -116,7 +116,7 @@
             <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                   <h2 class="">Aprende más de tu destino</h2>
+                   <h2 class="">Queres saber más sobre {{ $productos->destinos->nombre_destino }} ?</h2>
                 </div>
             </div>
         </div>  
@@ -168,8 +168,6 @@
         </div>
     </div>
 </div>
-
-
 <div class="container-fluid my-3 m-auto productos-detalles">
    <div class="row px-2 campo-detalles datos-generales">        
       <div class="col-md-5 ">
@@ -230,11 +228,12 @@
                 <div class="row">
                     <div class="col-md-7">
                         <p>
-                          <strong>PRECIO TOTAL </strong> ( {{ $productos->moneda }} {{ $productos->precio_total }} )
+                          <strong>PRECIO </strong> ( {{ $productos->moneda }} {{ $productos->precio_total }} )
+                          <p class="a-confirmar">A Confirmar al momento de la reserva</p>
                         </p>
                     </div>
                     <div class="col-md-5">
-                        <a class="btn btn-danger w-100" href="">Consultar</a>
+                        <a href="#modalVuelos" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#modalVuelos">Consultar Lugares!!!</a>                       
                     </div>
                 </div>
             </div>
@@ -268,6 +267,70 @@
     </div>         
   </div> 
   </div>
+   <!-- Modal Consultar Lugares -->
+ <div class="modal fade" id="modalVuelos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-question-circle"></i> Consulta por {{ $productos->destinos->nombre_destino }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario para Cotizar Vuelos -->
+        <form action="/consulta_viaje" method="post">
+          @csrf
+          <input type="hidden" name="id" value="{{ $productos->id }}">
+          <div class="form-floating mb-3">
+            <input type="number" name="adultos" placeholder="Cantidad Adultos" class="form-control" min="1" value="1">
+            <label for="adultos" class="form-label">Cantidad Adultos:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" name="menores" placeholder="Cantidad Menores" class="form-control" min="0" value="0">
+            <label for="menores" class="form-label">Cantidad Menores:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" name="nombre" placeholder="Cuál es tu Nombre ?" class="form-control" required>
+            <label for="nombre" class="form-label">Cuál es tu Nombre ?</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" name="email" placeholder="Cuál es tu Email?" class="form-control" required>
+            <label for="email" class="form-label">Cuál es tu Email?</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea name="consulta" placeholder="Déjanos acá tu consulta!!" class="form-control"></textarea>
+            <label for="consulta" class="form-label">Déjanos acá tu consulta!!</label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Enviar Consulta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal respuesta cotizacion viajes -->
+@if(session('success'))
+<div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title"><i class="fa fa-check-circle"></i>
+        ¡Gracias por tu consulta! Pronto nos comunicaremos contigo para brindarte toda la información que necesitas. ¡Hasta pronto!
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+        <div class="modal-body">   
+            <img src="{{ asset('assets/img_hoteles/' . $hotelData['hotel']->img_banner) }}" class="d-block w-100" alt=""> 
+      </div>
+      <div class="modal-footer">
+        <p>Disfruta al máximo {{ $productos->destinos->nombre_destino }} !!</p>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
 @endsection
 
         

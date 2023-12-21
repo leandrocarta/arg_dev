@@ -1,57 +1,111 @@
 @extends('layouts.app-master')
 @section('content')
-  <div class="container my-5 m-auto productos-detalles">
-     <div class="titulo text-center">
-       <h2 class="display-4">¡Conoce Argentina con ARGTRAVELS!</h2>
-     </div>
-     <div class="row my-5">
-     @foreach ($productos as $producto)
-     <div class="col-md-4 productos">
-       <div class="card">
-         <div class="card-img-container">
-          <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid productos" alt="{{ $producto->nombre }}">
-            <div class="card-img-overlay titulo-prod">
-              <h6 class="card-title">{{ $producto->nombre }}</h6>
-              <p class="precio-total">Precio desde: ${{ $producto->precio_total }}</p>
-            </div>
-         </div>      
-         <div>        
-           <p class="ms-2">
-             @if ($producto->transporte == 'Aéreo')
-               <i class="fas fa-plane-departure"></i>
-             @elseif ($producto->transporte == 'Aéreo Ida') 
-               <i class="fas fa-plane-departure"></i>
-             @elseif ($producto->transporte == 'Micro')
-               <i class="fas fa-bus"></i>
-             @endif:
-             <span>{{ $producto->origen_salida }} ⇌ {{ $producto->ciudad_destino }}</span>
-           </p>
-              <p class="ms-2">
-             <i class="fa-solid fa-bus"></i> : <span>Aeropuerto ⇌ Hotel</span>
-           </p>
-        <p class="ms-2">
-          <i class="fa-solid fa-hotel"></i> : <span>{{ $producto->hotel }} 
-            @if ($producto->categoria_hotel == 5)
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            @elseif ($producto->categoria_hotel == 4)  
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-           @elseif ($producto->categoria_hotel == 3)  
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-           @elseif ($producto->categoria_hotel == 2)  
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 
-            @endif || <i class="fa-solid fa-bed ms-2"></i> : <span>{{ $producto->duracion }} <i class="fa-solid fa-cloud-moon"></i></span>        
-          </span>           
-        </p>         
-        <p class="ms-2">          
-        </p>        
-      </div>
-      <a href="#" class="btn btn-primary">Ver detalles</a>
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="5000">      
+      <img src="assets/img_argentina/Cataratas-Iguazu-min.png" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1></h1>
+          <p></p>
+        </div>     
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="assets/img_argentina/Perito-Moreno-min.png" class="d-block w-100" alt="">      
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="assets/img_argentina/Bariloche-min.png" class="d-block w-100" alt="">      
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="assets/img_argentina/Jujuy-min.png" class="d-block w-100" alt="">      
     </div>
   </div>
-  @endforeach
-</div> 
-     <div class="text-center">
-       <a href="#" class="btn btn-primary btn-lg">Ver todos los destinos</a>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+ </div> 
+ <div class="container my-3 m-auto productos-detalles home-iconos">
+     <div class="titulo text-center">
+       <h4 class="display-4"></h4>
      </div>
+     <div class="row">
+       @php
+       $productosAleatorios = $productos->shuffle()->take(6);
+       @endphp
+       @foreach ($productosAleatorios as $producto)
+       <div class="col-md-4 p-2">
+       <div class="card productos">
+         <div class="card-img-container">
+            @if($producto->tipo_producto == 'Salida Grupal')
+            <div class="barra-horizontal-grupal">
+              <p class="leyenda">Salida Grupal</p>
+            </div>
+            @elseif($producto->tipo_producto == 'Grupal con Guía Hispanohablante')
+            <div class="barra-horizontal-grupal-hispano">
+              <p class="leyenda">Grupal con Guía Hispanohablante</p>
+            </div>
+            @elseif ($producto->tipo_producto == 'Family Plan')
+            <div class="barra-horizontal-family">
+              <p class="leyenda">Family Plan</p>
+            </div>
+             @elseif ($producto->tipo_producto == 'Paquete Turístico')
+            <div class="barra-horizontal-paquete">
+              <p class="leyenda">Paquete Turístico</p>
+            </div>
+            @endif
+            <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}">
+              <div class="card-img-overlay titulo-prod">
+                <h6 class="card-title">{{ $producto->nombre }}</h6>
+                <p class="precio-total">Precio: {{ $producto->moneda }} {{ $producto->precio_total }}</p>
+              </div>
+         </div>      
+         <div>      
+            <p class="ms-2">  
+              @if ($producto->service && ($producto->service->transporte_int == 'Aéreo Directo' || $producto->service->transporte_int == 'Aéreos con escala'))                                        
+                  <i class="fas fa-plane-departure"></i>
+              @elseif ($producto->service && $producto->service->transporte_int == 'Micro') 
+                  <i class="fas fa-bus"></i>
+              @elseif ($producto->service && $producto->service->transporte_int == 'Sin Traslados')               
+              @endif 
+              <span>{{ $producto->origen_salida }} ⇌ {{ $producto->destinos->nombre_destino }}</span>
+            </p>
+           <p class="ms-2">
+             <i class="fa-solid fa-bus"></i> : <span>Aeropuerto ⇌ Hotel</span>
+           </p>
+           <p class="ms-2">
+              <span>
+                  @if ($producto->hotel) {{-- Verifica si hay una relación con un hotel --}}
+                      <i class="fa-solid fa-hotel"></i> :
+                      {{ $producto->hotel->nombre }}
+                      @for ($i = 1; $i <= $producto->hotel->categoria; $i++)
+                          <i class="fa-solid fa-star"></i>
+                      @endfor
+                  @else
+                      <i class="fa-solid fa-hotel"></i> : Consultar!!
+                  @endif
+              </span>
+          </p>
+            <p class="">
+              <i class="fa-solid fa-bed ms-2"></i> : {{ $producto->habitacion }} <span> ({{ $producto->estadiaTotal }} <i class="fa-solid fa-cloud-moon"></i>)</span>        
+              </span>           
+            </p>   
+         </div>
+         <div class="p-1 w-100">
+          <a href="{{ route('producto.detalles', $producto->id) }}" class="btn btn-primary w-100">VER MAS</a>          
+         </div>        
+       </div>
+      </div>
+     @endforeach
+    </div>   
   </div>
 @endsection

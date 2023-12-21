@@ -25,11 +25,11 @@ class ClientLoginController extends Controller
                 return back()->withErrors(['email' => 'Para Iniciar Sesión debes validar tu cuenta siguiendo el Link que te enviamos al correo electrónico.']);
             }
             if ($request->hasCookie('promotorOficialVerificado')) { 
-                if (Auth::guard('client')->user()->id_user === null) {
+                if (Auth::guard('client')->user()->fk_users_id  === null) {
                     $userId = $request->cookie('promotorOficialVerificado');
                    $user = Auth::guard('client')->user();
                    if ($user) {
-                       $user->id_user = $userId;
+                       $user->fk_users_id  = $userId;
                        $user->save();
                    }               
                 }

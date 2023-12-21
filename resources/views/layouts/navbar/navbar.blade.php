@@ -1,6 +1,9 @@
-<div class="promo-container">
-  <p class="promo-text">Regístrate y podrás acceder a promociones exclusivas únicamente para nuestra comunidad.</p>
-</div>
+ @if (Auth::guard('client')->check() || Auth::check())
+  @else
+  <div class="promo-container">
+    <p class="promo-text">Regístrate y podrás acceder a promociones exclusivas únicamente para nuestra comunidad.</p>
+  </div>
+ @endif
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">    
       <div class="pe-3 content-logo">
@@ -30,7 +33,7 @@
           </a>
         </li>     
         <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="/conoce-argentina">
+          <a class="" aria-current="page" href="conoce-argentina">
             <div class="text-center text-left">
               <img class="bandera-arg" src="../assets/img_banderas/argentina_nav.png" alt="">
               <p>Tur-Arg</p>

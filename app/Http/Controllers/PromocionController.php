@@ -14,12 +14,13 @@ class PromocionController extends Controller
     public function cookie_conoceArgentina(Request $request)
     {
         //$productos = Producto::all();
-        $productos = Producto::where('pais_destino', 'Argentina')->get();
-        if ($request->hasCookie('promotorOficialVerificado')) {
-            $userId = $request->cookie('promotorOficialVerificado');
+       // $productos = Producto::where('pais_destino', 'Argentina')->get();
+        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
+        if ($request->hasCookie('comercioAdherido')) {
+            $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->id_user === null) {
-                $cliente->id_user = $userId;
+            if ($cliente && $cliente->fk_id_user === null) {
+                $cliente->fk_id_user = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -31,15 +32,15 @@ class PromocionController extends Controller
              dd('se elimino la cookie: ', $userId);*/
             return view('productos.conoce_argentina.conoce-argentina', compact('productos'));
         } else {
-            $userId = $request->query('promotorOficialVerificado') ?? 1;
+            $userId = $request->query('comercioAdherido') ?? 1;
             $user = User::find($userId);
             if (!$user) {
                 $userId = 1;
             }
-            $cookie = cookie('promotorOficialVerificado', $userId, 60 * 24 * 30 * 12);
+            $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->id_user === null) {
-                $cliente->id_user = $userId;
+            if ($cliente && $cliente->fk_id_user === null) {
+                $cliente->fk_id_user = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -47,7 +48,7 @@ class PromocionController extends Controller
                 }
             }
             return response()
-                ->view('productos.todos.por-el-mundo', compact('productos'))
+                ->view('productos.conoce_argentina.conoce-argentina', compact('productos'))
                 ->withCookie($cookie);
         }
     }
