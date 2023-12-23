@@ -25,7 +25,7 @@
           </a>
         </li>
          <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="#modalVuelos" data-bs-toggle="modal" data-bs-target="#modalVuelos">
+          <a class="" aria-current="page" href="/" data-bs-toggle="modal" data-bs-target="#modalVuelos">
             <div class="text-center text-left">
               <i class="fa-solid fa-plane"></i>
               <p class="cw">Vuelos</p>
@@ -33,7 +33,7 @@
           </a>
         </li>     
         <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="conoce-argentina">
+          <a class="" aria-current="page" href="/conoce-argentina">
             <div class="text-center text-left">
               <img class="bandera-arg" src="../assets/img_banderas/argentina_nav.png" alt="">
               <p>Tur-Arg</p>
@@ -41,7 +41,7 @@
           </a>
         </li>
         <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="/conoce-brasil">
+          <a class="" aria-current="page" href="/brasil">
             <div class="text-center text-left">
               <img class="bandera-arg" src="../assets/img_banderas/brasil_nav.png" alt="">
               <p>Brasil</p>
@@ -84,8 +84,7 @@
         @php
         $userId = Auth::user()->id;
          @endphp
-        @endif
-        
+        @endif        
         @if (@auth())           
              @if (Auth::user())
                @if (Auth::user()->id_rango === 1) 
@@ -98,8 +97,10 @@
                      <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
                      <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
                      <li><a class="dropdown-item" href="/read_producto">Productos</a></li>
+                     <li><a class="dropdown-item" href="/read_vuelos">Vuelos</a></li>
+                     <li><a class="dropdown-item" href="/read_destinos">Destinos</a></li>
                    <!--  <li><a class="dropdown-item" href="upload">Uploads Provincias con exel</a></li> -->
-                     <li><a class="dropdown-item" href="/read_hotel">Alta Hoteles</a></li>
+                     <li><a class="dropdown-item" href="/read_hotel">Hoteles</a></li>
                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>

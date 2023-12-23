@@ -10,7 +10,7 @@ class Destino extends Model
     use HasFactory;
      protected $fillable = [
         'nombre_destino',
-        'pais',
+        'id_pais',
         'detalle_gral',
         'ubicación',
         'playas',
@@ -18,6 +18,17 @@ class Destino extends Model
         'atracciones',
         'historia',
         'resumen',
+        'img_banner',
+        'img1',
+        'img2',
+        'img3',
+        'img4',
+        'img5',
+        'img6',
+        'img7',
+        'img8',
+        'img9',
+        'img10',
     ];   
 
 }

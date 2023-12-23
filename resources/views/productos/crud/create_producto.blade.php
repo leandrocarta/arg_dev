@@ -220,7 +220,7 @@
                             <div class="">                            
                                 <select name="pais_destino" class="form-select">                                    
                                     @foreach ($paises as $pais)
-                                        <option value="{{ $pais->nombre_img }}" {{ (old('pais_destino') == $pais->nombre_img) ? 'selected' : '' }}>
+                                        <option value="{{ $pais->id }}" {{ (old('pais_destino') == $pais->id) ? 'selected' : '' }}>
                                             {{ $pais->nombre_img }}
                                         </option>
                                     @endforeach
@@ -229,10 +229,16 @@
                         </div>
                         <div class="form-group">
                             <label for="ciudad_destino" class="col-md-4 control-label">Ciudad Destino</label>
-                            <div class="">
-                                <input type="text" class="form-control" name="ciudad_destino" value="{{ old('ciudad_destino') }}" required>
+                            <div class="">                            
+                                <select name="ciudad_destino" class="form-select">                                    
+                                    @foreach ($destinos as $destino)
+                                        <option value="{{ $destino->id }}" {{ (old('ciudad_destino') == $destino->id) ? 'selected' : '' }}>
+                                            {{ $destino->nombre_destino }}
+                                        </option>
+                                    @endforeach
+                                </select>                           
                             </div>
-                        </div>                        
+                        </div>                                           
                         <div class="form-group">
                             <label for="origen_salida" class="col-md-4 control-label">Origen Salida</label>
                             <div class="">

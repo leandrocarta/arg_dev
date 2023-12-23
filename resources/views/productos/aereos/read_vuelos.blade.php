@@ -7,8 +7,8 @@
         {{ session('success') }}
     </div>
     @endif
-    <a href="{{ route('producto.create') }}" class="btn btn-success mt-2">Crear Nuevo Producto</a>
-    <h2>Listado de Productos</h2>
+    <a href="{{ route('vuelos.create') }}" class="btn btn-success mt-2">Crear Nuevo Producto</a>
+    <h2>Listado de Vuelos</h2>
     <table class="table">
         <thead>
             <tr>
@@ -27,7 +27,7 @@
             <tr>
                 <td>{{ $producto->nombre }}</td>
                 <td>{{ $producto->codigo }}</td>
-               <td>{{ $producto->tipo_producto }}</td>                
+                <td>{{ $producto->tipo_producto }}</td>                
                 <td>{{ $producto->pais_destino }}</td>
                 <td>{{ $producto->ciudad_destino }}</td>
                 <td>{{ $producto->precio_total }}</td>

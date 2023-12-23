@@ -19,8 +19,7 @@ class HotelController extends Controller
     }
 
     public function createHotel(Request $request)
-    {
-        // Valida los datos ingresados por el usuario
+    {        
         $this->validate($request, [
             'nombre' => 'required|string',
             'categoria' => 'required|integer',

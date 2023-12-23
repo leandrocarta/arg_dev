@@ -13,8 +13,8 @@ class Producto extends Model
         'imagen',
         'habitacion',
         'tipo_producto',
-        'destinoGral',
-        'pais_destino',
+        'destino_gral',
+        'id_pais_destino',
         'ciudad_destino',
         'origen_salida',
         'precio_total',
@@ -45,5 +45,8 @@ class Producto extends Model
     {
         return $this->belongsTo(Destino::class, 'id_destino'); 
     }
-
+ public function paises()
+    {
+        return $this->belongsTo(Pais::class, 'id_pais_destino'); 
+    }
 }

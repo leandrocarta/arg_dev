@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
+    // Paquetes turisticos
     public function mostrarProductos()
     {       
         $productos = Producto::all();
@@ -34,7 +35,8 @@ class ProductoController extends Controller
     {
         $hoteles = Hotel::all();
         $paises = Pais::all();
-        return view('productos.crud.create_producto', compact('paises', 'hoteles')); // Esto asume que tienes una vista llamada 'productos.create'
+        $destinos = Destino::all();
+        return view('productos.crud.create_producto', compact('paises', 'hoteles', 'destinos')); // Esto asume que tienes una vista llamada 'productos.create'
     }
     public function formUpdateProductos($id)
     {
@@ -78,7 +80,7 @@ class ProductoController extends Controller
             $producto->codigo = $request->codigo;
             $producto->habitacion = $request->habitacion;
             $producto->tipo_producto = $request->tipo_producto;
-            $producto->pais_destino = $request->pais_destino;
+            $producto->id_pais_destino = $request->pais_destino;
             $producto->ciudad_destino = $request->ciudad_destino;
             $producto->origen_salida = $request->origen_salida;
             $producto->transporte = $request->transporte;
@@ -95,6 +97,7 @@ class ProductoController extends Controller
 
     public function createProd(Request $request)
     {
+      //  dd($request->all());
         $messages = [
             'codigo.unique' => 'EL CÓDIGO DEL PRODUCTO INGRESADO YA EXISTE.',
         ];
@@ -105,8 +108,8 @@ class ProductoController extends Controller
             'habitacion' => 'string',
             'tipo_producto' => 'string',
             'destinoGral' => 'string',
-            'pais_destino' => 'string',
-            'ciudad_destino' => 'string',
+            'id_pais_destino' => 'integer',
+            'ciudad_destino' => 'integer',
             'origen_salida' => 'string',
             'precio_total' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
             'precio_comisionable' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
@@ -137,16 +140,15 @@ class ProductoController extends Controller
             return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
         } else {
             $image->save(public_path('assets/img_paquetes/' . $originalFileName));
-            // Guardar el producto en la base de datos
             $producto = new Producto;
             $producto->nombre = $request->nombre;
             $producto->codigo = $request->codigo;
             $producto->imagen = $originalFileName;
             $producto->habitacion = $request->habitacion;
             $producto->tipo_producto = $request->tipo_producto;
-            $producto->destinoGral = $request->destinoGral;
-            $producto->pais_destino = $request->pais_destino;
-            $producto->ciudad_destino = $request->ciudad_destino;
+            $producto->destino_gral = $request->destinoGral;
+            $producto->id_pais_destino = $request->pais_destino;
+            $producto->id_destino = $request->ciudad_destino;
             $producto->origen_salida = $request->origen_salida;
             $producto->precio_total = $request->precio_total;
             $producto->precio_comisionable = $request->precio_comisionable;
@@ -206,10 +208,8 @@ class ProductoController extends Controller
 
         return view('productos.detalles.detalles_productos', compact('productos'));
     }
+    
 }
-
-
-
 
     public function deleteProductos($id)
     {
@@ -230,5 +230,16 @@ class ProductoController extends Controller
         $producto->delete();
 
         return redirect('/read_producto')->with('success', 'PRODUCTO ELIMINADO CON EXITO!!!');
+    }
+    // Seccion productos Vuelos
+     public function mostrarVuelos()
+    {       
+        $productos = Producto::all();
+        return view('productos.aereos.read_vuelos', compact('productos'));
+    }
+    public function showFormVuelos()
+    {        
+        $paises = Pais::all();
+        return view('productos.aereos.create_vuelos', compact('paises')); 
     }
 }

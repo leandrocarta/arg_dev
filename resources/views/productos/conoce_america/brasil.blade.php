@@ -6,12 +6,12 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">      
-      <img src="assets/img_banner/Perito-Moreno-min.png" class="d-block w-100" alt="...">
+      <img src="assets/img_banner/brasil-min.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h1></h1>
           <p></p>
         </div>     
-    </div>
+    </div>    
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -29,7 +29,7 @@
      <div class="row">
        @php
         $productosArgentina = $productos->filter(function ($producto) {
-            return $producto->pais_destino === 'Argentina';
+            return $producto->pais_destino === 'Brasil';
         });
         $productosAleatorios = $productosArgentina->shuffle();
        @endphp

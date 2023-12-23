@@ -11,7 +11,7 @@ class AereosController extends Controller
     {
         $request->validate([
     'fecha_ida' => 'required|date',
-    'fecha_regreso' => 'nullable|date', // Hacer la fecha de regreso opcional
+    'fecha_regreso' => 'nullable|date', 
     'origen' => 'required|string',
     'destino' => 'required|string',
     'email' => 'required|email',
@@ -19,7 +19,6 @@ class AereosController extends Controller
     'estado' => 'integer',
 ]);
 
-// Crear un array con los valores que deseas asignar
 $aereoData = [
     'fecha_ida' => $request->fecha_ida,
     'origen' => $request->origen,

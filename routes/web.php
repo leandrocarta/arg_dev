@@ -21,6 +21,7 @@ use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AereosController;
 use App\Http\Controllers\ViajeController;
+use App\Http\Controllers\DestinoController;
 
 /*Route::get('/', function () {
     //return view('layouts.construccion.construccion');
@@ -82,7 +83,9 @@ Route::post('/contacto/{id?}', [ContactosController::class, 'contactAccion'])->n
 
 // Promociones productos turisticos
 Route::get('/conoce-argentina', [PromocionController::class, 'cookie_conoceArgentina']);
+Route::get('/brasil', [PromocionController::class, 'cookie_brasil']);
 Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
+Route::get('/vuelos', [PromocionController::class, 'cookie_vuelos']);
 
 // Qr
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);
@@ -112,6 +115,15 @@ Route::get('/detalles_productos/{id}', [ProductoController::class, 'detalle_prod
 Route::get('/paquetes', [ProductoController::class, 'paquetes']);
 Route::get('/grupales', [ProductoController::class, 'grupales']);
 //Aereos
+Route::get('/read_vuelos', [ProductoController::class, 'mostrarVuelos'])->name('vuelos.show');
+Route::get('/create_vuelo', [ProductoController::class, 'showFormVuelos'])->name('vuelos.create');
+Route::post('/create_vuelo', [ProductoController::class, 'createProd'])->name('vuelos.create');
 Route::post('/cotizar_vuelos', [AereosController::class, 'guardarDatos'])->name('cotizar.vuelos');
 // Viajes consultas
 Route::post('/consulta_viaje', [ViajeController::class, 'guardarDatos'])->name('consulta_viaje');
+// Destinos
+Route::get('/read_destinos', [DestinoController::class, 'mostrarDestinos'])->name('destinos.show'); 
+Route::get('/create_destino', [DestinoController::class, 'showFormDestino'])->name('destinos.form');
+Route::post('/create_destinos', [DestinoController::class, 'createDestino'])->name('destinos.create');
+Route::get('/update_destino/{id}', [DestinoController::class, 'formUpdateDestino'])->name('destino.update');
+Route::post('/delete_destino/{id}', [DestinoController::class, 'deleteDestinos'])->name('destino.delete');
