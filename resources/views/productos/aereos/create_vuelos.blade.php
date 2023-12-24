@@ -48,7 +48,7 @@
                             <div class="">                            
                                 <select name="pais_destino" class="form-select">                                    
                                     @foreach ($paises as $pais)
-                                        <option value="{{ $pais->nombre_img }}" {{ (old('pais_destino') == $pais->nombre_img) ? 'selected' : '' }}>
+                                        <option value="{{ $pais->id }}" {{ (old('pais_destino') == $pais->id) ? 'selected' : '' }}>
                                             {{ $pais->nombre_img }}
                                         </option>
                                     @endforeach

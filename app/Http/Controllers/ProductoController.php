@@ -232,11 +232,7 @@ class ProductoController extends Controller
         return redirect('/read_producto')->with('success', 'PRODUCTO ELIMINADO CON EXITO!!!');
     }
     // Seccion productos Vuelos
-     public function mostrarVuelos()
-    {       
-        $productos = Producto::all();
-        return view('productos.aereos.read_vuelos', compact('productos'));
-    }
+    
     public function showFormVuelos()
     {        
         $paises = Pais::all();

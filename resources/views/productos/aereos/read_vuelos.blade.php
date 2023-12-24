@@ -28,8 +28,8 @@
                 <td>{{ $producto->nombre }}</td>
                 <td>{{ $producto->codigo }}</td>
                 <td>{{ $producto->tipo_producto }}</td>                
-                <td>{{ $producto->pais_destino }}</td>
-                <td>{{ $producto->ciudad_destino }}</td>
+                <td>{{ $producto->paises->nombre_img }}</td>
+                <td>{{ $producto->destinos->nombre_destino }}</td>
                 <td>{{ $producto->precio_total }}</td>
                 <td>
                     <a href="{{ route('producto.update', $producto->id) }}" class="btn btn-primary">Editar</a>                    

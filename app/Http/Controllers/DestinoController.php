@@ -22,7 +22,7 @@ class DestinoController extends Controller
     }
     public function createDestino(Request $request)
     {
-        dd($request->all());
+       // dd($request->all());
          $request->validate([
          'nombre_destino' => 'string',
          'id_pais' => 'integer',
@@ -74,6 +74,6 @@ class DestinoController extends Controller
         $destino->save();
     }
         } 
-      
+      return redirect('/read_destinos')->with('success', 'EL DESTINO SE AGREGÓ CORRECTAMENTE');
     }
 }

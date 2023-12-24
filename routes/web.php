@@ -115,9 +115,9 @@ Route::get('/detalles_productos/{id}', [ProductoController::class, 'detalle_prod
 Route::get('/paquetes', [ProductoController::class, 'paquetes']);
 Route::get('/grupales', [ProductoController::class, 'grupales']);
 //Aereos
-Route::get('/read_vuelos', [ProductoController::class, 'mostrarVuelos'])->name('vuelos.show');
+Route::get('/read_vuelos', [AereosController::class, 'mostrarVuelos'])->name('vuelos.show');
 Route::get('/create_vuelo', [ProductoController::class, 'showFormVuelos'])->name('vuelos.create');
-Route::post('/create_vuelo', [ProductoController::class, 'createProd'])->name('vuelos.create');
+Route::post('/create_vuelo', [ProductoController::class, 'createVuelo'])->name('vuelos.create');
 Route::post('/cotizar_vuelos', [AereosController::class, 'guardarDatos'])->name('cotizar.vuelos');
 // Viajes consultas
 Route::post('/consulta_viaje', [ViajeController::class, 'guardarDatos'])->name('consulta_viaje');
