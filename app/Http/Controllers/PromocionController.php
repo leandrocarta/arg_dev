@@ -164,7 +164,7 @@ class PromocionController extends Controller
                 }
             }
             return response()
-                ->view('productos.conoce_america.brasil', compact('productos'))
+                ->view('productos.aereos.aereos', compact('productos'))
                 ->withCookie($cookie);
         }
     }

@@ -50,13 +50,15 @@
        <h4 class="display-4"></h4>
      </div>
      <div class="row">
+      
        @php
        $productosAleatorios = $productos->shuffle()->take(6);
        @endphp
        @foreach ($productosAleatorios as $producto)
-       <div class="col-md-4 p-2">
-       <div class="card productos">
-         <div class="card-img-container">
+       @if($producto->tipo_producto !== 'Aéreo')
+       <div class="col-md-4 p-2">         
+       <div class="card productos">        
+         <div class="card-img-container">          
             @if($producto->tipo_producto == 'Salida Grupal')
             <div class="barra-horizontal-grupal">
               <p class="leyenda">Salida Grupal</p>
@@ -113,9 +115,10 @@
          </div>
          <div class="p-1 w-100">
           <a href="{{ route('producto.detalles', $producto->id) }}" class="btn btn-primary w-100">VER MAS</a>          
-         </div>        
-       </div>
+         </div>                
+       </div>        
       </div>
+       @endif
      @endforeach
     </div>   
   </div>

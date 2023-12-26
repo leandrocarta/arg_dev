@@ -675,7 +675,14 @@ font-family: 'Oswald', sans-serif;;
     color: #ffffff;
     font-weight: bold;
 }
-
+.bloque1-imagen-container img {
+  height: 100%; 
+  object-fit: cover; 
+}
+.card-img-container img {
+  height: 100%; 
+  object-fit: cover; 
+}
 .leyenda {
     margin: 0; 
 }

@@ -29,7 +29,7 @@
      <div class="row">
        @php
         $productosArgentina = $productos->filter(function ($producto) {
-            return $producto->pais_destino === 'Brasil';
+            return $producto->destino_gral === 'Brasil';
         });
         $productosAleatorios = $productosArgentina->shuffle();
        @endphp

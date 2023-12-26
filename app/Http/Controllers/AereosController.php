@@ -5,15 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Aereo;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Models\Pais;
+use App\Models\Destino;
+use Intervention\Image\Facades\Image;
 
 class AereosController extends Controller
 {
+    public function showFormVuelos()
+    {        
+        $paises = Pais::all();
+        $destinos = Destino::all();
+        return view('productos.aereos.create_vuelos', compact('paises', 'destinos')); 
+    }
      public function mostrarVuelos()
     {       
         $productos = Producto::all();
         return view('productos.aereos.read_vuelos', compact('productos'));
     }
-    public function guardarDatos(Request $request)
+    public function cotizarVuelos(Request $request)
     {
         $request->validate([
     'fecha_ida' => 'required|date',
@@ -44,7 +53,7 @@ Aereo::create($aereoData);
        // return redirect()->route('/home');
          return redirect('/')->with('success', 'Recibimos su consulta, en breve será respondida. Muchas Gracias');
     }
-    public function createProd(Request $request)
+    public function createVuelo(Request $request)
     {
       //  dd($request->all());
         $messages = [
@@ -54,21 +63,13 @@ Aereo::create($aereoData);
             'nombre' => 'string',
             'codigo' => 'unique:productos,codigo',
             'imagen' => 'image|mimes:jpeg,png,jpg',
-            'habitacion' => 'string',
             'tipo_producto' => 'string',
-            'destinoGral' => 'string',
             'id_pais_destino' => 'integer',
             'ciudad_destino' => 'integer',
             'origen_salida' => 'string',
             'precio_total' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
             'precio_comisionable' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
             'moneda' => 'string',
-            'hotel_principal' => 'string',
-            'estadia_principal' => 'integer',
-            'hotel_dos' => 'string',
-            'estadia_dos' => 'integer',
-            'hotel_tres' => 'string',
-            'estadia_tres' => 'integer',
             'fecha_vencimiento' => 'date',
             'estadiaTotal' => 'integer',
         ], $messages);
@@ -101,20 +102,12 @@ Aereo::create($aereoData);
             $producto->origen_salida = $request->origen_salida;
             $producto->precio_total = $request->precio_total;
             $producto->precio_comisionable = $request->precio_comisionable;
-            $producto->moneda = $request->moneda;
-            $producto->id_hotel = $request->hotel_principal;
-            $producto->estadia = $request->estadia_principal;
-            $producto->id_hotel2 = $request->hotel_dos;
-            $producto->estadia_dos = $request->estadia_dos;
-            $producto->id_hotel3 = $request->hotel_tres;
-            $producto->estadia_tres = $request->estadia_tres;
+            $producto->moneda = $request->moneda;            
             $producto->fecha_vencimiento = $request->fecha_vencimiento;
-            $producto->estadiaTotal = $request->estadiaTotal;
 
-            //$producto->solo_adultos = $request->has('solo_adultos') ? true : false;
             $producto->save();
         }
 
-        return redirect('/read_producto')->with('success', 'EL PRODUCTO SE CREÓ CORRECTAMENTE');
+        return redirect('/read_vuelos')->with('success', 'EL PRODUCTO SE CREÓ CORRECTAMENTE');
     }
 }

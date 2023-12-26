@@ -85,7 +85,7 @@ Route::post('/contacto/{id?}', [ContactosController::class, 'contactAccion'])->n
 Route::get('/conoce-argentina', [PromocionController::class, 'cookie_conoceArgentina']);
 Route::get('/brasil', [PromocionController::class, 'cookie_brasil']);
 Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
-Route::get('/vuelos', [PromocionController::class, 'cookie_vuelos']);
+Route::get('/aereos', [PromocionController::class, 'cookie_vuelos']);
 
 // Qr
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);
@@ -116,9 +116,9 @@ Route::get('/paquetes', [ProductoController::class, 'paquetes']);
 Route::get('/grupales', [ProductoController::class, 'grupales']);
 //Aereos
 Route::get('/read_vuelos', [AereosController::class, 'mostrarVuelos'])->name('vuelos.show');
-Route::get('/create_vuelo', [ProductoController::class, 'showFormVuelos'])->name('vuelos.create');
-Route::post('/create_vuelo', [ProductoController::class, 'createVuelo'])->name('vuelos.create');
-Route::post('/cotizar_vuelos', [AereosController::class, 'guardarDatos'])->name('cotizar.vuelos');
+Route::get('/create_vuelos', [AereosController::class, 'showFormVuelos'])->name('vuelos.create');
+Route::post('/create_vuelos', [AereosController::class, 'createVuelo'])->name('vuelos.create');
+Route::post('/cotizar_vuelos', [AereosController::class, 'cotizarVuelos'])->name('cotizar.vuelos');
 // Viajes consultas
 Route::post('/consulta_viaje', [ViajeController::class, 'guardarDatos'])->name('consulta_viaje');
 // Destinos

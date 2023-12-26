@@ -25,7 +25,7 @@
           </a>
         </li>
          <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="/" data-bs-toggle="modal" data-bs-target="#modalVuelos">
+          <a class="" aria-current="page" href="/aereos">
             <div class="text-center text-left">
               <i class="fa-solid fa-plane"></i>
               <p class="cw">Vuelos</p>

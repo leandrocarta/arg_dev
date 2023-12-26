@@ -19,7 +19,9 @@ class ProductoController extends Controller
     public function mostrarProductos()
     {       
         $productos = Producto::all();
-        return view('productos.crud.read_producto', compact('productos'));
+        $paises = Pais::all();
+        $destinos = Destino::all();
+        return view('productos.crud.read_producto', compact('productos', 'paises', 'destinos'));
     }
     public function paquetes()
     {       
@@ -233,9 +235,5 @@ class ProductoController extends Controller
     }
     // Seccion productos Vuelos
     
-    public function showFormVuelos()
-    {        
-        $paises = Pais::all();
-        return view('productos.aereos.create_vuelos', compact('paises')); 
-    }
+    
 }
