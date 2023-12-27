@@ -4,26 +4,22 @@
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>   
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">      
-      <img src="assets/img_banner/Cancun-min.png" class="d-block w-100" alt="...">
+      <img src="assets/img_banner/banner-comunidad-min.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h1></h1>
           <p></p>
         </div>     
+    </div>    
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="assets/img_banner/banner-1-min.png" class="d-block w-100" alt="">      
     </div>
     <div class="carousel-item" data-bs-interval="3000">
       <img src="assets/img_banner/Africa-min.png" class="d-block w-100" alt="">      
-    </div>
-    <div class="carousel-item" data-bs-interval="3000">
-      <img src="assets/img_banner/egipto-min.png" class="d-block w-100" alt="">      
-    </div>
-    <div class="carousel-item" data-bs-interval="3000">
-      <img src="assets/img_banner/europa-min.png" class="d-block w-100" alt="">      
-    </div>
+    </div>   
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -129,7 +125,7 @@
       <div class="col-md-3 container-servicio">
         <h3>Vuelos</h3>
         <div class="overlay">          
-          <a href="#modalVuelos" class="" data-bs-toggle="modal" data-bs-target="#modalVuelos">Cotizar Vuelos!!</a>
+          <a href="/aereos">Cotizar Vuelos!!</a>
         </div>
         <img class="img-fluid" src="assets/img/vuelos.png" alt="">
       </div>

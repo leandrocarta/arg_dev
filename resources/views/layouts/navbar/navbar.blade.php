@@ -49,7 +49,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="" aria-current="page" href="#">
+          <a class="" aria-current="page" href="/caribe">
             <div class="text-center text-left">
               <i class="fa-solid fa-umbrella-beach"></i>
               <p class="cw">Caribe</p>

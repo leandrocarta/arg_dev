@@ -92,6 +92,47 @@ class PromocionController extends Controller
                 ->withCookie($cookie);
         }
     }
+     public function cookie_caribe(Request $request)
+    {
+        //$productos = Producto::all();
+       // $productos = Producto::where('pais_destino', 'Argentina')->get();
+        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
+        if ($request->hasCookie('comercioAdherido')) {
+            $userId = $request->cookie('comercioAdherido');
+            $cliente = auth()->guard('client')->user();
+            if ($cliente && $cliente->fk_id_user === null) {
+                $cliente->fk_id_user = $userId;
+                try {
+                    $cliente->save();
+                } catch (\Exception $e) {
+                    dd($e->getMessage());
+                }
+            }
+            /*  $elim_cookie = 'promotorOficialVerificado';
+             setcookie($elim_cookie, '', time() - 3600, '/');
+             dd('se elimino la cookie: ', $userId);*/
+            return view('productos.caribe.caribe', compact('productos'));
+        } else {
+            $userId = $request->query('comercioAdherido') ?? 1;
+            $user = User::find($userId);
+            if (!$user) {
+                $userId = 1;
+            }
+            $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
+            $cliente = auth()->guard('client')->user();
+            if ($cliente && $cliente->fk_id_user === null) {
+                $cliente->fk_id_user = $userId;
+                try {
+                    $cliente->save();
+                } catch (\Exception $e) {
+                    dd($e->getMessage());
+                }
+            }
+            return response()
+                ->view('productos.caribe.caribe', compact('productos'))
+                ->withCookie($cookie);
+        }
+    }
 
     public function cookie_porElMundo(Request $request)
     {
