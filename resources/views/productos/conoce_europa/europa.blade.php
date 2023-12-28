@@ -3,7 +3,7 @@
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">  
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">      
-      <img src="assets/img_banner/Cancun-min.png" class="d-block w-100" alt="...">
+      <img src="assets/img_banner/europa-min.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h1></h1>
           <p></p>
@@ -14,8 +14,9 @@
  <div class="container introduction-productos-content">
   <div class="row">
     <div class="col-12 introduction-productos">
-  <h1>DESCUBRE LA MAGIA DEL CARIBE</h1>
-  <p>Sumérgete en un paraíso tropical donde las playas de arena dorada se encuentran con las aguas cristalinas. Desde las icónicas playas de Punta Cana hasta los rincones escondidos de Jamaica, el Caribe te invita a explorar la belleza sin igual de sus costas.</p>
+      <h1>DESCUBRE LA RIQUEZA DE EUROPA</h1>
+      <p>Europa, un continente impregnado de historia, cultura y diversidad, te invita a sumergirte en sus encantos. Desde las majestuosas ciudades con su arquitectura centenaria hasta los impresionantes paisajes naturales que te dejan sin aliento, Europa ofrece una experiencia única para cada viajero.</p>
+
   <p class="a my-3">
     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
       ¿Quieres saber más?
@@ -23,30 +24,26 @@
   </p>
   <div class="collapse" id="collapseExample">
     <div class="card card-body">        
-      <h4>Paraíso tropical de playas doradas</h4>
-          <p>El Caribe, un paraíso tropical donde las playas de arena dorada se encuentran con las aguas cristalinas. Desde las icónicas playas de Punta Cana hasta los rincones escondidos de Jamaica, el Caribe te invita a sumergirte en la belleza sin igual de sus costas.</p>
+       <h4>Un viaje a través de la historia y la cultura</h4>
+          <p>Europa, un continente impregnado de historia, cultura y diversidad, te invita a sumergirte en sus encantos. Desde las majestuosas ciudades con su arquitectura centenaria hasta los impresionantes paisajes naturales que te dejan sin aliento, Europa ofrece una experiencia única para cada viajero.</p>
 
-          <h4>Exploración de arrecifes de coral</h4>
-          <p>Descubre la riqueza submarina del Caribe a través de sus arrecifes de coral. Snorkeling en los Cayos de Cuba o buceo en las Islas Caimán, cada rincón ofrece una experiencia única para admirar la vida marina y los coloridos corales.</p>
+          <h4>Destinos emblemáticos que te enamorarán</h4>
+          <p>Explora las calles adoquinadas de París, donde la Torre Eiffel se alza como un ícono imponente, y déjate seducir por el arte en el Louvre. Pasea por los canales de Venecia, donde la arquitectura renacentista se refleja en las aguas serenas, creando un escenario de ensueño.</p>
 
-          <h4>Cultura vibrante y festivales caribeños</h4>
-          <p>Sumérgete en la cultura vibrante del Caribe, donde la música y los festivales llenan las calles de alegría. Desde el carnaval en Trinidad y Tobago hasta las festividades de Junkanoo en las Bahamas, la alegría y la música caribeña te envuelven.</p>
+          <h4>Encanto de antiguas civilizaciones y modernidad</h4>
+          <p>Descubre la historia antigua en Atenas, con la Acrópolis dominando el horizonte, y sumérgete en la cultura vibrante de Barcelona, donde la arquitectura de Gaudí deja una huella única. Recorre los Alpes suizos, con sus picos cubiertos de nieve, y siente la magia de la aurora boreal en los cielos del norte de Europa.</p>
 
-          <h4>Gastronomía isleña y sabores exóticos</h4>
-          <p>La gastronomía del Caribe es una explosión de sabores exóticos. Desde el jerk jamaicano hasta el mofongo en Puerto Rico, cada isla tiene su propia especialidad culinaria. Disfruta de pescados frescos y frutas tropicales en un festín que deleitará tu paladar.</p>
+          <h4>Festín para los sentidos: Gastronomía europea</h4>
+          <p>La diversidad culinaria de Europa es un festín para los sentidos. Desde la pasta italiana hasta los quesos franceses y las salchichas alemanas, cada país ofrece sabores auténticos que deleitarán tu paladar. Explora los mercados locales y descubre la riqueza gastronómica que define a cada región.</p>
 
-          <h4>Aventuras en la selva y cascadas secretas</h4>
-          <p>Explora la exuberante selva del Caribe y descubre cascadas secretas. Desde las selvas de Dominica hasta las rutas de senderismo en Santa Lucía, cada isla ofrece aventuras en la naturaleza que te acercarán a la auténtica belleza del Caribe.</p>
+          <h4>Viaja con facilidad: Red de trenes de alta velocidad</h4>
+          <p>La red de trenes de alta velocidad te permite recorrer fácilmente las maravillas de Europa, desde las playas mediterráneas hasta los castillos en las colinas. Sumérgete en la vida nocturna de Berlín, con sus clubes vibrantes, o relájate en las playas de la Costa Amalfitana en Italia.</p>
 
-          <h4>Hospitalidad isleña y bienvenida cálida</h4>
-          <p>Experimenta la hospitalidad única del Caribe, donde la bienvenida es cálida y cada visita se convierte en una experiencia inolvidable. Desde los resorts de lujo hasta las acogedoras posadas, cada rincón te invita a disfrutar de la serenidad isleña.</p>
-
-          <h4>Explora la magia del Caribe</h4>
-          <p>El Caribe, con su combinación de playas paradisíacas, cultura vibrante y hospitalidad isleña, te invita a explorar un mundo de maravillas tropicales y experiencias únicas.</p>
-     </div>
+          <h4>Hospitalidad europea: Una bienvenida en cada rincón</h4>
+          <p>La hospitalidad europea te hará sentir bienvenido en cada rincón. Desde las aldeas pintorescas hasta las metrópolis bulliciosas, cada destino tiene su propia historia que contar. Europa, con su riqueza cultural, su patrimonio histórico y sus paisajes variados, te espera con los brazos abiertos para que descubras la magia que la hace única.</p>
+    </div>
   </div>
 </div>
-
   </div>
  </div>
  <div class="container my-3 m-auto productos-detalles home-iconos">
@@ -55,10 +52,10 @@
      </div>
      <div class="row">
        @php
-        $productosCaribe = $productos->filter(function ($producto) {
-            return $producto->destino_gral === 'Caribe';
+        $productosEuropa = $productos->filter(function ($producto) {
+            return $producto->destino_gral === 'Europa';
         });
-        $productosAleatorios = $productosCaribe->shuffle();
+        $productosAleatorios = $productosEuropa->shuffle();
        @endphp
        @foreach ($productosAleatorios as $producto)
        <div class="col-md-4 p-2">

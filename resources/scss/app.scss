@@ -701,6 +701,33 @@ font-family: 'Oswald', sans-serif;;
   font-weight: bold;
 }
 /* FIN Estilos para productos */
+/* Pagina conoce-argentina - Manda paginas similares */
+  
+.introduction-productos-content {
+      
+    }
+
+    .introduction-productos {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: -10px 10px 10px -10px rgba(0, 0, 0, 0.3);
+    }
+    .introduction-productos a {
+      box-shadow: -10px 15px 10px -10px rgba(0, 0, 0, 0.8);
+    }
+    .introduction-productos h1 {
+      color: #ffffff;
+      background-color: #0D6EFD; 
+      display: inline-block;
+      padding-inline: 10px;
+      border-radius: 10px;
+    }
+
+    .introduction-productos p {
+      color: #555555;
+    }
+/* FIN Pagina conoce-argentina /*
 /* Pagina Aereos */
     .container-form-vuelos {
         margin-top: 50px;

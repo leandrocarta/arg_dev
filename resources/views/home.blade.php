@@ -143,7 +143,9 @@
       </div>
       <div class="col-md-3 container-servicio">
          <h3>Viajes a Medida</h3>        
+         <a href="a-medida"> 
         <img class="img-fluid" src="assets/img/TuViaje.png" alt="">
+        </a>
       </div>
     </div>
   </div>

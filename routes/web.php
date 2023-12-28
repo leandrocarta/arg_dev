@@ -85,8 +85,10 @@ Route::post('/contacto/{id?}', [ContactosController::class, 'contactAccion'])->n
 Route::get('/conoce-argentina', [PromocionController::class, 'cookie_conoceArgentina']);
 Route::get('/brasil', [PromocionController::class, 'cookie_brasil']);
 Route::get('/caribe', [PromocionController::class, 'cookie_caribe']);
+Route::get('/europa', [PromocionController::class, 'cookie_europa']);
 Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
 Route::get('/aereos', [PromocionController::class, 'cookie_vuelos']);
+Route::get('/a-medida', [PromocionController::class, 'cookie_a_medida']);
 
 // Qr
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);

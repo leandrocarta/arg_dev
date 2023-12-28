@@ -133,40 +133,87 @@ class PromocionController extends Controller
                 ->withCookie($cookie);
         }
     }
-
-    public function cookie_porElMundo(Request $request)
+    public function cookie_europa(Request $request)
     {
-        if ($request->hasCookie('promotorOficialVerificado')) {
-            $userId = $request->cookie('promotorOficialVerificado');
+        //$productos = Producto::all();
+       // $productos = Producto::where('pais_destino', 'Argentina')->get();
+        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
+        if ($request->hasCookie('comercioAdherido')) {
+            $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->id_user === null) {
-                $cliente->id_user = $userId;
+            if ($cliente && $cliente->fk_id_user === null) {
+                $cliente->fk_id_user = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
                     dd($e->getMessage());
                 }
             }
-            $elim_cookie = 'promotorOficialVerificado';
-            setcookie($elim_cookie, '', time() - 3600, '/');
-            return view('productos.todos.por-el-mundo');
+            /*  $elim_cookie = 'promotorOficialVerificado';
+             setcookie($elim_cookie, '', time() - 3600, '/');
+             dd('se elimino la cookie: ', $userId);*/
+            return view('productos.conoce_europa.europa', compact('productos'));
         } else {
-            $userId = $request->query('promotorOficialVerificado') ?? 1;
+            $userId = $request->query('comercioAdherido') ?? 1;
             $user = User::find($userId);
             if (!$user) {
                 $userId = 1;
             }
-            $cookie = cookie('promotorOficialVerificado', $userId, 60 * 24 * 30 * 12);
+            $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->id_user === null) {
-                $cliente->id_user = $userId;
+            if ($cliente && $cliente->fk_id_user === null) {
+                $cliente->fk_id_user = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
                     dd($e->getMessage());
                 }
             }
-            return response()->view('productos.todos.por-el-mundo')->withCookie($cookie);
+            return response()
+                ->view('productos.conoce_europa.europa', compact('productos'))
+                ->withCookie($cookie);
+        }
+    }
+
+   public function cookie_porElMundo(Request $request)
+    {
+        //$productos = Producto::all();
+       // $productos = Producto::where('pais_destino', 'Argentina')->get();
+        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
+        if ($request->hasCookie('comercioAdherido')) {
+            $userId = $request->cookie('comercioAdherido');
+            $cliente = auth()->guard('client')->user();
+            if ($cliente && $cliente->fk_id_user === null) {
+                $cliente->fk_id_user = $userId;
+                try {
+                    $cliente->save();
+                } catch (\Exception $e) {
+                    dd($e->getMessage());
+                }
+            }
+            /*  $elim_cookie = 'promotorOficialVerificado';
+             setcookie($elim_cookie, '', time() - 3600, '/');
+             dd('se elimino la cookie: ', $userId);*/
+            return view('productos.mundo.por-el-mundo', compact('productos'));
+        } else {
+            $userId = $request->query('comercioAdherido') ?? 1;
+            $user = User::find($userId);
+            if (!$user) {
+                $userId = 1;
+            }
+            $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
+            $cliente = auth()->guard('client')->user();
+            if ($cliente && $cliente->fk_id_user === null) {
+                $cliente->fk_id_user = $userId;
+                try {
+                    $cliente->save();
+                } catch (\Exception $e) {
+                    dd($e->getMessage());
+                }
+            }
+            return response()
+                ->view('productos.mundo.por-el-mundo', compact('productos'))
+                ->withCookie($cookie);
         }
     }
 
@@ -209,4 +256,10 @@ class PromocionController extends Controller
                 ->withCookie($cookie);
         }
     }
-}
+    public function cookie_a_medida()
+    {  
+        return view('productos.mundo.a-medida');
+          
+        }
+    }
+

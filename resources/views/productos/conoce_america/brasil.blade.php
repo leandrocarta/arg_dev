@@ -22,6 +22,43 @@
     <span class="visually-hidden">Next</span>
   </button>
  </div> 
+ <div class="container introduction-productos-content">
+  <div class="row">
+    <div class="col-12 introduction-productos">
+  <h1>DESCUBRE LA BELLEZA DE BRASIL</h1>
+  <p>Brasil, un país vibrante que deslumbra con su diversidad cultural y paisajes naturales extraordinarios. Desde las playas de Copacabana hasta la selva amazónica, Brasil te invita a explorar sus contrastes únicos.</p>
+  <p class="a my-3">
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      ¿Quieres saber más?
+    </a>   
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">        
+      <h4>Playas Paradisíacas</h4>
+      <p>Brasil es famoso por sus playas paradisíacas. Desde las inmaculadas playas de Porto de Galinhas, conocidas por sus aguas cristalinas y arenas blancas, hasta las icónicas playas de Copacabana en Río de Janeiro, famosas por su animado ambiente y vistas espectaculares, el litoral brasileño ofrece lugares como paraísos terrenales. Recorre las cálidas aguas de la Praia de Pipa, famosa por su encanto bohemio y belleza natural. No te pierdas la Praia do Forte, hogar de playas vírgenes y protegidas, donde podrás disfrutar de la biodiversidad marina. También, explora las extensas dunas de Genipabu y maravíllate con sus paisajes únicos. La tranquila Praia do Espelho en Bahía, con sus aguas serenas y paisajes espectaculares, es otro tesoro escondido del nordeste brasileño. Disfruta de la Praia dos Carneiros en Pernambuco, con sus aguas tranquilas y palmeras que bordean la costa, creando un ambiente paradisíaco. Estas recomendaciones son solo una muestra de la diversidad y belleza natural que Brasil tiene para ofrecer, proporcionando entornos ideales para relajarse y disfrutar del sol.</p>
+
+      <h4>Festivales y Ritmos Apasionantes</h4>
+      <p>Sumérgete en la alegría contagiosa de los festivales brasileños y deja que los ritmos apasionantes de la samba y la bossa nova te envuelvan. En Brasil, la música y la danza son parte integral de la vida cotidiana.</p>
+
+      <h4>Naturaleza Exuberante</h4>
+      <p>Descubre la exuberante belleza de la selva amazónica, hogar de una increíble variedad de flora y fauna. Las Cataratas del Iguazú y las extensas llanuras del Pantanal ofrecen panoramas impresionantes y experiencias inolvidables.</p>
+
+      <h4>Gastronomía Colorida y Sabrosa</h4>
+      <p>La cocina brasileña es una explosión de colores y sabores. Desde la feijoada, el plato nacional, hasta las deliciosas coxinhas, cada bocado es una aventura culinaria que refleja la riqueza de la cultura brasileña.</p>
+
+      <h4>Aventuras en la Amazonia</h4>
+      <p>Para los amantes de la aventura, la Amazonia brasilera ofrece exploraciones fascinantes. Navega por el río Amazonas, admira la biodiversidad única y conecta con la naturaleza en su estado más puro.</p>
+
+      <h4>Hospitalidad Brasileña</h4>
+      <p>La hospitalidad de los brasileños es conocida en todo el mundo. En cada rincón, te recibirán con sonrisas cálidas y te invitarán a formar parte de su vibrante cultura.</p>
+
+      <h4>Explora la Magia de Brasil</h4>
+      <p>Brasil, con su diversidad cultural, su naturaleza deslumbrante y su hospitalidad única, te invita a explorar un territorio lleno de sorpresas y experiencias auténticas.</p>
+    </div>
+  </div>
+</div>
+  </div>
+ </div>
  <div class="container my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
        <h4 class="display-4"></h4>

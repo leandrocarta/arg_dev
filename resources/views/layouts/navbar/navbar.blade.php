@@ -57,7 +57,7 @@
           </a>
         </li>
         <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="#">
+          <a class="" aria-current="page" href="/europa">
             <div class="text-center text-left">
               <i class="fa-solid fa-landmark"></i>
               <p class="cw">Europa</p>
@@ -65,7 +65,7 @@
           </a>
         </li>        
         <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="#">
+          <a class="" aria-current="page" href="/por-el-mundo">
             <div class="text-center text-left">
               <i class="fa-solid fa-earth-asia"></i>
               <p class="cw">MundoTravels</p>
