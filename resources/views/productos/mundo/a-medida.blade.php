@@ -11,7 +11,7 @@
     </div>
   </div>  
  </div> 
- <div class="container introduction-productos-content">
+ <div class="container introduction-productos-content my-3">
   <div class="row">
     <div class="col-12 introduction-productos">
       <h1>DISEÑAMOS TU VIAJE A TU MEDIDA</h1>
