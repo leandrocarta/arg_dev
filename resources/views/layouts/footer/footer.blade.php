@@ -55,8 +55,10 @@
                         <a href="{{ route('client.reclamos.form') }}" class="text-reset"><i class="fa-regular fa-envelope"></i> Reclamos/Loguin</a>
                     </p>
                     <p>reclamos@argtravels.tur.ar</p>
+                    <p><i class="fa-solid fa-phone"></i>+54 341 7329830</p>
                    <p><i class="fab fa-whatsapp"></i><a href="https://api.whatsapp.com/send?phone=543413672066" target="_blank" class="text-reset text-decoration-none"> +54 3413 672 066</a><br>Solo Urgencias</p>                      
-                    <p> 
+                    <i class="fa-solid fa-phone"></i>
+                   <p> 
                         <a href="https://www.argentina.gob.ar/servicio/presentar-una-denuncia-contra-una-agencia-de-viajes" target="blanck" class="text-reset"><i class="fa-solid fa-exclamation"></i> Denuncias</a>
                     </p>                   
                 </div>
