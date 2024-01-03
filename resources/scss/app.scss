@@ -420,12 +420,10 @@ padding-top: 12px;
  }
  .conten-login form button {
   border: none;
-  background-color: #E9B003;
+  
   
  }
- .conten-login form button:hover {
-  background-color: #FFCD35;
- }
+ 
 // Fin Formulario Edicion *****
 // Oportunidad de trabajo Remoto
 .presentacion button{
@@ -560,6 +558,7 @@ font-family: 'Oswald', sans-serif;;
     text-align: left;
     overflow: hidden; /* Evita que el contenido se desborde fuera del card en pantallas pequeñas */
 }
+
 /* Estilos para productos */
 .productos img {
     max-height: 201px;
@@ -701,6 +700,11 @@ font-family: 'Oswald', sans-serif;;
   font-weight: bold;
 }
 /* FIN Estilos para productos */
+// Pagina A-Medida
+
+// Fin Pagina A-Medida
+
+
 /* Pagina conoce-argentina - Manda paginas similares */
   
 .introduction-productos-content {
@@ -824,6 +828,12 @@ font-family: 'Oswald', sans-serif;;
 
 
 @media (max-width: 768px) {
+  h1 {
+    font-size: 20px;
+  }
+  form label {
+    font-size: 13px;
+  }
   .titulo-barra-movil h1 {
     font-size: 11px; 
     color: gray;

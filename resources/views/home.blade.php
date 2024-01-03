@@ -278,7 +278,7 @@
       </div>
       <div class="modal-body">
         <a href="http://127.0.0.1:8000/register_client">
-            <img src="assets/img/viajandomejor-min.png" alt="Probanos!!!" class="img-fluid">
+            <img src="assets/img/comunidad-min.png" alt="Probanos!!!" class="img-fluid">
         </a>
       </div>       
     </div>

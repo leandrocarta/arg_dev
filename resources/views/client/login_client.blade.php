@@ -5,8 +5,8 @@
             <div class="col conten-login">
                <form action="{{ url('/login_client') }}" method="post">
                 @csrf
-                <p style="color: grey;"><b><u>CLIENTES</u></b></p>
-                <div id="emailHelp" class="form-text">Si estas registrado, ingresa tus datos.</div>
+                <p style="color: grey;"><b><u>COMUNIDAD</u></b></p>
+                <div id="emailHelp" class="form-text">Si ya estas registrado, solamente ingresa tus datos.</div>
                <!-- @include('parcials.messages')        -->        
                     <div class="form-floating mb-3">
                       <input type="text" name="usuario" placeholder="Usuario / Correo electrónico" class="form-control" required>
@@ -24,7 +24,7 @@
                     </div>                                     
                     <button type="submit" class="btn btn-primary">IR A MI PANEL</button>
                      <div class="mb-3">
-                      <a href="/register_client">Nuevo Registro</a>  
+                      <a href="/register_client">Registrarse</a>  
                     </div>                      
                 </form>
             </div>

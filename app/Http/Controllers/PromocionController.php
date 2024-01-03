@@ -255,11 +255,6 @@ class PromocionController extends Controller
                 ->view('productos.aereos.aereos', compact('productos'))
                 ->withCookie($cookie);
         }
-    }
-    public function cookie_a_medida()
-    {  
-        return view('productos.mundo.a-medida');
-          
-        }
+    }   
     }
 

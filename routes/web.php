@@ -22,6 +22,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AereosController;
 use App\Http\Controllers\ViajeController;
 use App\Http\Controllers\DestinoController;
+use App\Http\Controllers\ViajeAMedidaController;
 
 /*Route::get('/', function () {
     //return view('layouts.construccion.construccion');
@@ -88,7 +89,6 @@ Route::get('/caribe', [PromocionController::class, 'cookie_caribe']);
 Route::get('/europa', [PromocionController::class, 'cookie_europa']);
 Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
 Route::get('/aereos', [PromocionController::class, 'cookie_vuelos']);
-Route::get('/a-medida', [PromocionController::class, 'cookie_a_medida']);
 
 // Qr
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);
@@ -130,3 +130,6 @@ Route::get('/create_destino', [DestinoController::class, 'showFormDestino'])->na
 Route::post('/create_destinos', [DestinoController::class, 'createDestino'])->name('destinos.create');
 Route::get('/update_destino/{id}', [DestinoController::class, 'formUpdateDestino'])->name('destino.update');
 Route::post('/delete_destino/{id}', [DestinoController::class, 'deleteDestinos'])->name('destino.delete');
+// Viajes a Medida
+Route::get('/a-medida', [ViajeAMedidaController::class, 'vista']);
+Route::post('/a-medida', [ViajeAMedidaController::class, 'store']);

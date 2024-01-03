@@ -21,19 +21,18 @@
  </div> 
  <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 mb-3">
       <div class="">
         <img class="w-100" src="assets/img/cuestionario.png" alt="">
-      </div>
-      
+      </div>      
     </div>
-    <div class="col-md-6 productos mb-3">
+    <div class="col-md-6 productos mb-3 container-a-medida">
       <h1>Cuestionario de Viaje</h1>
       <p></p>
-      <form action="/formulario-a-medida" method="post">
+      <form action="/a-medida" method="post">
         @csrf 
         <div class="form-floating mb-1">
-            <input type="text" placeholder="" name="nombre" class="form-control" >
+            <input type="text" placeholder="" name="nombre" class="form-control" required>
             <label for="nombre" class="form-label">¿Nos darías tu nombre?</label>
         </div>
         <div class="form-floating mb-1">
@@ -45,8 +44,8 @@
             <label for="fecha" class="form-label">¿En qué fecha planeas viajar?</label>
         </div>
         <div class="form-floating mb-1">
-            <input type="number" name="duracion" class="form-control" placeholder="" >
-            <label for="duracion" class="form-label">¿Cuánto días planeas dedicar a este viaje?</label>
+            <input type="number" name="dias" class="form-control" placeholder="" >
+            <label for="dias" class="form-label">¿Cuánto días planeas dedicar a este viaje?</label>
         </div>
         <div class="form-floating mb-1">
             <input type="text" placeholder="" name="destino" class="form-control" >
@@ -65,8 +64,8 @@
             <label for="presupuesto" class="form-label">¿Tienes un presupuesto estimado para este viaje?</label>
         </div>
         <div class="form-floating mb-1">
-            <input type="text" name="alojamiento" class="form-control" placeholder="">
-            <label for="alojamiento" class="form-label">¿Prefieres Hotel, Apart u otro tipo de alojamiento?</label>
+            <input type="text" name="hotel" class="form-control" placeholder="">
+            <label for="hotel" class="form-label">¿Prefieres Hotel, Apart u otro tipo de alojamiento?</label>
         </div>        
         <div class="form-floating mb-1">
             <input type="text" name="actividades" class="form-control" placeholder="">
@@ -77,8 +76,8 @@
             <label for="salud" class="form-label">¿Hay alguna condición de salud o de dieta que debamos saber?</label>
         </div>
         <div class="form-floating mb-1">
-            <input type="text" name="independencia" class="form-control" placeholder="">
-            <label for="independencia" class="form-label">¿Prefieres un Itinerario estructurado o más flexibilidad?</label>
+            <input type="text" name="itinerario" class="form-control" placeholder="">
+            <label for="itinerario" class="form-label">¿Prefieres un Itinerario estructurado o más flexibilidad?</label>
         </div>
         <div class="form-floating mb-1">
             <textarea name="expectativas" class="form-control" placeholder=""></textarea>
