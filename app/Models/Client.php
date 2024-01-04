@@ -49,7 +49,7 @@ class Client extends Model implements Authenticatable
 
     public function getRememberTokenName()
     {
-        return 'remember_token'; // Cambia esto si el nombre de la columna del token de recuerdo es diferente
+        return 'remember_token'; 
     }
     protected $fillable = [
         'usuario',
@@ -85,5 +85,10 @@ class Client extends Model implements Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+    public function updatePassword($newPassword)
+    {        
+       $this->password = $newPassword;
+    $this->save();
     }
 }

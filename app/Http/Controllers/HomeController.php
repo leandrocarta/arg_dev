@@ -39,9 +39,9 @@ class HomeController extends Controller
             } else {    
              $nombreUsuario = 'Argtravels';
             }
-            // $elim_cookie = 'comercioAdherido';
-            // setcookie($elim_cookie, '', time() - 3600, '/');
-            // dd('se elimino la cookie: ', $userId);
+            /* $elim_cookie = 'comercioAdherido';
+             setcookie($elim_cookie, '', time() - 3600, '/');
+             dd('se elimino la cookie: ', $userId); */
             return view('home', compact('productos', 'mostrarModal', 'nombreUsuario'));
         } else {
             $userId = $request->query('comercioAdherido') ?? 1;

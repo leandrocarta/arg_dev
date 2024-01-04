@@ -12,7 +12,7 @@
   </div>  
  </div> 
  <div class="container introduction-productos-content my-3">
-  <div class="row">
+  <div class="row px-2">
     <div class="col-12 introduction-productos">
       <h1>DISEÑAMOS TU VIAJE A TU MEDIDA</h1>
       <p>Embárcate en una aventura global explorando los destinos turísticos más asombrosos del mundo, donde la diversidad cultural, la historia milenaria y los paisajes impresionantes se entrelazan para ofrecer experiencias inolvidables.</p>
@@ -20,7 +20,7 @@
   </div>
  </div> 
  <div class="container">
-  <div class="row">
+  <div class="row px-2">
     <div class="col-md-6 mb-3">
       <div class="">
         <img class="w-100" src="assets/img/cuestionario.png" alt="">

@@ -17,12 +17,17 @@ class ClientRegisterController extends Controller
     {             
         $validatedData = $request->validated();
         $userId = $request->cookie('comercioAdherido');
+        
         try {            
             $client = Client::create($validatedData);
             if ($userId) {
             $client->fk_users_id  = $userId;
             $client->save();
-        }
+            } else {
+            $userId = 1;
+            $client->fk_users_id  = $userId;
+            $client->save();
+            }
         } catch (QueryException $e) {
             if (strpos($e->getMessage(), 'clients_usuario_unique') !== false || strpos($e->getMessage(), 'clients_email_unique') !== false) {
                 return redirect()->back()->withErrors(['error' => 'El usuario o el correo electrónico ya existen'])->withInput();
@@ -56,28 +61,30 @@ class ClientRegisterController extends Controller
 
     public function update(Request $request, $id)
     {
+        try {            
         $client = Client::findOrFail($id);
 
-        // Validar los datos del formulario
         $request->validate([
-            'email_confirmation' => 'nullable|email', // El campo email_confirm es opcional y debe ser una dirección de correo válida si se proporciona
-            'password' => 'nullable|min:8', // El campo password es opcional y debe tener al menos 8 caracteres si se proporciona
+        'email' => 'nullable|unique:clients,email,' . $id, 
+        'password' => 'nullable|min:8',
+        'password_confirmation_edit' => 'required_with:password|same:password',
+        
         ]);
 
         //dd($request->all());
 
-        // Realizar cambios solo si el campo 'email_confirm' no está vacío
-        if ($request->filled('email_confirmation')) {
-            $client->email = $request->input('email_confirmation');
-        }
-
-        // Realizar cambios solo si el campo 'password' no está vacío
-        if ($request->filled('password')) {
-            $newPassword = $request->input('password');
-            // $user->password = Hash::make($newPassword);
-            $client->password = bcrypt($newPassword);
-            //  $user->password = Hash::make($request->input('password')); // Asegúrate de cifrar la contraseña antes de guardarla en la base de datos
-        }
+       if ($request->filled('email')) {
+        $client->email = $request->input('email');
+       }
+       if ($request->filled('password')) {
+        $newPassword = $request->input('password');
+        $client->updatePassword($newPassword);
+       }
+       /*
+       if ($request->filled('password')) {
+        $newPassword = $request->input('password');
+        $client->password = bcrypt($newPassword); 
+       } */
         $client->nombre = $request->input('nombre');
         $client->apellido = $request->input('apellido');
         $client->cod_area = $request->input('cod_area');
@@ -88,7 +95,11 @@ class ClientRegisterController extends Controller
 
         // Guardar los cambios en la base de datos
         $client->save();
-
+       }catch (QueryException $e) {
+            if (strpos($e->getMessage(), 'clients_email_unique') !== false) {
+                return redirect()->back()->withErrors(['error' => 'El correo electrónico ya existe'])->withInput();
+            }
+        }
         // Redireccionar a la página de edición o mostrar un mensaje de éxito
         return redirect()->route('client.edit')->with('success', 'Sus datos se actualizaron correctamente!!!');
     }

@@ -10,6 +10,11 @@
                 @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
+                @error('email')
+                        <div class="alert alert-danger mt-1">
+                          <span class="">{{ $message }}</span>
+                      </div>
+                       @enderror
                 @method('PUT')
                 <p style="color: grey;"><b><u>EDITAR MIS DATOS</u></b></p>
                     <div class="mb-3">                      
@@ -17,26 +22,28 @@
                    <div class="form-text">Nombre Usuario: No Editable.</div>
                     </div>
                     <div class="mb-3">
-                      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{Auth::guard('client')->user()->email}}" disabled>
+                      <input type="email" class="form-control" aria-describedby="emailHelp" value="{{Auth::guard('client')->user()->email}}" disabled>
                    <div class="form-text">Email Registrado: No Editable.</div>
-                   </div>                     
+                   </div>     
+                   <p class="mb-2">
+                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                     Editar datos sensibles
+                     </a>  
+                   </p>                
                      <div class="collapse mb-3" id="collapseExample">                      
-                       <div class="card card-body collapse-form">
-                          <!--
+                       <div class="card card-body collapse-form">                          
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Cambiar Correo electrónico</label>
-                            <input type="email" name="email_confirmation" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp">    
+                            <label for="email" class="form-label">Cambiar Correo electrónico</label>
+                            <input type="email" name="email" class="form-control" aria-describedby="emailHelp">    
                           </div>  
                           <div class="mb-3">
-                            <label for="password" class="form-label">Cambiar Contraseña</label>
+                            <label for="password-edit" class="form-label">Cambiar Contraseña</label>
                             <input type="password" name="password" class="form-control" id="exampleInputPassword">
                           </div>                                     
                           <div class="mb-3">
-                           <label for="del_password" class="form-label">Repita Contraseña</label>
-                           <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword2">
-                          </div>   
-                          -->    
-                         
+                           <label for="password_confirmation_edit" class="form-label">Repita Contraseña</label>
+                           <input type="password" name="password_confirmation_edit" class="form-control" id="exampleInputPassword2">
+                          </div>                           
                        </div>
                     </div>                                           
                     <div class="mb-3 form-floating">
