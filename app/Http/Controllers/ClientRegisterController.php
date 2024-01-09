@@ -16,8 +16,12 @@ class ClientRegisterController extends Controller
     public function register(ClientRequest $request)
     {             
         $validatedData = $request->validated();
-        $userId = $request->cookie('comercioAdherido');
-        
+        $userId = $request->cookie('comercioAdherido');   
+        foreach ($validatedData as $field => $value) {
+        if ($field !== 'email') {
+            $validatedData[$field] = ucwords(strtolower($value));
+        }
+    }
         try {            
             $client = Client::create($validatedData);
             if ($userId) {
@@ -71,8 +75,6 @@ class ClientRegisterController extends Controller
         
         ]);
 
-        //dd($request->all());
-
        if ($request->filled('email')) {
         $client->email = $request->input('email');
        }
@@ -80,21 +82,17 @@ class ClientRegisterController extends Controller
         $newPassword = $request->input('password');
         $client->updatePassword($newPassword);
        }
-       /*
-       if ($request->filled('password')) {
-        $newPassword = $request->input('password');
-        $client->password = bcrypt($newPassword); 
-       } */
-        $client->nombre = $request->input('nombre');
-        $client->apellido = $request->input('apellido');
+       
+        $client->nombre = ucwords(strtolower($request->input('nombre')));
+        $client->apellido = ucwords(strtolower($request->input('apellido')));
         $client->cod_area = $request->input('cod_area');
         $client->movil = $request->input('movil');
         $client->ciudad = ucwords(strtolower($request->input('ciudad')));
         $client->provincia = ucwords(strtolower($request->input('provincia')));
         $client->pais = ucwords(strtolower($request->input('pais')));
-
-        // Guardar los cambios en la base de datos
-        $client->save();
+          
+        $client->save();       
+        
        }catch (QueryException $e) {
             if (strpos($e->getMessage(), 'clients_email_unique') !== false) {
                 return redirect()->back()->withErrors(['error' => 'El correo electrónico ya existe'])->withInput();

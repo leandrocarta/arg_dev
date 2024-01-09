@@ -9,20 +9,13 @@
                 <div id="emailHelp" class="form-text">Recuperar mi contraseña.</div>
                <!-- @include('parcials.messages')        -->        
                     <div class="form-floating mb-3">
-                      <input type="text" name="usuario" placeholder="Usuario / Correo electrónico" class="form-control" required>
+                      <input type="email" name="usuario" placeholder="Usuario / Correo electrónico" class="form-control" required>
                       <label for="exampleInputEmail1" class="form-label">Confirma tu Correo electrónico:</label>                                            
-                       @if(session('message'))
-                        <div class="alert alert-success">
-                          {{ session('message') }}
-                        </div>
-                       @elseif($errors->has('email'))
-                           <div class="alert alert-danger mt-1">
-                               <span>{{ $errors->first('email') }}</span>
-                           </div>
-                       @endif
-                       @if(isset($newPassword))
-                       <p>Nueva contraseña temporal generada: {{ $newPassword }}</p>
-                         @endif
+                       @error('email')
+                        <div class="alert alert-danger mt-1">
+                          <span class="">El email no existe, vuelva a ingresarlo</span>
+                      </div>
+                       @enderror                 
                     </div>                                                       
                     <button type="submit" class="btn btn-primary">ENVIAR</button>                                         
                 </form>

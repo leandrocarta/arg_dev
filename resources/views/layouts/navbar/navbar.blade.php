@@ -100,7 +100,8 @@
                      <li><a class="dropdown-item" href="/read_vuelos">Vuelos</a></li>
                      <li><a class="dropdown-item" href="/read_destinos">Destinos</a></li>
                    <!--  <li><a class="dropdown-item" href="upload">Uploads Provincias con exel</a></li> -->
-                     <li><a class="dropdown-item" href="/read_hotel">Hoteles</a></li>
+                     <li><a class="dropdown-item" href="/read_hotel">Hoteles</a></li> 
+                     <li><a class="dropdown-item" href="/read_mayoristas">Mayoristas</a></li>
                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>

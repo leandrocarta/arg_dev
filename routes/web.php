@@ -23,6 +23,7 @@ use App\Http\Controllers\AereosController;
 use App\Http\Controllers\ViajeController;
 use App\Http\Controllers\DestinoController;
 use App\Http\Controllers\ViajeAMedidaController;
+use App\Http\Controllers\ProveedorMayoristaController;
 
 /*Route::get('/', function () {
     //return view('layouts.construccion.construccion');
@@ -89,7 +90,11 @@ Route::get('/caribe', [PromocionController::class, 'cookie_caribe']);
 Route::get('/europa', [PromocionController::class, 'cookie_europa']);
 Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
 Route::get('/aereos', [PromocionController::class, 'cookie_vuelos']);
-
+// Proveedores Mayoristas
+Route::get('/read_mayoristas', [ProveedorMayoristaController::class, 'listarMayoristas'])->name('mayorista.listado');
+Route::get('/mayorista_new', [ProveedorMayoristaController::class, 'mostrarFormulario'])->name('mayorista.new');
+Route::post('/mayorista_new', [ProveedorMayoristaController::class, 'crear']);
+// FIN Proveedores Mayoristas
 // Qr
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);
 // Cookie promotor digital

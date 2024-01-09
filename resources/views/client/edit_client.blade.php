@@ -10,6 +10,16 @@
                 @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
+                 @error('password_confirmation_edit')
+                               <div class="alert alert-danger mt-1">
+                                    <span>Sus contraseñas no coinciden</span>
+                               </div>
+                           @enderror   
+                 @error('password')
+                               <div class="alert alert-danger mt-1">
+                                 <span class="">{{ $message }}</span>
+                               </div>
+                           @enderror    
                 @error('email')
                         <div class="alert alert-danger mt-1">
                           <span class="">{{ $message }}</span>
@@ -32,34 +42,34 @@
                    </p>                
                      <div class="collapse mb-3" id="collapseExample">                      
                        <div class="card card-body collapse-form">                          
-                          <div class="mb-3">
+                          <div class="mb-3 form-floating">                            
+                            <input type="email" name="email" class="form-control" placeholder="Cambiar Correo electrónico">    
                             <label for="email" class="form-label">Cambiar Correo electrónico</label>
-                            <input type="email" name="email" class="form-control" aria-describedby="emailHelp">    
                           </div>  
-                          <div class="mb-3">
+                          <div class="mb-3 form-floating">                            
+                            <input type="password" name="password" class="form-control" placeholder="">
                             <label for="password-edit" class="form-label">Cambiar Contraseña</label>
-                            <input type="password" name="password" class="form-control" id="exampleInputPassword">
-                          </div>                                     
-                          <div class="mb-3">
+                          </div>                                                           
+                          <div class="mb-3 form-floating">                           
+                           <input type="password" name="password_confirmation_edit" class="form-control" placeholder="">
                            <label for="password_confirmation_edit" class="form-label">Repita Contraseña</label>
-                           <input type="password" name="password_confirmation_edit" class="form-control" id="exampleInputPassword2">
-                          </div>                           
+                          </div>                                                  
                        </div>
                     </div>                                           
                     <div class="mb-3 form-floating">
                       <input type="text" name="nombre" placeholder="Nombre" class="form-control" value="{{Auth::guard('client')->user()->nombre }}">
-                      <label for="nombre" class="form-label">Nombre/s</label>                                            
+                      <label for="nombre" class="form-label">Nombre</label>                                            
                     </div>
                     <div class="mb-3 form-floating">
                       <input type="text" name="apellido" placeholder="Apellido" class="form-control" value="{{Auth::guard('client')->user()->apellido}}">
-                      <label for="apellido" class="form-label">Apellido/s</label>                                            
+                      <label for="apellido" class="form-label">Apellido</label>                                            
                     </div>      
                     <div class="mb-3 form-floating">
-                      <input type="text" name="cod_area" placeholder="Código Area Telefónica" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->cod_area}}">
+                      <input type="number" name="cod_area" placeholder="Código Area Telefónica" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->cod_area}}">
                       <label for="cod_area" class="form-label">Código Area Telefónica</label>                                            
                     </div>
                     <div class="mb-3 form-floating">
-                      <input type="text" name="movil" placeholder="Numero móvil" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->movil}}">
+                      <input type="number" name="movil" placeholder="Numero móvil" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->movil}}">
                       <label for="movil" class="form-label">Numero Móvil</label>                                            
                     </div>                    
                     <div class="mb-3 form-floating">

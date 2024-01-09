@@ -19,8 +19,8 @@ class PromocionController extends Controller
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -39,8 +39,8 @@ class PromocionController extends Controller
             }
             $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) { 
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -59,8 +59,8 @@ class PromocionController extends Controller
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -79,8 +79,8 @@ class PromocionController extends Controller
             }
             $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -100,8 +100,8 @@ class PromocionController extends Controller
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -120,8 +120,8 @@ class PromocionController extends Controller
             }
             $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -141,8 +141,8 @@ class PromocionController extends Controller
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -161,8 +161,8 @@ class PromocionController extends Controller
             }
             $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -183,8 +183,8 @@ class PromocionController extends Controller
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -203,8 +203,8 @@ class PromocionController extends Controller
             }
             $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -223,8 +223,8 @@ class PromocionController extends Controller
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {
@@ -243,8 +243,8 @@ class PromocionController extends Controller
             }
             $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
             $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_id_user === null) {
-                $cliente->fk_id_user = $userId;
+            if ($cliente && $cliente->fk_users_id === null) {
+                $cliente->fk_users_id = $userId;
                 try {
                     $cliente->save();
                 } catch (\Exception $e) {

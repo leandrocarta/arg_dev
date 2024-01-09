@@ -376,8 +376,15 @@ nav p {
 nav ul li a div {
 padding-top: 12px;
 }
+.rotate-90 {
+  transform: rotate(90deg);
+}
+.margenes {
+  margin-top: 80px;
+  margin-bottom: 180px;
+}
 // Fin Zona Footer *****
-// Formulario Edicion *****
+// Formulario Edicion ****
 .edit button {  
   font-size: 13px; 
   padding-left: 5px; 

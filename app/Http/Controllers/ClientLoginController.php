@@ -7,6 +7,8 @@ use App\Http\Requests\ClientLoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use App\Models\Client;
+use Illuminate\Support\Str;
 
 class ClientLoginController extends Controller
 {
@@ -60,5 +62,17 @@ class ClientLoginController extends Controller
 
     public function recoverPassword(Request $request)
     {
+       $client = Client::where('email', $request->input('usuario'))->first();
+       
+    if ($client) {
+        $temporaryPassword = Str::random(8);
+        $client->updatePassword($temporaryPassword); // Utiliza el método en la instancia del modelo
+        $client->save();
+        dd($temporaryPassword);
+        return redirect()->back()->with('success', 'Hemos enviado instrucciones para recuperar tu contraseña a tu correo electrónico.');
+    } else {
+        dd('Entre');
+        return redirect()->back()->withErrors(['error' => 'El correo electrónico ya existe'])->withInput();
+    }
     }
 }
