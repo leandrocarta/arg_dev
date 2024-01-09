@@ -94,6 +94,9 @@ Route::get('/aereos', [PromocionController::class, 'cookie_vuelos']);
 Route::get('/read_mayoristas', [ProveedorMayoristaController::class, 'listarMayoristas'])->name('mayorista.listado');
 Route::get('/mayorista_new', [ProveedorMayoristaController::class, 'mostrarFormulario'])->name('mayorista.new');
 Route::post('/mayorista_new', [ProveedorMayoristaController::class, 'crear']);
+Route::get('/update_mayorista/{id}', [ProveedorMayoristaController::class, 'formUpdateMayorista'])->name('mayorista.update');
+Route::post('/update_mayorista/{id}', [ProveedorMayoristaController::class, 'editarMayorista'])->name('mayorista.updateProcess');
+Route::post('/delete_mayorista/{id}', [ProveedorMayoristaController::class, 'deleteMayorista'])->name('mayorista.delete');
 // FIN Proveedores Mayoristas
 // Qr
 Route::get('/qrcode', [QRCodeController::class, 'generateQRCode']);

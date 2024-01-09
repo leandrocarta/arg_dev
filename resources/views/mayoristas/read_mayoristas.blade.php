@@ -13,11 +13,11 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
+                <th>Empresa</th>
+                <th>Contacto</th>
                 <th>Dirección </th>
                 <th>Teléfono</th>
-                <th>email</th>
-                <th>Localidad</th>                
+                <th>email</th>             
                 <th>Provincia</th>
                 <th>País</th>
                 <th>Editar</th>
@@ -28,18 +28,18 @@
             @foreach ($mayoristas as $mayorista)
             <tr>
                 <td>{{ $mayorista->id }}</td>
-                <td>{{ $mayorista->nombre }}</td>
+                <td>{{ $mayorista->empresa }}</td>
+                <td>{{ $mayorista->contacto }}</td>
                 <td>{{ $mayorista->direccion }}</td>
                <td>{{ $mayorista->telefono }}</td>     
-               <td>{{ $mayorista->email }}</td>           
-                <td>{{ $mayorista->localidad }}</td>
+               <td>{{ $mayorista->email }}</td>  
                 <td>{{ $mayorista->provincia }}</td>
                 <td>{{ $mayorista->pais }}</td>
                 <td>
-                    <a href="{{ route('producto.update', $mayorista->id) }}" class="btn btn-primary">Editar</a>                    
+                    <a href="{{ route('mayorista.update', $mayorista->id) }}" class="btn btn-primary">Editar</a>                    
                 </td>
                 <td>
-                    <form action="{{ route('producto.delete', $mayorista->id) }}" method="POST">
+                    <form action="{{ route('mayorista.delete', $mayorista->id) }}" method="POST">
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>

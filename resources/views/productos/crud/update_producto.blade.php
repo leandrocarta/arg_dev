@@ -99,7 +99,7 @@
                                 <select name="hotel" class="form-select">
                                     @if ($producto->hotel)
                                         <option value="{{ $producto->hotel }}" selected>
-                                            {{ $producto->hotel }}
+                                            {{ $producto->hotel->nombre }}
                                         </option>
                                     @endif
                                     @foreach ($hoteles as $hotel)

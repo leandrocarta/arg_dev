@@ -12,10 +12,7 @@ class ProveedorMayorista extends Model
     use HasFactory;
     protected $table = 'proveedores_mayoristas';
     protected $fillable = [
-    'nombre', 'direccion', 'telefono' ,'email', 'localidad', 'provincia', 'pais'];
+    'empresa', 'contacto', 'direccion', 'telefono' ,'email', 'localidad', 'provincia', 'pais'];
 
-        public function pais()
-    {
-        return $this->belongsTo(Pais::class, 'id_pais', 'id');
-    }
+        
 }

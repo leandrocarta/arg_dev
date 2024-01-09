@@ -11,7 +11,8 @@ class ProveedorMayoristaController extends Controller
     public function crear(Request $request)
     {
         $request->validate([
-            'nombre' => 'string',
+            'empresa' => 'string',
+            'contacto' => 'string',
             'direccion' => 'string',
             'telefono' => 'string',
             'email' => 'string',
@@ -35,5 +36,43 @@ class ProveedorMayoristaController extends Controller
     {
         $paises = Pais::all();
         return view('mayoristas.mayorista_new', compact('paises'));
+    }
+    public function formUpdateMayorista($id)
+    {        
+        $mayorista = ProveedorMayorista::find($id);
+        if (!$mayorista) {
+            // Manejo del caso en que el producto no existe
+        } else {
+            return view('mayoristas.update_mayorista', compact('mayorista'));
+        }
+    }
+     public function editarMayorista(Request $request, $id)
+    {
+       $mayorista = ProveedorMayorista::find($id);     
+
+        if ($mayorista) {
+            $mayorista->empresa = $request->empresa;
+            $mayorista->contacto = $request->contacto;
+            $mayorista->direccion = $request->direccion;
+            $mayorista->telefono = $request->telefono;
+            $mayorista->email = $request->email;
+            $mayorista->localidad = $request->localidad;
+            $mayorista->provincia = $request->provincia;
+            $mayorista->pais = $request->pais;
+
+            $mayorista->save();
+        }
+        return redirect('/read_mayoristas')->with('success', 'EL PRODUCTO SE EDITO CORRECTAMENTE !!!');
+    }
+    public function deleteMayorista($id)
+    {
+        $mayorista = ProveedorMayorista::find($id);
+        if (!$mayorista) {
+            return redirect('/read_mayoristas')->with('success', 'EL PRODUCTO NO EXISTE!!!');
+        }      
+
+        $mayorista->delete();
+
+        return redirect('/read_mayoristas')->with('success', 'Se ha eliminado al Mayorista!!!');
     }
 }

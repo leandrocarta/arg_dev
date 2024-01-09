@@ -7,8 +7,12 @@
                 @csrf
                 <p style="color: grey;"><b><u>ALTA PROVEEDORES MAYORISTAS</u></b></p>
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="{{ old('nombre') }}" required>
-                  <label for="nombre" class="form-label">Nombre</label>                  
+                  <input type="text" class="form-control" name="empresa" placeholder="Empresa" value="{{ old('empresa') }}" required>
+                  <label for="empresa" class="form-label">Empresa</label>                  
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" name="contacto" placeholder="Contacto" value="{{ old('contacto') }}" required>
+                  <label for="contacto" class="form-label">Contacto</label>                  
                 </div>
                 <div class="mb-3 form-floating">
                       <input type="text" name="direccion" placeholder="Dirección" class="form-control" value="{{old('direccion')}}">
