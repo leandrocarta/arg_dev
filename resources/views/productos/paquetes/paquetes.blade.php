@@ -39,6 +39,10 @@
             <div class="barra-horizontal-paquete">
               <p class="leyenda">Paquete Turístico</p>
             </div>
+            @elseif ($producto->tipo_producto == 'Exclusivo Comunidad')
+            <div class="barra-horizontal-comunidad">
+              <p class="leyenda">Exclusivo Comunidad</p>
+            </div>
             @endif
             <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}">
               <div class="card-img-overlay titulo-prod">

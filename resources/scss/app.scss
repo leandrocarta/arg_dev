@@ -681,6 +681,19 @@ font-family: 'Oswald', sans-serif;;
     color: #ffffff;
     font-weight: bold;
 }
+.barra-horizontal-comunidad {
+    height: 35px; 
+    background-color: rgba(218, 0, 252, 0.7); 
+    width: 100%; 
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+}
 .bloque1-imagen-container img {
   height: 100%; 
   object-fit: cover; 

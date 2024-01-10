@@ -75,7 +75,7 @@
              @elseif($producto->tipo_producto == 'Grupal con Guía Hispanohablante')
             <div class="barra-horizontal-grupal-hispano">
               <p class="leyenda">Grupal con Guía Hispanohablante</p>
-            </div>            
+            </div>                        
             @endif
             <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}">
               <div class="card-img-overlay titulo-prod">

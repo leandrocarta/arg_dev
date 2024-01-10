@@ -55,6 +55,7 @@
                                     <option value="Salida Grupal" @if(old('tipo_producto') == 'Salida Grupal') selected @endif>Salida Grupal</option>
                                     <option value="Grupal con Guía Hispanohablante" @if(old('tipo_producto') == 'Grupal con Guía Hispanohablante') selected @endif>Grupal con Guía Hispanohablante</option>
                                     <option value="Family Plan" @if(old('tipo_producto') == 'Family Plan') selected @endif>Family Plan</option>
+                                    <option value="Exclusivo Comunidad" @if(old('tipo_producto') == 'Exclusivo Comunidad') selected @endif>Exclusivo Comunidad</option>
                                 </select>                                 
                             </div>
                         </div>

@@ -23,7 +23,7 @@ class ProveedorMayoristaController extends Controller
 
         $proveedor = ProveedorMayorista::create($request->all());
 
-        return redirect('/mayorista_new');
+        return redirect('/read_mayoristas')->with('success', 'EL MAYORISTA SE CREO CORRECTAMENTE!!!');
     }
 
     public function listarMayoristas()
