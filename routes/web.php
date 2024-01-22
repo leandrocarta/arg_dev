@@ -52,7 +52,7 @@ Route::get('/verificacion_success', [UserRegisterController::class, 'verificatio
 Route::get('/login_emprendedor_digital', [UserLoginController::class, 'show']);
 Route::post('/login_emprendedor_digital', [UserLoginController::class, 'login']);
 Route::get('/recover_password_emprendedor', [UserLoginController::class, 'recover']);
-Route::post('/recover_password_emprendedor', [UserLoginController::class, 'recoverPost']);
+Route::post('/recover_password_emprendedor', [UserLoginController::class, 'recoverPassword']);
 Route::get('/userHome', [UserHomeController::class, 'index']);
 Route::get('/edit', [UserRegisterController::class, 'editForm'])->name('user.edit');
 Route::put('/edit/{id}', [UserRegisterController::class, 'update'])->name('user.update');
@@ -130,6 +130,9 @@ Route::get('/read_vuelos', [AereosController::class, 'mostrarVuelos'])->name('vu
 Route::get('/create_vuelos', [AereosController::class, 'showFormVuelos'])->name('vuelos.create');
 Route::post('/create_vuelos', [AereosController::class, 'createVuelo'])->name('vuelos.create');
 Route::post('/cotizar_vuelos', [AereosController::class, 'cotizarVuelos'])->name('cotizar.vuelos');
+Route::get('/coti_update/{id}', [AereosController::class, 'formUpdateCoti'])->name('cotiAereo.update');
+Route::post('/deleteCotiAereo/{id}', [AereosController::class, 'deleteCotiAereo'])->name('cotiAereo.delete');
+Route::post('/editarCotiAereo/{id}', [AereosController::class, 'editarProducto'])->name('cotiAereo.updateProcess');
 // Viajes consultas
 Route::post('/consulta_viaje', [ViajeController::class, 'guardarDatos'])->name('consulta_viaje');
 // Destinos
@@ -137,6 +140,7 @@ Route::get('/read_destinos', [DestinoController::class, 'mostrarDestinos'])->nam
 Route::get('/create_destino', [DestinoController::class, 'showFormDestino'])->name('destinos.form');
 Route::post('/create_destinos', [DestinoController::class, 'createDestino'])->name('destinos.create');
 Route::get('/update_destino/{id}', [DestinoController::class, 'formUpdateDestino'])->name('destino.update');
+Route::post('/update_destino/{id}', [DestinoController::class, 'updateDestino'])->name('update.destino');
 Route::post('/delete_destino/{id}', [DestinoController::class, 'deleteDestinos'])->name('destino.delete');
 // Viajes a Medida
 Route::get('/a-medida', [ViajeAMedidaController::class, 'vista']);

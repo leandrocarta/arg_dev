@@ -18,6 +18,7 @@ class Producto extends Model
         'ciudad_destino',
         'origen_salida',
         'precio_total',
+        'descto',
         'precio_comisionable',
         'moneda',
         'id_hotel',

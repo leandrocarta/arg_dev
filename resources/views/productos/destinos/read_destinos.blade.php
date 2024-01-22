@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ $destino->id }}</td>
                 <td>{{ $destino->nombre_destino }}</td>
-                <td>{{ $destino->pais }}</td>
+                <td>{{ $destino->id_pais }}</td>
                 <td>
                     <a href="{{ route('destino.update', $destino->id) }}" class="btn btn-primary">Editar</a>                    
                 </td>

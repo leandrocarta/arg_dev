@@ -37,6 +37,14 @@
             <input type="text" name="destino" placeholder="Ciudad Destino" class="form-control" required>
             <label for="destino" class="form-label">Ciudad Destino:</label>
           </div>
+          <div class="form-floating mb-1">
+            <input type="number" name="adultos" value="1" class="form-control" placeholder="" >
+            <label for="adultos" class="form-label">¿Cantidad de adultos?</label>
+          </div>
+          <div class="form-floating mb-1">
+              <input type="number" name="menores" value="0" class="form-control" placeholder="" >
+              <label for="menores" class="form-label">¿Cantidad de menores?</label>
+          </div>
           <div class="form-floating mb-3">
             <input type="email" name="email" placeholder="Email de Contacto" class="form-control" required>
             <label for="email" class="form-label">Email de Contacto:</label>

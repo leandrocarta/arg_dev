@@ -83,10 +83,8 @@
                                    <label for="traslados_orig" class="col-md-4 control-label">Traslados en Origen</label>
                                       <div class="">
                                           <select name="traslados_orig" class="form-select" aria-label="Default select example"> 
-                                            <option value="Sin Traslados" @if(old('traslados_orig') == 'Sin Traslados') selected @endif>Sin Traslados</option>
-                                            <option value="Micro - Vans" @if(old('traslados_orig') == 'Micro - Vans') selected @endif>Micro - Vans</option>
-                                            <option value="Aéreos" @if(old('traslados_orig') == 'Aéreos') selected @endif>Aéreos</option>
-                                            <option value="Otro" @if(old('traslados_orig') == 'Otro') selected @endif>Otro</option>                                            
+                                            <option value="No Incluye" @if(old('traslados_orig') == 'No Incluye') selected @endif>No Incluye</option>
+                                            <option value="Incluye" @if(old('traslados_orig') == 'Incluye') selected @endif>Incluye</option>                                                                                      
                                           </select>  
                                       </div>
                                   </div>   
@@ -94,8 +92,8 @@
                                    <label for="traslados_dest" class="col-md-4 control-label">Traslados en Destino</label>
                                       <div class="">
                                           <select name="traslados_dest" class="form-select" aria-label="Default select example"> 
-                                            <option value="Micro - Vans" @if(old('traslados_dest') == 'Micro - Vans') selected @endif>Micro - Vans</option>
-                                            <option value="Sin Traslados" @if(old('traslados_dest') == 'Sin Traslados') selected @endif>Sin Traslados</option>
+                                            <option value="Incluye Traslados" @if(old('traslados_dest') == 'Incluye Traslados') selected @endif>Incluye Traslados</option>
+                                            <option value="No Incluye" @if(old('traslados_dest') == 'No Incluye') selected @endif>No Incluye</option>
                                           </select>  
                                       </div>
                                   </div>
@@ -254,6 +252,12 @@
                             <label for="precio_total" class="col-md-4 control-label">Precio Total</label>
                             <div class="">
                                 <input type="number" class="form-control" name="precio_total" value="{{ old('precio_total') }}" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descto" class="col-md-4 control-label">Descto. Comunidad</label>
+                            <div class="">
+                                <input type="number" class="form-control" name="descto" value="1" step="0.01">
                             </div>
                         </div>
                         <div class="form-group">

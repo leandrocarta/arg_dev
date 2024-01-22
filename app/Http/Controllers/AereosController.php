@@ -12,50 +12,60 @@ use Intervention\Image\Facades\Image;
 class AereosController extends Controller
 {
     public function showFormVuelos()
-    {        
+    {
         $paises = Pais::all();
         $destinos = Destino::all();
-        return view('productos.aereos.create_vuelos', compact('paises', 'destinos')); 
+        return view('productos.aereos.create_vuelos', compact('paises', 'destinos'));
     }
-     public function mostrarVuelos()
-    {       
+    public function formUpdateCoti($id)
+    {
+        $aereos = Aereo::find($id);
+        return view('productos.aereos.coti_update', compact('aereos'));
+    }
+    public function mostrarVuelos()
+    {
         $productos = Producto::all();
-        return view('productos.aereos.read_vuelos', compact('productos'));
+        $cotiAereos = Aereo::all();
+        return view('productos.aereos.read_vuelos', compact('productos', 'cotiAereos'));
     }
     public function cotizarVuelos(Request $request)
     {
+        //dd($request->all());
         $request->validate([
-    'fecha_ida' => 'required|date',
-    'fecha_regreso' => 'nullable|date', 
-    'origen' => 'required|string',
-    'destino' => 'required|string',
-    'email' => 'required|email',
-    'aclaracion' => 'string',
-    'estado' => 'integer',
-]);
+            'fecha_ida' => 'required|date',
+            'fecha_regreso' => 'nullable|date',
+            'origen' => 'required|string',
+            'destino' => 'required|string',
+            'adultos' => 'integer',
+            'menores' => 'integer',
+            'email' => 'required|email',
+            'estado' => 'integer',
+        ]);
 
-$aereoData = [
-    'fecha_ida' => $request->fecha_ida,
-    'origen' => $request->origen,
-    'destino' => $request->destino,
-    'email' => $request->email,
-    'aclaracion' => $request->aclaracion,
-    'estado' => 1,
-];
+        $aereoData = [
+            'fecha_ida' => $request->fecha_ida,
+            'origen' => $request->origen,
+            'destino' => $request->destino,
+            'adultos' => $request->adultos,
+            'menores' => $request->menores,
+            'email' => $request->email,
+            'aclaracion' => $request->aclaracion,
+            'estado' => 1,
+        ];
 
-// Agregar la fecha de regreso solo si está presente
-if ($request->has('fecha_regreso')) {
-    $aereoData['fecha_regreso'] = $request->fecha_regreso;
-}
+        // Agregar la fecha de regreso solo si está presente
+        if ($request->has('fecha_regreso')) {
+            $aereoData['fecha_regreso'] = $request->fecha_regreso;
+        }
+        //dd($aereoData);
+        Aereo::create($aereoData);
 
-Aereo::create($aereoData);
-
-       // return redirect()->route('/home');
-         return redirect('/')->with('success', 'Recibimos su consulta, en breve será respondida. Muchas Gracias');
+        // return redirect()->route('/home');
+        return redirect('/')->with('success', 'Recibimos su consulta, en breve será respondida. Muchas Gracias');
     }
     public function createVuelo(Request $request)
     {
-      //  dd($request->all());
+        //  dd($request->all());
         $messages = [
             'codigo.unique' => 'EL CÓDIGO DEL PRODUCTO INGRESADO YA EXISTE.',
         ];
@@ -83,7 +93,7 @@ Aereo::create($aereoData);
             $image->fit(1080, 720);
         } else {
             $image->fit(1080, 720);
-        }    
+        }
         $extension = strtolower($uploadedFile->getClientOriginalExtension());
         if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {
             Session::flash('error_message', 'Ooops10!!! Hubo un error, revisa el formulario.');
@@ -102,12 +112,43 @@ Aereo::create($aereoData);
             $producto->origen_salida = $request->origen_salida;
             $producto->precio_total = $request->precio_total;
             $producto->precio_comisionable = $request->precio_comisionable;
-            $producto->moneda = $request->moneda;            
+            $producto->moneda = $request->moneda;
             $producto->fecha_vencimiento = $request->fecha_vencimiento;
 
             $producto->save();
         }
 
         return redirect('/read_vuelos')->with('success', 'EL PRODUCTO SE CREÓ CORRECTAMENTE');
+    }
+    public function editarProducto(Request $request, $id)
+    {
+        $aereo = Aereo::find($id);
+       
+          // dd($producto::All());
+        if ($aereo) {
+            $aereo->fecha_ida = $request->fecha_ida;
+            $aereo->fecha_regreso = $request->fecha_regreso;
+            $aereo->origen = $request->origen;
+            $aereo->destino = $request->destino;
+            $aereo->adultos = $request->adultos;
+            $aereo->menores = $request->menores;
+            $aereo->email = $request->email;
+            $aereo->aclaracion = $request->aclaracion;
+            $aereo->estado = $request->estado;
+           
+
+            $aereo->save();
+        }
+        return redirect('/read_vuelos')->with('success', 'EL PRODUCTO SE EDITO CORRECTAMENTE !!!');
+    }
+    public function deleteCotiAereo($id)
+    {
+        $aereos = Aereo::find($id);
+        if (!$aereos) {
+            return redirect('/read_vuelos')->with('success', 'EL PRODUCTO NO EXISTE!!!');
+        }       
+        $aereos->delete();
+
+        return redirect('/read_vuelos')->with('success', 'PRODUCTO ELIMINADO CON EXITO!!!');
     }
 }

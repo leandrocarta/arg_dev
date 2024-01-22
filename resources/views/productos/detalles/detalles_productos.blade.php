@@ -30,15 +30,21 @@
         @endphp
         @if ($hotelesRelacionados->isNotEmpty())
         @foreach ($hotelesRelacionados as $hotelData)
+        <div class="banner_movil">
             <div class="carousel-item filtro {{ $loop->first ? 'active' : '' }}">
+              <div class="card-img-container">
                 <img src="{{ asset('assets/img_hoteles/' . $hotelData['hotel']->img_banner) }}" class="d-block w-100" alt="">
                 <div class="titulo-detalles-prod">
-                    <h4><i class="fa-solid fa-location-dot me-2"></i>{{ $productos->pais_destino }} - {{ $productos->destinos->nombre_destino }}</h4>
-                    <h1>{{ $hotelData['hotel']->nombre }}</h1>
-                    <h4>Con Estadía de {{ $hotelData['estadia'] }} Noches</h4>
-                    <h4><strong><i class="fa-regular fa-calendar-days"></i></strong> {{ $productos->fecha_vencimiento }}</h4>
+                    <h1><i class="fa-solid fa-location-dot me-2"></i>{{ $productos->pais_destino }}  {{ $productos->destinos->nombre_destino }}</h1>
+                    <h2><i class="fa-solid fa-hotel"></i> {{ $hotelData['hotel']->nombre }}</h2>
+                    <h3>Con Estadía de {{ $hotelData['estadia'] }} Noches</h3>                    
+                 @if ($productos->tipo_producto == 'Exclusivo Comunidad')                  
+                     <p class="exclusivo-detalles">Comunidad Argtravels (20% Descto.)</p>                                     
+                 @endif
                 </div>
+              </div>
             </div>
+           </div>
         @endforeach
         @else
         <p>No hay información disponible para este producto.</p>
@@ -59,7 +65,7 @@
             <div class="px-2 flex-grow-1 bg-light-detalles">
                 <h4 class="mb-2">Información del Paquete</h4>
                 <p>
-                    <i class="fas fa-bus"></i> Origen: Domicilio ⮂ {{ $productos->origen_salida }} {{ $productos->service->traslados_orig }}
+                    <i class="fas fa-bus"></i> {{ $productos->service->traslados_orig }} Traslados a {{ $productos->origen_salida }}
                 </p>
                 <p class="">
                     @if ($productos->service)
@@ -85,7 +91,7 @@
                     {{ $productos->service->transporte_int }}: desde {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->nombre_destino }}                 
                 </p>
                 <p class="">                
-                    <i class="fas fa-bus me-1"></i> Destino: {{ $productos->service->traslados_dest }} desde <span>Aeropuerto ⮂ Hotel</span>           
+                    <i class="fas fa-bus me-1"></i> {{ $productos->service->traslados_dest }} desde <span>Aeropuerto ⮂ Hotel</span>           
                 </p>     
                 <p>
                     <i class="fa-solid fa-cloud-moon"></i> Estadía Total: {{ $productos->estadiaTotal }} Noches.
@@ -196,18 +202,22 @@
                     @endif
                 </h5>
                  <div class="info-hotel">
-                     <p><i class="fa-solid fa-hotel"></i> {{ $productos->$campoEstadia }} Noches
-                         {{ $hotelRelacionado->nombre }}             
+                     <p><i class="fa-solid fa-hotel"></i> Hotel: {{ $hotelRelacionado->nombre }}                                  
                      </p>
-                     <p class=""><i class="fa-solid fa-bed"></i> Habitación {{ $productos->habitacion }}
+                     <p>
+                     <i class="fa-solid fa-cloud-moon"></i>Noches: {{ $productos->$campoEstadia }}   
+                     </p>                     
+                     <p class=""><i class="fa-solid fa-bed"></i> Habitación: {{ $productos->habitacion }} </p>
+                     <p>
                       @if ($productos->service->comidas == 'All Inclusive')
-                         Con {{ $productos->service->comidas }}
+                         <i class="fa-solid fa-bell-concierge"></i> Régimen: {{ $productos->service->comidas }}
                          @elseif ($productos->service->comidas == 'Desayuno')
                          <i class="fa-solid fa-mug-saucer"></i> {{ $productos->service->comidas }}
                          @elseif ($productos->service->comidas == 'Media Pensión')
                          <i class="fa-solid fa-utensils"></i> {{ $productos->service->comidas }}
                          @endif
                      </p>
+                     <p><i class="fa-regular fa-calendar-days"></i> Salida: {{ $productos->fecha_vencimiento }} - Consultar Otras Fechas!!</p>
                      @if ($hotelRelacionado->gym == 'Área de Gimnasio' || $hotelRelacionado->spa == 'Área de Spa')
                      <p>
                          @if ($hotelRelacionado->gym == 'Área de Gimnasio')
@@ -228,8 +238,19 @@
                 <div class="row">
                     <div class="col-md-7">
                         <p>
-                          <strong>PRECIO </strong> ( {{ $productos->moneda }} {{ $productos->precio_total }} )
+                         @php
+                        $descto_comunidad =$productos->descto;                         
+                        $resul =  $productos->precio_total * $descto_comunidad
+                     @endphp   
+                        @if ($productos->tipo_producto == 'Exclusivo Comunidad')    
+                         <strong>PRECIO: </strong> {{ $productos->moneda }} <s> {{ $productos->precio_total }} </s>
+                          <p>Comunidad Argtravels {{ $productos->moneda . ' ' . $resul }} </p>
                           <p class="a-confirmar">A Confirmar al momento de la reserva</p>
+                        @else 
+                          <strong>PRECIO </strong> ( {{ $productos->moneda }} {{ $productos->precio_total }} )
+                          <p class="a-confirmar">A Confirmar al momento de la reserva</p>                        
+                          @endif
+                          
                         </p>
                     </div>
                     <div class="col-md-5">

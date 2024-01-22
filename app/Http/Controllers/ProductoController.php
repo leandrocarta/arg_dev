@@ -42,14 +42,15 @@ class ProductoController extends Controller
     }
     public function formUpdateProductos($id)
     {
+        $destinos = Destino::all();
         $hoteles = Hotel::all();
         $paises = Pais::all();
         $producto = Producto::find($id);
         if (!$producto) {
             // Manejo del caso en que el producto no existe
         } else {
-            return view('productos.crud.update_producto', compact('producto', 'paises', 'hoteles'));
-            //return view('productos.crud.update_producto');
+            return view('productos.crud.update_producto', compact('producto', 'paises', 'hoteles', 'destinos'));
+            
         }
     }
     public function editarProducto(Request $request, $id)
@@ -76,21 +77,21 @@ class ProductoController extends Controller
                 $producto->imagen = $originalFileName;
             }
         }
-
+          // dd($producto::All());
         if ($producto) {
             $producto->nombre = $request->nombre;
             $producto->codigo = $request->codigo;
             $producto->habitacion = $request->habitacion;
             $producto->tipo_producto = $request->tipo_producto;
             $producto->id_pais_destino = $request->pais_destino;
-            $producto->ciudad_destino = $request->ciudad_destino;
+            $producto->id_destino = $request->ciudad_destino;
             $producto->origen_salida = $request->origen_salida;
-            $producto->transporte = $request->transporte;
             $producto->precio_total = $request->precio_total;
             $producto->precio_comisionable = $request->precio_comisionable;
             $producto->moneda = $request->moneda;
-            $producto->hotel = $request->hotel;
-            $producto->estadia = $request->estadia;
+            $producto->id_hotel = $request->hotel_principal;
+            $producto->estadia = $request->estadia_principal;
+            $producto->estadiaTotal = $request->estadiaTotal;
 
             $producto->save();
         }
@@ -114,6 +115,7 @@ class ProductoController extends Controller
             'ciudad_destino' => 'integer',
             'origen_salida' => 'string',
             'precio_total' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'descto' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
             'precio_comisionable' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
             'moneda' => 'string',
             'hotel_principal' => 'string',
@@ -153,6 +155,7 @@ class ProductoController extends Controller
             $producto->id_destino = $request->ciudad_destino;
             $producto->origen_salida = $request->origen_salida;
             $producto->precio_total = $request->precio_total;
+            $producto->descto = $request->descto;
             $producto->precio_comisionable = $request->precio_comisionable;
             $producto->moneda = $request->moneda;
             $producto->id_hotel = $request->hotel_principal;

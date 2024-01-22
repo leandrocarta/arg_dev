@@ -22,7 +22,7 @@ class DestinoController extends Controller
     }
     public function createDestino(Request $request)
     {
-       // dd($request->all());
+        //dd($request->all());
          $request->validate([
          'nombre_destino' => 'string',
          'id_pais' => 'integer',
@@ -34,31 +34,46 @@ class DestinoController extends Controller
          'historia' => 'string',         
          'resumen' => 'string',
 ]);
+//dd($request->all());
         $uploadedFile = $request->file('img_banner');
         $uploadedFiles = $request->file('imagenes');
         $originalFileName = $uploadedFile->getClientOriginalName();
         $image = Image::make($uploadedFile);
         $extension = strtolower($uploadedFile->getClientOriginalExtension());
-        if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {
+        if($originalFileName != null){
+            if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {
             Session::flash('error_message', 'Ooops10!!! Hubo un error, revisa el formulario.');
             return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
+            } else {
+             $image->save(public_path('assets/img_destinos/' . $originalFileName));
+             $destino = new Destino;
+             $destino->nombre_destino = $request->nombre_destino;
+             $destino->id_pais = $request->id_pais;
+             $destino->detalle_gral = $request->detalle_gral;
+             $destino->ubicacion = $request->ubicacion;
+             $destino->playas = $request->playas;
+             $destino->gastronomia = $request->gastronomia;
+             $destino->atracciones = $request->atracciones;
+             $destino->historia = $request->historia;
+             $destino->resumen = $request->resumen;        
+             $destino->img_banner = $originalFileName;        
+             $destino->save();
+             }
         } else {
-        $image->save(public_path('assets/img_destinos/' . $originalFileName));
-        $destino = new Destino;
-        $destino->nombre_destino = $request->nombre_destino;
-        $destino->id_pais = $request->id_pais;
-        $destino->detalle_gral = $request->detalle_gral;
-        $destino->ubicacion = $request->ubicacion;
-        $destino->playas = $request->playas;
-        $destino->gastronomia = $request->gastronomia;
-        $destino->atracciones = $request->atracciones;
-        $destino->historia = $request->historia;
-        $destino->resumen = $request->resumen;        
-        $destino->img_banner = $originalFileName;
-        
-        $destino->save();
-        
-      if ($request->hasFile('imagenes')) {
+             $destino = new Destino;
+             $destino->nombre_destino = $request->nombre_destino;
+             $destino->id_pais = $request->id_pais;
+             $destino->detalle_gral = $request->detalle_gral;
+             $destino->ubicacion = $request->ubicacion;
+             $destino->playas = $request->playas;
+             $destino->gastronomia = $request->gastronomia;
+             $destino->atracciones = $request->atracciones;
+             $destino->historia = $request->historia;
+             $destino->resumen = $request->resumen;   
+             $destino->save();
+        }
+        if ($request->hasFile('imagenes')) {
+       // dd('Aca no tengo que entrar');
            $index = 1;
            foreach ($uploadedFiles as $imagen) {
             $destinationPath = public_path('assets/img_destinos/');
@@ -73,7 +88,13 @@ class DestinoController extends Controller
         }
         $destino->save();
     }
-        } 
+        
       return redirect('/read_destinos')->with('success', 'EL DESTINO SE AGREGÓ CORRECTAMENTE');
+    }
+    public function formUpdateDestino()
+    {       
+        $destinos = Destino::all();
+        $paises = Pais::all();
+        return view('productos.destinos.update_destino', compact('destinos', 'paises'));
     }
 }

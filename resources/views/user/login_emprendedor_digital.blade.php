@@ -20,7 +20,7 @@
                     <div class="form-floating mb-3">
                       <input type="password" name="password" placeholder="Password" class="form-control" id="exampleInputPassword1">
                       <label for="exampleInputPassword1" class="form-label">Contraseña</label> 
-                      <div id="emailHelp" class="form-text"><a href="">Olvide mi contraseña</a>.</div>                     
+                      <div id="emailHelp" class="form-text"><a href="/recover_password_emprendedor">Olvide mi contraseña</a>.</div>                     
                     </div>                                     
                     <button type="submit" class="btn btn-primary">IR A MI PANEL</button>
                      <div class="mb-3">

@@ -28,12 +28,33 @@
                       <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{auth()->user()->email}}" disabled>
                    <div class="form-text">Email Registrado: No Editable.</div>
                    </div>
+                   <p class="mb-2">
+                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                     Editar datos sensibles
+                     </a>  
+                   </p>                
+                     <div class="collapse mb-3" id="collapseExample">                      
+                       <div class="card card-body collapse-form">                          
+                          <div class="mb-3 form-floating">                            
+                            <input type="email" name="email" class="form-control" placeholder="Cambiar Correo electrónico">    
+                            <label for="email" class="form-label">Cambiar Correo electrónico</label>
+                          </div>  
+                          <div class="mb-3 form-floating">                            
+                            <input type="password" name="password" class="form-control" placeholder="">
+                            <label for="password-edit" class="form-label">Cambiar Contraseña</label>
+                          </div>                                                           
+                          <div class="mb-3 form-floating">                           
+                           <input type="password" name="password_confirmation_edit" class="form-control" placeholder="">
+                           <label for="password_confirmation_edit" class="form-label">Repita Contraseña</label>
+                          </div>                                                  
+                       </div>
+                    </div>  
                      <p class="mas my-2">
-                       <a class="btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                       <a class="btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
                          <i class="fa-solid fa-circle-plus"><span>Aquí tus Links</span></i>
                        </a>                      
                      </p>
-                     <div class="collapse mb-3 edit" id="collapseExample">                      
+                     <div class="collapse mb-3 edit" id="collapseExample1">                      
                        <div class="card card-body collapse-form">
                           <!--
                           <div class="mb-3">

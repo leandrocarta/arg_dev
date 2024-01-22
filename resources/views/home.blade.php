@@ -1,5 +1,7 @@
 @extends('layouts.app-master')
 @section('content')
+<div class="container-fluid">
+<div class="banner_movil">
  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -30,6 +32,7 @@
     <span class="visually-hidden">Next</span>
   </button>
  </div> 
+</div>
  <!-- Barra movil 
  <div class="container-fluid">
   <div class="row">
@@ -41,7 +44,7 @@
   </div>
  </div>
  -->
-  <div class="container my-3 m-auto productos-detalles home-iconos">
+  <div class="container-fluid my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
        <h4 class="display-4"></h4>
      </div>
@@ -72,13 +75,22 @@
             </div>
             @elseif ($producto->tipo_producto == 'Exclusivo Comunidad')
             <div class="barra-horizontal-comunidad">
-              <p class="leyenda">Exclusivo Comunidad (20% descto.)</p>
+              <p class="leyenda">Comunidad Argtravels (20% descto.)</p>
             </div>
             @endif
+            @php
+               $descto_comunidad =$producto->descto;                         
+               $resul =  $producto->precio_total * $descto_comunidad
+            @endphp   
             <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}">
               <div class="card-img-overlay titulo-prod">
                 <h6 class="card-title">{{ $producto->nombre }}</h6>
-                <p class="precio-total">Precio: {{ $producto->moneda }} {{ $producto->precio_total }}</p>
+                @if ($producto->tipo_producto == 'Exclusivo Comunidad')
+                <p class="precio-total">Precio: {{ $producto->moneda }} <s> {{ $producto->precio_total }} </s> ({{ $resul }})</p>
+               <p>  </p>
+                @else 
+               <p class="precio-total">Precio: {{ $producto->moneda }}  {{ $producto->precio_total }} </p>
+               @endif
               </div>
          </div>      
          <div>      
@@ -121,7 +133,7 @@
      @endforeach
     </div>   
   </div>
-  <div class="container-fluid container-servicios bg-gris">
+  <div class="container-fluid my-3 m-auto container-servicios bg-gris">
     <div class="row" id="vuelos">
       <hr>     
       <h1 class="text-center">Descubrí el Placer de Viajar</h1>      
@@ -152,7 +164,7 @@
       </div>
     </div>
   </div>
-  <div class="container my-3 m-auto productos-detalles">
+  <div class="container-fluid my-3 m-auto productos-detalles">
      <div class="titulo text-center">
        <h4 class="display-4"></h4>
      </div>
@@ -183,7 +195,7 @@
             </div>
              @elseif ($producto->tipo_producto == 'Exclusivo Comunidad')
             <div class="barra-horizontal-comunidad">
-              <p class="leyenda">Exclusivo Comunidad (20% descto.)</p>
+              <p class="leyenda">Comunidad Argtravels (20% descto.)</p>
             </div>
             @endif
             <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}">
@@ -231,51 +243,8 @@
       @endif
      @endforeach
     </div>   
-  </div>
-  <!-- Modal para Vuelos -->
- <div class="modal fade" id="modalVuelos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"><i class="fa fa-plane"></i> Cotizar Vuelos</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"></span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Formulario para Cotizar Vuelos -->
-        <form action="/cotizar_vuelos" method="post">
-          @csrf
-          <div class="form-floating mb-3">
-            <input type="date" name="fecha_ida" placeholder="Fecha de Ida" class="form-control" required>
-            <label for="fecha_ida" class="form-label">Fecha Partida:</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="date" name="fecha_regreso" placeholder="Fecha Regreso si Corresponde" class="form-control">
-            <label for="fecha_regreso" class="form-label">Fecha Regreso si Corresponde :</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" name="origen" placeholder="Ciudad de Origen" class="form-control" required>
-            <label for="origen" class="form-label">Ciudad de Origen:</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" name="destino" placeholder="Ciudad Destino" class="form-control" required>
-            <label for="destino" class="form-label">Ciudad Destino:</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="email" name="email" placeholder="Email de Contacto" class="form-control" required>
-            <label for="email" class="form-label">Email de Contacto:</label>
-          </div>
-          <div class="form-floating mb-3">
-            <textarea name="aclaracion" placeholder="Tenes algo para aclararnos?" class="form-control"></textarea>
-            <label for="email" class="form-label">Tenes algo que aclarar?</label>
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+  </div> 
+</div> 
 @if($mostrarModal)
 <div class="modal fade comercioAdherido" id="miModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

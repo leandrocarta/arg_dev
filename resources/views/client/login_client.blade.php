@@ -14,7 +14,7 @@
                        @error('email')
                         <div class="alert alert-danger mt-1">
                           <span class="">{{ $message }}</span>
-                        </div>
+                        </div>    
                        @enderror                        
                     </div>
                     <div class="form-floating mb-3">

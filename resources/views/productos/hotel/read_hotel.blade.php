@@ -13,6 +13,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nombre Hotel</th>
                 <th>Categoría</th>
                 <th>Apto Todo Publico?</th>                
@@ -23,6 +24,7 @@
         <tbody>
             @foreach ($hoteles as $hotel)
             <tr>
+                <td>{{ $hotel->id }}</td>
                 <td>{{ $hotel->nombre }}</td>
                 <td>{{ $hotel->categoria }}</td>
                 <td>{{ $hotel->publico }}</td>

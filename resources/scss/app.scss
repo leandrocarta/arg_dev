@@ -13,8 +13,12 @@
 p {
   margin: 0;
 }
+.modal-open {
+    overflow: scroll;
+}
 body {
   background-color: #FFFFFF;
+  
 }
 main {
   padding: 0!important;
@@ -55,8 +59,6 @@ font-weight: bold;
 }
 .comercioAdherido h5 i {
   font-size: 14px;
-  
-  
 }
 .container-servicio {
   text-align: center;
@@ -325,6 +327,15 @@ margin-left: 10px;
 }
 
 // Pagina Detalle Productos
+.titulo-detalles-prod i {
+  color: white;
+}
+.exclusivo-detalles {
+  background-color: rgba(218, 0, 252, 0.7) ;
+  padding: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+}
 .detalles_productos .datos-generales p i {
   color: rgb(130, 130, 131);
 }
@@ -575,11 +586,13 @@ font-family: 'Oswald', sans-serif;;
   color: white;
   text-transform: uppercase;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  font-weight: bold;
 }
 .titulo-prod p {
   color: white;
   text-transform: capitalize;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  font-weight: bold;
 }
 .fa-sun, .fa-bed, .fa-hotel, .fa-bell-concierge, .fa-mug-saucer, .fa-utensils,
 .fa-hot-tub-person, .fa-dumbbell, .fa-cloud-moon, .fa-bus, .fa-plane-departure {
@@ -680,6 +693,7 @@ font-family: 'Oswald', sans-serif;;
     align-items: center;
     color: #ffffff;
     font-weight: bold;
+    z-index: 3;
 }
 .barra-horizontal-comunidad {
     height: 35px; 
@@ -692,8 +706,15 @@ font-family: 'Oswald', sans-serif;;
     justify-content: center;
     align-items: center;
     color: #ffffff;
-    font-weight: bold;
+    font-weight: bold;    
 }
+
+
+.barra-horizontal-comunidad_detalles p {
+    display: block;
+    width: 100%; 
+}
+
 .bloque1-imagen-container img {
   height: 100%; 
   object-fit: cover; 
@@ -719,6 +740,10 @@ font-family: 'Oswald', sans-serif;;
   color: red;
   font-weight: bold;
 }
+
+.titulo-prod h6, .titulo-prod p {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
 /* FIN Estilos para productos */
 // Pagina A-Medida
 
@@ -727,9 +752,6 @@ font-family: 'Oswald', sans-serif;;
 
 /* Pagina conoce-argentina - Manda paginas similares */
   
-.introduction-productos-content {
-      
-    }
 
     .introduction-productos {
       background-color: #ffffff;
@@ -848,6 +870,12 @@ font-family: 'Oswald', sans-serif;;
 
 
 @media (max-width: 768px) {
+  .banner_movil img {
+    height: 180px;
+  }
+  .exclusivo-detalles {  
+  padding: 0;
+}
   h1 {
     font-size: 20px;
   }
@@ -864,8 +892,11 @@ font-family: 'Oswald', sans-serif;;
   .titulo-detalles-prod h1 {
   font-size: 20px;
 }
-.titulo-detalles-prod h4 {
+.titulo-detalles-prod h2 {
   font-size: 15px;
+}
+.titulo-detalles-prod h3 {
+  font-size: 13px;
 }
 .titulo-detalles-prod {
     position: absolute;

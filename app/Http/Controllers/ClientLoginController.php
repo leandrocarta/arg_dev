@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Support\Str;
+use App\Notifications\PasswordRecoveryNotification;
 
 class ClientLoginController extends Controller
 {
@@ -66,13 +67,14 @@ class ClientLoginController extends Controller
        
     if ($client) {
         $temporaryPassword = Str::random(8);
-        $client->updatePassword($temporaryPassword); // Utiliza el método en la instancia del modelo
+        $client->updatePassword($temporaryPassword); 
         $client->save();
-        dd($temporaryPassword);
-        return redirect()->back()->with('success', 'Hemos enviado instrucciones para recuperar tu contraseña a tu correo electrónico.');
+
+        $client->notify(new PasswordRecoveryNotification($temporaryPassword));
+      //  dd($temporaryPassword);
+        return redirect()->back()->with('success', 'Te enviamos por email una nueva contraseña, puedes utilizar la misma o cambiarla desde tu administrador.');
     } else {
-        dd('Entre');
-        return redirect()->back()->withErrors(['error' => 'El correo electrónico ya existe'])->withInput();
+        return back()->withErrors(['email' => 'Los datos ingresados no son válidos']);
     }
     }
 }

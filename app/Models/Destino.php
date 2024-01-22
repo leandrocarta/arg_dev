@@ -12,7 +12,7 @@ class Destino extends Model
         'nombre_destino',
         'id_pais',
         'detalle_gral',
-        'ubicación',
+        'ubicacion',
         'playas',
         'gastronomia',
         'atracciones',

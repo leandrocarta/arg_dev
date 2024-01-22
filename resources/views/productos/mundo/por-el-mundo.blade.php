@@ -26,7 +26,7 @@
      <div class="row">
        @php
         $productosCaribe = $productos->filter(function ($producto) {
-            return $producto->destino_gral === 'Caribe';
+            return $producto->destino_gral === 'Mundo';
         });
         $productosAleatorios = $productosCaribe->shuffle();
        @endphp
@@ -52,13 +52,22 @@
             </div>
             @elseif ($producto->tipo_producto == 'Exclusivo Comunidad')
             <div class="barra-horizontal-comunidad">
-              <p class="leyenda">Exclusivo Comunidad</p>
+              <p class="leyenda">Comunidad Argtravels (20% descto.)</p>
             </div>
             @endif
+            @php
+               $descto_comunidad =$producto->descto;                         
+               $resul =  $producto->precio_total * $descto_comunidad
+            @endphp   
             <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}">
               <div class="card-img-overlay titulo-prod">
                 <h6 class="card-title">{{ $producto->nombre }}</h6>
-                <p class="precio-total">Precio: {{ $producto->moneda }} {{ $producto->precio_total }}</p>
+                @if ($producto->tipo_producto == 'Exclusivo Comunidad')
+                <p class="precio-total">Precio: {{ $producto->moneda }} <s> {{ $producto->precio_total }} </s> ({{ $resul }})</p>
+               <p>  </p>
+                @else 
+               <p class="precio-total">Precio: {{ $producto->moneda }}  {{ $producto->precio_total }} </p>
+               @endif
               </div>
          </div>      
          <div>      
