@@ -23,7 +23,9 @@ use App\Http\Controllers\AereosController;
 use App\Http\Controllers\ViajeController;
 use App\Http\Controllers\DestinoController;
 use App\Http\Controllers\ViajeAMedidaController;
-use App\Http\Controllers\ProveedorMayoristaController;
+use App\Http\Controllers\ProveedorMayoristaController; 
+use App\Http\Controllers\ProductoCruceroController;
+use App\Http\Controllers\AltaNavieraController;
 
 /*Route::get('/', function () {
     //return view('layouts.construccion.construccion');
@@ -90,6 +92,7 @@ Route::get('/caribe', [PromocionController::class, 'cookie_caribe']);
 Route::get('/europa', [PromocionController::class, 'cookie_europa']);
 Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
 Route::get('/aereos', [PromocionController::class, 'cookie_vuelos']);
+Route::get('/cruceros', [PromocionController::class, 'cookie_cruceros']);
 // Proveedores Mayoristas
 Route::get('/read_mayoristas', [ProveedorMayoristaController::class, 'listarMayoristas'])->name('mayorista.listado');
 Route::get('/mayorista_new', [ProveedorMayoristaController::class, 'mostrarFormulario'])->name('mayorista.new');
@@ -125,6 +128,16 @@ Route::post('/delete_producto/{id}', [ProductoController::class, 'deleteProducto
 Route::get('/detalles_productos/{id}', [ProductoController::class, 'detalle_producto'])->name('producto.detalles');
 Route::get('/paquetes', [ProductoController::class, 'paquetes']);
 Route::get('/grupales', [ProductoController::class, 'grupales']);
+//Alta Cruceros - 
+Route::get('/create_crucero', [ProductoCruceroController::class, 'showFormCru'])->name('crucero.create');
+Route::get('/read_crucero', [ProductoCruceroController::class, 'mostrarProductos'])->name('crucero.show');
+// Alta Navieras
+Route::get('/create_naviera', [AltaNavieraController::class, 'showFormNav']);
+Route::get('/read_naviera', [AltaNavieraController::class, 'index']);
+Route::post('/create_naviera', [AltaNavieraController::class, 'create'])->name('naviera.create');
+Route::post('/delete_naviera/{id}', [AltaNavieraController::class, 'destroy'])->name('naviera.delete');
+Route::get('/naviera_update/{id}', [AltaNavieraController::class, 'edit'])->name('naviera.edit');
+Route::post('/naviera_update/{id}', [AltaNavieraController::class, 'update'])->name('naviera.update');
 //Aereos
 Route::get('/read_vuelos', [AereosController::class, 'mostrarVuelos'])->name('vuelos.show');
 Route::get('/create_vuelos', [AereosController::class, 'showFormVuelos'])->name('vuelos.create');

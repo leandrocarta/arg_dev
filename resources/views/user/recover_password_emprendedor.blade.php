@@ -22,8 +22,12 @@
                         </div>
                        @enderror                 
                     </div>                                                       
-                    <button type="submit" class="btn btn-primary">ENVIAR</button>                                         
+                    <button type="submit" class="btn btn-primary">ENVIAR</button>   
+                    <div class="mb-3">
+                      <a href="/login_emprendedor_digital">Ir al Loguin</a>  
+                    </div>                                      
                 </form>
+
             </div>
         </div>
   </div>  

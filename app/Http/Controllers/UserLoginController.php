@@ -60,7 +60,8 @@ class UserLoginController extends Controller
         $user->notify(new PasswordRecoveryNotificationUser($temporaryPassword));
       //  dd($temporaryPassword);
       //  return redirect()->back()->with('success', 'Te enviamos por email una nueva contraseña, puedes utilizar la misma o cambiarla desde tu administrador.');
-        return view('user.login_emprendedor_digital')->with('success', 'Te enviamos por email una nueva contraseña, puedes utilizar la misma o cambiarla desde tu administrador.');
+       return redirect()->back()->with('success', 'Te enviamos por email una nueva contraseña, puedes utilizar la misma o cambiarla desde tu administrador.');
+    //  return view('user.login_emprendedor_digital')->with('success', 'Te enviamos por email una nueva contraseña, puedes utilizar la misma o cambiarla desde tu administrador.');
     } else {
         return back()->withErrors(['email' => 'Los datos ingresados no son válidos']);
     }

@@ -116,6 +116,12 @@ class UserRegisterController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $request->validate([
+       // 'email' => 'nullable|unique:users,email,' . $id, 
+        'password' => 'nullable|min:8',
+        'password_confirmation_edit' => 'required_with:password|same:password',
+        
+        ]);
         $user = User::findOrFail($id);
         if (Auth::user()->img_profile === '' || Auth::user()->img_profile === null) {
             try {                
@@ -138,10 +144,18 @@ class UserRegisterController extends Controller
                             $image->fit(500, 500);
                         }
                         $image->save(public_path('assets/img_profile/' . $originalFileName));
+
+                        if ($request->filled('email')) {
+                          $user->email = $request->input('email');
+                         }
+                         if ($request->filled('password')) {
+                          $newPassword = $request->input('password');
+                          $user->updatePassword($newPassword);
+                         }
                         
                         // Guardar el nombre original en la base de datos
                         $user->img_profile = $originalFileName;
-                        $user->save();
+                        //$user->save();
                         $user->comision = 2.00;
                         $user->regalia = 0.00;
                         $user->nombre = $request->input('nombre');
@@ -159,7 +173,7 @@ class UserRegisterController extends Controller
                         $user->save();
                     }
                 } else {
-                    Session::flash('error_message', 'Ooops!!! Hubo un error, revisa el formulario pero debes subir una imagen de perfil.');
+                    Session::flash('error_message', 'Ooops!!! Hubo un error, revisa el formulario, pero debes subir una imagen de perfil en la primera actualización.');
                     return back()->withErrors(['profile_image' => 'Debes seleccionar una imagen de perfil.']);
                 }
             } catch (\Exception $e) {
@@ -196,7 +210,7 @@ class UserRegisterController extends Controller
                         }
                         $image->save(public_path('assets/img_profile/' . $originalFileName), 99);
                         $user->img_profile = $originalFileName;
-                        $user->save();
+                       // $user->save();
                         $user->comision = $request->input('comision');
                         $user->regalia = $request->input('regalia');
                         $regalia = $request->input('regalia');
@@ -204,6 +218,13 @@ class UserRegisterController extends Controller
                         $regalia = 0.00;
                         $user->regalia = $regalia;
                         }
+                        if ($request->filled('email')) {
+                          $user->email = $request->input('email');
+                         }
+                         if ($request->filled('password')) {
+                          $newPassword = $request->input('password');
+                          $user->updatePassword($newPassword);
+                         }
                         $user->nombre = $request->input('nombre');
                         $user->apellido = $request->input('apellido');
                         $user->dni_select = $request->input('dni_select');
@@ -227,6 +248,13 @@ class UserRegisterController extends Controller
                     $regalia = 0.00;
                     $user->regalia = $regalia;
                     }
+                    if ($request->filled('email')) {
+                          $user->email = $request->input('email');
+                         }
+                         if ($request->filled('password')) {
+                          $newPassword = $request->input('password');
+                          $user->updatePassword($newPassword);
+                         }
                     $user->nombre = $request->input('nombre');
                     $user->apellido = $request->input('apellido');
                     $user->dni_select = $request->input('dni_select');

@@ -33,17 +33,7 @@
   </button>
  </div> 
 </div>
- <!-- Barra movil 
- <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-       <div class="barra-movil">
-         <div class="titulo-barra-movil"><h2>TODOS LOS DESTINOS AL MEJOR PRECIO, ENCONTRÁ EL TUYO y VIAJA TRANQUILO</span></h2></div>  
-       </div>
-    </div>
-  </div>
- </div>
- -->
+ 
   <div class="container-fluid my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
        <h4 class="display-4"></h4>

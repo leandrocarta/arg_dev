@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="es">
-
 <head>
   <title>ARGTRAVELS</title>
   <!-- Required meta tags -->

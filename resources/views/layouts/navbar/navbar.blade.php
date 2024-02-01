@@ -71,7 +71,15 @@
               <p class="cw">MundoTravels</p>
             </div>
           </a>
-        </li>           
+        </li>       
+        <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="/cruceros">
+            <div class="text-center text-left">
+              <i class="fa-solid fa-ship"></i>
+              <p class="cw">Cruceros</p>
+            </div>
+          </a>
+        </li>         
       </ul>        
       <ul class="navbar-nav me-5 mb-2 mb-lg-0">      
         @guest()
@@ -96,12 +104,14 @@
                      <li><a class="dropdown-item" href="{{ route('user.edit') }}">Mi Perfil</a></li>
                      <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
                      <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
-                     <li><a class="dropdown-item" href="/read_producto">Productos</a></li>
+                     <li><a class="dropdown-item" href="/read_producto">Alta Paquetes</a></li>
+                     <li><a class="dropdown-item" href="/read_crucero">Alta Cruceros</a></li>
                      <li><a class="dropdown-item" href="/read_vuelos">Vuelos</a></li>
                      <li><a class="dropdown-item" href="/read_destinos">Destinos</a></li>
                    <!--  <li><a class="dropdown-item" href="upload">Uploads Provincias con exel</a></li> -->
                      <li><a class="dropdown-item" href="/read_hotel">Hoteles</a></li> 
                      <li><a class="dropdown-item" href="/read_mayoristas">Mayoristas</a></li>
+                     <li><a class="dropdown-item" href="/read_naviera">Alta Navieras</a></li>
                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>

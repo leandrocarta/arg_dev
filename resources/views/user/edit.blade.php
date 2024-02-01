@@ -15,9 +15,24 @@
                 {{ Session::forget('error_message') }} <!-- Elimina el mensaje de la sesión -->
                  </div>
                 @endif
-                @if(session('success'))
+                 @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
+                 @error('password_confirmation_edit')
+                               <div class="alert alert-danger mt-1">
+                                    <span>Sus contraseñas no coinciden</span>
+                               </div>
+                           @enderror   
+                 @error('password')
+                               <div class="alert alert-danger mt-1">
+                                 <span class="">{{ $message }}</span>
+                               </div>
+                           @enderror    
+                @error('email')
+                        <div class="alert alert-danger mt-1">
+                          <span class="">{{ $message }}</span>
+                      </div>
+                       @enderror
                 @method('PUT')
                 <p style="color: grey;"><b>ES NECESARIO COMPLETAR TUS DATOS</b></p>
                     <div class="mb-3">                      
@@ -30,15 +45,15 @@
                    </div>
                    <p class="mb-2">
                      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                     Editar datos sensibles
+                     Editar Password
                      </a>  
                    </p>                
                      <div class="collapse mb-3" id="collapseExample">                      
                        <div class="card card-body collapse-form">                          
-                          <div class="mb-3 form-floating">                            
+                       <!--   <div class="mb-3 form-floating">                            
                             <input type="email" name="email" class="form-control" placeholder="Cambiar Correo electrónico">    
                             <label for="email" class="form-label">Cambiar Correo electrónico</label>
-                          </div>  
+                          </div>  -->
                           <div class="mb-3 form-floating">                            
                             <input type="password" name="password" class="form-control" placeholder="">
                             <label for="password-edit" class="form-label">Cambiar Contraseña</label>

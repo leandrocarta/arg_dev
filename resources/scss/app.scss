@@ -24,6 +24,7 @@ main {
   padding: 0!important;
 }
 // Home //
+
 .barra-movil {
     display: flex;
     overflow: hidden;
@@ -34,8 +35,7 @@ font-weight: bold;
 .titulo-barra-movil h2 span{
  color: #1D4D8B; 
 }
-.titulo-barra-movil {
-  
+.titulo-barra-movil {  
     width: 100vw; 
     flex-shrink: 0; 
     color: gray;
@@ -870,6 +870,9 @@ font-family: 'Oswald', sans-serif;;
 
 
 @media (max-width: 768px) {
+  .barra-movil img {
+  width: 99%;
+}
   .banner_movil img {
     height: 180px;
   }
