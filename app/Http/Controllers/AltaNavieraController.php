@@ -3,16 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AltaNaviera;
+use App\Models\Naviera;
 
 class AltaNavieraController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
+{   
     public function index()
     {
-          $navieras = AltaNaviera::all();        
+          $navieras = Naviera::all();        
         return view('productos.navieras.read_naviera', compact('navieras'));
     }
 
@@ -21,65 +18,39 @@ class AltaNavieraController extends Controller
         return view('productos.navieras.create_naviera');
     }
     
-
     public function create(Request $request)
     {
         $this->validate($request, [
             'naviera' => 'string',
         ]);
-        $naviera = new AltaNaviera;
-        $naviera->naviera = $request->naviera;
+        $naviera = new Naviera;
+        $naviera->naviera = strtoupper($request->naviera);
 
         $naviera->save();
         return redirect('/read_naviera')->with('success', 'NAVIERA AGREGADA CORRECTAMENTE');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit($id)
     {
-        $naviera = AltaNaviera::find($id);
+        $naviera = Naviera::find($id);
 
         return view('productos.navieras.naviera_update', compact('naviera'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
-         $naviera = AltaNaviera::find($id);
+        $naviera = Naviera::find($id);
 
-        $naviera->naviera = $request->naviera;
+        $naviera->naviera = strtoupper($request->naviera);
 
         $naviera->save();
 
         return redirect('/read_naviera')->with('success', 'SE EDITO CORRECTAMENTE !!!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
-         $naviera = AltaNaviera::find($id);
+         $naviera = Naviera::find($id);
 
         $naviera->delete();
 

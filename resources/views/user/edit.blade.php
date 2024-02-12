@@ -49,11 +49,7 @@
                      </a>  
                    </p>                
                      <div class="collapse mb-3" id="collapseExample">                      
-                       <div class="card card-body collapse-form">                          
-                       <!--   <div class="mb-3 form-floating">                            
-                            <input type="email" name="email" class="form-control" placeholder="Cambiar Correo electrónico">    
-                            <label for="email" class="form-label">Cambiar Correo electrónico</label>
-                          </div>  -->
+                       <div class="card card-body collapse-form">   
                           <div class="mb-3 form-floating">                            
                             <input type="password" name="password" class="form-control" placeholder="">
                             <label for="password-edit" class="form-label">Cambiar Contraseña</label>

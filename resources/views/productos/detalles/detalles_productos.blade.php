@@ -286,8 +286,7 @@
         </div>
       </div>
     </div>         
-  </div> 
-  </div>
+</div>
    <!-- Modal Consultar Lugares -->
  <div class="modal fade" id="modalVuelos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

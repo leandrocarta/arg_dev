@@ -112,6 +112,7 @@
                      <li><a class="dropdown-item" href="/read_hotel">Hoteles</a></li> 
                      <li><a class="dropdown-item" href="/read_mayoristas">Mayoristas</a></li>
                      <li><a class="dropdown-item" href="/read_naviera">Alta Navieras</a></li>
+                     <li><a class="dropdown-item" href="/read_barcos">Alta Barcos</a></li>
                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>

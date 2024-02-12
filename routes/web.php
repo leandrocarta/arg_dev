@@ -26,6 +26,7 @@ use App\Http\Controllers\ViajeAMedidaController;
 use App\Http\Controllers\ProveedorMayoristaController; 
 use App\Http\Controllers\ProductoCruceroController;
 use App\Http\Controllers\AltaNavieraController;
+use App\Http\Controllers\NombreBarcoController;
 
 /*Route::get('/', function () {
     //return view('layouts.construccion.construccion');
@@ -130,7 +131,12 @@ Route::get('/paquetes', [ProductoController::class, 'paquetes']);
 Route::get('/grupales', [ProductoController::class, 'grupales']);
 //Alta Cruceros - 
 Route::get('/create_crucero', [ProductoCruceroController::class, 'showFormCru'])->name('crucero.create');
+Route::post('/create_crucero', [ProductoCruceroController::class, 'create'])->name('crucero.creates');
 Route::get('/read_crucero', [ProductoCruceroController::class, 'mostrarProductos'])->name('crucero.show');
+Route::get('/crucero_update/{id}', [ProductoCruceroController::class, 'edit'])->name('crucero.edit');
+Route::post('/crucero_update/{id}', [ProductoCruceroController::class, 'update'])->name('crucero.update');
+Route::post('/delete_crucero/{id}', [ProductoCruceroController::class, 'destroy'])->name('crucero.delete');
+Route::get('/detalles_cruceros/{id}', [ProductoCruceroController::class, 'detalle_producto'])->name('producto.detallesCrucero');
 // Alta Navieras
 Route::get('/create_naviera', [AltaNavieraController::class, 'showFormNav']);
 Route::get('/read_naviera', [AltaNavieraController::class, 'index']);
@@ -138,6 +144,13 @@ Route::post('/create_naviera', [AltaNavieraController::class, 'create'])->name('
 Route::post('/delete_naviera/{id}', [AltaNavieraController::class, 'destroy'])->name('naviera.delete');
 Route::get('/naviera_update/{id}', [AltaNavieraController::class, 'edit'])->name('naviera.edit');
 Route::post('/naviera_update/{id}', [AltaNavieraController::class, 'update'])->name('naviera.update');
+// Nombre de Barcos
+Route::get('/create_barco', [NombreBarcoController ::class, 'showFormNav']);
+Route::get('/read_barcos', [NombreBarcoController ::class, 'index']);
+Route::post('/create_barco', [NombreBarcoController ::class, 'create'])->name('barco.create');
+Route::post('/delete_barco/{id}', [NombreBarcoController ::class, 'destroy'])->name('barco.delete');
+Route::get('/barco_update/{id}', [NombreBarcoController ::class, 'edit'])->name('barco.edit');
+Route::post('/barco_update/{id}', [NombreBarcoController ::class, 'update'])->name('barco.update');
 //Aereos
 Route::get('/read_vuelos', [AereosController::class, 'mostrarVuelos'])->name('vuelos.show');
 Route::get('/create_vuelos', [AereosController::class, 'showFormVuelos'])->name('vuelos.create');

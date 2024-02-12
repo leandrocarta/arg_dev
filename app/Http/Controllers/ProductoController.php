@@ -59,6 +59,13 @@ class ProductoController extends Controller
         $oldImageName = $producto->imagen;
         $uploadedFile = $request->file('imagen');
         if ($uploadedFile) {
+            $oldImageName = $producto->imagen;
+        if ($oldImageName) {
+            $oldImagePath = public_path('assets/img_paquetes/' . $oldImageName);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        } 
             $extension = strtolower($uploadedFile->getClientOriginalExtension());
             if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {
                 Session::flash('error_message', 'Ooops!!! Hubo un error, revisa el formulario.');
@@ -77,9 +84,8 @@ class ProductoController extends Controller
                 $producto->imagen = $originalFileName;
             }
         }
-          // dd($producto::All());
         if ($producto) {
-            $producto->nombre = $request->nombre;
+            $producto->nombre = strtoupper($request->nombre);
             $producto->codigo = $request->codigo;
             $producto->habitacion = $request->habitacion;
             $producto->tipo_producto = $request->tipo_producto;
@@ -100,7 +106,6 @@ class ProductoController extends Controller
 
     public function createProd(Request $request)
     {
-      //  dd($request->all());
         $messages = [
             'codigo.unique' => 'EL CÓDIGO DEL PRODUCTO INGRESADO YA EXISTE.',
         ];
@@ -145,7 +150,7 @@ class ProductoController extends Controller
         } else {
             $image->save(public_path('assets/img_paquetes/' . $originalFileName));
             $producto = new Producto;
-            $producto->nombre = $request->nombre;
+            $producto->nombre = strtoupper($request->nombre);
             $producto->codigo = $request->codigo;
             $producto->imagen = $originalFileName;
             $producto->habitacion = $request->habitacion;

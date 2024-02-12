@@ -10,14 +10,14 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">      
-      <img src="assets/img_banner/banner-comunidad-min.png" class="d-block w-100" alt="...">
+      <img src="assets/img_banner/Banner-comunidad-min.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h1></h1>
           <p></p>
         </div>     
     </div>    
     <div class="carousel-item" data-bs-interval="3000">
-      <img src="assets/img_banner/banner-1-min.png" class="d-block w-100" alt="">      
+      <img src="assets/img_banner/Banner-1-min.png" class="d-block w-100" alt="">      
     </div>
     <div class="carousel-item" data-bs-interval="3000">
       <img src="assets/img_banner/Africa-min.png" class="d-block w-100" alt="">      

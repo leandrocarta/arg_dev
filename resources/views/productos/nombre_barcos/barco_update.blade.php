@@ -10,15 +10,27 @@
               {{ session('success') }}
               </div>
             @endif
-              <p>EDITAR NAVIERA</p>  
-                <form class="form-horizontal" method="POST" action="{{ route('naviera.update', ['id' => $naviera->id]) }}">
+              <p>EDITAR BARCO</p>  
+                <form class="form-horizontal" method="POST" action="{{ route('barco.update', ['id' => $barco->id]) }}">
                         {{ csrf_field() }}                        
                         <div class="form-group">
-                            <label for="naviera" class="col-md-4 control-label">Nombre</label>
+                            <label for="nombre" class="col-md-4 control-label">Nombre</label>
                             <div class="">
-                                <input type="text" class="form-control" name="naviera" value="{{ $naviera->naviera }}" required>
+                                <input type="text" class="form-control" name="nombre" value="{{ $barco->nombre }}" required>
                             </div>
-                        </div>     
+                        </div> 
+                         <div class="mb-3 form-floating">
+                           <select name="naviera" class="form-select">
+                             @if ($barco->id_naviera)
+                             @foreach ($navieras as $naviera)
+                               <option value="{{ $naviera->id }}" data-nombre-img="{{ $barco->nombre }}" {{ $naviera->id == $barco->id_naviera ? 'selected' : '' }}>
+                                 {{ $naviera->naviera }}
+                               </option>
+                             @endforeach
+                             @endif                
+                            </select>
+                            <label for="pais" class="form-label">Naviera</label>
+                        </div>    
                         <div class="mt-2">
                            <button type="submit" class="btn btn-primary">
                                Guardar Cambios

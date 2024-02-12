@@ -14,119 +14,111 @@
                 <form class="form-horizontal" method="POST" action="{{ route('crucero.create') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="nombre" class="col-md-4 control-label">Destino</label>
+                            <label for="id_naviera" class="col-md-4 control-label">NAVIERA</label>
+                            <div class="">                            
+                                <select name="id_naviera" class="form-select">                                    
+                                    @foreach ($navieras as $naviera)
+                                        <option value="{{ $naviera->id }}" {{ (old('id_naviera') == $naviera->id) ? 'selected' : '' }}>
+                                            {{ $naviera->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>                           
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_barco" class="col-md-4 control-label">NOMBRE BARCO</label>
+                            <div class="">                            
+                                <select name="id_barco" class="form-select">                                    
+                                    @foreach ($barcos as $barco)
+                                        <option value="{{ $barco->id }}" {{ (old('id_barco') == $barco->id) ? 'selected' : '' }}>
+                                            {{ $barco->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>                           
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="destino" class="col-md-4 control-label">Destino</label>
                             <div class="">
-                                <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required>
+                                <input type="text" class="form-control" name="destino" value="{{ old('destino') }}" required>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="entre_fechas" class="col-md-4 control-label">Meses de Navegación</label>
+                            <div class="">
+                                <input type="text" class="form-control" name="entre_fechas" value="{{ old('entre_fechas') }}">
                             </div>
                         </div>
                         <div class="form-row">                           
                            <div class="form-group ps-1">
-                               <label for="fecha_vencimiento" class="col-form-label">Fecha Viaje</label>
-                               <input type="date" name="fecha_vencimiento" class="form-control" required>
+                               <label for="fecha_partida" class="col-form-label">Fecha Viaje</label>
+                               <input type="date" name="fecha_partida" class="form-control">
                            </div>
-                        </div>      
+                        </div>  
+                        <div class="form-group">
+                            <label for="img_banner" class="col-md-4 control-label">Imagen Banner</label>
+                            <div class="">
+                                <input type="file" class="form-control" name="img_banner" value="{{ old('img_banner') }}" required>
+                            </div>
+                        </div>       
                         <div class="form-group">
                             <label for="imagen" class="col-md-4 control-label">Imagen del Producto</label>
                             <div class="">
-                                <input id="imagen" type="file" class="form-control" name="imagen" value="{{ old('imagen') }}" required>
-                            </div>
-                        </div>
-                         <div class="form-group">
-                            <label for="naviera" class="col-md-4 control-label">Puerto de Salida</label>
-                            <div class="">
-                                <select name="puerto_salida" class="form-select" aria-label="Default select example">  
-                                    <option value="Costa Cruceros" @if(old('naviera') == 'Costa Cruceros') selected @endif>Costa Cruceros</option>
-                                    <option value="MSC Cruceros" @if(old('naviera') == 'MSC Cruceros') selected @endif>MSC Cruceros</option>
-                                    <option value="Royal Caribbean" @if(old('naviera') == 'Royal Caribbean') selected @endif>Royal Caribbean</option>
-                                    <option value="Celebrity Cruises" @if(old('naviera') == 'Celebrity Cruises') selected @endif>Celebrity Cruises</option>
-                                    <option value="Azamara Cruises" @if(old('naviera') == 'Azamara Cruises') selected @endif>Azamara Cruises</option>
-                                </select>  
+                                <input type="file" class="form-control" name="imagen" value="{{ old('imagen') }}" required>
                             </div>
                         </div>    
+                        <div class="form-group">
+                            <label for="estadia" class="col-md-4 control-label">Estadía</label>
+                            <div class="">
+                                <input type="number" class="form-control" name="estadia" value="{{ old('estadia') }}" required>
+                            </div>
+                        </div>                      
                          <div class="form-group">
                             <label for="puerto_salida" class="col-md-4 control-label">Puerto de Salida</label>
                             <div class="">
                                 <select name="puerto_salida" class="form-select" aria-label="Default select example">  
-                                    <option value="Bs. As." @if(old('puerto_salida') == 'Bs. As.') selected @endif>Bs. As.</option>
-                                    <option value="Brasil" @if(old('puerto_salida') == 'Brasil') selected @endif>Brasil</option>
-                                    <option value="Otor" @if(old('puerto_salida') == 'Otro') selected @endif>Otro</option>
+                                    <option value="BS.AS." @if(old('puerto_salida') == 'BS.AS.') selected @endif>BS.AS.</option>
+                                    <option value="BRASIL" @if(old('puerto_salida') == 'BRASIL') selected @endif>BRASIL</option>
+                                    <option value="MIAMI" @if(old('puerto_salida') == 'MIAMI') selected @endif>MIAMI</option>
+                                    <option value="OTRO" @if(old('puerto_salida') == 'OTRO') selected @endif>OTRO</option>
                                 </select>  
                             </div>
                         </div>    
                         <div class="form-group">
-                            <label for="habitacion" class="col-md-4 control-label">Tipo de Cabina</label>
+                            <label for="tipo_cabina" class="col-md-4 control-label">Tipo de Cabina</label>
                             <div class="">
-                                <select name="cabina" class="form-select" aria-label="Default select example">  
-                                    <option value="Cabina Interior" @if(old('cabina') == 'Cabina Interior') selected @endif>Cabina Interior</option>
-                                    <option value="Cabina Exterior" @if(old('cabina') == 'Cabina Exterior') selected @endif>Cabina Exterior</option>
-                                    <option value="Cabina Balcon" @if(old('cabina') == 'Cabina Balcon') selected @endif>Cabina Balcon</option>
-                                    <option value="Cabina Suite" @if(old('cabina') == 'Cabina Suite') selected @endif>Cabina Suite</option>
+                                <select name="tipo_cabina" class="form-select" aria-label="Default select example">  
+                                    <option value="CABINA INTERIOR" @if(old('tipo_cabina') == 'CABINA INTERIOR') selected @endif>CABINA INTERIOR</option>
+                                    <option value="CABINA EXTERIOR" @if(old('tipo_cabina') == 'CABINA EXTERIOR') selected @endif>CABINA EXTERIOR</option>
+                                    <option value="CABINA BALCÓN" @if(old('tipo_cabina') == 'CABINA BALCÓN') selected @endif>CABINA BALCÓN</option>
+                                    <option value="CABINA SUITE" @if(old('tipo_cabina') == 'CABINA SUITE') selected @endif>CABINA SUITE</option>
                                 </select>                                 
                             </div>
-                        </div>                        
-                          <div class="form-group">
-                           <p class="mas my-2">
-                             <a class="btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
-                             <i class="fa-solid fa-circle-plus"><span>Servicios incluidos</span></i>
-                             </a>                      
-                           </p>
-                           <div class="collapse mb-3 edit" id="collapseExample1">                      
-                               <div class="card card-body collapse-form">                                  
-                                  <div class="form-group">
-                                   <label for="traslados_orig" class="col-md-4 control-label">Traslados en Origen</label>
-                                      <div class="">
-                                          <select name="traslados_orig" class="form-select" aria-label="Default select example"> 
-                                            <option value="No Incluye" @if(old('traslados_orig') == 'No Incluye') selected @endif>No Incluye</option>
-                                            <option value="Rosario" @if(old('traslados_orig') == 'Rosario') selected @endif>Desde Rosario</option> 
-                                            <option value="Aeropuerto" @if(old('traslados_orig') == 'Aeropuerto') selected @endif>Desde Aeropuerto</option>                                                                                      
-                                          </select>  
-                                      </div>
-                                  </div>   
-                                  <div class="form-group">
-                                   <label for="traslados_dest" class="col-md-4 control-label">Traslados en Destino</label>
-                                      <div class="">
-                                          <select name="traslados_dest" class="form-select" aria-label="Default select example">                                             
-                                            <option value="No Incluye" @if(old('traslados_dest') == 'No Incluye') selected @endif>No Incluye</option>
-                                            <option value="Incluye Traslados" @if(old('traslados_dest') == 'Incluye Traslados') selected @endif>Incluye Traslados</option>
-                                          </select>  
-                                      </div>
-                                  </div>                                        
-                                  <div class="form-group">
-                                   <label for="comidas" class="col-md-4 control-label">Comidas</label>
-                                      <div class="">
-                                          <select name="comidas" class="form-select" aria-label="Default select example"> 
-                                            <option value="All Inclusive" @if(old('comidas') == 'All Inclusive') selected @endif>All Inclusive</option>
-                                            <option value="Desayuno" @if(old('comidas') == 'Desayuno') @endif>Desayuno</option>
-                                            <option value="Media Pensión" @if(old('comidas') == 'Media Pensión') @endif>Media Pensión</option>
-                                            <option value="Otros" @if(old('comidas') == 'Otros') @endif>Otros</option>
-                                          </select>  
-                                      </div>
-                                  </div>   
-                                  <div class="form-group">
-                                  <label for="seguro" class="col-md-4 control-label">Asistencia al viajero</label>
-                                      <div class="">
-                                          <select name="seguro" class="form-select" aria-label="Default select example"> 
-                                            <option value="Asistencia al viajero" @if(old('seguro') == 'Asistencia al viajero') selected @endif>Asistencia al viajero</option>
-                                            <option value="SIN Asistencia al viajero" @if(old('seguro') == 'SIN Asistencia al viajero') selected @endif>SIN Asistencia al viajero</option>
-                                          </select>  
-                                      </div>
-                                  </div>    
-                                  <div class="form-group">
-                                   <label for="propinas" class="col-md-4 control-label">Propinas</label>
-                                      <div class="">
-                                          <select name="propinas" class="form-select" aria-label="Default select example">                                             
-                                            <option value="No Incluye" @if(old('propinas') == 'No Incluye') selected @endif>No Incluye Propinas</option>
-                                            <option value="Incluye" @if(old('propinas') == 'Incluye') selected @endif>Incluye Propinas</option>
-                                          </select>  
-                                      </div>
-                                  </div>                   
-                               </div>
-                          </div>  
+                        </div>   
+                        <div class="form-group">
+                            <label for="detalle" class="col-md-4 control-label">Detalle</label>
+                            <input type="text" class="form-control" name="detalle" value="{{ old('detalle') }}">                            
+                        </div> 
+                        <div class="form-group">
+                            <label for="moneda" class="col-md-4 control-label">Tipo de Moneda</label>
+                            <div class="">
+                                <select name="moneda" class="form-select" aria-label="Default select example">  
+                                    <option value="USD" @if(old('moneda') == 'USD') selected @endif>USD</option>
+                                    <option value="EUR" @if(old('moneda') == 'EUR') selected @endif>EUR</option>
+                                    <option value="$" @if(old('moneda') == '$') selected @endif>$</option>                                    
+                                </select>                                 
+                            </div>
                         </div>  
+                        <div class="form-group">
+                            <label for="precio" class="col-md-4 control-label">Precio Total</label>
+                            <div class="">
+                                <input type="number" class="form-control" name="precio" value="{{ old('precio') }}" step="0.01" required>
+                            </div>
+                        </div>   
                         <div class="form-group">
                            <p class="mas my-2">
                              <a class="btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                             <i class="fa-solid fa-circle-plus"><span>Itinerarios / Excursiones</span></i>
+                             <i class="fa-solid fa-circle-plus"><span>Itinerarios x dia</span></i>
                              </a>                      
                            </p>
                            <div class="collapse mb-3 edit" id="collapseExample">                      
@@ -194,56 +186,7 @@
                                </div>
                           </div>  
                         </div>  
-                        <div class="form-group">
-                            <label for="destinoGral" class="col-md-4 control-label">Destino General</label>
-                            <div class="">
-                                <select name="destinoGral" class="form-select" aria-label="Default select example">  
-                                    <option value="Mundo" @if(old('destinoGral') == 'Mundo') selected @endif>Mundo</option>
-                                    <option value="Tur-Arg" @if(old('destinoGral') == 'Tur-Arg') selected @endif>Tur-Arg</option>
-                                    <option value="Brasil" @if(old('destinoGral') == 'Brasil') selected @endif>Brasil</option>
-                                    <option value="Caribe" @if(old('destinoGral') == 'Caribe') selected @endif>Caribe</option>
-                                    <option value="Europa" @if(old('destinoGral') == 'Europa') selected @endif>Europa</option>                                    
-                                </select>                                 
-                            </div>
-                        </div>                              
-                        <div class="form-group">
-                            <label for="puerto_salida" class="col-md-4 control-label">Puerto de Salida</label>
-                            <div class="">
-                                <select name="puerto_salida" class="form-select" aria-label="Default select example">  
-                                    <option value="Bs. As." @if(old('puerto_salida') == 'Bs. As.') selected @endif>Bs. As.</option>
-                                    <option value="Brasil" @if(old('puerto_salida') == 'Brasil') selected @endif>Brasil</option>
-                                    <option value="Otor" @if(old('puerto_salida') == 'Otro') selected @endif>Otro</option>
-                                </select>  
-                            </div>
-                        </div>                       
-                        <div class="form-group">
-                            <label for="precio_total" class="col-md-4 control-label">Precio Total</label>
-                            <div class="">
-                                <input type="number" class="form-control" name="precio_total" value="{{ old('precio_total') }}" step="0.01" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="descto" class="col-md-4 control-label">Descto. Comunidad</label>
-                            <div class="">
-                                <input type="number" class="form-control" name="descto" value="1" step="0.01">
-                            </div>
-                        </div>                        
-                        <div class="form-group">
-                            <label for="moneda" class="col-md-4 control-label">Tipo de Moneda</label>
-                            <div class="">
-                                <select name="moneda" class="form-select" aria-label="Default select example">  
-                                    <option value="USD" @if(old('moneda') == 'USD') selected @endif>USD</option>
-                                    <option value="EUR" @if(old('moneda') == 'EUR') selected @endif>EUR</option>
-                                    <option value="$" @if(old('moneda') == '$') selected @endif>$</option>                                    
-                                </select>                                 
-                            </div>
-                        </div>     
-                        <div class="form-group">
-                            <label for="estadiaTotal" class="col-md-4 control-label">Estadía Total</label>
-                            <div class="">
-                                <input type="number" class="form-control" name="estadiaTotal" value="{{ old('estadiaTotal') }}" required>
-                            </div>
-                        </div>                                            
+                                                                   
                         <div class="mt-2">
                            <button type="submit" class="btn btn-primary">
                                Guardar Producto

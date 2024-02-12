@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class NombreBarco extends Model
 {
-   protected $fillable = [
-        'nombre', 
-        'categoria',
-        'publico',
+    use HasFactory;
+    protected $table = 'nombre_barcos';
+    protected $fillable = [
+        'id_naviera',
+        'nombre',
         'img_banner',
         'img1',
         'img2',
@@ -22,10 +23,8 @@ class Hotel extends Model
         'img8',
         'img9',
         'img10',
-        'gym',
-        'spa',
     ];
-     public function getImagenes()
+    public function getImagenes()
     {
         $imagenes = [];
         for ($i = 1; $i <= 10; $i++) { 
@@ -36,8 +35,13 @@ class Hotel extends Model
         }
         return $imagenes;
     }
-    public function productos()
+
+     public function naviera()
     {
-        return $this->hasMany(Producto::class, 'id_hotel');
+        return $this->belongsTo(Naviera::class, 'id_naviera');
+    }
+     public function productos()
+    {
+        return $this->hasMany(ProductoCrucero::class, 'id_barco');
     }
 }

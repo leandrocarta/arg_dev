@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
 use App\Models\User;
 use App\Models\Producto;
+use App\Models\ProductoCrucero;
+use App\Models\Naviera;
 
 class PromocionController extends Controller
 {
     public function cookie_conoceArgentina(Request $request)
     {
-        //$productos = Producto::all();
-       // $productos = Producto::where('pais_destino', 'Argentina')->get();
-        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
+         $productos = Producto::all();
+        //$productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
@@ -55,7 +56,8 @@ class PromocionController extends Controller
 
     public function cookie_brasil(Request $request)
     {       
-        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
+        $productos = Producto::all();
+       // $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
@@ -94,9 +96,8 @@ class PromocionController extends Controller
     }
      public function cookie_caribe(Request $request)
     {
-        //$productos = Producto::all();
-       // $productos = Producto::where('pais_destino', 'Argentina')->get();
-        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
+         $productos = Producto::all();
+       // $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();
@@ -257,10 +258,9 @@ class PromocionController extends Controller
         }
     }   
     public function cookie_cruceros(Request $request)
-    {
-        //$productos = Producto::all();
-       // $productos = Producto::where('pais_destino', 'Argentina')->get();
-        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
+    {       
+       $productos = ProductoCrucero::with('naviera')->get();
+            
         if ($request->hasCookie('comercioAdherido')) {
             $userId = $request->cookie('comercioAdherido');
             $cliente = auth()->guard('client')->user();

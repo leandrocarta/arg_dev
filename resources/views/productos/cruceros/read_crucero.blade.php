@@ -32,17 +32,17 @@
                 <td>{{ $producto->fecha_partida }}</td>
                <td>{{ $producto->estadia }}</td>                
                 <td>{{ $producto->puerto_salida }}</td>
-                <td>{{ $producto->naviera }}</td>
-                 <td>{{ $producto->nombre_barco }}</td>
+                <td>{{ $producto->id_naviera }}</td>
+                 <td>{{ $producto->id_barco }}</td>
                 <td>{{ $producto->tipo_cabina }}</td>
                 <td>
-                   <!-- <a href="{{ route('producto.update', $producto->id) }}" class="btn btn-primary">Editar</a>  -->                  
+                    <a href="{{ route('crucero.edit', $producto->id) }}" class="btn btn-primary">Editar</a>                   
                 </td>
                 <td>
-                <!--    <form action="{{ route('producto.delete', $producto->id) }}" method="POST">
+                   <form action="{{ route('crucero.delete', $producto->id) }}" method="POST">
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form> -->
+                    </form> 
                 </td>
             </tr>
             @endforeach
