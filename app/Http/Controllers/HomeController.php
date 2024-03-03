@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Cookie;
 class HomeController extends Controller
 {
     public function index(Request $request)
-    {        
+    {                
         $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
         $mostrarModal = false;
-        if ($request->hasCookie('comercioAdherido')) {
-            $userId = $request->cookie('comercioAdherido');
+        if ($request->hasCookie('comercioAdherido')) {            
+            $userId = $request->cookie('comercioAdherido'); 
             $cliente = auth()->guard('client')->user();
             if ($cliente && $cliente->fk_users_id  === null) {
                 $cliente->fk_users_id  = $userId;
@@ -39,11 +39,11 @@ class HomeController extends Controller
             } else {    
              $nombreUsuario = 'Argtravels';
             }
-            /* $elim_cookie = 'comercioAdherido';
+          /*  $elim_cookie = 'comercioAdherido';
              setcookie($elim_cookie, '', time() - 3600, '/');
-             dd('se elimino la cookie: ', $userId); */
+             dd('se elimino la cookie n°: ', $userId); */
             return view('home', compact('productos', 'mostrarModal', 'nombreUsuario'));
-        } else {
+        } else {            
             $userId = $request->query('comercioAdherido') ?? 1;
             $user = User::find($userId);
             if ($user) {    

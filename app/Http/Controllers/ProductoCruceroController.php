@@ -45,7 +45,6 @@ class ProductoCruceroController extends Controller
             'estadia' => 'integer',
             'puerto_salida' => 'string',
             'tipo_cabina' => 'string',
-            'detalle' => 'string',
             'moneda' => 'string',
             'precio' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',    
         ]);
@@ -148,44 +147,38 @@ class ProductoCruceroController extends Controller
             'estadia' => 'integer',
             'puerto_salida' => 'string',
             'tipo_cabina' => 'string',
-            'detalle' => 'string',
             'moneda' => 'string',
             'precio' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',    
         ]);
-        $timestamp = time();
         $uploadedFile_banner = $request->file('img_banner');         
         $uploadedFile_imagen = $request->file('imagen');
-        $originalFileName_banner = $timestamp . '_' . $uploadedFile_banner->getClientOriginalName();
-        $originalFileName_imagen = $timestamp . '_' . $uploadedFile_imagen->getClientOriginalName();
+        $originalFileName_banner = $uploadedFile_banner->getClientOriginalName();
+        $originalFileName_imagen = $uploadedFile_imagen->getClientOriginalName();
 
         
          $image_banner = Image::make($uploadedFile_banner);
          $image_imagen = Image::make($uploadedFile_imagen);
-        if ($image_banner->width() > 1080) {
-            $image_banner->fit(1080, 720);
-        } else {
-            $image_banner->fit(1080, 720);
-        }    
+       
         $extension_banner = strtolower($uploadedFile_banner->getClientOriginalExtension());
         if (!in_array($extension_banner, ['jpeg', 'jpg', 'png'])) {
         Session::flash('error_message', 'Ooops10!!! Hubo un error, revisa el formulario.');
         return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
         } else {
-        $image_banner->save(public_path('assets/img_cruceros/' . $originalFileName_banner));
+        $image_banner->save(public_path('assets/img_banner/' . $originalFileName_banner));
         }
         // Procesamiento de la imagen adicional
         if ($image_imagen->width() > 1080) {
          $image_imagen->fit(1080, 720);
         } else {
         $image_imagen->fit(1080, 720);
-}    
+        }    
 
-$extension_imagen = strtolower($uploadedFile_imagen->getClientOriginalExtension());
-if (!in_array($extension_imagen, ['jpeg', 'jpg', 'png'])) {
-    Session::flash('error_message', 'Ooops10!!! Hubo un error, revisa el formulario.');
-    return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
-} else {
-    $image_imagen->save(public_path('assets/img_cruceros/' . $originalFileName_imagen));
+        $extension_imagen = strtolower($uploadedFile_imagen->getClientOriginalExtension());
+        if (!in_array($extension_imagen, ['jpeg', 'jpg', 'png'])) {
+         Session::flash('error_message', 'Ooops10!!! Hubo un error, revisa el formulario.');
+         return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
+        } else {
+        $image_imagen->save(public_path('assets/img_cruceros/' . $originalFileName_imagen));
 
             $producto = new ProductoCrucero;
             $producto->id_naviera = $request->id_naviera;
@@ -254,6 +247,6 @@ if (!in_array($extension_imagen, ['jpeg', 'jpg', 'png'])) {
     public function detalle_producto($id)
 {
     $productos = ProductoCrucero::with(['naviera', 'barco'])->find($id);
-    return view('productos.detalles.detalles_cruceros', compact('productos'));        
+    return view('productos.cruceros.detalles_cruceros', compact('productos'));        
 }
 }

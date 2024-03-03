@@ -3,7 +3,7 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="{{ asset('assets/img_cruceros/' . $productos->img_banner) }}" class="d-block w-100" alt="...">
+      <img src="{{ asset('assets/img_banner/' . $productos->img_banner) }}" class="d-block w-100" alt="...">
     </div>    
   </div>
 </div>
@@ -35,7 +35,9 @@
                      </p>  
                      <p><i class="fa-regular fa-calendar-days"></i> {{ $productos->fecha_partida }}  - Consultar Otras Fechas!!</p>
                      <p class="a-confirmar">Consultar otros tipos de cabinas y/o mayor capacidad de PASAJEROS.</p>
+                     @if($productos->detalle)
                      <p><i class="fa-regular fa-clipboard"></i> {{ $productos->detalle }} </p>
+                     @endif
                  </div>                 
              </div>             
              <hr>
@@ -79,5 +81,66 @@
       </div>
     </div>         
   </div>   
-
+<div class="modal fade" id="modalVuelos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-question-circle"></i> CRUCERO A: {{ $productos->destino }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario para Cotizar Vuelos -->
+        <form action="/consulta_viaje" method="post">
+          @csrf
+          <input type="hidden" name="id" value="{{ $productos->id }}">
+          <div class="form-floating mb-3">
+            <input type="number" name="adultos" placeholder="Cantidad Adultos" class="form-control" min="1" value="1">
+            <label for="adultos" class="form-label">Cantidad Adultos:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" name="menores" placeholder="Cantidad Menores" class="form-control" min="0" value="0">
+            <label for="menores" class="form-label">Cantidad Menores:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" name="nombre" placeholder="Cuál es tu Nombre ?" class="form-control" required>
+            <label for="nombre" class="form-label">Cuál es tu Nombre ?</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" name="email" placeholder="Cuál es tu Email?" class="form-control" required>
+            <label for="email" class="form-label">Cuál es tu Email?</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea name="consulta" placeholder="Déjanos acá tu consulta!!" class="form-control"></textarea>
+            <label for="consulta" class="form-label">Déjanos acá tu consulta!!</label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Enviar Consulta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@if(session('success'))
+<div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title"><i class="fa fa-check-circle"></i>
+        ¡Gracias por tu consulta! Nos comunicaremos contigo para brindarte toda la información que necesitas. ¡Hasta pronto!
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+        <div class="modal-body">   
+           <img src="{{ asset('assets/img_cruceros/' . $productos->imagen) }}" class="d-block w-100" alt=""> 
+      </div>
+      <div class="modal-footer">
+       <p>Disfruta al máximo !!</p> 
+      </div>
+    </div>
+  </div>
+</div>
+@endif
 @endsection

@@ -49,20 +49,17 @@ class UserRegisterController extends Controller
         $user = User::create($request->except('link_mundo', 'link_argtravels', 'link_sumate', 'comision', 'regalia'));
 
         $urlMundo = 'www.argtravels.tur.ar/?=';
-        $linkMundo = $urlMundo . $user->id;
-        // En desuso por el momento
+        $linkMundo = $urlMundo . $user->id;       
         $user->link_mundo = $linkMundo;
         $user->save();
 
         $urlArgTravels = 'www.argtravels.tur.ar/?comercioAdherido=';
         $linkArgTravels = $urlArgTravels . $user->id;
-
         $user->link_argtravels = $linkArgTravels;
         $user->save();
 
-        $urlEquipo = 'www.argtravels.tur.ar/oportunidad_trabajo_remoto_turismo?comercioAdherido=';
+        $urlEquipo = 'www.argtravels.tur.ar/oportunidad_trabajo_remoto_turismo?reclutador_equipo_oficial=';
         $link_sumate = $urlEquipo . $user->id;
-
         $user->link_sumate = $link_sumate;
         $user->save();
                 
@@ -123,9 +120,8 @@ class UserRegisterController extends Controller
         
         ]);
         $user = User::findOrFail($id);
-        if (Auth::user()->img_profile === '' || Auth::user()->img_profile === null) {
-            try {                
-                // Subir y almacenar el nombre de la imagen de perfil si se proporcionó
+        if (Auth::user()->img_profile === '' || Auth::user()->img_profile === null) {                        
+            try {    
                 $uploadedFile = $request->file('profile_image');
                 if ($uploadedFile) {                   
                     $extension = strtolower($uploadedFile->getClientOriginalExtension());
@@ -177,17 +173,13 @@ class UserRegisterController extends Controller
                     return back()->withErrors(['profile_image' => 'Debes seleccionar una imagen de perfil.']);
                 }
             } catch (\Exception $e) {
-                // Manejar el error general  
+                dd('Viene sin IMG y es Obligatoria: ERROR!!');
                 Session::flash('error_message', 'Ooops Ooops !!! Hubo un error, revisa el formulario.');
             }
         } else {
             try {
-                // Subir y almacenar el nombre de la imagen de perfil si se proporcionó
                 $uploadedFile = $request->file('profile_image');
-
                 $oldImageName = $user->img_profile;
-               // dd('Nombre imagen anterior: ', $oldImageName);
-
                 if ($uploadedFile) {
                     $extension = strtolower($uploadedFile->getClientOriginalExtension());
                     if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {

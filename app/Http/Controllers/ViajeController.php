@@ -21,6 +21,7 @@ class ViajeController extends Controller
 
         Viaje::create([
             'id_producto' => $request->id,
+            'tipo_prod' => 'Crucero',
             'adultos' => $request->adultos,
             'menores' => $request->menores,
             'nombre' => $request->nombre,
@@ -29,6 +30,6 @@ class ViajeController extends Controller
             'estado' => 1,
         ]);
 
-        return redirect('/detalles_productos/'. $request->input('id'))->with('success', 'Recibimos su consulta sobre este maravilloso destino. A la brevedad nos pondremos en contacto. Muchas Gracias');
+        return redirect('/detalles_cruceros/'. $request->input('id'))->with('success', 'Recibimos su consulta sobre este maravilloso destino. A la brevedad nos pondremos en contacto. Muchas Gracias');
     }
 }

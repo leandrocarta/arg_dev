@@ -38,7 +38,10 @@
      <div class="titulo text-center">
        <h4 class="display-4"></h4>
      </div>
-     <div class="row">      
+     <div class="row">
+            @if($nombreUsuario)
+            <p>{{ $nombreUsuario }}</p>
+            @endif
        @php
        $productosAleatorios = $productos->shuffle()->take(6);
        @endphp

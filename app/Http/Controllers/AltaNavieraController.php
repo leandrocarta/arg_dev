@@ -24,7 +24,7 @@ class AltaNavieraController extends Controller
             'naviera' => 'string',
         ]);
         $naviera = new Naviera;
-        $naviera->naviera = strtoupper($request->naviera);
+        $naviera->nombre = strtoupper($request->naviera);
 
         $naviera->save();
         return redirect('/read_naviera')->with('success', 'NAVIERA AGREGADA CORRECTAMENTE');
@@ -41,7 +41,7 @@ class AltaNavieraController extends Controller
     {
         $naviera = Naviera::find($id);
 
-        $naviera->naviera = strtoupper($request->naviera);
+        $naviera->nombre = strtoupper($request->naviera);
 
         $naviera->save();
 

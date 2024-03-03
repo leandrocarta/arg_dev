@@ -22,7 +22,7 @@
             @foreach ($navieras as $naviera)
             <tr>
                 <td>{{ $naviera->id }}</td>                
-                <td>{{ $naviera->naviera }}</td>
+                <td>{{ $naviera->nombre }}</td>
                 <td>
                     <a href="{{ route('naviera.edit', $naviera->id) }}" class="btn btn-primary">Editar</a>                  
                 </td>

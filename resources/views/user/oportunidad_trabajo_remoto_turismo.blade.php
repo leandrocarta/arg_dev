@@ -1,6 +1,5 @@
 @extends('layouts.app-master')
 @section('content')
-    <!-- Otros datos del usuario que desees mostrar -->
 <section class="container mt-5 presentacion">    
         <div class="titulo">
           <h2><span>TRABAJO REMOTO: </span>Únete a la emocionante revolución digital en una de las industrias de mayor crecimiento a nivel global: <span>'EL TURISMO'.</span> Conviértete en un <span>'PROMOTOR DIGITAL'</span> priorizando tu independencia y transformando tus sueños en oportunidades ilimitadas. ¡Inicia hoy la construcción de tu futuro en tus propios términos!</h2>          
@@ -97,7 +96,7 @@
                         $reclutador_equipo_oficial = request()->cookie('reclutador_equipo_oficial', '');
                       @endphp
                      <input type="hidden" name="reclutador_equipo_oficial" value="{{ $reclutador_equipo_oficial }}">
-                      <!-- Agrega aquí tus campos de formulario -->
+                      
                       <div class="form-floating my-2">
                           <input type="email" class="form-control" placeholder="Danos tu mejor email" name="email" required>
                           <label for="email" class="form-label">¿Nos darías tu mejor email? </label>

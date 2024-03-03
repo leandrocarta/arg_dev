@@ -41,7 +41,7 @@
 </div>
 <div class="container my-3 m-auto productos-detalles home-iconos">
     <div class="titulo">
-        <h2 class="">CONOCE ALGUNOS DE NUESTROS DESTINOS</h2>
+        <h2 class=""></h2>
     </div>
     <div class="row">
             @php
@@ -71,7 +71,5 @@
             </div>
         @endforeach
     </div>   
-</div>
-
- 
+</div> 
 @endsection

@@ -16,7 +16,7 @@
                         <div class="form-group">
                             <label for="naviera" class="col-md-4 control-label">Nombre</label>
                             <div class="">
-                                <input type="text" class="form-control" name="naviera" value="{{ $naviera->naviera }}" required>
+                                <input type="text" class="form-control" name="naviera" value="{{ $naviera->nombre }}" required>
                             </div>
                         </div>     
                         <div class="mt-2">

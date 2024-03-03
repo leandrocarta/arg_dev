@@ -19,7 +19,7 @@
                                 <select name="id_naviera" class="form-select">                                      
                                     @foreach ($navieras as $naviera)
                                       <option value="{{ $naviera->id }}" {{ $producto->id_naviera == $naviera->id ? 'selected' : '' }}>
-                                       {{ $naviera->naviera }}
+                                       {{ $naviera->nombre }}
                                       </option>
                                     @endforeach                              
                                 </select>                           

@@ -25,7 +25,7 @@
                                 <select name="naviera" class="form-select">                                    
                                     @foreach ($navieras as $naviera)
                                         <option value="{{ $naviera->id }}" {{ (old('pais_destino') == $naviera->id) ? 'selected' : '' }}>
-                                            {{ $naviera->naviera }}
+                                            {{ $naviera->nombre }}
                                         </option>
                                     @endforeach
                                 </select>                           
@@ -42,7 +42,13 @@
                             <div class="">
                                 <input type="file" class="form-control" name="imagenes[]" accept="image/*" value="{{ old('imagenes') }}" multiple> 
                             </div>
-                        </div>                                                               
+                        </div>    
+                        <div class="form-group">
+                            <label for="detalle" class="col-md-4 control-label">Detalle General</label>
+                            <div class="">
+                              <textarea class="form-control" name="detalle" rows="5">{{ old('detalle') }}</textarea>
+                            </div>
+                        </div>                                                           
                         <div class="mt-2">
                            <button type="submit" class="btn btn-primary">
                                Agregar Barco a Flota

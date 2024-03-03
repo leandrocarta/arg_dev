@@ -66,21 +66,7 @@
                        </a>                      
                      </p>
                      <div class="collapse mb-3 edit" id="collapseExample1">                      
-                       <div class="card card-body collapse-form">
-                          <!--
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Cambiar Correo electrónico</label>
-                            <input type="email" name="email_confirmation" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp">    
-                          </div>  
-                          <div class="mb-3">
-                            <label for="password" class="form-label">Cambiar Contraseña</label>
-                            <input type="password" name="password" class="form-control" id="exampleInputPassword">
-                          </div>                                     
-                          <div class="mb-3">
-                           <label for="del_password" class="form-label">Repita Contraseña</label>
-                           <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword2">
-                          </div>   
-                          -->    
+                       <div class="card card-body collapse-form">                         
                           @if ($user->id_rango === null)    
                          <div class="mb-3">                                               
                           <p>Seleccione un Rango y Guarde los Cambios</p>
@@ -90,9 +76,10 @@
                             <div style="display: flex;">
                               <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_mundo}}" id="myInput4" disabled>
                               <button type="button" onclick="copyToClipboard('myInput4', this)">
-                                <div class="button-content">
-                                  <span>Copiar</span>                                    
-                                </div></button>
+                                <div class="button-content content-copy">
+                                  <span class="copy">Copiar</span>                                    
+                                </div>
+                              </button>
                             </div>
                            <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
                          </div>
@@ -100,9 +87,10 @@
                             <div style="display: flex;">
                               <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_argtravels}}" id="myInput3" disabled>
                               <button type="button" onclick="copyToClipboard('myInput3', this)">
-                                <div class="button-content">
-                                  <span>Copiar</span>                                    
-                                </div></button>
+                                <div class="button-content content-copy">
+                                  <span class="copy">Copiar</span>                                    
+                                </div>
+                              </button>
                             </div>
                            <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
                          </div>   
@@ -111,9 +99,10 @@
                             <div style="display: flex;">
                               <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_mundo}}" id="myInput1" disabled>
                               <button type="button" onclick="copyToClipboard('myInput1', this)">
-                                <div class="button-content">
-                                  <span>Copiar</span>                                    
-                                </div></button>
+                                <div class="button-content content-copy">
+                                  <span class="copy">Copiar</span>                                    
+                                </div>
+                              </button>
                             </div>
                            <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
                          </div>
@@ -121,9 +110,10 @@
                             <div style="display: flex;">
                               <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_argtravels}}" id="myInput2" disabled>
                               <button type="button" onclick="copyToClipboard('myInput2', this)">
-                                <div class="button-content">
-                                  <span>Copiar</span>                                    
-                                </div></button>
+                                <div class="button-content content-copy">
+                                  <span class="copy">Copiar</span>                                    
+                                </div>
+                              </button>
                             </div>
                            <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
                          </div>         
@@ -131,11 +121,12 @@
                             <div style="display: flex;">
                               <input style="border-radius: 0" type="text" class="form-control" value="{{auth()->user()->link_sumate}}" id="myInput5" disabled>
                               <button type="button" onclick="copyToClipboard('myInput5', this)">
-                                <div class="button-content">
-                                  <span>Copiar</span>                                    
-                                </div></button>
+                                <div class="button-content content-copy">
+                                  <span class="copy">Copiar</span>                                    
+                                </div>
+                              </button>
                             </div>
-                           <div class="form-text">Link de ventas Turismo Global: No Editable.</div>
+                           <div class="form-text">Link de Reclutamiento de Equipo : No Editable.</div>
                          </div>  
                          @endif                  
                        </div>

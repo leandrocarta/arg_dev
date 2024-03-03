@@ -24,7 +24,7 @@
                              @if ($barco->id_naviera)
                              @foreach ($navieras as $naviera)
                                <option value="{{ $naviera->id }}" data-nombre-img="{{ $barco->nombre }}" {{ $naviera->id == $barco->id_naviera ? 'selected' : '' }}>
-                                 {{ $naviera->naviera }}
+                                 {{ $naviera->nombre }}
                                </option>
                              @endforeach
                              @endif                

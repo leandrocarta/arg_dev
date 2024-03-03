@@ -26,6 +26,7 @@ class NombreBarcoController extends Controller
         $this->validate($request, [
             'nombre' => 'string',
             'naviera' => 'integer',
+            'detalle_gral' => 'string',
         ]);
         $uploadedFile = $request->file('img_banner');
         $uploadedFiles = $request->file('imagenes');
@@ -37,18 +38,18 @@ class NombreBarcoController extends Controller
             Session::flash('error_message', 'Ooops10!!! Hubo un error, revisa el formulario.');
             return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
         } else {
-        $image->save(public_path('assets/img_msc/' . $originalFileName));
+        $image->save(public_path('assets/img_cruceros/' . $originalFileName));
         $barco = new NombreBarco;
         $barco->nombre = strtoupper($request->nombre);
         $barco->id_naviera  = $request->naviera;
         $barco->img_banner = $originalFileName;
-
+        $barco->detalle  = $request->detalle;
         $barco->save();
         if ($request->hasFile('imagenes')) {
            $index = 1;
            foreach ($uploadedFiles as $imagen) {
             // Define la carpeta de destino y el nombre del archivo
-            $destinationPath = public_path('assets/img_msc/');
+            $destinationPath = public_path('assets/img_cruceros/');
             $imagenPath = $imagen->getClientOriginalName();
 
             // Guarda la imagen secundaria
