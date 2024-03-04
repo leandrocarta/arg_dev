@@ -17,13 +17,14 @@ class UserPresentationController extends Controller
         $rangos = Rango::all(); 
          if ($request->hasCookie('reclutador_equipo_oficial')) {             
              $userId = $request->cookie('reclutador_equipo_oficial');
-             dd('Reclutador N: ' . $userId);             
+             //dd('Reclutador N:: ' . $userId);             
              $user = User::find($userId); 
-            // $elim_cookie = 'reclutador_equipo_oficial';
-            // setcookie($elim_cookie, '', time() - 3600, '/');
+           /*  $elim_cookie = 'reclutador_equipo_oficial';
+             setcookie($elim_cookie, '', time() - 3600, '/');
+             dd('se elimino la cookie n°: ', $userId); */
              return response()->view('user.oportunidad_trabajo_remoto_turismo', compact('user', 'paises', 'rangos')); 
          } else {    
-           $userId = $request->query('reclutador_equipo_oficial', 1);  
+           $userId = $request->query('reclutador_equipo_oficial') ?? 1;  
            $user = User::find($userId); 
            if (!$user) {
            $userId = 1;

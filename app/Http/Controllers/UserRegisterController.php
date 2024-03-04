@@ -16,26 +16,11 @@ use Intervention\Image\Facades\Image;
 
 
 class UserRegisterController extends Controller
-{    
-    public function index()
-    {
-        // return view('user.userRegister');
-    }
+{        
     public function welcome()
     {
         return view('bienvenidos');
-    }
-    
-    public function create()
-    {
-        
-    }
-
-    
-    public function store(Request $request)
-    {
-        
-    }
+    }    
 
     public function show()
     {
@@ -130,8 +115,7 @@ class UserRegisterController extends Controller
                         return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
                     } else {                         
                         $timestamp = time();
-                        $originalFileName = $timestamp . '_' . $uploadedFile->getClientOriginalName();
-                        
+                        $originalFileName = $timestamp . '_' . $uploadedFile->getClientOriginalName();                        
                         $image = Image::make($uploadedFile);
                         
                         if ($image->width() > 500 || $image->height() > 500) {
@@ -149,9 +133,7 @@ class UserRegisterController extends Controller
                           $user->updatePassword($newPassword);
                          }
                         
-                        // Guardar el nombre original en la base de datos
                         $user->img_profile = $originalFileName;
-                        //$user->save();
                         $user->comision = 2.00;
                         $user->regalia = 0.00;
                         $user->nombre = $request->input('nombre');

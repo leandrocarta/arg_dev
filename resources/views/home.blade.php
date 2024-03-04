@@ -135,7 +135,7 @@
         <div class="overlay">          
           <a href="/aereos">Cotizar Vuelos!!</a>
         </div>
-        <img class="img-fluid" src="assets/img/vuelos.png" alt="">
+        <img class="img-fluid" src="assets/img/Vuelos.png" alt="">
       </div>
       <div class="col-md-3 container-servicio">
          <h3>Paquetes Turísticos</h3>   

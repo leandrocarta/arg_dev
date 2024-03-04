@@ -91,10 +91,27 @@ class DestinoController extends Controller
         
       return redirect('/read_destinos')->with('success', 'EL DESTINO SE AGREGÓ CORRECTAMENTE');
     }
-    public function formUpdateDestino()
+    public function formUpdateDestino($id)
     {       
-        $destinos = Destino::all();
+        $destinos = Destino::find($id);
         $paises = Pais::all();
         return view('productos.destinos.update_destino', compact('destinos', 'paises'));
+    }
+    public function updateDestino(Request $request, $id)
+    {
+        $destino = Destino::find($id);
+        $destino->nombre_destino = $request->nombre_destino;
+        $destino->id_pais = $request->id_pais;
+        $destino->detalle_gral = $request->detalle_gral;
+        $destino->ubicacion = $request->ubicacion;
+        $destino->playas = $request->playas;
+        $destino->gastronomia = $request->gastronomia;
+        $destino->atracciones = $request->atracciones;
+        $destino->historia = $request->historia;
+        $destino->resumen = $request->resumen;
+
+        $destino->save();
+
+        return redirect('/read_destinos')->with('success', 'EL HOTEL SE EDITO CORRECTAMENTE !!!');
     }
 }

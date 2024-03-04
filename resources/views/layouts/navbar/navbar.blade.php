@@ -43,7 +43,7 @@
         <li class="nav-item ms-4">
           <a class="" aria-current="page" href="/brasil">
             <div class="text-center text-left">
-              <img class="bandera-arg" src="../assets/img_banderas/brasil_nav.png" alt="">
+              <img class="bandera-arg" src="../assets/img_banderas/Brasil_nav.png" alt="">
               <p>Brasil</p>
             </div>
           </a>

@@ -3,7 +3,7 @@
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">  
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">      
-      <img src="assets/img_banner/medida-min.png" class="d-block w-100" alt="...">
+      <img src="assets/img_banner/Medida-min.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h1></h1>
           <p></p>
