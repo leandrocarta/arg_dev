@@ -34,14 +34,11 @@
  </div> 
 </div>
  
-  <div class="container-fluid my-3 m-auto productos-detalles home-iconos">
+  <div class="container my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
        <h4 class="display-4"></h4>
      </div>
-     <div class="row">
-            @if($nombreUsuario)
-            <p>{{ $nombreUsuario }}</p>
-            @endif
+     <div class="row">            
        @php
        $productosAleatorios = $productos->shuffle()->take(6);
        @endphp
@@ -94,26 +91,24 @@
                   <i class="fas fa-bus"></i>
               @elseif ($producto->service && $producto->service->transporte_int == 'Sin Traslados')               
               @endif 
-              <span>{{ $producto->origen_salida }} ⇌ {{ $producto->destinos->nombre_destino }}</span>
+              <span>Vuelo Desde {{ $producto->origen_salida }}</span>
             </p>
-           <p class="ms-2">
-             <i class="fa-solid fa-bus"></i> : <span>Aeropuerto ⇌ Hotel</span>
-           </p>
-           <p class="ms-2">
-              <span>
-                  @if ($producto->hotel) {{-- Verifica si hay una relación con un hotel --}}
-                      <i class="fa-solid fa-hotel"></i> :
-                      {{ $producto->hotel->nombre }}
+             <p class="ms-2"><i class="fa-solid fa-bus"></i>
+             <span>Traslados Aeropuerto ⇌ Hotel</span>
+            </p>           
+           <p class="ms-2">              
+                  @if ($producto->hotel)
+                      <i class="fa-solid fa-hotel"></i> 
+                      <span class="ms-1"> {{ $producto->hotel->nombre }} </span>
                       @for ($i = 1; $i <= $producto->hotel->categoria; $i++)
                           <i class="fa-solid fa-star"></i>
                       @endfor
                   @else
                       <i class="fa-solid fa-hotel"></i> : Consultar!!
-                  @endif
-              </span>
+                  @endif              
           </p>
             <p class="">
-              <i class="fa-solid fa-bed ms-2"></i> : {{ $producto->habitacion }} <span> ({{ $producto->estadiaTotal }} <i class="fa-solid fa-cloud-moon"></i>)</span>        
+              <i class="fa-solid fa-bed ms-2"></i> {{ $producto->habitacion }} <span> ({{ $producto->estadia }} <i class="fa-solid fa-cloud-moon"></i>) noches.</span>        
               </span>           
             </p>   
          </div>
@@ -157,7 +152,7 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid my-3 m-auto productos-detalles">
+  <div class="container my-3 m-auto productos-detalles">
      <div class="titulo text-center">
        <h4 class="display-4"></h4>
      </div>
@@ -198,33 +193,31 @@
               </div>
          </div>      
          <div>      
-            <p class="ms-2">  
+             <p class="ms-2">  
               @if ($producto->service && ($producto->service->transporte_int == 'Aéreo Directo' || $producto->service->transporte_int == 'Aéreos con escala'))                                        
                   <i class="fas fa-plane-departure"></i>
               @elseif ($producto->service && $producto->service->transporte_int == 'Micro') 
                   <i class="fas fa-bus"></i>
               @elseif ($producto->service && $producto->service->transporte_int == 'Sin Traslados')               
               @endif 
-              <span>{{ $producto->origen_salida }} ⇌ {{ $producto->destinos->nombre_destino }}</span>
+              <span>Vuelo Desde {{ $producto->origen_salida }}</span>
             </p>
-           <p class="ms-2">
-             <i class="fa-solid fa-bus"></i> : <span>Aeropuerto ⇌ Hotel</span>
-           </p>
-           <p class="ms-2">
-              <span>
-                  @if ($producto->hotel) {{-- Verifica si hay una relación con un hotel --}}
-                      <i class="fa-solid fa-hotel"></i> :
-                      {{ $producto->hotel->nombre }}
+             <p class="ms-2"><i class="fa-solid fa-bus"></i>
+             <span>Traslados Aeropuerto ⇌ Hotel</span>
+            </p>
+           <p class="ms-2">              
+                  @if ($producto->hotel)
+                      <i class="fa-solid fa-hotel"></i> 
+                      <span class="ms-1"> {{ $producto->hotel->nombre }} </span>
                       @for ($i = 1; $i <= $producto->hotel->categoria; $i++)
                           <i class="fa-solid fa-star"></i>
                       @endfor
                   @else
                       <i class="fa-solid fa-hotel"></i> : Consultar!!
-                  @endif
-              </span>
+                  @endif              
           </p>
             <p class="">
-              <i class="fa-solid fa-bed ms-2"></i> : {{ $producto->habitacion }} <span> ({{ $producto->estadia }} <i class="fa-solid fa-cloud-moon"></i>)</span>        
+              <i class="fa-solid fa-bed ms-2"></i>  {{ $producto->habitacion }} <span> ({{ $producto->estadia }} <i class="fa-solid fa-cloud-moon"></i>)</span>        
               </span>           
             </p>   
          </div>

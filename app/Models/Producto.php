@@ -9,7 +9,7 @@ class Producto extends Model
 {
     protected $fillable = [
         'nombre',
-        'codigo',
+        'proveedor',
         'imagen',
         'habitacion',
         'tipo_producto',
@@ -19,16 +19,11 @@ class Producto extends Model
         'origen_salida',
         'precio_total',
         'descto',
-        'precio_comisionable',
         'moneda',
+        'detalles',
         'id_hotel',
-        'estadia',
-        'id_hotel2',
-        'estadia_dos',
-        'id_hotel3',
-        'estadia_tres',
+        'estadia',        
         'fecha_baja',
-        'estadiaTotal',
     ];
     public function hotel()
     {

@@ -161,6 +161,7 @@ Route::post('/deleteCotiAereo/{id}', [AereosController::class, 'deleteCotiAereo'
 Route::post('/editarCotiAereo/{id}', [AereosController::class, 'editarProducto'])->name('cotiAereo.updateProcess');
 // Viajes consultas
 Route::post('/consulta_viaje', [ViajeController::class, 'guardarDatos'])->name('consulta_viaje');
+Route::post('/consulta_viaje_crucero', [ViajeController::class, 'guardarDatosCrucero'])->name('consulta_viaje_crucero');
 // Destinos
 Route::get('/read_destinos', [DestinoController::class, 'mostrarDestinos'])->name('destinos.show'); 
 Route::get('/create_destino', [DestinoController::class, 'showFormDestino'])->name('destinos.form');

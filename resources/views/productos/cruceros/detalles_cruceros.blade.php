@@ -91,8 +91,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <!-- Formulario para Cotizar Vuelos -->
-        <form action="/consulta_viaje" method="post">
+        <form action="/consulta_viaje_crucero" method="post">
           @csrf
           <input type="hidden" name="id" value="{{ $productos->id }}">
           <div class="form-floating mb-3">
@@ -137,7 +136,7 @@
            <img src="{{ asset('assets/img_cruceros/' . $productos->imagen) }}" class="d-block w-100" alt=""> 
       </div>
       <div class="modal-footer">
-       <p>Disfruta al máximo !!</p> 
+       <p>{{ $productos->destino }}: Es un Excelente Destino !!</p> 
       </div>
     </div>
   </div>

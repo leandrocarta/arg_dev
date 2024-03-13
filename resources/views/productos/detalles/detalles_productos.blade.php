@@ -249,16 +249,24 @@
                         @else 
                           <strong>PRECIO </strong> ( {{ $productos->moneda }} {{ $productos->precio_total }} )
                           <p class="a-confirmar">A Confirmar al momento de la reserva</p>                        
-                          @endif
-                          
-                        </p>
+                     @endif                          
+                        </p>                        
                     </div>
                     <div class="col-md-5">
                         <a href="#modalVuelos" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#modalVuelos">Consultar Lugares!!!</a>                       
-                    </div>
+                    </div>                    
                 </div>
-            </div>
-             
+                @if ($productos->detalles) 
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p> 
+                         <strong>DETALLES PAQUETE: </strong> {{ $productos->detalles }}                                                
+                        </p>                        
+                    </div>                    
+                </div>
+                 @endif 
+            </div>             
       </div>
       <div class="col-md-7 mt-2-movil">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -302,6 +310,7 @@
         <form action="/consulta_viaje" method="post">
           @csrf
           <input type="hidden" name="id" value="{{ $productos->id }}">
+          <input type="hidden" name="tipo_prod" value="{{ $productos->tipo_producto }}">
           <div class="form-floating mb-3">
             <input type="number" name="adultos" placeholder="Cantidad Adultos" class="form-control" min="1" value="1">
             <label for="adultos" class="form-label">Cantidad Adultos:</label>
@@ -345,7 +354,7 @@
             <img src="{{ asset('assets/img_hoteles/' . $hotelData['hotel']->img_banner) }}" class="d-block w-100" alt=""> 
       </div>
       <div class="modal-footer">
-        <p>Disfruta al máximo {{ $productos->destinos->nombre_destino }} !!</p>
+        <p>{{ $productos->destinos->nombre_destino }}: Es un Excelente Destino !!</p>
       </div>
     </div>
   </div>
