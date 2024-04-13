@@ -129,43 +129,45 @@
             <div class="">
                 <div class="container mt-4">
                     <div class="row bg-light-detalles">
-                        <div class="col-md-6">                            
+                        <div class="col-md-12">                            
                             @if($productos->destinos->ubicacion)
-                                <p class="mb-2 borde-cajas">
+                                <p class="m-2">
                                     <i class="fa-solid fa-location-dot"></i>
                                     <span class="fw-bold">Ubicación:</span>
                                     {{ $productos->destinos->ubicacion }}
-                                </p>                            
+                                </p>      
+                                <hr>                      
                             @endif
                             @if($productos->destinos->playas)
-                                <p class="borde-cajas">
+                                <p class="m-2">
                                     <i class="fa-solid fa-umbrella-beach"></i>
                                     <span class="fw-bold">Playas:</span>
                                     {{ $productos->destinos->playas }}
-                                </p>                            
+                                </p>   
+                                <hr>                          
                             @endif
                             @if($productos->destinos->gastronomia)
-                                <p class="mb-2 borde-cajas">
+                                <p class="m-2">
                                     <i class="fas fa-utensils"></i>
                                     <span class="fw-bold">Gastronomía:</span>
                                     {{ $productos->destinos->gastronomia }}
                                 </p>
-                            @endif
-                        </div>
-                        <div class="col-md-6">
+                                <hr> 
+                            @endif                        
                             @if($productos->destinos->atracciones)
-                                <p class="mb-2 borde-cajas">  
+                                <p class="m-2">  
                                     <i class="fas fa-camera"></i>
                                     <span class="fw-bold">Atracciones:</span>
                                     {{ $productos->destinos->atracciones }}
                                 </p>
+                                <hr> 
                             @endif
                             @if($productos->destinos->historia)
-                                <p class="mb-2 borde-cajas"> 
+                                <p class="m-2"> 
                                     <i class="fas fa-book"></i> 
                                     <span class="ms-2 fw-bold">Historia:</span>
                                     {{ $productos->destinos->historia }}                
-                                </p>
+                                </p>                                
                             @endif
                         </div>
                     </div>

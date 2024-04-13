@@ -2,7 +2,7 @@
 @section('content')
 @guest
 @php
-$cliente = auth('client')->user(); // Obtén el cliente autenticado ('client') es el guard del archivo config
+$cliente = auth('client')->user();  
 @endphp
 @if ($cliente)
     <div class="container w-50 form-edit form-movil">

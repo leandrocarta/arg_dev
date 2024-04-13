@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Aereo;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use App\Models\Pais;
 use App\Models\Destino;
 use Intervention\Image\Facades\Image;
+use App\Notifications\CotizacionAereosNotification;
 
 class AereosController extends Controller
 {
@@ -59,6 +61,11 @@ class AereosController extends Controller
         }
         //dd($aereoData);
         Aereo::create($aereoData);
+
+        // Enviar el correo electrónico utilizando notify
+        Notification::route('mail', 'leandrocarta@gmail.com')
+        ->notify(new CotizacionAereosNotification($aereoData)); 
+
 
         // return redirect()->route('/home');
         return redirect('/')->with('success', 'Recibimos su consulta, en breve será respondida. Muchas Gracias');

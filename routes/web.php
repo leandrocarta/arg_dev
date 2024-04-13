@@ -27,7 +27,8 @@ use App\Http\Controllers\ProveedorMayoristaController;
 use App\Http\Controllers\ProductoCruceroController;
 use App\Http\Controllers\AltaNavieraController;
 use App\Http\Controllers\NombreBarcoController;
-
+use App\Http\Controllers\ExcursionesArgController; 
+use App\Http\Controllers\HotelsRoomController;
 /*Route::get('/', function () {
     //return view('layouts.construccion.construccion');
     return view('home');
@@ -85,7 +86,9 @@ Route::post('/reclamos/{id}', [ContactosController::class, 'reclamo_save'])->nam
 
 Route::get('/contacto', [ContactosController::class, 'contactForm'])->name('client.contacto');
 Route::post('/contacto/{id?}', [ContactosController::class, 'contactAccion'])->name('client.contacto.save');
-
+// Excursiones Arg
+Route::get('/excursiones_arg', [ExcursionesArgController::class, 'create'])->name('excursiones_arg.create');
+// FIN Excursiones Arg
 // Promociones productos turisticos
 Route::get('/conoce-argentina', [PromocionController::class, 'cookie_conoceArgentina']);
 Route::get('/brasil', [PromocionController::class, 'cookie_brasil']);
@@ -172,3 +175,13 @@ Route::post('/delete_destino/{id}', [DestinoController::class, 'deleteDestinos']
 // Viajes a Medida
 Route::get('/a-medida', [ViajeAMedidaController::class, 'vista']);
 Route::post('/a-medida', [ViajeAMedidaController::class, 'store']);
+// Create Rooms
+
+Route::get('/create_room_hotel', [HotelsRoomController ::class, 'index'])->name('form.room');
+Route::post('/create_room_hotel', [HotelsRoomController ::class, 'create'])->name('create_room_hotel');
+Route::get('/read_rooms', [HotelsRoomController ::class, 'read_rooms']);
+Route::get('/room_update/{id}', [HotelsRoomController ::class, 'edit_form'])->name('room.update');
+Route::post('/delete_room/{id}', [HotelsRoomController ::class, 'destroy'])->name('room.delete');
+/*
+Route::post('/barco_update/{id}', [NombreBarcoController ::class, 'update'])->name('barco.update');
+*/

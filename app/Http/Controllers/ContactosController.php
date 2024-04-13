@@ -75,7 +75,7 @@ class ContactosController extends Controller
         $email = $request->input('email');
         $pais = $request->input('pais');
         $comentario = $request->input('comentario');
-        $correoEmpresa = 'contacto@argtravels.tur.ar';
+        $correoEmpresa = 'leandrocarta@gmail.com';
 
         if ($id) {
             Mail::to($correoEmpresa)->send(new ContactFormMail($id, $nombre, $email, $pais, $comentario));

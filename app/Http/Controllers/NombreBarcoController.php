@@ -58,7 +58,6 @@ class NombreBarcoController extends Controller
 
             // Guarda la ruta en la columna correspondiente (img_1, img_2, ..., img_10)
             $barco->setAttribute('img' . $index, $imagenPath);
-
             $index++;
         }
         $barco->save();

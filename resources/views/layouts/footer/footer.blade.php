@@ -10,10 +10,10 @@
 
     <!-- Right -->
     <div>
-      <a target="_blank" href="https://www.facebook.com/profile.php?id=100091063627100" class="me-4 text-reset">
+      <a target="_blank" href="https://www.facebook.com/argtravels.tur.ar/" class="me-4 text-reset">
         <i class="fab fa-facebook-f"></i>
       </a>
-      <a target="_blank" href="https://www.youtube.com/@Argtravels/" class="me-4 text-reset">
+      <a target="_blank" href="https://www.youtube.com/@Argtravels-tur-ar/" class="me-4 text-reset">
         <i class="fa-brands fa-youtube"></i>
       </a>      
       <a target="_blank" href="https://www.instagram.com/argtravels.tur.ar/" class="me-4 text-reset">

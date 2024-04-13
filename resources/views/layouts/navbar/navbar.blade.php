@@ -55,23 +55,7 @@
               <p class="cw">Caribe</p>
             </div>
           </a>
-        </li>
-        <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="/europa">
-            <div class="text-center text-left">
-              <i class="fa-solid fa-landmark"></i>
-              <p class="cw">Europa</p>
-            </div>
-          </a>
         </li>        
-        <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="/por-el-mundo">
-            <div class="text-center text-left">
-              <i class="fa-solid fa-earth-asia"></i>
-              <p class="cw">MundoTravels</p>
-            </div>
-          </a>
-        </li>       
         <li class="nav-item ms-4">
           <a class="" aria-current="page" href="/cruceros">
             <div class="text-center text-left">
@@ -106,10 +90,12 @@
                      <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
                      <li><a class="dropdown-item" href="/read_producto">Alta Paquetes</a></li>
                      <li><a class="dropdown-item" href="/read_crucero">Alta Cruceros</a></li>
+                     <li><a class="dropdown-item" href="/excursiones_arg">Excursiones Arg.</a></li>
                      <li><a class="dropdown-item" href="/read_vuelos">Vuelos</a></li>
                      <li><a class="dropdown-item" href="/read_destinos">Destinos</a></li>
                    <!--  <li><a class="dropdown-item" href="upload">Uploads Provincias con exel</a></li> -->
                      <li><a class="dropdown-item" href="/read_hotel">Hoteles</a></li> 
+                     <li><a class="dropdown-item" href="/read_rooms">Room</a></li> 
                      <li><a class="dropdown-item" href="/read_mayoristas">Mayoristas</a></li>
                      <li><a class="dropdown-item" href="/read_naviera">Alta Navieras</a></li>
                      <li><a class="dropdown-item" href="/read_barcos">Alta Barcos</a></li>
