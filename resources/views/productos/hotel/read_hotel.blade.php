@@ -16,7 +16,13 @@
                 <th>ID</th>
                 <th>Nombre Hotel</th>
                 <th>Categoría</th>
-                <th>Apto Todo Publico?</th>                
+                <th>Apto Todo Publico?</th>  
+                <th>Gastronomía</th>
+                <th>Wifi</th>  
+                <th>Gym</th>
+                <th>Spa</th>  
+                <th>Parking</th>
+                <th>Traslados</th>             
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
@@ -28,6 +34,12 @@
                 <td>{{ $hotel->nombre }}</td>
                 <td>{{ $hotel->categoria }}</td>
                 <td>{{ $hotel->publico }}</td>
+                <td>{{ $hotel->comidas }}</td>
+                <td>{{ $hotel->wifi }}</td>
+                <td>{{ $hotel->gym }}</td>
+                <td>{{ $hotel->spa }}</td>
+                <td>{{ $hotel->parking }}</td>
+                <td>{{ $hotel->traslados }}</td>
                 <td>
                     <a href="{{ route('hotel.update', $hotel->id) }}" class="btn btn-primary">Editar</a>                    
                 </td>

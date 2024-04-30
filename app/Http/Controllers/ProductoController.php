@@ -226,13 +226,11 @@ class ProductoController extends Controller
                 unlink($oldImagePath);
             }
         }
-
         // Elimina el producto de la base de datos
         $producto->delete();
 
         return redirect('/read_producto')->with('success', 'PRODUCTO ELIMINADO CON EXITO!!!');
     }
-    // Seccion productos Vuelos
     
     
 }

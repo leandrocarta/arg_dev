@@ -9,6 +9,9 @@ class Hotel extends Model
 {
    protected $fillable = [
         'nombre', 
+        'destino',
+        'pais',
+        'comidas',
         'categoria',
         'publico',
         'img_banner',
@@ -22,8 +25,16 @@ class Hotel extends Model
         'img8',
         'img9',
         'img10',
+        'img11',
+        'img12',
+        'img13',
+        'img14',
+        'img15',
+        'wifi',
         'gym',
         'spa',
+        'parking',
+        'traslados',
     ];
      public function getImagenes()
     {

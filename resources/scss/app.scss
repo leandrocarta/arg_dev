@@ -937,3 +937,9 @@ font-family: 'Oswald', sans-serif;;
 }
 
 // Fin Medias Querys
+
+// Scroll
+.table-container {
+    max-height: 330px; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega un scroll vertical si hay más de 20 registros */
+}

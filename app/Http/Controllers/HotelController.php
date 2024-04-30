@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 use Intervention\Image\Facades\Image;
+use App\Models\Pais;
+use App\Models\Destino;
 
 class HotelController extends Controller
 {
@@ -15,19 +17,24 @@ class HotelController extends Controller
     }
     public function showFormHotel()
     {
-        return view('productos.hotel.hotel_news');
+        $destinos = Destino::all();
+        $paises = Pais::all();
+        return view('productos.hotel.hotel_news', compact('paises', 'destinos'));
     }
 
     public function createHotel(Request $request)
     {        
         $this->validate($request, [
             'nombre' => 'required|string',
+            'destino' => 'required|string',
+            'pais' => 'required|string',
+            'comidas' => 'required|string',
             'categoria' => 'required|integer',
             'publico' => 'required|string',
         ]);
         $uploadedFile = $request->file('img_banner');
         $uploadedFiles = $request->file('imagenes');
-
+        
         $originalFileName = $uploadedFile->getClientOriginalName();
         $image = Image::make($uploadedFile);
         $extension = strtolower($uploadedFile->getClientOriginalExtension());
@@ -39,12 +46,37 @@ class HotelController extends Controller
         // Crea un nuevo hotel en la base de datos
         $hotel = new Hotel;
         $hotel->nombre = $request->nombre;
+        $hotel->destino = $request->destino;
+        $hotel->pais = $request->pais;
+        $hotel->comidas = $request->comidas;
         $hotel->categoria = $request->categoria;
         $hotel->publico = $request->publico;
         $hotel->img_banner = $originalFileName;
-        $hotel->gym = $request->gym;
-        $hotel->spa = $request->spa;
-        
+        if ($request->has('wifi')) {
+        $hotel->wifi = true; 
+        } else {
+        $hotel->wifi = false; 
+        }
+        if ($request->has('gym')) {
+        $hotel->gym = true; 
+        } else {
+        $hotel->gym = false; 
+        }
+        if ($request->has('spa')) {
+        $hotel->spa = true; 
+        } else {
+        $hotel->spa = false; 
+        }
+        if ($request->has('parking')) {
+        $hotel->parking = true; 
+        } else {
+        $hotel->parking = false; 
+        }
+        if ($request->has('traslados')) {
+        $hotel->traslados = true; 
+        } else {
+        $hotel->traslados = false; 
+        }
         $hotel->save();
         
       if ($request->hasFile('imagenes')) {
@@ -72,19 +104,48 @@ class HotelController extends Controller
     public function formUpdateHotel($id)
     {
         $hotel = Hotel::find($id);
+        $destinos = Destino::all();
+        $paises = Pais::all();
 
-        return view('productos.hotel.hotel_update', compact('hotel'));
+        return view('productos.hotel.hotel_update', compact('hotel', 'destinos', 'paises'));
     }
     public function editarHotel(Request $request, $id)
     {
-        $hotel = Hotel::find($id);
+        $hotel = Hotel::find($id);        
 
         $hotel->nombre = $request->nombre;
+        $hotel->destino = $request->destino;
+        $hotel->pais = $request->pais;
+        $hotel->comidas = $request->comidas;
         $hotel->categoria = $request->categoria;
         $hotel->publico = $request->publico;
 
+        if ($request->has('wifi')) {
+        $hotel->wifi = true; 
+        } else {
+        $hotel->wifi = false; 
+        }
+        if ($request->has('gym')) {
+        $hotel->gym = true; 
+        } else {
+        $hotel->gym = false; 
+        }
+        if ($request->has('spa')) {
+        $hotel->spa = true; 
+        } else {
+        $hotel->spa = false; 
+        }
+        if ($request->has('parking')) {
+        $hotel->parking = true; 
+        } else {
+        $hotel->parking = false; 
+        }
+        if ($request->has('traslados')) {
+        $hotel->traslados = true; 
+        } else {
+        $hotel->traslados = false; 
+        }
         $hotel->save();
-
         return redirect('/read_hotel')->with('success', 'EL HOTEL SE EDITO CORRECTAMENTE !!!');
     }
     public function hotelDelete($id)
