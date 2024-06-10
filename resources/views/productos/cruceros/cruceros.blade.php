@@ -54,7 +54,7 @@
             <div class="col-md-4 p-2">
                 <div class="card productosCrucero">
                     <div class="" style="position: relative; overflow: hidden;">
-                        <div style="padding-top: 100%;"></div> <!-- Este contenedor mantiene el aspect ratio -->
+                        <div style="padding-top: 100%;"></div>
                         <img src="{{ asset('assets/img_cruceros/' . $productoAleatorio->imagen) }}" class="card-img-top img-fluid" alt="{{ $productoAleatorio->nombre }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                         <div class="card-img-overlay titulo-prod-cruceros">
                             <h5 class="card-title"><i class="fa-solid fa-anchor"></i> {{ $productoAleatorio->naviera->nombre }}</h5>                            

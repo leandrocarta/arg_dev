@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre Destino</th>
+                <th>Ciudad Destino</th>
                 <th>País Destino</th>               
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -23,8 +23,8 @@
             @foreach ($destinos as $destino)
             <tr>
                 <td>{{ $destino->id }}</td>
-                <td>{{ $destino->nombre_destino }}</td>
-                <td>{{ $destino->id_pais }}</td>
+                <td>{{ $destino->ciudad_destino }}</td>
+                <td>{{ $destino->pais->nombre_img }}</td>
                 <td>
                     <a href="{{ route('destino.update', $destino->id) }}" class="btn btn-primary">Editar</a>                    
                 </td>

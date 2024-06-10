@@ -8,22 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     protected $fillable = [
-        'nombre',
+        'titulo',
         'proveedor',
-        'imagen',
+        'fecha_salida',
+        'id_hotel',
+        'id_destino',
+        'id_pais',
+        'estadia',
         'habitacion',
-        'tipo_producto',
-        'destino_gral',
-        'id_pais_destino',
-        'ciudad_destino',
-        'origen_salida',
         'precio_total',
         'descto',
         'moneda',
-        'detalles',
-        'id_hotel',
-        'estadia',        
-        'fecha_baja',
+        'origen_salida',
+        'tipo_producto',
+        'imagen',
+        'detalle',
+        'comidas',
+        'ubicacion',
     ];
     public function hotel()
     {
@@ -41,8 +42,12 @@ class Producto extends Model
     {
         return $this->belongsTo(Destino::class, 'id_destino'); 
     }
- public function paises()
+ /*public function paises()
     {
         return $this->belongsTo(Pais::class, 'id_pais_destino'); 
+    } */
+    public function pais()
+    {
+        return $this->belongsTo(Pais::class, 'id_pais');
     }
 }

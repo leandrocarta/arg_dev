@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Hotel extends Model
 {
    protected $fillable = [
-        'nombre', 
-        'destino',
-        'pais',
-        'comidas',
+        'nombre',         
         'categoria',
-        'publico',
+        'id_ciudad',
+        'id_pais',
+        'tipo_publico',
         'img_banner',
         'img1',
         'img2',
@@ -30,11 +29,7 @@ class Hotel extends Model
         'img13',
         'img14',
         'img15',
-        'wifi',
-        'gym',
-        'spa',
-        'parking',
-        'traslados',
+        'detalles',
     ];
      public function getImagenes()
     {
@@ -50,5 +45,13 @@ class Hotel extends Model
     public function productos()
     {
         return $this->hasMany(Producto::class, 'id_hotel');
+    }
+    public function pais()
+    {
+        return $this->belongsTo(Pais::class, 'id_pais');
+    }
+    public function destino()
+    {
+        return $this->belongsTo(Destino::class, 'id_ciudad');
     }
 }

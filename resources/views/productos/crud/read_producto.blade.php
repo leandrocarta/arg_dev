@@ -13,10 +13,9 @@
         <thead>
             <tr>
                 <th>Titulo</th>
-                <th>Código</th>
-                <th>Tipo Producto</th>
-                <th>País</th>
-                <th>Ciudad Destino</th>                
+                <th>Tipo Producto</th>                
+                <th>Ciudad Destino</th> 
+                <th>País</th>               
                 <th>Precio Total</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -26,11 +25,10 @@
             @foreach ($productos as $producto)
             @if($producto->tipo_producto !== 'Aéreo')
             <tr>
-                <td>{{ $producto->nombre }}</td>
-                <td>{{ $producto->codigo }}</td>
-               <td>{{ $producto->tipo_producto }}</td>                
-                <td>{{ $producto->paises->nombre_img }}</td>
-                <td>{{ $producto->destinos->nombre_destino }}</td>
+                <td>{{ $producto->titulo }}</td>
+                <td>{{ $producto->tipo_producto }}</td>    
+                <td>{{ $producto->destinos->ciudad_destino }}</td>            
+                <td>{{ $producto->pais->nombre_img }}</td>                
                 <td>{{ $producto->precio_total }}</td>
                 <td>
                     <a href="{{ route('producto.update', $producto->id) }}" class="btn btn-primary">Editar</a>                    

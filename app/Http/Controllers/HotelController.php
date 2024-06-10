@@ -13,24 +13,26 @@ class HotelController extends Controller
     public function mostrarHoteles()
     {
         $hoteles = Hotel::all();
-        return view('productos.hotel.read_hotel', compact('hoteles'));
+        $paises = Pais::all();
+        $destinos = Destino::all();
+        return view('productos.hotel.read_hotel', compact('hoteles', 'paises', 'destinos'));
     }
     public function showFormHotel()
     {
-        $destinos = Destino::all();
+        $ciudades = Destino::all();
         $paises = Pais::all();
-        return view('productos.hotel.hotel_news', compact('paises', 'destinos'));
+        return view('productos.hotel.hotel_news', compact('paises', 'ciudades'));
     }
 
     public function createHotel(Request $request)
     {        
+        //dd($request->all());
         $this->validate($request, [
             'nombre' => 'required|string',
-            'destino' => 'required|string',
-            'pais' => 'required|string',
-            'comidas' => 'required|string',
             'categoria' => 'required|integer',
-            'publico' => 'required|string',
+            'id_ciudad' => 'required|string',
+            'id_pais' => 'required|string',            
+            'tipo_publico' => 'required|string',
         ]);
         $uploadedFile = $request->file('img_banner');
         $uploadedFiles = $request->file('imagenes');
@@ -46,13 +48,13 @@ class HotelController extends Controller
         // Crea un nuevo hotel en la base de datos
         $hotel = new Hotel;
         $hotel->nombre = $request->nombre;
-        $hotel->destino = $request->destino;
-        $hotel->pais = $request->pais;
-        $hotel->comidas = $request->comidas;
         $hotel->categoria = $request->categoria;
-        $hotel->publico = $request->publico;
+        $hotel->id_ciudad = $request->id_ciudad;
+        $hotel->id_pais = $request->id_pais;        
+        $hotel->tipo_publico = $request->tipo_publico;
         $hotel->img_banner = $originalFileName;
-        if ($request->has('wifi')) {
+        $hotel->detalles = $request->detalles;
+       /* if ($request->has('wifi')) {
         $hotel->wifi = true; 
         } else {
         $hotel->wifi = false; 
@@ -77,20 +79,18 @@ class HotelController extends Controller
         } else {
         $hotel->traslados = false; 
         }
+        */
         $hotel->save();
         
       if ($request->hasFile('imagenes')) {
            $index = 1;
            foreach ($uploadedFiles as $imagen) {
-            // Define la carpeta de destino y el nombre del archivo
             $destinationPath = public_path('assets/img_hoteles/');
             $imagenPath = $imagen->getClientOriginalName();
 
-            // Guarda la imagen secundaria
             $imageSecundaria = Image::make($imagen);
             $imageSecundaria->save($destinationPath . $imagen->getClientOriginalName());
 
-            // Guarda la ruta en la columna correspondiente (img_1, img_2, ..., img_10)
             $hotel->setAttribute('img' . $index, $imagenPath);
 
             $index++;
@@ -104,23 +104,22 @@ class HotelController extends Controller
     public function formUpdateHotel($id)
     {
         $hotel = Hotel::find($id);
-        $destinos = Destino::all();
+        $ciudades = Destino::all();
         $paises = Pais::all();
 
-        return view('productos.hotel.hotel_update', compact('hotel', 'destinos', 'paises'));
+        return view('productos.hotel.hotel_update', compact('hotel', 'ciudades', 'paises'));
     }
     public function editarHotel(Request $request, $id)
     {
-        $hotel = Hotel::find($id);        
-
+        $hotel = Hotel::find($id);       
         $hotel->nombre = $request->nombre;
-        $hotel->destino = $request->destino;
-        $hotel->pais = $request->pais;
-        $hotel->comidas = $request->comidas;
         $hotel->categoria = $request->categoria;
-        $hotel->publico = $request->publico;
+        $hotel->id_ciudad = $request->id_ciudad;
+        $hotel->id_pais = $request->id_pais;        
+        $hotel->tipo_publico = $request->tipo_publico;
+        $hotel->detalles = $request->detalles;
 
-        if ($request->has('wifi')) {
+      /*  if ($request->has('wifi')) {
         $hotel->wifi = true; 
         } else {
         $hotel->wifi = false; 
@@ -144,7 +143,7 @@ class HotelController extends Controller
         $hotel->traslados = true; 
         } else {
         $hotel->traslados = false; 
-        }
+        } */
         $hotel->save();
         return redirect('/read_hotel')->with('success', 'EL HOTEL SE EDITO CORRECTAMENTE !!!');
     }

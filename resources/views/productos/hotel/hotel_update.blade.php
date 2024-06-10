@@ -19,53 +19,51 @@
                                 <input type="text" class="form-control" name="nombre" value="{{ $hotel->nombre }}" required>
                             </div>
                         </div>
+                        <div class="mb-3 form-group form-floating">
+                          <input type="number" value="{{ $hotel->categoria }}" class="form-control" name="categoria" placeholder="Categoría" min="1" max="7" required>
+                          <label for="categoria" class="control-label">Categoría Estrellas</label>
+                        </div>                         
                         <div class="mb-3 form-floating">                 
-                          <select name="destino" class="form-select">
-                             @foreach ($destinos as $destino)
-                               <option value="{{ $destino->id }}" {{ ($hotel->destino == $destino->id) ? 'selected' : '' }}>
-                                   {{ $destino->nombre_destino }}
+                          <select name="id_ciudad" class="form-select">
+                             @foreach ($ciudades as $ciudad)
+                               <option value="{{ $ciudad->id }}" {{ ($hotel->id_ciudad == $ciudad->id) ? 'selected' : '' }}>
+                                   {{ $ciudad->ciudad_destino }}
                                </option>
                              @endforeach
                           </select>
-                         <label for="destino" class="col-md-4 control-label">Ciudad Destino</label> 
-                     </div>      
-                     <div class="mb-3 form-floating">
-                       <select name="pais" class="form-select">
+                         <label for="ciudad" class="col-md-4 control-label">Ciudad Destino</label> 
+                        </div>      
+                        <div class="mb-3 form-floating">
+                          <select name="id_pais" class="form-select">
                              @foreach ($paises as $pais)
-                               <option value="{{ $pais->id }}" {{ ($hotel->pais == $pais->cod_pais) ? 'selected' : '' }}>
+                               <option value="{{ $pais->id }}" {{ ($hotel->id_pais == $pais->id) ? 'selected' : '' }}>
                                    {{ $pais->nombre_img }}
                                </option>
                              @endforeach
                           </select>
-                       <label for="pais" class="form-label">País</label>
-                     </div>
-                     <div class="mb-3 form-group form-floating">       
+                          <label for="pais" class="form-label">País</label>
+                        </div>
+                       <!-- <div class="mb-3 form-group form-floating">       
                          <select name="comidas" class="form-select" aria-label="Default select example">  
                             @if ($hotel->comidas)
-                                      <option value="{{ $hotel->comidas }}" selected>
-                                        {{ $hotel->comidas }}
-                                      </option>
-                                    @endif
+                            <option value="{{ $hotel->comidas }}" selected>
+                                {{ $hotel->comidas }}
+                            </option>
+                            @endif
                             <option value="All Inclusive">All Inclusive</option>
                             <option value="Desayuno">Desayuno</option>
                             <option value="Media Pensión">Media Pensión</option>
                             <option value="Solo Hospedaje">Solo Hospedaje</option>
                          </select>  
                          <label for="comidas" class="col-md-4 control-label">¿Servicio de Gastronomía?</label>
-                     </div>   
+                        </div>   -->                        
                         <div class="form-group">
-                            <label for="codigo" class="col-md-4 control-label">Categoria Hotel</label>
+                           <label for="tipo_publico" class="col-md-4 control-label">¿Apto todo Publico?</label>
                             <div class="">
-                                <input type="text" class="form-control" name="categoria" value="{{ $hotel->categoria }}" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                           <label for="publico" class="col-md-4 control-label">¿Apto todo Publico?</label>
-                            <div class="">
-                                <select name="publico" class="form-select" aria-label="Default select example">  
-                                    @if ($hotel->publico)
-                                      <option value="{{ $hotel->publico }}" selected>
-                                        {{ $hotel->publico }}
+                                <select name="tipo_publico" class="form-select" aria-label="Default select example">  
+                                    @if ($hotel->tipo_publico)
+                                      <option value="{{ $hotel->tipo_publico }}" selected>
+                                        {{ $hotel->tipo_publico }}
                                       </option>
                                     @endif
                                    <option value="Publico">Apto Publico</option>
@@ -74,7 +72,7 @@
                                 </select>  
                             </div>
                         </div>   
-                        <div class="col-md-12 d-flex">
+                       <!-- <div class="col-md-12 d-flex">
                          <div class="col-md-4">
                             <div class="mb-3 form-group form-floating">
                                <div class="form-check">                            
@@ -120,45 +118,51 @@
                             </div>                      
                             <div class="mb-3 form-group form-floating">
                                <div class="form-check">
-                               <!--    <input class="form-check-input" type="checkbox" name="spa" value="SPA">
+                                   <input class="form-check-input" type="checkbox" name="spa" value="SPA">
                                    <label class="form-check-label" for="spa">
                                       
-                                   </label> -->
+                                   </label> 
                                </div>
                             </div> 
                          </div>
                          <div class="col-md-4">
                             <div class="mb-3 form-group form-floating">
                                <div class="form-check">                            
-                              <!--    <label class="form-check-label" for="WIFI">
+                                <label class="form-check-label" for="WIFI">
                                      
                                   </label>
-                                <input class="form-check-input" type="checkbox" name="wifi" value="WIFI"> -->
+                                <input class="form-check-input" type="checkbox" name="wifi" value="WIFI"> 
                                </div>
                             </div>                          
                             <div class="mb-3 form-group form-floating">
                                <div class="form-check">                            
-                                 <!--  <label class="form-check-label" for="gym">
+                                   <label class="form-check-label" for="gym">
                                        
                                    </label>
-                                   <input class="form-check-input" type="checkbox" name="gym" value="GIMNACIO"> -->
+                                   <input class="form-check-input" type="checkbox" name="gym" value="GIMNACIO"> 
                                </div>
                             </div>                      
                             <div class="mb-3 form-group form-floating">
                                <div class="form-check">
-                                  <!-- <input class="form-check-input" type="checkbox" name="spa" value="SPA"> 
+                                   <input class="form-check-input" type="checkbox" name="spa" value="SPA"> 
                                    <label class="form-check-label" for="spa">
                                        
-                                   </label> -->
+                                   </label> 
                                </div>
                             </div> 
                          </div>                     
-                     </div>   
-                        <div class="mt-2">
-                           <button type="submit" class="btn btn-primary">
+                     </div>   -->
+                     <div class="form-group">
+                        <label for="detalles" class="col-md-4 control-label">Detalles Generales</label>
+                        <div class="">
+                           <textarea class="form-control" name="detalles" rows="5">{{ $hotel->detalles }}</textarea>
+                        </div>
+                     </div>    
+                     <div class="mt-2">
+                        <button type="submit" class="btn btn-primary">
                                Guardar Cambios
-                           </button>
-                        </div> 
+                        </button>
+                     </div> 
                 </form>                 
             </div>                   
         </div>

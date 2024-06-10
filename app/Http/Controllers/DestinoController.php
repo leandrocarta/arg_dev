@@ -12,7 +12,8 @@ class DestinoController extends Controller
      public function mostrarDestinos()
     {       
         $destinos = Destino::all();
-        return view('productos.destinos.read_destinos', compact('destinos'));
+        $paises = Pais::all();
+        return view('productos.destinos.read_destinos', compact('destinos', 'paises'));
     }
     public function showFormDestino()
     {       
@@ -22,19 +23,13 @@ class DestinoController extends Controller
     }
     public function createDestino(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
          $request->validate([
-         'nombre_destino' => 'string',
+         'ciudad_destino' => 'string',
          'id_pais' => 'integer',
-         'detalle_gral' => 'string',
-         'ubicacion' => 'string',         
-         'playas' => 'string',
-         'gastronomia' => 'string',
-         'atracciones' => 'string',
-         'historia' => 'string',         
-         'resumen' => 'string',
+         
 ]);
-//dd($request->all());
+       //dd($request->all());
         $uploadedFile = $request->file('img_banner');
         $uploadedFiles = $request->file('imagenes');
         $originalFileName = $uploadedFile->getClientOriginalName();
@@ -47,7 +42,7 @@ class DestinoController extends Controller
             } else {
              $image->save(public_path('assets/img_destinos/' . $originalFileName));
              $destino = new Destino;
-             $destino->nombre_destino = $request->nombre_destino;
+             $destino->ciudad_destino = strtoupper($request->ciudad_destino);
              $destino->id_pais = $request->id_pais;
              $destino->detalle_gral = $request->detalle_gral;
              $destino->ubicacion = $request->ubicacion;
@@ -61,7 +56,7 @@ class DestinoController extends Controller
              }
         } else {
              $destino = new Destino;
-             $destino->nombre_destino = $request->nombre_destino;
+             $destino->ciudad_destino = strtoupper($request->ciudad_destino);
              $destino->id_pais = $request->id_pais;
              $destino->detalle_gral = $request->detalle_gral;
              $destino->ubicacion = $request->ubicacion;
@@ -100,7 +95,7 @@ class DestinoController extends Controller
     public function updateDestino(Request $request, $id)
     {
         $destino = Destino::find($id);
-        $destino->nombre_destino = $request->nombre_destino;
+        $destino->ciudad_destino = strtoupper($request->ciudad_destino);
         $destino->id_pais = $request->id_pais;
         $destino->detalle_gral = $request->detalle_gral;
         $destino->ubicacion = $request->ubicacion;
@@ -113,5 +108,13 @@ class DestinoController extends Controller
         $destino->save();
 
         return redirect('/read_destinos')->with('success', 'EL HOTEL SE EDITO CORRECTAMENTE !!!');
+    }
+     public function deleteDestinos($id)
+    {
+        $destinos = Destino::find($id);
+
+        $destinos->delete();
+
+        return redirect('/read_destinos')->with('success', 'Se ha eliminado el Destino exitosamente!!!');
     }
 }

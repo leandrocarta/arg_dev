@@ -13,27 +13,69 @@
                 <form class="form-horizontal" method="POST" action="{{ route('producto.updateProcess', ['id' => $producto->id]) }}" enctype="multipart/form-data">                      
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="nombre" class="col-md-4 control-label">Titulo Producto</label>
+                            <label for="titulo" class="col-md-4 control-label">Titulo Producto</label>
                             <div class="">
-                                <input type="text" class="form-control" name="nombre" value="{{ $producto->nombre }}">
+                                <input type="text" class="form-control" name="titulo" value="{{ $producto->titulo }}">
                             </div>
                         </div>
-                        <div class="form-row d-flex">
+                         <div class="form-row d-flex">
                            <div class="form-group col-md-6 pe-1">
-                               <label for="codigo" class="col-form-label">Código Producto</label>
-                               <input type="text" class="form-control" name="codigo" value="{{ $producto->codigo }}">
+                               <label for="proveedor" class="col-form-label">Proveedor</label>
+                               <select name="proveedor" class="form-select" aria-label="Default select example">  
+                                     @foreach ($proveedores as $proveedor)
+                                        <option value="{{ $proveedor->empresa }}" {{ $producto->proveedor == $proveedor->empresa ? 'selected' : '' }}>
+                                            {{ $proveedor->empresa }}
+                                        </option>
+                                    @endforeach
+                                </select>   
                            </div>
                            <div class="form-group col-md-6 ps-1">
-                               <label for="fecha_vencimiento" class="col-form-label">Fecha de Vencimiento</label>
-                               <input type="date" name="fecha_vencimiento" class="form-control" value="{{ $producto->fecha_vencimiento }}">
+                               <label for="fecha_salida" class="col-form-label">Fecha de Viaje</label>
+                               <input type="date" name="fecha_salida" class="form-control" value="{{ $producto->fecha_salida }}" required>
                            </div>
-                        </div>      
-                        <div class="form-group">
-                            <label for="imagen" class="col-md-4 control-label">Imagen del Producto</label>
+                        </div> 
+                         <div class="form-group">
+                            <label for="id_hotel" class="col-md-4 control-label">Hotel</label>
                             <div class="">
-                                <input id="imagen" type="file" class="form-control" name="imagen">
+                               <select name="id_hotel" class="form-select">
+                                 @foreach ($hoteles as $hotel)
+                                        <option value="{{ $hotel->id }}" {{ $producto->id_hotel == $hotel->id ? 'selected' : ''}}>
+                                        {{ $hotel->nombre }}
+                                      </option>                                      
+                                    @endforeach     
+                                </select>
                             </div>
-                        </div>
+                        </div>   
+                        <div class="form-group">
+                            <label for="id_destino" class="col-md-4 control-label">Destino</label>
+                            <div class="">                            
+                                <select name="id_destino" class="form-select">                                    
+                                    @foreach ($destinos as $destino)
+                                        <option value="{{ $destino->id }}" {{ $producto->id_destino == $destino->id ? 'selected' : ''}}>
+                                            {{ $destino->ciudad_destino }}
+                                        </option>
+                                    @endforeach
+                                </select>                           
+                            </div>
+                        </div>    
+                         <div class="form-group">
+                            <label for="id_pais" class="col-md-4 control-label">País Destino</label>
+                            <div class="">                            
+                                <select name="id_pais" class="form-select">                                    
+                                    @foreach ($paises as $pais)
+                                        <option value="{{ $pais->id }}" {{ $producto->id_pais == $pais->id ? 'selected' : '' }}>
+                                            {{ $pais->nombre_img }}
+                                        </option>
+                                    @endforeach
+                                </select>                           
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="estadia" class="col-md-4 control-label">Estadía Principal</label>
+                            <div class="">
+                                <input type="number" class="form-control" name="estadia" value="{{ $producto->estadia }}">
+                            </div>
+                        </div>   
                         <div class="form-group">
                             <label for="habitacion" class="col-md-4 control-label">Tipo de Habitación</label>
                             <div class="">
@@ -47,6 +89,33 @@
                                 </select>                                 
                             </div>
                         </div>
+                         <div class="form-group">
+                            <label for="precio_total" class="col-md-4 control-label">Precio Total</label>
+                            <div class="">
+                                <input type="number" class="form-control" name="precio_total" value="{{ $producto->precio_total }}" step="0.01">
+                            </div>
+                        </div>                        
+                        <div class="form-group">
+                            <label for="moneda" class="col-md-4 control-label">Tipo de Moneda</label>
+                            <div class="">
+                                <select name="moneda" class="form-select" aria-label="Default select example">  
+                                    <option value="{{ $producto->moneda }}" @if(old('moneda') == 'USD') selected @endif>{{ $producto->moneda }}</option>
+                                    <option value="EUR" @if(old('moneda') == 'EUR') selected @endif>EUR</option>
+                                    <option value="$" @if(old('moneda') == '$') selected @endif>$</option>  
+                                    <option value="USD" @if(old('moneda') == 'USD') selected @endif>USD</option>                                  
+                                </select>                                 
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="origen_salida" class="col-md-4 control-label">Origen Salida</label>
+                            <div class="">
+                                <select name="origen_salida" class="form-select" aria-label="Default select example">  
+                                    <option value="{{ $producto->origen_salida }}" @if(old('origen_salida') == '{{ $producto->origen_salida }}') selected @endif>{{ $producto->origen_salida }}</option>
+                                    <option value="Córdoba" @if(old('origen_salida') == 'Córdoba') selected @endif>Córdoba</option>
+                                    <option value="Ezeiza" @if(old('origen_salida') == 'Ezeiza') selected @endif>Ezeiza</option>
+                                </select>  
+                            </div>
+                        </div>    
                         <div class="form-group">
                             <label for="tipo_producto" class="col-md-4 control-label">Tipo Producto</label>
                             <div class="">
@@ -59,7 +128,31 @@
                                     <option value="Paquete Turístico" @if(old('tipo_producto') == 'Paquete Turístico') selected @endif>Paquete Turístico</option>
                                 </select>                                 
                             </div>
+                        </div>                        
+                        <div class="form-group">
+                            <label for="imagen" class="col-md-4 control-label">Imagen del Producto</label>
+                            <div class="">
+                                <input id="imagen" type="file" class="form-control" name="imagen">
+                            </div>
                         </div>
+                        <div class="form-group">
+                            <label for="detalles" class="col-md-4 control-label">Detalles</label>
+                            <div class="">
+                                <input type="text" class="form-control" name="detalles" value="{{ $producto->detalles }}">
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="comidas" class="col-md-4 control-label">Comidas</label>
+                              <div class="">
+                                  <select name="comidas" class="form-select" aria-label="Default select example"> 
+                                  <option value="{{ $producto->comidas }}" @if(old('comidas') == 'All Inclusive') selected @endif>{{ $producto->comidas }}</option>
+                                    <option value="All Inclusive" @if(old('comidas') == 'All Inclusive') selected @endif>All Inclusive</option>
+                                    <option value="Desayuno" @if(old('comidas') == 'Desayuno') @endif>Desayuno</option>
+                                    <option value="Media Pensión" @if(old('comidas') == 'Media Pensión') @endif>Media Pensión</option>
+                                    <option value="Otros" @if(old('comidas') == 'Otros') @endif>Otros</option>
+                                  </select>  
+                              </div>
+                        </div>                           
                           <div class="form-group">
                            <p class="mas my-2">
                              <a class="btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -113,17 +206,7 @@
                                           </select>  
                                       </div>
                                   </div>       
-                                  <div class="form-group">
-                                   <label for="comidas" class="col-md-4 control-label">Comidas</label>
-                                      <div class="">
-                                          <select name="comidas" class="form-select" aria-label="Default select example"> 
-                                            <option value="All Inclusive" @if(old('comidas') == 'All Inclusive') selected @endif>All Inclusive</option>
-                                            <option value="Desayuno" @if(old('comidas') == 'Desayuno') @endif>Desayuno</option>
-                                            <option value="Media Pensión" @if(old('comidas') == 'Media Pensión') @endif>Media Pensión</option>
-                                            <option value="Otros" @if(old('comidas') == 'Otros') @endif>Otros</option>
-                                          </select>  
-                                      </div>
-                                  </div>   
+                                  
                                   <div class="form-group">
                                   <label for="seguro" class="col-md-4 control-label">Asistencia al viajero</label>
                                       <div class="">
@@ -208,135 +291,18 @@
                           </div>  
                         </div>  
                         <div class="form-group">
-                            <label for="destinoGral" class="col-md-4 control-label">Destino General</label>
+                            <label for="ubicacion" class="col-md-4 control-label">Destino General</label>
                             <div class="">
-                                <select name="destinoGral" class="form-select" aria-label="Default select example">   
+                                <select name="ubicacion" class="form-select" aria-label="Default select example">   
                                     <option value="{{ $producto->destino_gral }}" @if(old('destinoGral') == 'Mundo') selected @endif>{{ $producto->destino_gral }}</option>
-                                    <option value="Tur-Arg" @if(old('destinoGral') == 'Tur-Arg') @endif>Tur-Arg</option>
-                                    <option value="Brasil" @if(old('destinoGral') == 'Brasil') @endif>Brasil</option>
-                                    <option value="Caribe" @if(old('destinoGral') == 'Caribe') @endif>Caribe</option>
-                                    <option value="Europa" @if(old('destinoGral') == 'Europa') @endif>Europa</option>                                    
-                                    <option value="Mundo" @if(old('destinoGral') == 'Mundo') @endif>Mundo</option>
+                                    <option value="Tur-Arg" @if(old('ubicacion') == 'Tur-Arg') @endif>Tur-Arg</option>
+                                    <option value="Brasil" @if(old('ubicacion') == 'Brasil') @endif>Brasil</option>
+                                    <option value="Caribe" @if(old('ubicacion') == 'Caribe') @endif>Caribe</option>
+                                    <option value="Europa" @if(old('ubicacion') == 'Europa') @endif>Europa</option>                                    
+                                    <option value="Mundo" @if(old('ubicacion') == 'Mundo') @endif>Mundo</option>
                                 </select>                                 
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="pais_destino" class="col-md-4 control-label">País Destino</label>
-                            <div class="">                            
-                                <select name="pais_destino" class="form-select">                                    
-                                    @foreach ($paises as $pais)
-                                        <option value="{{ $pais->id }}" {{ ($producto->id_pais_destino  == $pais->id) ? 'selected' : '' }}>
-                                            {{ $pais->nombre_img }}
-                                        </option>
-                                    @endforeach
-                                </select>                           
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="ciudad_destino" class="col-md-4 control-label">Ciudad Destino</label>
-                            <div class="">                            
-                                <select name="ciudad_destino" class="form-select">                                    
-                                    @foreach ($destinos as $destino)
-                                       <option value="{{ $destino->id }}" {{ ($producto->id_destino == $destino->id) ? 'selected' : '' }}>
-                                          {{ $destino->nombre_destino }}
-                                       </option>
-                                    @endforeach
-                                </select>                       
-                            </div>
-                        </div>                                           
-                        <div class="form-group">
-                            <label for="origen_salida" class="col-md-4 control-label">Origen Salida</label>
-                            <div class="">
-                                <select name="origen_salida" class="form-select" aria-label="Default select example">  
-                                    <option value="{{ $producto->origen_salida }}" @if(old('origen_salida') == '{{ $producto->origen_salida }}') selected @endif>{{ $producto->origen_salida }}</option>
-                                    <option value="Córdoba" @if(old('origen_salida') == 'Córdoba') selected @endif>Córdoba</option>
-                                    <option value="Ezeiza" @if(old('origen_salida') == 'Ezeiza') selected @endif>Ezeiza</option>
-                                </select>  
-                            </div>
-                        </div>                       
-                        <div class="form-group">
-                            <label for="precio_total" class="col-md-4 control-label">Precio Total</label>
-                            <div class="">
-                                <input type="number" class="form-control" name="precio_total" value="{{ $producto->precio_total }}" step="0.01">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="precio_comisionable" class="col-md-4 control-label">Precio Comisionable</label>
-                            <div class="">
-                                <input type="number" class="form-control" name="precio_comisionable" value="{{ $producto->precio_comisionable }}" step="0.01">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="moneda" class="col-md-4 control-label">Tipo de Moneda</label>
-                            <div class="">
-                                <select name="moneda" class="form-select" aria-label="Default select example">  
-                                    <option value="{{ $producto->moneda }}" @if(old('moneda') == 'USD') selected @endif>{{ $producto->moneda }}</option>
-                                    <option value="EUR" @if(old('moneda') == 'EUR') selected @endif>EUR</option>
-                                    <option value="$" @if(old('moneda') == '$') selected @endif>$</option>  
-                                    <option value="USD" @if(old('moneda') == 'USD') selected @endif>USD</option>                                  
-                                </select>                                 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="hotel_principal" class="col-md-4 control-label">Hotel Principal</label>
-                            <div class="">
-                               <select name="hotel_principal" class="form-select">
-                                    @foreach ($hoteles as $hotel)
-                                        <option value="{{ $hotel->id }}" {{ ($producto->id_hotel == $hotel->id) ? 'selected' : '' }}>
-                                            {{ $hotel->nombre }}
-                                        </option>                                         
-                                    @endforeach                                    
-                                </select>
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="estadia_principal" class="col-md-4 control-label">Estadía Principal</label>
-                            <div class="">
-                                <input type="number" class="form-control" name="estadia_principal" value="{{ $producto->estadia }}">
-                            </div>
-                        </div>    
-                        <div class="form-group">
-                            <label for="hotel_dos" class="col-md-4 control-label">Hotel 2</label>
-                            <div class="">
-                               <select name="hotel_dos" class="form-select">
-                                    @foreach ($hoteles as $hotel)
-                                        <option value="{{ $hotel->id }}" {{ (old('hotel_dos') == $hotel->id) ? 'selected' : '' }}>
-                                            {{ $hotel->nombre }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="estadia_dos" class="col-md-4 control-label">Estadía Hotel 2</label>
-                            <div class="">
-                                <input value="0" type="number" class="form-control" name="estadia_dos" value="{{ $producto->estadia_dos }}">
-                            </div>
-                        </div>                        
-                        <div class="form-group">
-                            <label for="hotel_tres" class="col-md-4 control-label">Hotel 3</label>
-                            <div class="">
-                               <select name="hotel_tres" class="form-select">
-                                    @foreach ($hoteles as $hotel)
-                                        <option value="{{ $hotel->id }}" {{ (old('hotel_tres') == $hotel->id) ? 'selected' : '' }}>
-                                            {{ $hotel->nombre }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="estadia_tres" class="col-md-4 control-label">Estadía Hotel 3</label>
-                            <div class="">
-                                <input value="0" type="number" class="form-control" name="estadia_tres" value="{{ $producto->estadia_tres }}">
-                            </div>
-                        </div>    
-                        <div class="form-group">
-                            <label for="estadiaTotal" class="col-md-4 control-label">Estadía Total</label>
-                            <div class="">
-                                <input type="number" class="form-control" name="estadiaTotal" value="{{ $producto->estadiaTotal }}">
-                            </div>
-                        </div>                                            
+                        </div>                           
                         <div class="mt-2">
                            <button type="submit" class="btn btn-primary">
                                Guardar Producto

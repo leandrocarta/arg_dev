@@ -43,7 +43,7 @@
           </div>
           <div class="form-floating mb-1">
               <input type="number" name="menores" value="0" class="form-control" placeholder="" >
-              <label for="menores" class="form-label">¿Cantidad de menores?</label>
+              <label for="menores" class="form-label">¿Cantidad de menores de 2 a 11 años?</label>
           </div>
           <div class="form-floating mb-3">
             <input type="email" name="email" placeholder="Email de Contacto" class="form-control" required>

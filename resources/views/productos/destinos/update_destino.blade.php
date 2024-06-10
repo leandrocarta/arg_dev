@@ -14,9 +14,9 @@
                 <form class="form-horizontal" method="POST" action="{{ route('update.destino', ['id' => $destinos->id]) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="nombre_destino" class="col-md-4 control-label">Nombre Destino</label>
+                            <label for="ciudad_destino" class="col-md-4 control-label">Nombre Destino</label>
                             <div class="">
-                                <input type="text" class="form-control" name="nombre_destino" value="{{ $destinos->nombre_destino }}" required>
+                                <input type="text" class="form-control" name="ciudad_destino" value="{{ $destinos->ciudad_destino }}" required>
                             </div>
                         </div>      
                         <div class="form-group">

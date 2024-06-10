@@ -9,7 +9,7 @@ class Destino extends Model
 {
     use HasFactory;
      protected $fillable = [
-        'nombre_destino',
+        'ciudad_destino',
         'id_pais',
         'detalle_gral',
         'ubicacion',
@@ -31,4 +31,8 @@ class Destino extends Model
         'img10',
     ];   
 
+     public function pais()
+    {
+        return $this->belongsTo(Pais::class, 'id_pais');
+    }
 }

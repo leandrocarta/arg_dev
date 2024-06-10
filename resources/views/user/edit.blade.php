@@ -445,7 +445,7 @@
                         </option>
                         @endforeach
                            @else <!-- Si el campo id_pais está vacío o nulo -->
-                        <option value="" data-nombre-img="" disabled selected>Seleccione su País</option>
+                        <option data-nombre-img="" disabled selected>Seleccione su País</option>
                         @foreach ($paises as $pais)
                         <option value="{{ $pais->cod_pais }}" data-nombre-img="{{ $pais->nombre}}">
                             {{ $pais->nombre_img }} ({{ $pais->cod_pais }})

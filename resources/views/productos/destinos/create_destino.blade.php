@@ -14,9 +14,9 @@
                 <form class="form-horizontal" method="POST" action="{{ route('destinos.create') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="nombre_destino" class="col-md-4 control-label">Nombre Destino</label>
+                            <label for="ciudad_destino" class="col-md-4 control-label">Ciudad Destino</label>
                             <div class="">
-                                <input id="nombre" type="text" class="form-control" name="nombre_destino" value="{{ old('nombre_destino') }}" required>
+                                <input type="text" class="form-control" name="ciudad_destino" value="{{ old('nombre_destino') }}" required>
                             </div>
                         </div>      
                         <div class="form-group">

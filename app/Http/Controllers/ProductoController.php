@@ -44,6 +44,7 @@ class ProductoController extends Controller
     }
     public function formUpdateProductos($id)
     {
+        $proveedores = ProveedorMayorista::all();
         $destinos = Destino::all();
         $hoteles = Hotel::all();
         $paises = Pais::all();
@@ -51,7 +52,7 @@ class ProductoController extends Controller
         if (!$producto) {
             // Manejo del caso en que el producto no existe
         } else {
-            return view('productos.crud.update_producto', compact('producto', 'paises', 'hoteles', 'destinos'));
+            return view('productos.crud.update_producto', compact('producto', 'paises', 'hoteles', 'destinos', 'proveedores'));
             
         }
     }
@@ -87,18 +88,25 @@ class ProductoController extends Controller
             }
         }
         if ($producto) {
-            $producto->nombre = strtoupper($request->nombre);
+            $producto->titulo = strtoupper($request->titulo);
             $producto->proveedor = $request->proveedor;
+            $producto->fecha_salida = $request->fecha_salida;
+            $producto->id_hotel = $request->id_hotel;
+            $producto->id_destino = $request->id_destino;
+            $producto->id_pais = $request->id_pais;
+            $producto->estadia = $request->estadia;
             $producto->habitacion = $request->habitacion;
-            $producto->tipo_producto = $request->tipo_producto;
-            $producto->id_pais_destino = $request->pais_destino;
-            $producto->id_destino = $request->ciudad_destino;
-            $producto->origen_salida = $request->origen_salida;
             $producto->precio_total = $request->precio_total;
+            $producto->descto = $request->descto;
             $producto->moneda = $request->moneda;
+            $producto->origen_salida = $request->origen_salida;
+            $producto->tipo_producto = $request->tipo_producto;
+            if($uploadedFile){
+            $producto->imagen = $originalFileName;
+            }  
             $producto->detalles = $request->detalles;
-            $producto->id_hotel = $request->hotel_principal;
-            $producto->estadia = $request->estadia_principal;
+            $producto->comidas = $request->comidas; 
+            $producto->ubicacion = $request->ubicacion;
 
             $producto->save();
         }
@@ -111,7 +119,7 @@ class ProductoController extends Controller
             'codigo.unique' => 'EL CÓDIGO DEL PRODUCTO INGRESADO YA EXISTE.',
         ];
         $this->validate($request, [
-            'nombre' => 'string',
+            'titulo' => 'string',
             'proveedor' => 'string',
             'imagen' => 'image|mimes:jpeg,png,jpg',
             'habitacion' => 'string',
@@ -146,23 +154,25 @@ class ProductoController extends Controller
         } else {
             $image->save(public_path('assets/img_paquetes/' . $originalFileName));
             $producto = new Producto;
-            $producto->nombre = strtoupper($request->nombre);
+            $producto->titulo = strtoupper($request->titulo);
             $producto->proveedor = $request->proveedor;
-            $producto->imagen = $originalFileName;
+            $producto->fecha_salida = $request->fecha_salida;
+            $producto->id_hotel = $request->id_hotel;
+            $producto->id_destino = $request->id_destino;
+            $producto->id_pais = $request->id_pais;
+            $producto->estadia = $request->estadia;
             $producto->habitacion = $request->habitacion;
-            $producto->tipo_producto = $request->tipo_producto;
-            $producto->destino_gral = $request->destinoGral;
-            $producto->id_pais_destino = $request->pais_destino;
-            $producto->id_destino = $request->ciudad_destino;
-            $producto->origen_salida = $request->origen_salida;
             $producto->precio_total = $request->precio_total;
             $producto->descto = $request->descto;
             $producto->moneda = $request->moneda;
+            $producto->origen_salida = $request->origen_salida;
+            $producto->tipo_producto = $request->tipo_producto;
+            if($uploadedFile){
+            $producto->imagen = $originalFileName;
+            }           
             $producto->detalles = $request->detalles;
-            $producto->id_hotel = $request->hotel_principal;
-            $producto->estadia = $request->estadia_principal;
-            $producto->fecha_vencimiento = $request->fecha_vencimiento;
-
+            $producto->comidas = $request->comidas;
+            $producto->ubicacion = $request->ubicacion;
             //$producto->solo_adultos = $request->has('solo_adultos') ? true : false;
             $producto->save();
         }

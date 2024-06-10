@@ -36,8 +36,7 @@
                 <img src="{{ asset('assets/img_hoteles/' . $hotelData['hotel']->img_banner) }}" class="d-block w-100" alt="">
                 <div class="titulo-detalles-prod">
                     <h1><i class="fa-solid fa-location-dot me-2"></i>{{ $productos->pais_destino }}  {{ $productos->destinos->nombre_destino }}</h1>
-                    <h2><i class="fa-solid fa-hotel"></i> {{ $hotelData['hotel']->nombre }}</h2>
-                    <h3>Con Estadía de {{ $hotelData['estadia'] }} Noches</h3>                    
+                    <h2><i class="fa-solid fa-hotel"></i> {{ $hotelData['hotel']->nombre }}</h2>                                        
                  @if ($productos->tipo_producto == 'Exclusivo Comunidad')                  
                      <p class="exclusivo-detalles">Comunidad Argtravels (20% Descto.)</p>                                     
                  @endif
@@ -60,54 +59,42 @@
                    <h2 class="mb-4">Información General</h2>
                 </div>
             </div>
-        </div>        
-        <div class="col-md-6 info-paquete d-flex flex-column mb1-movil">
-            <div class="px-2 flex-grow-1 bg-light-detalles">
-                <h4 class="mb-2">Información del Paquete</h4>
-                <p>
-                    <i class="fas fa-bus"></i> {{ $productos->service->traslados_orig }} Traslados a {{ $productos->origen_salida }}
-                </p>
-                <p class="">
-                    @if ($productos->service)
-                        @php
-                            $transporteAereo = $productos->service->transporte_int;
-                        @endphp
+        </div>    
+        <div class="col-mb-12 icon-detalles mb-2">    
+                 @if ($productos->service)
+                 @php
+                     $transporteAereo = $productos->service->transporte_int;
+                 @endphp
 
-                        @if ($transporteAereo == 'Aéreo Directo')
-                            <i class="fas fa-plane-departure me-1"></i>
-                        @elseif ($transporteAereo == 'Aéreos con escala')
-                            <i class="fas fa-plane-departure me-1"></i> 
-                        @endif
+                 @if ($transporteAereo == 'Aéreo Directo')
+                     <i class="fas fa-plane-departure me-1"></i>
+                 @elseif ($transporteAereo == 'Aéreos con escala')
+                     <i class="fas fa-plane-departure me-1"></i> 
+                 @endif
 
-                        @if ($transporteAereo == 'Micro - Vans') 
-                            <i class="fas fa-bus"></i> 
-                        @endif
+                 @if ($transporteAereo == 'Micro - Vans') 
+                       <i class="fas fa-bus"></i> 
+                 @endif
 
-                        @if ($transporteAereo == 'Sin Traslados')               
+                 @if ($transporteAereo == 'Sin Traslados')               
                             <!-- Agregar código específico si es necesario -->
-                        @endif
-                    @endif
-
-                    {{ $productos->service->transporte_int }}: desde {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->nombre_destino }}                 
-                </p>
-                <p class="">                
-                    <i class="fas fa-bus me-1"></i> {{ $productos->service->traslados_dest }} desde <span>Aeropuerto ⮂ Hotel</span>           
-                </p>     
-                <p>
-                    <i class="fa-solid fa-cloud-moon"></i> Estadía Total: {{ $productos->estadiaTotal }} Noches.
-                </p>       
-                <p class="mb-2">
-                    <i class="fa-solid fa-kit-medical me-1"></i> {{ $productos->service->seguro }} 
-                </p>                
-            </div>
-        </div>
-        <div class="col-md-6 info-paquete d-flex flex-column">
+                 @endif
+             @endif
+             {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->nombre_destino }}                 
+                              
+             <i class="fas fa-bus me-1"></i> {{ $productos->service->traslados_dest }} <span>Aeropuerto ⮂ Hotel</span>           
+                
+             <i class="fa-solid fa-cloud-moon"></i> Estadía: {{ $productos->estadia }} Noches.
+                
+            <i class="fa-solid fa-kit-medical me-1"></i> {{ $productos->service->seguro }}                   
+        </div>            
+        <div class="col-md-12 info-paquete d-flex flex-column">
             <div class="bg-light-detalles px-2 flex-grow-1">
                 <h4 class="mb-2">{{ $productos->destinos->nombre_destino }}</h4>
                 <p class="mb-2">            
                     @if($productos->destinos->detalle_gral)
                         {{ $productos->destinos->detalle_gral }}                        
-                         <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                         <a data-bs-toggle="collapse" href="#collapseExample" style="color: orange" role="button" aria-expanded="false" aria-controls="collapseExample">
                            Leer mas
                          </a>   
                     @endif

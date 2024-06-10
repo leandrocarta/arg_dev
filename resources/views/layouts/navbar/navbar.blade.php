@@ -56,20 +56,20 @@
             </div>
           </a>
         </li>        
-        <li class="nav-item ms-4">
+       <!-- <li class="nav-item ms-4">
           <a class="" aria-current="page" href="/cruceros">
             <div class="text-center text-left">
               <i class="fa-solid fa-ship"></i>
               <p class="cw">Cruceros</p>
             </div>
           </a>
-        </li>         
+        </li> -->       
       </ul>        
       <ul class="navbar-nav me-5 mb-2 mb-lg-0">      
         @guest()
         @if (Auth::guard('client')->check())
         @else
-          <p class="inicia_sesion"><i class="fa-solid fa-right-to-bracket"></i><a href="login_client">Login</a></p>
+          <p class="inicia_sesion"><i class="fa-solid fa-right-to-bracket"></i><a href="/login_client">Login</a></p>
         @endif
           @endguest 
         @if (Auth::check())
@@ -101,6 +101,7 @@
                      <li><a class="dropdown-item" href="/read_barcos">Alta Barcos</a></li>
                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
+                     <li><a class="dropdown-item" href="{{ route('recibo_pagos') }}">Recibos</a></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>
                    </ul>
                   </li>

@@ -29,6 +29,7 @@ use App\Http\Controllers\AltaNavieraController;
 use App\Http\Controllers\NombreBarcoController;
 use App\Http\Controllers\ExcursionesArgController; 
 use App\Http\Controllers\HotelsRoomController;
+use App\Http\Controllers\ReciboPagoController;
 /*Route::get('/', function () {
     //return view('layouts.construccion.construccion');
     return view('home');
@@ -173,10 +174,9 @@ Route::get('/update_destino/{id}', [DestinoController::class, 'formUpdateDestino
 Route::post('/update_destino/{id}', [DestinoController::class, 'updateDestino'])->name('update.destino');
 Route::post('/delete_destino/{id}', [DestinoController::class, 'deleteDestinos'])->name('destino.delete');
 // Viajes a Medida
-Route::get('/a-medida', [ViajeAMedidaController::class, 'vista']);
+Route::get('/a-medida', [ViajeAMedidaController::class, 'vista'])->name('a-medida');
 Route::post('/a-medida', [ViajeAMedidaController::class, 'store']);
 // Create Rooms
-
 Route::get('/create_room_hotel', [HotelsRoomController ::class, 'index'])->name('form.room');
 Route::post('/create_room_hotel', [HotelsRoomController ::class, 'create'])->name('create_room_hotel');
 Route::get('/read_rooms', [HotelsRoomController ::class, 'read_rooms']);
@@ -185,3 +185,7 @@ Route::post('/delete_room/{id}', [HotelsRoomController ::class, 'destroy'])->nam
 /*
 Route::post('/barco_update/{id}', [NombreBarcoController ::class, 'update'])->name('barco.update');
 */
+// Recibo de pagos
+Route::get('/recibo_pagos', [ReciboPagoController::class, 'index'])->name('recibo_pagos');
+Route::post('/recibo_pagos', [ReciboPagoController::class, 'store']);
+// Fin Recibo de pagos

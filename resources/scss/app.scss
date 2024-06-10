@@ -6,9 +6,17 @@
 }
 
 .bg-light-detalles {
-  background-color: #e2e3e4;
-  border: 2px solid rgb(0, 0, 0);
+  background-color: #2866B7;
   border-radius: 8px;
+}
+.bg-light-detalles h4, .bg-light-detalles p {
+  color: white;
+}
+.icon-detalles i {
+padding: 15px;
+background-color: #2866B7;
+border-radius: 100%;
+color: white;
 }
 p {
   margin: 0;
@@ -288,16 +296,13 @@ margin-left: 10px;
     margin: 5px;
 } 
 .datos-generales h2, .datos-generales h5 {
-  //display: inline-block;
   color: white;
   padding: 10px;
   background-color: #2866B7;
   border-radius: 10px;
   text-align: center;
 }
-.datos-generales .info-paquete h4{
-  color: #2866B7;
-}
+
 
 .titulo-seccion {
     color: #007bff; 
@@ -337,10 +342,10 @@ margin-left: 10px;
   border-radius: 10px;
 }
 .detalles_productos .datos-generales p i {
-  color: rgb(130, 130, 131);
+  color: orange;
 }
 .detalles_productos .datos-generales p span {
-  color: gray;
+  color: orange;
 }
 .detalles_productos i {
   margin-right: 5px;
@@ -611,13 +616,18 @@ font-family: 'Oswald', sans-serif;;
 .fa-hot-tub-person, .fa-dumbbell, .fa-cloud-moon, .fa-bus, .fa-plane-departure {
   color: #ffffff;
 }
-.home-iconos, .fa-sun, .fa-bed, .fa-hotel, .fa-bell-concierge, .fa-mug-saucer, .fa-utensils,
+.home-iconos, .fa-sun, .fa-bed, .fa-utensils,
 .fa-hot-tub-person, .fa-dumbbell, .fa-cloud-moon, .fa-bus, .fa-plane-departure {
   color: #474646;
 } 
 .fa-star {
   color: #E9B003;
 }
+.fa-location-dot {
+  color: rgb(237, 46, 46);
+}
+
+
 
 .productos .card-body {
   display: flex;

@@ -18,12 +18,10 @@ class ViajeAMedida extends Model
         'destino',
         'adultos',
         'menores',
-        'presupuesto',
-        'hotel',
-        'actividades',
-        'salud',
-        'itinerario',
-        'expectativa',
-        'otro',
+        'edad_menores',
+        'habitaciones',
+        'servicio',
+        'info',
+        'estado',
     ];
 }
