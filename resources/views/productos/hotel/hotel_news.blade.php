@@ -143,7 +143,7 @@
                          </div>                     
                      </div>   -->        
                      <div class="form-group">
-                        <label for="detalles" class="col-md-4 control-label">Ubicación</label>
+                        <label for="detalles" class="col-md-4 control-label">Info del Hotel</label>
                         <div class="">
                            <textarea class="form-control" name="detalles" rows="5">{{ old('detalle') }}</textarea>
                         </div>

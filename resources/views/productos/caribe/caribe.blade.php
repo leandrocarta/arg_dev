@@ -56,7 +56,7 @@
      <div class="row">
        @php
         $productosCaribe = $productos->filter(function ($producto) {
-            return $producto->destino_gral === 'Caribe';
+            return $producto->ubicacion === 'Caribe';
         });
         $productosAleatorios = $productosCaribe->shuffle();
        @endphp

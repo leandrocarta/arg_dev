@@ -94,7 +94,7 @@
         <a class="text-reset fw-bold" href="">ARGTravels</a>
     </div>
   <!-- Copyright -->
-</footer>
+
 <div class="container-fluid vista-pc mb-2 content-min">  
   <div class="d-flex justify-content-between">  
     <img src="assets/img/logo_ministerio_turismo2.png" alt="Imagen" class="logo-min">   
@@ -105,4 +105,4 @@
       </div>  
   </div>
 </div>
-<!-- Footer -->
+</footer>

@@ -35,7 +35,7 @@
               <div class="card-img-container">
                 <img src="{{ asset('assets/img_hoteles/' . $hotelData['hotel']->img_banner) }}" class="d-block w-100" alt="">
                 <div class="titulo-detalles-prod">
-                    <h1><i class="fa-solid fa-location-dot me-2"></i>{{ $productos->pais_destino }}  {{ $productos->destinos->nombre_destino }}</h1>
+                    <h1><i class="fa-solid fa-location-dot me-2"></i> {{ $productos->destinos->ciudad_destino }}, {{ $productos->pais->nombre_img }}</h1>
                     <h2><i class="fa-solid fa-hotel"></i> {{ $hotelData['hotel']->nombre }}</h2>                                        
                  @if ($productos->tipo_producto == 'Exclusivo Comunidad')                  
                      <p class="exclusivo-detalles">Comunidad Argtravels (20% Descto.)</p>                                     
@@ -80,7 +80,7 @@
                             <!-- Agregar código específico si es necesario -->
                  @endif
              @endif
-             {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->nombre_destino }}                 
+             {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->ciudad_destino }}                 
                               
              <i class="fas fa-bus me-1"></i> {{ $productos->service->traslados_dest }} <span>Aeropuerto ⮂ Hotel</span>           
                 
@@ -90,7 +90,7 @@
         </div>            
         <div class="col-md-12 info-paquete d-flex flex-column">
             <div class="bg-light-detalles px-2 flex-grow-1">
-                <h4 class="mb-2">{{ $productos->destinos->nombre_destino }}</h4>
+                <h4 class="mb-2">{{ $productos->destinos->ciudad_destino }}</h4>
                 <p class="mb-2">            
                     @if($productos->destinos->detalle_gral)
                         {{ $productos->destinos->detalle_gral }}                        
@@ -185,28 +185,28 @@
             <div class="detalle-hotel">
                 <h5 class="subtitulo-hotel">
                     @if ($campoHotel === 'id_hotel')
-                    HOSPEDAJE PRINCIPAL:
+                    DETALLES:
                     @else
                     OTROS:
                     @endif
                 </h5>
                  <div class="info-hotel">
-                     <p><i class="fa-solid fa-hotel"></i> Hotel: {{ $hotelRelacionado->nombre }}                                  
+                     <p><i class="fa-solid fa-hotel"></i> {{ $hotelRelacionado->nombre }}                                  
                      </p>
                      <p>
-                     <i class="fa-solid fa-cloud-moon"></i>Noches: {{ $productos->$campoEstadia }}   
+                     <i class="fa-solid fa-cloud-moon"></i> {{ $productos->$campoEstadia }} Noches  
                      </p>                     
-                     <p class=""><i class="fa-solid fa-bed"></i> Habitación: {{ $productos->habitacion }} </p>
+                     <p class=""><i class="fa-solid fa-bed"></i> {{ $productos->habitacion }} </p>
                      <p>
                       @if ($productos->service->comidas == 'All Inclusive')
-                         <i class="fa-solid fa-bell-concierge"></i> Régimen: {{ $productos->service->comidas }}
+                         <i class="fa-solid fa-bell-concierge"></i> {{ $productos->service->comidas }}
                          @elseif ($productos->service->comidas == 'Desayuno')
                          <i class="fa-solid fa-mug-saucer"></i> {{ $productos->service->comidas }}
                          @elseif ($productos->service->comidas == 'Media Pensión')
                          <i class="fa-solid fa-utensils"></i> {{ $productos->service->comidas }}
                          @endif
                      </p>
-                     <p><i class="fa-regular fa-calendar-days"></i> Salida: {{ $productos->fecha_vencimiento }} - Consultar Otras Fechas!!</p>
+                     <p><i class="fa-regular fa-calendar-days"></i> Salida {{ $productos->fecha_salida }} - Consultar Otras Fechas!!</p>
                      @if ($hotelRelacionado->gym == 'Área de Gimnasio' || $hotelRelacionado->spa == 'Área de Spa')
                      <p>
                          @if ($hotelRelacionado->gym == 'Área de Gimnasio')
@@ -250,7 +250,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <p> 
-                         <strong>DETALLES PAQUETE: </strong> {{ $productos->detalles }}                                                
+                         <strong>NOTA: </strong> {{ $productos->detalles }}                                                
                         </p>                        
                     </div>                    
                 </div>
