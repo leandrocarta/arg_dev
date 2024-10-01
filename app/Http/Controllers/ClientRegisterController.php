@@ -16,7 +16,7 @@ class ClientRegisterController extends Controller
     public function register(ClientRequest $request)
     {             
         $validatedData = $request->validated();
-        $userId = $request->cookie('comercioAdherido');   
+        $userId = $request->cookie('comercioAdherido'); 
         foreach ($validatedData as $field => $value) {
         if ($field !== 'email') {
             $validatedData[$field] = ucwords(strtolower($value));
@@ -85,7 +85,6 @@ class ClientRegisterController extends Controller
        
         $client->nombre = ucwords(strtolower($request->input('nombre')));
         $client->apellido = ucwords(strtolower($request->input('apellido')));
-        $client->cod_area = $request->input('cod_area');
         $client->movil = $request->input('movil');
         $client->ciudad = ucwords(strtolower($request->input('ciudad')));
         $client->provincia = ucwords(strtolower($request->input('provincia')));

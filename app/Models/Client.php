@@ -18,10 +18,6 @@ class Client extends Model implements Authenticatable
         Notifiable,
         MustVerifyEmailTrait;
 
-
-    // Resto de las definiciones de tu modelo
-
-    // Métodos requeridos por la interfaz Authenticatable
     public function getAuthIdentifierName()
     {
         return 'id'; // Cambia esto si el nombre de la columna de identificación es diferente
@@ -56,13 +52,12 @@ class Client extends Model implements Authenticatable
         'email',
         'nombre',
         'apellido',
-        'cod_area',
         'movil',
         'ciudad',
         'provincia',
         'pais',
         'password',
-        'id_user',
+        'fk_users_id',
     ];
     /**
      * The attributes that should be hidden for arrays.

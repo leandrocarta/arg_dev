@@ -5,8 +5,9 @@
             <div class="col conten-login">
                <form action="{{ url('/register_client') }}" method="post">
                 @csrf
-                <p style="color: grey;"><b><u>REGISTRO DE CLIENTES</u></b></p>
-                <div class="form-floating mb-3">
+                <p style="color: grey;"><b>Alta Nuevo Miembro:</b></p>
+                <p style="color: grey;">Regístrate en 'THE CLUB' y accede a tarifas especiales y planes de pagos en tus próximas vacaciones.</p>
+                <div class="form-floating my-3">
                   <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre de usuario" value="{{ old('usuario') }}" required>
                   <label for="usuario" class="form-label">Nombre de usuario</label>
                   @error('usuario')

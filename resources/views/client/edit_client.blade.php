@@ -37,7 +37,7 @@
                    </div>     
                    <p class="mb-2">
                      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                     Editar datos sensibles
+                     Cambiar contraseña
                      </a>  
                    </p>                
                      <div class="collapse mb-3" id="collapseExample">                      
@@ -64,13 +64,14 @@
                       <input type="text" name="apellido" placeholder="Apellido" class="form-control" value="{{Auth::guard('client')->user()->apellido}}">
                       <label for="apellido" class="form-label">Apellido</label>                                            
                     </div>      
-                    <div class="mb-3 form-floating">
+                  <!--  <div class="mb-3 form-floating">
                       <input type="number" name="cod_area" placeholder="Código Area Telefónica" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->cod_area}}">
                       <label for="cod_area" class="form-label">Código Area Telefónica</label>                                            
                     </div>
+                  --> 
                     <div class="mb-3 form-floating">
                       <input type="number" name="movil" placeholder="Numero móvil" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->movil}}">
-                      <label for="movil" class="form-label">Numero Móvil</label>                                            
+                      <label for="movil" class="form-label">WhatsApp (Incluir codigo de area) </label>                                            
                     </div>                    
                     <div class="mb-3 form-floating">
                       <input type="text" name="ciudad" placeholder="Ciudad" class="form-control" value="{{Auth::guard('client')->user()->ciudad}}">

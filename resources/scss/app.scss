@@ -32,7 +32,18 @@ main {
   padding: 0!important;
 }
 // Home //
-
+.precio_home {
+   font-family: 'Oswald', sans-serif;
+   color: white;
+   font-weight: bold;
+   font-size: 24px; /* Aumenta el tamaño de la fuente */
+   background-color: rgba(255, 87, 51, 0.8);
+   padding: 10px 20px; /* Agrega un padding para mayor espaciado */
+   border-radius: 5px; /* Bordes redondeados */
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade una sombra para mayor profundidad */
+   text-transform: uppercase; /* Convierte el texto a mayúsculas */
+   letter-spacing: 1px; /* Espaciado entre letras */
+}
 .barra-movil {
     display: flex;
     overflow: hidden;
@@ -224,7 +235,7 @@ border-radius: 10px;
 margin-left: 10px;
 }
 .inicia_sesion a:active {
-  background: #265301;
+ // background: #265301;
   color: #CDFEAA
 }
 .bienvenido-user a {
@@ -455,19 +466,22 @@ padding-top: 12px;
   font-weight: bold;
 }
 .cita-pascal .titulo-contenido p{
-font-family: 'Oswald', sans-serif;;
+font-family: 'Oswald', sans-serif;
   }
 .cita-pascal p span{
   color: orangered;
   text-shadow: 0px 0px 3px black;
 }  
 .presentacion {
-  background-color: #fff7f7;
+  background-color: #2866B7;
   padding: 30px;
   border: 1px solid;
   border-radius: 10px;
   //text-align: center;
   margin: 20px auto;
+}
+.presentacion h2, .presentacion ul {
+  color: white;
 }
 .contenido img {
  border-radius: 10px;
@@ -598,12 +612,14 @@ font-family: 'Oswald', sans-serif;;
   text-transform: uppercase;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
   font-weight: bold;
+  
 }
 .titulo-prod-cruceros h5 {
   color: white;
   text-transform: uppercase;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
   font-weight: bold;
+  margin: 0;
 }
 .titulo-prod p, .titulo-prod-cruceros p {
   color: white;
@@ -720,7 +736,7 @@ font-family: 'Oswald', sans-serif;;
 }
 .barra-horizontal-comunidad {
     height: 35px; 
-    background-color: rgba(218, 0, 252, 0.7); 
+    background-color: rgba(0, 17, 252, 0.7); 
     width: 100%; 
     position: absolute;
     bottom: 30px;
@@ -730,6 +746,7 @@ font-family: 'Oswald', sans-serif;;
     align-items: center;
     color: #ffffff;
     font-weight: bold;    
+    z-index: 3;
 }
 
 
@@ -752,11 +769,11 @@ font-family: 'Oswald', sans-serif;;
 .card-img-container {
     position: relative;
 }
-.titulo-paquetes h2 {
+.titulo-paquetes h2, .titulo-paquetes h5 {
  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
  font-weight: bold;
 }
-.titulo-paquetes h2 span {
+.titulo-paquetes h2 span, .titulo-paquetes h5 span  {
   color: #1D4D8B;
 }
 .titulo-paquetes p span {
@@ -856,7 +873,63 @@ font-family: 'Oswald', sans-serif;;
     padding: 5px;
     background-color: #ffcd36;
 }
+ // Seccion disney  
+ .quince-title {
+      font-family: 'Gochi Hand', cursive;
+      font-size: 2rem; 
+      color: #ffffff; 
+      font-weight: bold; 
+      text-transform: uppercase; 
+      letter-spacing: 2px; 
+      text-align: center; 
+      background: linear-gradient(to right, #f58084, #fad0c4); 
+      padding: 15px; 
+      border-radius: 10px; 
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+    }
+ .boton-disney-usa {
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%; 
+    transition: transform 0.3s ease-in-out;
+ }    
+ .boton-disney-usa:hover {
+    transform: translate(-50%, -50%) scale(1.1); /* Aplica el zoom solo al botón */
+}
+.card {
+    position: relative;
+}
+.program-btn {
+        background-color: #ff69b4;
+        color: white;
+        font-weight: bold;
+        padding: 15px 30px;
+        margin: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
 
+    .program-btn:hover {
+        background-color: #ff1493;
+        transform: scale(1.05);
+    }
+
+    .collapse-container .card {
+        border: 1px solid #ff69b4;
+        border-radius: 8px;
+        background-color: #fff0f5;
+    }
+
+    .collapse-container .card-body {
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+// Fin Seccion disney
 
 .container-welcome .image-container {
             width: 100%;
@@ -893,6 +966,11 @@ font-family: 'Oswald', sans-serif;;
 
 
 @media (max-width: 768px) {
+ 
+  .muy-importante h2 {
+    font-size: 15px;
+  }
+
   .barra-movil img {
   width: 99%;
 }

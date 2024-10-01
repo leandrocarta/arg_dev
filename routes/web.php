@@ -30,10 +30,13 @@ use App\Http\Controllers\NombreBarcoController;
 use App\Http\Controllers\ExcursionesArgController; 
 use App\Http\Controllers\HotelsRoomController;
 use App\Http\Controllers\ReciboPagoController;
-/*Route::get('/', function () {
-    //return view('layouts.construccion.construccion');
-    return view('home');
-});*/
+use App\Http\Controllers\MisViajesController;
+use App\Http\Controllers\ContactoCursoItalianoController;
+use App\Http\Controllers\DisneyController;
+
+Route::get('/disney-usa', [DisneyController::class, 'disneyUSA'])->name('disney.usa');
+Route::get('/eurodisney', [DisneyController::class, 'eurodisney'])->name('eurodisney');
+
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/welcome_suppliers', function () {
     return view('welcome_suppliers');
@@ -73,7 +76,7 @@ Route::resource('categoria_users', CategoriaUserController::class);
 // Clientes
 Route::get('/clientHome', [ClientLoginController::class, 'index']);
 Route::post('/register_client', [ClientRegisterController::class, 'register']);
-Route::get('/register_client', [ClientRegisterController::class, 'show']);
+Route::get('/register_client', [ClientRegisterController::class, 'show'])->name('client.register_client');
 Route::get('/verification_success', [ClientRegisterController::class, 'verification'])->name('verification.success');
 Route::get('/login_client', [ClientLoginController::class, 'showLogin']);
 Route::post('/login_client', [ClientLoginController::class, 'login']);
@@ -84,12 +87,18 @@ Route::get('/recover_password_client', [ClientLoginController::class, 'recover']
 Route::post('/recover_password_client', [ClientLoginController::class, 'recoverPassword']);
 Route::get('/reclamos', [ContactosController::class, 'showForm'])->name('client.reclamos.form');
 Route::post('/reclamos/{id}', [ContactosController::class, 'reclamo_save'])->name('client.reclamos');
+Route::get('/mis_viajes', [MisViajesController::class, 'index'])->name('client.misViajes');
+Route::post('/mis_viajes', [MisViajesController::class, 'store']);
+Route::delete('/mis_viajes/{id}', [MisViajesController::class, 'destroy'])->name('mis_viajes.destroy');
 
 Route::get('/contacto', [ContactosController::class, 'contactForm'])->name('client.contacto');
 Route::post('/contacto/{id?}', [ContactosController::class, 'contactAccion'])->name('client.contacto.save');
 // Excursiones Arg
 Route::get('/excursiones_arg', [ExcursionesArgController::class, 'create'])->name('excursiones_arg.create');
 // FIN Excursiones Arg
+// Italianos
+Route::get('/italy', [ContactoCursoItalianoController::class, 'create']);
+Route::post('/italy', [ContactoCursoItalianoController::class, 'store']);
 // Promociones productos turisticos
 Route::get('/conoce-argentina', [PromocionController::class, 'cookie_conoceArgentina']);
 Route::get('/brasil', [PromocionController::class, 'cookie_brasil']);
@@ -189,3 +198,5 @@ Route::post('/barco_update/{id}', [NombreBarcoController ::class, 'update'])->na
 Route::get('/recibo_pagos', [ReciboPagoController::class, 'index'])->name('recibo_pagos');
 Route::post('/recibo_pagos', [ReciboPagoController::class, 'store']);
 // Fin Recibo de pagos
+// The Club
+Route::get('/the_club', [UserRegisterController ::class, 'the_club']);

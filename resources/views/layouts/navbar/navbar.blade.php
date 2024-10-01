@@ -1,7 +1,7 @@
  @if (Auth::guard('client')->check() || Auth::check())
   @else
   <div class="promo-container">
-    <p class="promo-text">Regístrate y podrás acceder a promociones exclusivas únicamente para nuestra comunidad.</p>
+    <p class="promo-text">"THE CLUB" Regístrate y podrás acceder a promociones exclusivas únicamente para nuestra comunidad.</p>
   </div>
  @endif
 <nav class="navbar navbar-expand-lg">
@@ -31,7 +31,8 @@
               <p class="cw">Vuelos</p>
             </div>
           </a>
-        </li>     
+        </li>    
+        <!-- 
         <li class="nav-item ms-4">
           <a class="" aria-current="page" href="/conoce-argentina">
             <div class="text-center text-left">
@@ -40,6 +41,7 @@
             </div>
           </a>
         </li>
+         -->
         <li class="nav-item ms-4">
           <a class="" aria-current="page" href="/brasil">
             <div class="text-center text-left">
@@ -55,27 +57,19 @@
               <p class="cw">Caribe</p>
             </div>
           </a>
-        </li>        
-       <!-- <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="/cruceros">
-            <div class="text-center text-left">
-              <i class="fa-solid fa-ship"></i>
-              <p class="cw">Cruceros</p>
-            </div>
-          </a>
-        </li> -->       
+        </li>      
       </ul>        
       <ul class="navbar-nav me-5 mb-2 mb-lg-0">      
         @guest()
-        @if (Auth::guard('client')->check())
-        @else
-          <p class="inicia_sesion"><i class="fa-solid fa-right-to-bracket"></i><a href="/login_client">Login</a></p>
-        @endif
-          @endguest 
+          @if (Auth::guard('client')->check())
+          @else
+          <p class="inicia_sesion"><i class="fa-solid fa-right-to-bracket"></i><a href="/login_client">THE CLUB</a></p>
+          @endif
+        @endguest 
         @if (Auth::check())
-        @php
-        $userId = Auth::user()->id;
-         @endphp
+          @php
+          $userId = Auth::user()->id;
+          @endphp
         @endif        
         @if (@auth())           
              @if (Auth::user())
@@ -152,7 +146,7 @@
               </a>
                <ul class="dropdown-menu menu-login">
                    <li><a class="dropdown-item" href="{{ route('client.edit') }}">Mi Perfil</a></li>
-                   <li><a class="dropdown-item" href="#">Mis Compras</a></li>
+                   <li><a class="dropdown-item" href="{{ route('client.misViajes') }}">Mis Viajes</a></li>
                    <li><hr class="dropdown-divider"></li>
                    <li><a class="dropdown-item" href="/logout">Salir</a></li>
                </ul>

@@ -8,5 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Viaje extends Model
 {
     use HasFactory;
-    protected $fillable = ['id_producto', 'tipo_prod', 'adultos', 'menores', 'nombre', 'email', 'consulta','estado'];
+    protected $table = 'mis_viajes';
+    protected $fillable = [
+        'id_cliente', 
+        'id_producto', 
+        'familias', 
+        'adultos', 
+        'menores', 
+        'edad_menores',
+        'habitaciones', 
+        'comentario'
+    ];
 }

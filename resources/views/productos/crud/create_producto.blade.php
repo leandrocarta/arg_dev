@@ -120,6 +120,7 @@
                             <label for="tipo_producto" class="col-md-4 control-label">Tipo Producto</label>
                             <div class="">
                                 <select name="tipo_producto" class="form-select" aria-label="Default select example">  
+                                    <option value="The Club" @if(old('tipo_producto') == 'The Club') selected @endif>Miembros The Club</option>
                                     <option value="Paquete Turístico" @if(old('tipo_producto') == 'Paquete Turístico') selected @endif>Paquete Turístico</option>
                                     <option value="Salida Grupal" @if(old('tipo_producto') == 'Salida Grupal') selected @endif>Salida Grupal</option>
                                     <option value="Grupal con Guía Hispanohablante" @if(old('tipo_producto') == 'Grupal con Guía Hispanohablante') selected @endif>Grupal con Guía Hispanohablante</option>
@@ -162,9 +163,10 @@
                                   <div class="form-group">
                                    <label for="transporte_int" class="col-md-4 control-label">Transporte Internacional</label>
                                       <div class="">
-                                          <select name="transporte_int" class="form-select" aria-label="Default select example"> 
-                                            <option value="Aéreo Directo" @if(old('transporte_int') == 'Aéreo Directo') selected @endif>Aéreo Directo</option>
+                                          <select name="transporte_int" class="form-select" aria-label="Default select example">                                             
                                             <option value="Aéreos con escala" @if(old('transporte_int') == 'Aéreos con escala') selected @endif>Aéreos con escala</option>
+                                            <option value="Aéreo Directo" @if(old('transporte_int') == 'Aéreo Directo') selected @endif>Aéreo Directo</option>
+                                            <option value="No Incluye" @if(old('transporte_int') == 'No Incluye') selected @endif>No Incluye Aéreo</option>
                                             <option value="Micro" @if(old('transporte_int') == 'Micro') selected @endif>Micro</option>
                                             <option value="Otro" @if(old('transporte_int') == 'Otro') selected @endif>Otro</option>
                                              <option value="Sin Traslados" @if(old('transporte_int') == 'Sin Traslados') selected @endif>Sin Traslados</option>
@@ -175,8 +177,8 @@
                                    <label for="traslados_orig" class="col-md-4 control-label">Traslados en Origen</label>
                                       <div class="">
                                           <select name="traslados_orig" class="form-select" aria-label="Default select example"> 
-                                            <option value="No Incluye" @if(old('traslados_orig') == 'No Incluye') selected @endif>No Incluye</option>
-                                            <option value="Incluye" @if(old('traslados_orig') == 'Incluye') selected @endif>Incluye</option>                                                                                      
+                                            <option value="NO INCLUYE" @if(old('traslados_orig') == 'No Incluye') selected @endif>No Incluye</option>
+                                            <option value="INCLUYE" @if(old('traslados_orig') == 'Incluye') selected @endif>Incluye</option>                                                                                      
                                           </select>  
                                       </div>
                                   </div>   
@@ -184,8 +186,8 @@
                                    <label for="traslados_dest" class="col-md-4 control-label">Traslados en Destino</label>
                                       <div class="">
                                           <select name="traslados_dest" class="form-select" aria-label="Default select example"> 
-                                            <option value="Incluye Traslados" @if(old('traslados_dest') == 'Incluye Traslados') selected @endif>Incluye Traslados</option>
-                                            <option value="No Incluye" @if(old('traslados_dest') == 'No Incluye') selected @endif>No Incluye</option>
+                                            <option value="INCLUYE TRASLADOS" @if(old('traslados_dest') == 'Incluye Traslados') selected @endif>Incluye Traslados</option>
+                                            <option value="NO INCLUYE TRASLADOS" @if(old('traslados_dest') == 'No Incluye') selected @endif>No Incluye Traslados</option>
                                           </select>  
                                       </div>
                                   </div>
@@ -205,8 +207,8 @@
                                   <label for="seguro" class="col-md-4 control-label">Asistencia al viajero</label>
                                       <div class="">
                                           <select name="seguro" class="form-select" aria-label="Default select example"> 
-                                            <option value="Asistencia al viajero" @if(old('seguro') == 'Asistencia al viajero') selected @endif>Asistencia al viajero</option>
-                                            <option value="SIN Asistencia al viajero" @if(old('seguro') == 'SIN Asistencia al viajero') selected @endif>SIN Asistencia al viajero</option>
+                                            <option value="INCLUYE ASISTENCIA AL VIAJERO" @if(old('seguro') == 'Asistencia al viajero') selected @endif>Con Asistencia al Viajero</option>
+                                            <option value="SIN ASISTENCIA AL VIAJERO" @if(old('seguro') == 'SIN Asistencia al viajero') selected @endif>SIN Asistencia al Viajero</option>
                                           </select>  
                                       </div>
                                   </div>                   

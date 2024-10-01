@@ -22,6 +22,11 @@ class UserRegisterController extends Controller
         return view('bienvenidos');
     }    
 
+     public function the_club()
+    {
+        return view('the_club');
+    }    
+
     public function show()
     {
         if (Auth::check()) {

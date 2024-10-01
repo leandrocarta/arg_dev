@@ -8,10 +8,8 @@
 <body>
     <div class="container text-center">
         <div class="row">
-            <div class="border">
-              <h1 style="color: #E9B003">COMERCIO ADHERIDO</h1>
-               {!! $qrCode !!}
-              <h1 style="color: #E9B003">FUN-0051</h1>
+            <div class="border mt-5">
+               {!! $qrCode !!}             
             </div>
         </div>
     </div>    

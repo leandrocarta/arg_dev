@@ -13,7 +13,7 @@
  </div> 
   <div class="container my-3 m-auto productos-detalles" id="grupales">
      <div class="titulo-paquetes">
-       <h2 class="">LAS MEJORES SALIDAS GRUPALES <span>POR TODO EL MUNDO</span></h2>
+       <h2>LAS MEJORES SALIDAS GRUPALES <span>POR TODO EL MUNDO</span></h2>
        <p>Te invitamos a explorar nuestra extraordinaria colección de productos diseñados para satisfacer las expectativas de cada tipo de viajero.<span> Presta especial atención a nuestras ofertas</span>, ya que contamos con una línea cuidadosamente seleccionada que incorpora un toque exclusivo en cada destino.</p>
        <p>Al explorar nuestra amplia gama de productos, encontrarás opciones que destacan no solo por los destinos fascinantes que visitarás, sino también por experiencias enriquecidas gracias a <span>guías de habla hispana</span> expertos en cultura e historia. Estos expertos están aquí para transformar cada momento de tu viaje en una inmersión auténtica en la riqueza cultural de cada lugar.</p>
        <hr>

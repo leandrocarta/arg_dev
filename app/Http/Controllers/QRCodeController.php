@@ -10,7 +10,7 @@ class QRCodeController extends Controller
    public function generateQRCode()
 {
       // $url = "https://www.argtravels.tur.ar/welcome_suppliers"; // Reemplaza con la URL que desees codificar
-         $url = "https://www.argtravels.tur.ar/?comercioAdherido=51";
+         $url = "https://www.argtravels.tur.ar/italy";
          $qrCode = QrCode::size(400)
         //->merge('assets/img/valija.png', .3, true)
         ->style('round')
