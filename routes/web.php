@@ -36,6 +36,8 @@ use App\Http\Controllers\DisneyController;
 
 Route::get('/disney-usa', [DisneyController::class, 'disneyUSA'])->name('disney.usa');
 Route::get('/eurodisney', [DisneyController::class, 'eurodisney'])->name('eurodisney');
+Route::post('/disney-usa', [DisneyController::class, 'formDisneyUSA'])->name('formDisney');
+Route::post('/eurodisney', [DisneyController::class, 'formEuroDisney'])->name('formDisneyEuropa');
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/welcome_suppliers', function () {
@@ -67,8 +69,8 @@ Route::put('/edit/{id}', [UserRegisterController::class, 'update'])->name('user.
 Route::get('/bienvenidos', [UserRegisterController::class, 'welcome']);
 Route::get('/logout', [UserLogoutController::class, 'logout']);
 //Route::get('/oportunidad_trabajo_remoto', [UserPresentationController::class, 'information'])->name('user.presentation');
-Route::get('/oportunidad_trabajo_remoto_turismo', [UserPresentationController::class, 'information'])->name('user.presentation');
-Route::post('/oportunidad_trabajo_remoto_turismo', [UserPresentationController::class, 'registro'])->name('user.presentation_registro');
+Route::get('/lider_equipo', [UserPresentationController::class, 'information'])->name('user.presentation');
+Route::post('/lider_equipo', [UserPresentationController::class, 'registro'])->name('user.presentation_registro');
 // Fin User Emprendedores
 Route::resource('paises', PaisController::class);
 Route::resource('provincias', ProvinciaController::class);

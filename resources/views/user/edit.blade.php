@@ -339,21 +339,21 @@
                     
                 @elseif ($user->id_rango === 3)    
                      <div class="mb-3 form-floating">
-                      <input type="number" name="comision" placeholder="comision" class="form-control" value="{{auth()->user()->comision}}" min="0" max="2" step="0.05">
-                      <label for="comision" class="form-label">Comisión Directa (2%)</label>                                            
+                      <input type="number" name="comision" placeholder="comision" class="form-control" value="{{auth()->user()->comision}}" min="0" max="4" step="0.05" disabled>
+                      <label for="comision" class="form-label">Comisión Directa (4%)</label>                                            
                     </div>  
                     <div class="mb-3 form-floating">
-                      <input type="number" name="regalia" placeholder="regalia" class="form-control" value="{{auth()->user()->regalia}}" min="0" max="0" step="0.05" disabled>
+                      <input type="number" name="regalia" placeholder="regalia" class="form-control" value="{{auth()->user()->regalia}}" min="0" max="1" step="0.05" disabled>
                       <label for="regalia" class="form-label">Comisión Equipo a Partir Nivel 2</label>                                            
                     </div>                        
                 @elseif ($user->id_rango >= 3 && $user->id_rango <= 6)    
                      <div class="mb-3 form-floating">
-                      <input type="number" name="comision" placeholder="comision" class="form-control" value="{{auth()->user()->comision}}" min="0" max="2" step="0.05">
-                      <label for="comision" class="form-label">Comisión Max Directa (2%)</label>                                            
+                      <input type="number" name="comision" placeholder="comision" class="form-control" value="{{auth()->user()->comision}}" min="0" max="4" step="0.05">
+                      <label for="comision" class="form-label">Comisión Max Directa (4%)</label>                                            
                     </div>  
                     <div class="mb-3 form-floating">
-                      <input type="number" name="regalia" placeholder="regalia" class="form-control" value="{{auth()->user()->regalia}}" min="0" max="1" step="0.05">
-                      <label for="regalia" class="form-label">Comisión Max Equipo (1%), Editala.</label>                                            
+                      <input type="number" name="regalia" placeholder="regalia" class="form-control" value="{{auth()->user()->regalia}}" min="0" max="1" step="0.05" disabled>
+                      <label for="regalia" class="form-label">Comisión Max Equipo (1%).</label>                                            
                     </div>     
                 @elseif ($user->id_rango >= 7 && $user->id_rango <= 10)    
                      <div class="mb-3 form-floating">

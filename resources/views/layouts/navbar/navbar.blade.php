@@ -31,17 +31,7 @@
               <p class="cw">Vuelos</p>
             </div>
           </a>
-        </li>    
-        <!-- 
-        <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="/conoce-argentina">
-            <div class="text-center text-left">
-              <img class="bandera-arg" src="../assets/img_banderas/argentina_nav.png" alt="">
-              <p>Tur-Arg</p>
-            </div>
-          </a>
-        </li>
-         -->
+        </li>       
         <li class="nav-item ms-4">
           <a class="" aria-current="page" href="/brasil">
             <div class="text-center text-left">
@@ -57,7 +47,15 @@
               <p class="cw">Caribe</p>
             </div>
           </a>
-        </li>      
+        </li>   
+        <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="/#disney">
+            <div class="text-center text-left">
+              <i class="fa-brands fa-fort-awesome"></i>
+              <p>15añeras</p>
+            </div>
+          </a>
+        </li>   
       </ul>        
       <ul class="navbar-nav me-5 mb-2 mb-lg-0">      
         @guest()

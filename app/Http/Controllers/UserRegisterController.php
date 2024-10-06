@@ -36,28 +36,44 @@ class UserRegisterController extends Controller
     }
     public function register(UserRequest $request)
     {
+        if ($request->hasCookie('reclutador_equipo_oficial')) {             
+             $userId = $request->cookie('reclutador_equipo_oficial');
+             $user = User::find($userId); 
+         } else {    
+           $userId = $request->query('reclutador_equipo_oficial') ?? 1;  
+           $user = User::find($userId); 
+           if (!$user) {
+           $userId = 1;
+           $user = User::find(1);
+           }            
+           $cookie = cookie('reclutador_equipo_oficial', $userId, 60 * 24 * 30 * 12); 
+          }     
+    
         $user = User::create($request->except('link_mundo', 'link_argtravels', 'link_sumate', 'comision', 'regalia'));
+
+        $user->id_user_lider = $userId;
+        $user->save();
 
         $urlMundo = 'www.argtravels.tur.ar/?=';
         $linkMundo = $urlMundo . $user->id;       
         $user->link_mundo = $linkMundo;
         $user->save();
 
-        $urlArgTravels = 'www.argtravels.tur.ar/?comercioAdherido=';
+        $urlArgTravels = 'www.argtravels.tur.ar/#disney/?promotor_ventas=';
         $linkArgTravels = $urlArgTravels . $user->id;
         $user->link_argtravels = $linkArgTravels;
         $user->save();
 
-        $urlEquipo = 'www.argtravels.tur.ar/oportunidad_trabajo_remoto_turismo?reclutador_equipo_oficial=';
+        $urlEquipo = 'www.argtravels.tur.ar/lider_equipo?reclutador_equipo_oficial=';
         $link_sumate = $urlEquipo . $user->id;
         $user->link_sumate = $link_sumate;
         $user->save();
                 
-        $comision = 2;
+        $comision = 4;
         $user->comision = $comision;
         $user->save();
 
-        $regalia = 0;
+        $regalia = 1;
         $user->regalia = $regalia;
         $user->save();
         // Enviar la notificación de verificación por correo electrónico
@@ -139,8 +155,8 @@ class UserRegisterController extends Controller
                          }
                         
                         $user->img_profile = $originalFileName;
-                        $user->comision = 2.00;
-                        $user->regalia = 0.00;
+                        $user->comision = 4.00;
+                        $user->regalia = 1.00;
                         $user->nombre = $request->input('nombre');
                         $user->apellido = $request->input('apellido');
                         $user->dni_select = $request->input('dni_select');
@@ -191,10 +207,11 @@ class UserRegisterController extends Controller
                         $user->img_profile = $originalFileName;
                        // $user->save();
                         $user->comision = $request->input('comision');
+                        
                         $user->regalia = $request->input('regalia');
                         $regalia = $request->input('regalia');
                         if ($regalia === null || $regalia === '') {
-                        $regalia = 0.00;
+                        $regalia = 1.00;
                         $user->regalia = $regalia;
                         }
                         if ($request->filled('email')) {
@@ -204,6 +221,7 @@ class UserRegisterController extends Controller
                           $newPassword = $request->input('password');
                           $user->updatePassword($newPassword);
                          }
+                        
                         $user->nombre = $request->input('nombre');
                         $user->apellido = $request->input('apellido');
                         $user->dni_select = $request->input('dni_select');
@@ -219,12 +237,12 @@ class UserRegisterController extends Controller
                         $user->save();
                         return redirect()->route('user.edit')->with('success', 'Tus datos se actualizaron correctamente!!!');
                     }
-                } else {                    
-                    $user->comision = $request->input('comision');
+                } else {                                       
+                    $user->comision = $request->input('comision');                    
                     $user->regalia = $request->input('regalia');
                     $regalia = $request->input('regalia');
                     if ($regalia === null || $regalia === '') {
-                    $regalia = 0.00;
+                    $regalia = 1.00;
                     $user->regalia = $regalia;
                     }
                     if ($request->filled('email')) {

@@ -411,6 +411,19 @@ padding-top: 12px;
   margin-bottom: 180px;
 }
 // Fin Zona Footer *****
+// Formulario Disney
+.form-title {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px; /* Un poco de espacio entre letras */
+    text-transform: uppercase;
+    margin-bottom: 20px;    
+}
+.conten-form-disney {
+  background-color: #ff69b4;
+}
+// Fin Formulario Disney
 // Formulario Edicion ****
 
 .edit button {  
@@ -461,49 +474,83 @@ padding-top: 12px;
  
 // Fin Formulario Edicion *****
 // Oportunidad de trabajo Remoto
-.presentacion button{
-  color: red;
+.presentacion button {
+  color: #fff;
   font-weight: bold;
+  background-color: #ff6347; /* Usar un color llamativo como Tomato */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
-.cita-pascal .titulo-contenido p{
-font-family: 'Oswald', sans-serif;
-  }
-.cita-pascal p span{
-  color: orangered;
-  text-shadow: 0px 0px 3px black;
-}  
-.presentacion {
-  background-color: #2866B7;
-  padding: 30px;
-  border: 1px solid;
-  border-radius: 10px;
-  //text-align: center;
-  margin: 20px auto;
+
+.presentacion button:hover {
+  background-color: #ff4500; /* Un tono más oscuro en hover */
 }
-.presentacion h2, .presentacion ul {
+
+.cita-pascal .titulo-contenido p {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem; /* Aumentar el tamaño de fuente */
   color: white;
 }
-.contenido img {
- border-radius: 10px;
-}
-.presentacion .titulo h2 {   
-  font-size: 24px;
-  font-weight: bold;
-  color: #6c6c6d;
-}
-.presentacion .titulo h2 span {
+
+.cita-pascal p span {
   color: orangered;
-  text-shadow: 0px 0px 3px black;
+  text-shadow: 1px 1px 4px black; /* Aumentar el efecto de sombra */
 }
-.presentacion hr{
-  border-width: 2px;
+
+.presentacion {
+  background-color: #6a5acd; /* Cambiar a un morado más profundo */
+  padding: 40px; /* Mayor padding para resaltar el bloque */
+  border: 2px solid #fff;
+  border-radius: 15px; /* Mayor border-radius para suavizar los bordes */
+  margin: 30px auto;
 }
+
+.presentacion h2 {
+  color: #fff;
+  text-transform: uppercase; /* Usar mayúsculas para dar énfasis */
+  letter-spacing: 2px; /* Separar letras para destacar títulos */
+}
+.presentacion p {
+  color: white;
+}
+.presentacion ul {
+  color: rgb(255, 215, 0);
+}
+
+.contenido img {
+  border-radius: 15px; /* Mayor radio de borde para suavizar las imágenes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra en las imágenes para que resalten */
+}
+
+.presentacion .titulo h2 {
+  font-size: 28px; /* Aumentar el tamaño de la fuente */
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.presentacion .titulo h2 span {
+  color: rgb(255, 215, 0); /* Cambiar a un dorado para llamar más la atención */
+  text-shadow: 2px 2px 5px black;
+}
+
+.presentacion hr {
+  border-width: 3px;
+  border-color: #fff;
+}
+
 .presentacion-contenido p span, .presentacion p span {
-   color: orangered;
-  text-shadow: 0px 0px 2px black;
+  color: rgb(255, 215, 0);
+  text-shadow: 1px 1px 4px black; /* Aumentar la sombra para mayor efecto */
 }
-
-
+.presentacion-contenido p {
+  color: white;
+}
+.presentacion-contenido h4 {
+  color: rgb(255, 215, 0);
+}
 
 // FIN Oportunidad de trabajo Remoto
 // Verify Emails
@@ -531,6 +578,7 @@ font-family: 'Oswald', sans-serif;
    border-radius: 5px;
 }
 // FIN Verify Emails
+// 
 // welcome suppliers
 .welcome_suppliers {
     margin: 0;

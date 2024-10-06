@@ -17,13 +17,14 @@ class UserPresentationController extends Controller
         $rangos = Rango::all(); 
          if ($request->hasCookie('reclutador_equipo_oficial')) {             
              $userId = $request->cookie('reclutador_equipo_oficial');
-             //dd('Reclutador N:: ' . $userId);             
+            // dd('Entro en Reclutador N: ' . $userId);             
              $user = User::find($userId); 
-           /*  $elim_cookie = 'reclutador_equipo_oficial';
-             setcookie($elim_cookie, '', time() - 3600, '/');
+             $elim_cookie = 'reclutador_equipo_oficial';
+           /*  setcookie($elim_cookie, '', time() - 3600, '/');
              dd('se elimino la cookie n°: ', $userId); */
-             return response()->view('user.oportunidad_trabajo_remoto_turismo', compact('user', 'paises', 'rangos')); 
+             return response()->view('user.lider_equipo', compact('user', 'paises', 'rangos')); 
          } else {    
+           // dd('En el Else');
            $userId = $request->query('reclutador_equipo_oficial') ?? 1;  
            $user = User::find($userId); 
            if (!$user) {
@@ -31,8 +32,9 @@ class UserPresentationController extends Controller
            $user = User::find(1);
            }            
            $cookie = cookie('reclutador_equipo_oficial', $userId, 60 * 24 * 30 * 12); 
-           return response()->view('user.oportunidad_trabajo_remoto_turismo', compact('user', 'paises', 'rangos'))->withCookie($cookie);  
-          }     
+           return response()->view('user.lider_equipo', compact('user', 'paises', 'rangos'))->withCookie($cookie); 
+         
+        }     
     }
     public function registro(Request $request)
     {
@@ -52,6 +54,8 @@ class UserPresentationController extends Controller
         $reunion->fecha_presentacion = $request->input('fecha_presentacion');
 
         $reunion->save();
-        return Redirect::route('user.presentation', ['reclutador_equipo_oficial' => $request->input('reclutador_equipo_oficial')]);
+        return redirect()->back()->with('success', '¡Formulario enviado correctamente!');
+
+       // return Redirect::route('user.presentation', ['reclutador_equipo_oficial' => $request->input('reclutador_equipo_oficial')]);
     }
 }

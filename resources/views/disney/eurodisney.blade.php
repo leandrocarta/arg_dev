@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container my-5">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="row">
         <div class="col-12 text-center">
             <h1>¡Viaja a Eurodisney con Enjoy 15!</h1>
@@ -12,8 +17,8 @@
     <!-- Video de YouTube -->
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="ratio ratio-16x9">
-                <iframe src="https://youtu.be/E654wPWE3EA" title="YouTube video" allowfullscreen></iframe>
+            <div class="ratio ratio-16x9"> 
+                <iframe width="853" height="480" src="https://www.youtube.com/embed/E654wPWE3EA" title="Viajá a Disney EUROPA con Enjoy 15 y Argtravels.tur.ar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -105,5 +110,65 @@
 </div>
     </div>
     </div>
+    <div class="row">
+    <div class="col p-2 m-1 border conten-form-disney rounded">
+    <h3 class="form-title text-center mb-4">Formulario de contacto</h3> <!-- Título del formulario -->
+    <form action="{{ route('formDisneyEuropa')}}" method="post">
+        @csrf
+        @php
+            $promotor_ventas = request()->cookie('promotor_ventas', '');
+        @endphp
+        <input type="hidden" name="promotor_ventas" value="{{ $promotor_ventas }}">
+        
+        <div class="form-floating my-2">
+            <input type="email" class="form-control" placeholder="Danos tu mejor email" name="email" required>
+            <label for="email" class="form-label">¿Nos darías tu mejor email?</label>
+        </div>
+        
+        <div class="mb-3 form-floating mt-3">
+            <input type="text" name="name" placeholder="Mi Nombre" class="form-control" required>
+            <label for="name" class="form-label">¿Cuál es tu Nombre?</label>                                            
+        </div>
+        
+        <div class="mb-3 form-floating my-2">
+            <select name="disney" class="form-select" aria-label="Default select example">   
+               <option value="EuroDisney">EuroDisney</option> 
+               <option value="Disney USA">Disney USA</option>
+            </select>     
+            <label for="disney" class="form-label">¿A dónde te gustaría viajar?</label>                      
+        </div>   
+
+        <div class="mb-3 form-floating my-2">
+            <select name="fecha" class="form-select" aria-label="Default select example">   
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>                               
+            </select>     
+            <label for="fecha" class="form-label">¿En que año viajarias (2025-2026-2027)?</label>                      
+        </div>  
+        
+        <div class="mb-3 form-floating my-2">
+            <select name="contacto" class="form-select" aria-label="Default select example">   
+                <option value="Whatsapp">Por WhatsApp</option>
+                <option value="email">Por Email</option>  
+                <option value="telefono">Por Teléfono</option>                              
+            </select>     
+            <label for="contacto" class="form-label">¿Cómo te podemos contactar?</label>                      
+        </div>   
+        
+        <div class="mb-3 form-floating">
+            <input type="text" name="movil" placeholder="Número móvil" class="form-control" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" required>
+            <label for="movil" class="form-label">Número Móvil (EJ: 011xxxx)</label>                                            
+        </div>      
+        
+        <div class="mb-3 form-floating">
+            <input type="text" name="comentario" placeholder="¿Algún comentario?" class="form-control">
+            <label for="comentario" class="form-label">¿Algún comentario?</label>                                            
+        </div>                                   
+        
+        <button type="submit" class="btn btn-light form-control">ENVIAR</button>
+    </form>
+</div>
+</div>  
 </div>
 @endsection

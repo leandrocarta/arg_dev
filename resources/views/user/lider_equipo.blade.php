@@ -1,8 +1,13 @@
 @extends('layouts.app-master')
 @section('content')
-<section class="container mt-5 presentacion">    
+<section class="container mt-5 presentacion">  
+  @if (session('success'))
+<div class="alert alert-success" role="alert">
+    {{ session('success') }}
+</div>
+@endif  
         <div class="titulo">
-          <h2><span>TRABAJO REMOTO: </span>Únete a la emocionante revolución digital en una de las industrias de mayor crecimiento a nivel global: <span>'EL TURISMO'.</span> Conviértete en un <span>'PROMOTOR DIGITAL'</span> priorizando tu independencia y transformando tus sueños en oportunidades ilimitadas. ¡Inicia hoy la construcción de tu futuro en tus propios términos!</h2>          
+          <h2><span>TRABAJO REMOTO: </span>Únete a la emocionante revolución digital en una de las industrias de mayor crecimiento a nivel global: <span>'EL TURISMO'.</span> Conviértete en un <span>'PROMOTOR DIGITAL y LIDER DE EQUIPO'</span> priorizando tu independencia y transformando tus sueños en oportunidades ilimitadas. ¡Inicia hoy la construcción de tu futuro en tus propios términos!</h2>          
           <p><span>NO NECESITAS INVERTIR DINERO PARA UNIRTE</span>. Valoramos tu actitud y tu deseo de crecer por encima de todo.
            Creemos en tu potencial y te ofrecemos el apoyo y la capacitación que necesitas. No dejes que las preocupaciones sobre inversiones te detengan.
            ¡Estás en el lugar adecuado para comenzar este emocionante viaje!
@@ -125,7 +130,7 @@
               <div class="row">
                 <div class="col">
                    <h4>TRABAJO REMOTO Y LIBERTAD FINANCIERA:</h4>
-                   <p>Imagina un mundo en el que tú controlas tus horario, tus ingresos y tu lugar de trabajo. En nuestro modelo de negocio, el <span>trabajo remoto </span>es la norma, lo que significa que puedes disfrutar de la comodidad de gestionar tu tiempo a tu manera. ¿Quieres pasar más tiempo con tu familia? ¿Viajar más? ¿O simplemente trabajar desde la comodidad de tu hogar? La elección es tuya. Además, en las próspera industria del turismo, <span>las oportunidades son ilimitadas</span>, y <span>tus ganancias también lo son</span>. Descubre un mundo de posibilidades y potencial financiero que puede ser tuyo en este emocionante camino como <span>PROMOTOR DIGITAL</span>.</p>
+                   <p>Imagina un mundo en el que tú controlas tus horario, tus ingresos y tu lugar de trabajo. En nuestro modelo de negocio, el <span>trabajo remoto </span>es la norma, lo que significa que puedes disfrutar de la comodidad de gestionar tu tiempo a tu manera. ¿Quieres pasar más tiempo con tu familia? ¿Viajar más? ¿O simplemente trabajar desde la comodidad de tu hogar? La elección es tuya. Además, en las próspera industria del turismo, <span>las oportunidades son ilimitadas</span>, y <span>tus ganancias también lo son</span>. Descubre un mundo de posibilidades y potencial financiero que puede ser tuyo en este emocionante camino como <span>PROMOTOR DIGITAL o LIDER DE UN EQUIPO</span>.</p>
              
                    <h4>VENTAJAS DE VENDER PRODUCTOS TURÍSTICOS:</h4>
                    <p>Nuestra especialización se centra en la venta de productos turísticos, una de las industrias más emocionantes y prósperas en todo el mundo, con un crecimiento del 33% en ventas en línea en los últimos años. Esto significa que tendrás la oportunidad de conectar a las personas con experiencias únicas y al mismo tiempo generar ingresos significativos.</p>
@@ -148,7 +153,7 @@
                   <div class="col-12 text-center titulo-contenido">
                     <blockquote class="blockquote">
                     <p class="">Consideren este programa <span>“PROMOTOR DIGITAL”</span> como una <span>“VALIOSA OPORTUNIDAD”</span> en la industria del turismo. Si deciden unirse y participar activamente, tendrán la oportunidad única de adquirir conocimientos esenciales, establecer conexiones profesionales sólidas y obtener ventajas competitivas en este sector en constante crecimiento. Sin embargo, si optan por no participar, corren el riesgo de perderse una oportunidad excepcional que podría tener un impacto significativo en su crecimiento personal y su libertad financiera.</p>
-                    <footer class="blockquote-footer">Carta Leandro (CEO)</footer>
+                    <footer class="blockquote-footer mt-2">Carta Leandro (CEO) Argtravels.tur.ar</footer>
                     </blockquote>
                   </div>
                 </div>
