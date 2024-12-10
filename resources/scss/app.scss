@@ -782,9 +782,13 @@ padding-top: 12px;
     font-weight: bold;
     z-index: 3;
 }
+.color-barra {
+  background-color: rgba(255, 87, 51, 0.8);
+  color: white;
+}
 .barra-horizontal-comunidad {
     height: 35px; 
-    background-color: rgba(0, 17, 252, 0.7); 
+    background-color: rgba(255, 87, 51, 0.8); 
     width: 100%; 
     position: absolute;
     bottom: 30px;
@@ -1078,4 +1082,19 @@ padding-top: 12px;
 .table-container {
     max-height: 330px; /* Altura máxima del contenedor */
     overflow-y: auto; /* Agrega un scroll vertical si hay más de 20 registros */
+}
+// Paquetes apis
+.img-paquete {
+    position: absolute;
+    top: 0;
+    left: 0;    
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    object-position: center;
+    image-rendering: crisp-edges; 
+    transition: transform 0.2s ease;
+}
+.whatsapp {
+  color: rgb(2, 188, 2);
 }

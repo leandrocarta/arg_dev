@@ -22,6 +22,73 @@ class HomeController extends Controller
     
        // $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
         $mostrarModal = false;
+        if ($request->hasCookie('promotor_ventas')) {            
+    $userId = $request->cookie('promotor_ventas'); 
+    $cliente = auth()->guard('client')->user();
+
+    if ($cliente && $cliente->fk_users_id === null) {
+        $cliente->fk_users_id = $userId;
+        try {
+            $cliente->save();
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    if ($request->has('promotor_ventas')) {
+        $mostrarModal = true;
+    }
+
+    $user = User::find($userId);
+    if ($user) {    
+        $nombreUsuario = $user->usuario;
+    } else {    
+        $nombreUsuario = 'Argtravels';
+    }
+
+    return view('home', compact('productos', 'mostrarModal', 'nombreUsuario'));
+} else {            
+    $userId = $request->query('promotor_ventas') ?? 1;
+    $user = User::find($userId);
+
+    if ($user) {    
+        $nombreUsuario = $user->usuario;
+    } else {    
+        $nombreUsuario = 'Argtravels';
+    }
+
+    if (!$user) {
+        $userId = 1;
+    }
+
+    $cookie = cookie('promotor_ventas', $userId, 60 * 24 * 30 * 12);
+    $cliente = auth()->guard('client')->user();
+
+    if ($cliente && $cliente->fk_users_id === null) {
+        $cliente->fk_users_id = $userId;
+        try {
+            $cliente->save();
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    if ($request->has('promotor_ventas')) {               
+        $mostrarModal = true;
+    }
+
+    return response()
+        ->view('home', compact('productos', 'mostrarModal', 'nombreUsuario'))
+        ->withCookie($cookie);
+}
+
+    }
+     public function index2(Request $request)
+    {                
+       $productos = Producto::with(['hotel', 'service', 'itinerario', 'destinos', 'pais'])->get();
+    
+       // $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
+        $mostrarModal = false;
         if ($request->hasCookie('comercioAdherido')) {            
             $userId = $request->cookie('comercioAdherido'); 
             $cliente = auth()->guard('client')->user();

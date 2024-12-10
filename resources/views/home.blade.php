@@ -31,72 +31,41 @@
 </div> 
   <div class="container my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
-       <h4 class="display-4"></h4>
+       <h4 class="display-4">Paquetes Imbatibles Comunidad</h4>
+       <p>Todos nuestros paquetes incluyen (Aéreos con equipaje en Bodega, traslados en destino y seguros) con valores por pasajero en habitación doble.</p>
      </div>
      <div class="row">                     
        @php
        $productosAleatorios = $productos->shuffle()->take(6);
        @endphp
        @foreach ($productos as $producto)       
+      @if($producto->tipo_producto !== 'Aéreo')  
       <div class="col-md-4 p-2">
         <div class="card productosCrucero">
             <div class="" style="position: relative; overflow: hidden;">
-                <div class="card-img-container" style="padding-top: 100%;">
-                    @if ($producto->tipo_producto == 'The Club')
+                <div style="padding-top: 100%;"></div>
+                @if ($producto->tipo_producto == 'The Club')
                     <div class="barra-horizontal-comunidad">
-                       <p class="leyenda">THE CLUB - Cupos Limitados!!!</p>
+                      <p class="leyenda">100% - Financiados!!!</p>
                     </div>
                     @endif 
-                    <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                    <div class="card-img-overlay titulo-prod-cruceros">
+                <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                <div class="card-img-overlay titulo-prod-cruceros">
                     <p>REF: N° {{ $producto->id }} - <i class="fa-regular fa-calendar-days"></i> {{ $producto->fecha_salida }}</p>
                     <h5><i class="fa-solid fa-location-dot me-1"></i> {{ $producto->destinos->ciudad_destino }}</h5> 
-                    <p>{{ $producto->pais->nombre }}</p>                                    
-                    <h3 class="precio_home"><span class="usd">{{ $producto->moneda }} </span> {{ $producto->precio_total }}</h3>  
-                  </div>
-                </div>
+                    <p>{{ $producto->titulo }}</p>                                    
+                     <h3 class="precio_home"><span class="usd">{{ $producto->moneda }} </span> {{ $producto->precio_total }}</h3>
+                    </div>
             </div>
             <div class="w-100 btn-crucero">
-                <a href="{{ route('producto.detalles', $producto->id) }}" class="btn btn-primary w-100">VER ITINERARIO</a>
+                <a href="{{ route('producto.detalles', $producto->id) }}" class="btn btn-primary w-100">VER MÁS</a>
             </div>
         </div>
-      </div>
+       </div>
+       @endif
        @endforeach
     </div>   
-  </div>
-  <!-- Seccion Disney USA -->
-  <section class="">
-  <div class="container-fluid" id="disney">  
-    <div class="row">
-      <div class="col-md-12">
-        <h3 class="quince-title">Quinceañeras</h3>
-      </div>  
-    </div>  
-    <div class="row">
-    <!-- Imagen Disney USA -->
-    <div class="col-md-6 p-0">
-         <a href="{{ route('disney.usa') }}" class="zoom-effect">
-        <div class="card position-relative">
-            <img src="assets/img_disney/img-disney-usa.jpg" class="img-fluid" alt="Disney USA">
-            <div class="card-body text-center boton-disney-usa position-absolute">
-                <img src="assets/img_disney/boton-disney-usa.png" class="img-fluid" alt="Disney USA">
-            </div>
-        </div>
-    </a>
-    </div>
-    <div class="col-md-6 p-0">
-        <a href="{{ route('eurodisney') }}" class="zoom-effect">
-            <div class="card position-relative">
-                <img src="assets/img_disney/img-disney-eur.jpg" class="img-fluid" alt="Disney Europa">
-                <div class="card-body text-center boton-disney-usa position-absolute">
-                    <img src="assets/img_disney/boton-disney-europa.png" class="img-fluid" alt="Disney Europa">
-                </div>
-            </div>
-        </a>
-    </div>
-</div>
-  </div>
-  </section>
+  </div>  
   <div class="container-fluid my-3 m-auto container-servicios bg-gris">
     <div class="row" id="vuelos">
       <hr>     
@@ -128,41 +97,46 @@
       </div>
     </div>
   </div>
-  <div class="container my-3 m-auto productos-detalles home-iconos">
+  <!-- 
+<div class="container my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
-       <h4 class="display-4"></h4>
+       <h4 class="display-4">Paquetes Imbatibles Comunidad</h4>
+       <p>Todos nuestros paquetes incluyen (Aéreos con equipaje en Bodega, traslados en destino y seguros) con valores por pasajero en habitación doble.</p>
      </div>
      <div class="row">                     
        @php
        $productosAleatorios = $productos->shuffle()->take(6);
        @endphp
-       @foreach ($productos as $producto)       
+       @foreach ($productos as $producto)     
+       @if($producto->tipo_producto !== 'Aéreo')  
       <div class="col-md-4 p-2">
         <div class="card productosCrucero">
             <div class="" style="position: relative; overflow: hidden;">
-                <div class="card-img-container" style="padding-top: 100%;">
-                    @if ($producto->tipo_producto == 'The Club')
+                <div style="padding-top: 100%;"></div>
+                @if ($producto->tipo_producto == 'The Club')
                     <div class="barra-horizontal-comunidad">
-                      <p class="leyenda">THE CLUB - Cupos Limitados!!!</p>
+                      <p class="leyenda">100% - Financiados!!!</p>
                     </div>
                     @endif 
-                    <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                    <div class="card-img-overlay titulo-prod-cruceros">
+                <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                <div class="card-img-overlay titulo-prod-cruceros">
                     <p>REF: N° {{ $producto->id }} - <i class="fa-regular fa-calendar-days"></i> {{ $producto->fecha_salida }}</p>
                     <h5><i class="fa-solid fa-location-dot me-1"></i> {{ $producto->destinos->ciudad_destino }}</h5> 
-                    <p>{{ $producto->pais->nombre }}</p>                                    
+                    <p>{{ $producto->titulo }}</p>                                    
                      <h3 class="precio_home"><span class="usd">{{ $producto->moneda }} </span> {{ $producto->precio_total }}</h3>
                     </div>
-                </div>
             </div>
             <div class="w-100 btn-crucero">
-                <a href="{{ route('producto.detalles', $producto->id) }}" class="btn btn-primary w-100">VER ITINERARIO</a>
+                <a href="{{ route('producto.detalles', $producto->id) }}" class="btn btn-primary w-100">VER MÁS</a>
             </div>
         </div>
-      </div>
+       </div>
+       @endif
        @endforeach
     </div>   
   </div>
+  -->
+  
 </div> 
 @if($mostrarModal)
 <div class="modal fade comercioAdherido" id="miModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

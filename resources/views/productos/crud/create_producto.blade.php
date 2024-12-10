@@ -186,8 +186,8 @@
                                    <label for="traslados_dest" class="col-md-4 control-label">Traslados en Destino</label>
                                       <div class="">
                                           <select name="traslados_dest" class="form-select" aria-label="Default select example"> 
-                                            <option value="INCLUYE TRASLADOS" @if(old('traslados_dest') == 'Incluye Traslados') selected @endif>Incluye Traslados</option>
-                                            <option value="NO INCLUYE TRASLADOS" @if(old('traslados_dest') == 'No Incluye') selected @endif>No Incluye Traslados</option>
+                                            <option value="INCLUYE" @if(old('traslados_dest') == 'Incluye Traslados') selected @endif>Incluye Traslados</option>
+                                            <option value="NO INCLUYE" @if(old('traslados_dest') == 'No Incluye') selected @endif>No Incluye Traslados</option>
                                           </select>  
                                       </div>
                                   </div>

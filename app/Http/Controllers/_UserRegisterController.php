@@ -36,55 +36,49 @@ class UserRegisterController extends Controller
     }
     public function register(UserRequest $request)
     {
-        if ($request->hasCookie('reclutador')) {
-    // Obtiene el valor de la cookie
-    $userId = $request->cookie('reclutador');
-    $userLider = User::find($userId);
+        if ($request->hasCookie('reclutador_equipo_oficial')) {             
+             $userId = $request->cookie('reclutador_equipo_oficial');
+             $user = User::find($userId); 
+         } else {    
+           $userId = $request->query('reclutador_equipo_oficial') ?? 1;  
+           $user = User::find($userId); 
+           if (!$user) {
+           $userId = 1;
+           $user = User::find(1);
+           }            
+           $cookie = cookie('reclutador_equipo_oficial', $userId, 60 * 24 * 30 * 12); 
+          }     
+    
+        $user = User::create($request->except('link_mundo', 'link_argtravels', 'link_sumate', 'comision', 'regalia'));
 
-    // Si no existe el usuario de la cookie, asigna un 'id_user_lider' aleatorio
-    if (!$userLider) {
-        // Elimina la cookie si no hay un usuario válido
-        $cookie = cookie('reclutador', '', -1); // Elimina la cookie
-        $userId = User::inRandomOrder()->first()->id; // Asigna un líder aleatorio
-    }
-   } else {
-    // Si no hay cookie 'reclutador', asigna un 'id_user_lider' aleatorio
-    $userId = User::inRandomOrder()->first()->id;
-    }
+        $user->id_user_lider = $userId;
+        $user->save();
 
-// Crea el nuevo usuario con los datos de la solicitud
-$user = User::create($request->except('link_mundo', 'link_argtravels', 'link_sumate', 'comision', 'regalia'));
+        $urlMundo = 'www.argtravels.tur.ar/?=';
+        $linkMundo = $urlMundo . $user->id;       
+        $user->link_mundo = $linkMundo;
+        $user->save();
 
-// Asigna el 'id_user_lider' al nuevo usuario
-$user->id_user_lider = $userId;
-$user->save();
+        $urlArgTravels = 'www.argtravels.tur.ar/disney?promotor_ventas=';
+        $linkArgTravels = $urlArgTravels . $user->id;
+        $user->link_argtravels = $linkArgTravels;
+        $user->save();
 
-// Genera los enlaces personalizados
-$urlMundo = 'www.argtravels.tur.ar/?promotor_ventas=';
-$linkMundo = $urlMundo . $user->id;
-$user->link_mundo = $linkMundo;
+        $urlEquipo = 'www.argtravels.tur.ar/lider_equipo?reclutador=';
+        $link_sumate = $urlEquipo . $user->id;
+        $user->link_sumate = $link_sumate;
+        $user->save();
+                
+        $comision = 4;
+        $user->comision = $comision;
+        $user->save();
 
-$urlArgTravels = 'www.argtravels.tur.ar/disney?promotor_ventas=';
-$linkArgTravels = $urlArgTravels . $user->id;
-$user->link_argtravels = $linkArgTravels;
-
-$urlEquipo = 'www.argtravels.tur.ar/lider_equipo?reclutador=';
-$link_sumate = $urlEquipo . $user->id;
-$user->link_sumate = $link_sumate;
-
-// Asigna la comisión y la regalía
-$user->comision = 4;
-$user->regalia = 1;
-$user->save();
-
-// Enviar la notificación de verificación por correo electrónico
-$user->notify(new VerifyEmailUser($user->id));
-
-// Redirigir a la página de bienvenida
-return redirect('/bienvenidos');
-
-   
-       
+        $regalia = 1;
+        $user->regalia = $regalia;
+        $user->save();
+        // Enviar la notificación de verificación por correo electrónico
+        $user->notify(new VerifyEmailUser($user->id));
+        return redirect('/bienvenidos');
     }
     public function verification()
     {

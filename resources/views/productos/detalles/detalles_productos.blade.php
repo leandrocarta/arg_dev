@@ -108,7 +108,7 @@
                             @endif
                         @endif
                         </p>
-                        <p class="mb-1"><i class="fas fa-bus me-1"></i> {{ $productos->service->traslados_dest }} <span>TRASLADOS EN DESTINO IN - OUT</span></p>
+                        <p class="mb-1"><i class="fas fa-bus me-1"></i> {{ $productos->service->traslados_dest }} <span>TRASLADOS IN-OUT</span></p>
                         <p class="mb-1"><i class="fa-solid fa-cloud-moon"></i> INCLUYE ESTADIA de {{ $productos->estadia }} NOCHES.</p>
                         <p class="mb-1"><i class="fa-solid fa-kit-medical me-1"></i> {{ $productos->service->seguro }}</p>
                   </div>
@@ -281,10 +281,12 @@
                             @if ($productos->tipo_producto == 'Exclusivo Comunidad')
                                 <strong>PRECIO: </strong> {{ $productos->moneda }} <s>{{ $productos->precio_total }}</s>
                                 <p>Comunidad Argtravels {{ $productos->moneda . ' ' . $resul }}</p>
-                                <p class="a-confirmar">A Confirmar con Grupo Establecido</p>
+                                <p class="a-confirmar">Por Pax en Habitación doble</p>
+                                <p class="a-confirmar">Consultar por otro tipo de habitación</p>
                             @else
                                 <strong>PRECIO: </strong> ({{ $productos->moneda }} {{ $productos->precio_total }})
-                                <p class="a-confirmar">A Confirmar con Grupo Establecido (20 Pax)</p>
+                                <p class="a-confirmar">Por Pax en Habitación doble</p>
+                                <p class="a-confirmar">Consultar por otro tipo de habitación</p>
                             @endif
                         </p>
                     </div>

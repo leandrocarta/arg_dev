@@ -17,8 +17,8 @@
     <!-- Video de YouTube -->
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="ratio ratio-16x9">
-                <iframe width="853" height="480" src="https://www.youtube.com/embed/Y98zqkC1jBU" title="Viajá a Disney con Enjoy 15 y Argtravels.tur.ar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="ratio ratio-16x9"> 
+                <iframe width="853" height="480" src="https://www.youtube.com/embed/Mo3bandgFFU" title="Disney USA con Enjoy y Argtravels.tur.ar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -304,6 +304,7 @@
     </ul>
 
     <h4>Orlando, Florida - 13 días y 12 noches</h4>
+    <h4>Walt Disney World - 7 noches</h4>
     <p><strong>Alojamiento:</strong> Walt Disney World Resort (Disney’s All Star Movies, Music, Sports o Pop Century) con pensión completa (desayuno, almuerzo, merienda y cena). Incluye el servicio "Disney Mug" con sistema "Free Refill" de bebidas en forma permanente.</p>
     <p><strong>Actividades:</strong></p>
     <ul>

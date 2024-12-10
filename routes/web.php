@@ -33,7 +33,12 @@ use App\Http\Controllers\ReciboPagoController;
 use App\Http\Controllers\MisViajesController;
 use App\Http\Controllers\ContactoCursoItalianoController;
 use App\Http\Controllers\DisneyController;
+use App\Http\Controllers\PaquetesController;
 
+Route::get('/obtener-paquetes', [PaquetesController::class, 'obtenerPaquetes']);
+Route::get('/paquetes1', [PaquetesController::class, 'obtenerPaquetes']);
+
+Route::get('/disney', [DisneyController::class, 'welcome']);
 Route::get('/disney-usa', [DisneyController::class, 'disneyUSA'])->name('disney.usa');
 Route::get('/eurodisney', [DisneyController::class, 'eurodisney'])->name('eurodisney');
 Route::post('/disney-usa', [DisneyController::class, 'formDisneyUSA'])->name('formDisney');
@@ -102,9 +107,16 @@ Route::get('/excursiones_arg', [ExcursionesArgController::class, 'create'])->nam
 Route::get('/italy', [ContactoCursoItalianoController::class, 'create']);
 Route::post('/italy', [ContactoCursoItalianoController::class, 'store']);
 // Promociones productos turisticos
-Route::get('/conoce-argentina', [PromocionController::class, 'cookie_conoceArgentina']);
+Route::get('/argentina', [PromocionController::class, 'mostrarDisponibilidadArgentina']);
+Route::get('/argentina/paquetes', [PromocionController::class, 'consultarPaquetesArgentina'])->name('paquetes.argentina');
 Route::get('/brasil', [PromocionController::class, 'cookie_brasil']);
-Route::get('/caribe', [PromocionController::class, 'cookie_caribe']);
+Route::get('/caribe', [PaquetesController::class, 'mostrarDisponibilidadCaribe'])->name('productos.caribe');
+Route::get('/caribe/paquetes', [PaquetesController::class, 'consultarPaquetesCaribe'])->name('paquetes.caribe');
+
+
+Route::get('/paquetes/detalle/{packageCode}', [PaquetesController::class, 'show'])->name('paquetes.detalle');
+
+
 Route::get('/europa', [PromocionController::class, 'cookie_europa']);
 Route::get('/por-el-mundo', [PromocionController::class, 'cookie_porElMundo']);
 Route::get('/aereos', [PromocionController::class, 'cookie_vuelos']);

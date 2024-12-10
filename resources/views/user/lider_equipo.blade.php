@@ -98,9 +98,9 @@
                     <form action="{{ route('user.presentation_registro')}}" method="post">
                       @csrf
                       @php
-                        $reclutador_equipo_oficial = request()->cookie('reclutador_equipo_oficial', '');
+                        $reclutador = request()->cookie('reclutador', '');
                       @endphp
-                     <input type="hidden" name="reclutador_equipo_oficial" value="{{ $reclutador_equipo_oficial }}">
+                     <input type="hidden" name="reclutador_equipo_oficial" value="{{ $reclutador }}">
                       
                       <div class="form-floating my-2">
                           <input type="email" class="form-control" placeholder="Danos tu mejor email" name="email" required>

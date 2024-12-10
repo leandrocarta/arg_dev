@@ -111,6 +111,7 @@
                             <div class="">
                                 <select name="origen_salida" class="form-select" aria-label="Default select example">  
                                     <option value="{{ $producto->origen_salida }}" @if(old('origen_salida') == '{{ $producto->origen_salida }}') selected @endif>{{ $producto->origen_salida }}</option>
+                                    <option value="Rosario" @if(old('origen_salida') == 'Rosario') selected @endif>Rosario</option>
                                     <option value="Córdoba" @if(old('origen_salida') == 'Córdoba') selected @endif>Córdoba</option>
                                     <option value="Ezeiza" @if(old('origen_salida') == 'Ezeiza') selected @endif>Ezeiza</option>
                                 </select>  

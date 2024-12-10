@@ -31,7 +31,15 @@
               <p class="cw">Vuelos</p>
             </div>
           </a>
-        </li>       
+        </li>  
+         <li class="nav-item ms-4">
+          <a class="" aria-current="page" href="/argentina">
+            <div class="text-center text-left">
+              <img class="bandera-arg" src="../assets/img_banderas/argentina_nav.png" alt="">
+              <p>Argentina</p>
+            </div>
+          </a>
+        </li>     
         <li class="nav-item ms-4">
           <a class="" aria-current="page" href="/brasil">
             <div class="text-center text-left">
@@ -41,15 +49,15 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="" aria-current="page" href="/caribe">
-            <div class="text-center text-left">
-              <i class="fa-solid fa-umbrella-beach"></i>
-              <p class="cw">Caribe</p>
-            </div>
+          <a class="" aria-current="page" href="{{ route('productos.caribe') }}">
+              <div class="text-center text-left">
+                  <i class="fa-solid fa-umbrella-beach"></i>
+                   <p class="cw">Caribe</p>
+              </div>
           </a>
-        </li>   
+        </li>
         <li class="nav-item ms-4">
-          <a class="" aria-current="page" href="/#disney">
+          <a class="" aria-current="page" href="/disney">
             <div class="text-center text-left">
               <i class="fa-brands fa-fort-awesome"></i>
               <p>15añeras</p>
@@ -91,7 +99,7 @@
                      <li><a class="dropdown-item" href="/read_mayoristas">Mayoristas</a></li>
                      <li><a class="dropdown-item" href="/read_naviera">Alta Navieras</a></li>
                      <li><a class="dropdown-item" href="/read_barcos">Alta Barcos</a></li>
-                     <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
+                     <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
                      <li><a class="dropdown-item" href="{{ route('recibo_pagos') }}">Recibos</a></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>
@@ -131,7 +139,7 @@
                       <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
                       <li><a class="dropdown-item" href="#">Contenidos</a></li>
                       <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
-                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador_equipo_oficial' => Auth::user()->id]) }}">Mi Presentación</a></li>
+                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador' => Auth::user()->id]) }}">Mi Presentación</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="/logout">Salir</a></li>
                     </ul>

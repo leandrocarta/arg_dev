@@ -55,20 +55,40 @@
                            <label for="password_confirmation_edit" class="form-label">Repita Contraseña</label>
                           </div>                                                  
                        </div>
-                    </div>                                           
+                    </div>           
+                    <p>IMPORTANTE:</p>    
+                    <p>Los datos personales deben ser iguales al documento de viaje.</p>                            
                     <div class="mb-3 form-floating">
                       <input type="text" name="nombre" placeholder="Nombre" class="form-control" value="{{Auth::guard('client')->user()->nombre }}">
-                      <label for="nombre" class="form-label">Nombre</label>                                            
+                      <label for="nombre" class="form-label">Nombres</label>                                            
                     </div>
                     <div class="mb-3 form-floating">
                       <input type="text" name="apellido" placeholder="Apellido" class="form-control" value="{{Auth::guard('client')->user()->apellido}}">
                       <label for="apellido" class="form-label">Apellido</label>                                            
-                    </div>      
-                  <!--  <div class="mb-3 form-floating">
-                      <input type="number" name="cod_area" placeholder="Código Area Telefónica" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->cod_area}}">
-                      <label for="cod_area" class="form-label">Código Area Telefónica</label>                                            
+                    </div>    
+                    <div class="mb-3">                            
+                         <select name="documento" class="form-select">  
+                          <option value="">--- Tipo de Documento ---</option>
+                            <option value="PASAPORTE">PASAPORTE</option>
+                            <option value="DNI">DNI</option>
+                         </select>                           
                     </div>
-                  --> 
+                    <div class="mb-3 form-floating">
+                      <input type="text" name="numero_doc" placeholder="numero_doc" class="form-control" value="">
+                      <label for="numero_doc" class="form-label">Número del documento</label>                                            
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="date" name="fecha_nacimiento" placeholder="Fecha de Nacimiento" class="form-control" value="">
+                       <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="date" name="fecha_vencimiento" placeholder="Fecha de Vencimiento del Documento" class="form-control" value="">
+                         <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento del Documento</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                      <input type="number" name="cuil" placeholder="cuil" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->cod_area}}">
+                      <label for="cuil" class="form-label">Número de Cuil o DNI</label>                                            
+                    </div>                  
                     <div class="mb-3 form-floating">
                       <input type="number" name="movil" placeholder="Numero móvil" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->movil}}">
                       <label for="movil" class="form-label">WhatsApp (Incluir codigo de area) </label>                                            

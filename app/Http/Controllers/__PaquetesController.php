@@ -3,23 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Client;
-use App\Models\User;
 use App\Models\Producto;
-use App\Models\ProductoCrucero;
-use App\Models\Naviera;
+use App\Models\Package;
 
-class PromocionController extends Controller
+
+class PaquetesController extends Controller
 {
-     public function mostrarDisponibilidadArgentina(Request $request)
+    public function mostrarDisponibilidadCaribe(Request $request)
 {
     
-    $productos = Producto::where('ubicacion', 'Argentina')->get();
+    $productos = Producto::where('ubicacion', 'Caribe')->get();
 
     // Consultar los destinos de Caribe usando el nuevo método de la API
-    $destinosArgentina = $this->dispo_consultarDestinosArgentinaAPI();
+    $destinosCaribe = $this->dispo_consultarDestinosCaribeAPI();
 
     $paquetes = [];   
     
@@ -34,11 +30,11 @@ class PromocionController extends Controller
             } catch (\Exception $e) {
                 dd($e->getMessage());
             }
-        }
-        return view('productos.argentina.argentina', [
+        }       
+            return view('productos.caribe.caribe', [
         'productos' => $productos, // Usa la misma variable que en mostrarDisponibilidadCaribe
         'paquetes' => $paquetes,
-        'destinosArgentina' => json_encode($this->dispo_consultarDestinosArgentinaAPI()),
+        'destinosCaribe' => json_encode($this->dispo_consultarDestinosCaribeAPI()),
          ]);
     } else {
         $userId = $request->query('comercioAdherido') ?? 1;
@@ -56,14 +52,15 @@ class PromocionController extends Controller
                 dd($e->getMessage());
             }
         }
-        return view('productos.argentina.argentina', [
+        return view('productos.caribe.caribe', [
         'productos' => $productos, // Usa la misma variable que en mostrarDisponibilidadCaribe
         'paquetes' => $paquetes,
-        'destinosArgentina' => json_encode($this->dispo_consultarDestinosArgentinaAPI()),
+        'destinosCaribe' => json_encode($this->dispo_consultarDestinosCaribeAPI()),
          ]);        
     }
 }
-private function dispo_consultarDestinosArgentinaAPI()
+
+private function dispo_consultarDestinosCaribeAPI()
 {
     $url = "https://aws-qa1.ola.com.ar/qa/wsola/endpoint";
     $requestXml = <<<XML
@@ -109,44 +106,53 @@ private function dispo_consultarDestinosArgentinaAPI()
         return []; // Si hay error, retornar array vacío
     } else {
         curl_close($ch);
-        return $this->dispo_parsearDestinosArgentina($response);
+        return $this->dispo_parsearDestinosCaribe($response);
+        
+        //$destinos = $this->parsearDestinosCaribe($response);
+        //dd($destinos); // Muestra los datos obtenidos de la API para inspección
 
 return $destinos;
     }
 }
 
- private function dispo_parsearDestinosArgentina($response)
-{    
+ private function dispo_parsearDestinosCaribe($response)
+{
     $destinos = [];
     $xml = simplexml_load_string($response);
     $internalXmlString = (string) $xml->xpath('//*[local-name()="Response"]')[0];
     $internalXml = simplexml_load_string($internalXmlString);
 
+    // Recorre todas las zonas disponibles sin filtrar
     foreach ($internalXml->xpath('//Zone') as $zone) {
-        if ((string)$zone->Name === 'ARGENTINA') {
-            foreach ($zone->Countries->Country as $country) {
-                $nombrePais = (string) $country->Name;
-                $codigoPais = (string) $country->Code;
+        $nombreZona = (string)$zone->Name;
 
-                // Inicializa el array de ciudades para cada país
+        foreach ($zone->Countries->Country as $country) {
+            $nombrePais = (string)$country->Name;
+            $codigoPais = (string)$country->Code;
+
+            // Inicializa el array de ciudades para cada país dentro de la zona
+            if (!isset($destinos[$codigoPais])) {
                 $destinos[$codigoPais] = [
                     'nombre_pais' => $nombrePais,
+                    'zona' => $nombreZona, // Asigna la zona al país
                     'ciudades' => []
                 ];
+            }
 
-                foreach ($country->Cities->City as $city) {
-                    $destinos[$codigoPais]['ciudades'][] = [
-                        'codigo_ciudad' => (string) $city->Code,
-                        'nombre_ciudad' => (string) $city->Name
-                    ];
-                }
+            foreach ($country->Cities->City as $city) {
+                $destinos[$codigoPais]['ciudades'][] = [
+                    'codigo_ciudad' => (string)$city->Code,
+                    'nombre_ciudad' => (string)$city->Name
+                ];
             }
         }
     }
 
     return $destinos;
-} 
-public function consultarPaquetesArgentina(Request $request)
+}
+
+
+public function consultarPaquetesCaribe(Request $request)
 {
     // Recibir los datos del formulario
     $pais = $request->input('pais');
@@ -210,19 +216,19 @@ public function consultarPaquetesArgentina(Request $request)
     }
 
     // Procesar la respuesta XML y obtener los paquetes
-    $paquetes = $this->parsearPaquetesXMLArgentina($response);
+    $paquetes = $this->parsearPaquetesXMLCaribe($response);
 
     // Obtener productos personales
-    $productos = Producto::where('ubicacion', 'Argentina')->get();
+    $productos = Producto::where('ubicacion', 'Caribe')->get();
 
     // Pasar los paquetes y productos a la vista
-    return view('productos.argentina.argentina', [
+    return view('productos.caribe.caribe', [
         'productos' => $productos, // Incluye los productos personales
         'paquetes' => $paquetes,
-        'destinosArgentina' => json_encode($this->dispo_consultarDestinosArgentinaAPI())
+        'destinosCaribe' => json_encode($this->dispo_consultarDestinosCaribeAPI())
     ]);
 }
-private function parsearPaquetesXMLArgentina($response)
+private function parsearPaquetesXMLCaribe($response)
 {
     $paquetes = [];
      
@@ -323,214 +329,4 @@ private function obtenerNotas($notas)
     }
     return implode(" ", $listaNotas);
 }
-
-    
-
-    public function cookie_brasil(Request $request)
-    {       
-        $productos = Producto::all();
-       // $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
-        if ($request->hasCookie('comercioAdherido')) {
-            $userId = $request->cookie('comercioAdherido');
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) {
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            /*  $elim_cookie = 'promotorOficialVerificado';
-             setcookie($elim_cookie, '', time() - 3600, '/');
-             dd('se elimino la cookie: ', $userId);*/
-            return view('productos.conoce_america.brasil', compact('productos'));
-        } else {
-            $userId = $request->query('comercioAdherido') ?? 1;
-            $user = User::find($userId);
-            if (!$user) {
-                $userId = 1;
-            }
-            $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) {
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            return response()
-                ->view('productos.conoce_america.brasil', compact('productos'))
-                ->withCookie($cookie);
-        }
-    }
-
-    
-
-     
-    public function cookie_europa(Request $request)
-    {
-        //$productos = Producto::all();
-       // $productos = Producto::where('pais_destino', 'Argentina')->get();
-        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
-        if ($request->hasCookie('comercioAdherido')) {
-            $userId = $request->cookie('comercioAdherido');
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) {
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            /*  $elim_cookie = 'promotorOficialVerificado';
-             setcookie($elim_cookie, '', time() - 3600, '/');
-             dd('se elimino la cookie: ', $userId);*/
-            return view('productos.conoce_europa.europa', compact('productos'));
-        } else {
-            $userId = $request->query('comercioAdherido') ?? 1;
-            $user = User::find($userId);
-            if (!$user) {
-                $userId = 1;
-            }
-            $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) {
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            return response()
-                ->view('productos.conoce_europa.europa', compact('productos'))
-                ->withCookie($cookie);
-        }
-    }
-
-   public function cookie_porElMundo(Request $request)
-    {
-        //$productos = Producto::all();
-       // $productos = Producto::where('pais_destino', 'Argentina')->get();
-        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
-        if ($request->hasCookie('comercioAdherido')) {
-            $userId = $request->cookie('comercioAdherido');
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) {
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            /*  $elim_cookie = 'promotorOficialVerificado';
-             setcookie($elim_cookie, '', time() - 3600, '/');
-             dd('se elimino la cookie: ', $userId);*/
-            return view('productos.mundo.por-el-mundo', compact('productos'));
-        } else {
-            $userId = $request->query('comercioAdherido') ?? 1;
-            $user = User::find($userId);
-            if (!$user) {
-                $userId = 1;
-            }
-            $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) {
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            return response()
-                ->view('productos.mundo.por-el-mundo', compact('productos'))
-                ->withCookie($cookie);
-        }
-    }
-
-    public function cookie_vuelos(Request $request)
-    {       
-        $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
-        if ($request->hasCookie('comercioAdherido')) {
-            $userId = $request->cookie('comercioAdherido');
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) {
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            /*  $elim_cookie = 'promotorOficialVerificado';
-             setcookie($elim_cookie, '', time() - 3600, '/');
-             dd('se elimino la cookie: ', $userId);*/
-            return view('productos.aereos.aereos', compact('productos'));
-        } else {
-            $userId = $request->query('comercioAdherido') ?? 1;
-            $user = User::find($userId);
-            if (!$user) {
-                $userId = 1;
-            }
-            $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) {
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            return response()
-                ->view('productos.aereos.aereos', compact('productos'))
-                ->withCookie($cookie);
-        }
-    }   
-    public function cookie_cruceros(Request $request)
-    {       
-       $productos = ProductoCrucero::with('naviera')->get();
-            
-        if ($request->hasCookie('comercioAdherido')) {
-            $userId = $request->cookie('comercioAdherido');
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) {
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            /*  $elim_cookie = 'promotorOficialVerificado';
-             setcookie($elim_cookie, '', time() - 3600, '/');
-             dd('se elimino la cookie: ', $userId);*/
-            return view('productos.cruceros.cruceros', compact('productos'));
-        } else {
-            $userId = $request->query('comercioAdherido') ?? 1;
-            $user = User::find($userId);
-            if (!$user) {
-                $userId = 1;
-            }
-            $cookie = cookie('comercioAdherido', $userId, 60 * 24 * 30 * 12);
-            $cliente = auth()->guard('client')->user();
-            if ($cliente && $cliente->fk_users_id === null) { 
-                $cliente->fk_users_id = $userId;
-                try {
-                    $cliente->save();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            }
-            return response()
-                ->view('productos.cruceros.cruceros', compact('productos'))
-                ->withCookie($cookie);
-        }
-    }
-    }
+}

@@ -1,17 +1,18 @@
 @extends('layouts.app-master')
 @section('content')
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">  
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="5000">
-      <img src="{{ asset('assets/img_banner/Caribe-min.png') }}" class="d-block w-100" alt="Caribe">
+    <div class="carousel-item active" data-bs-interval="5000">      
+      <img src="{{ asset ('assets/img_banner/Banner-argentina-min.png') }}" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h1></h1>
-        <p></p>
-      </div>
+         <h1></h1>
+         <p></p>
+      </div>     
     </div>
-  </div>
-</div>
-<div class="container my-3 m-auto productos-detalles home-iconos">
+  </div>  
+ </div> 
+ <!--
+ <div class="container my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
        <h4 class="display-4">Paquetes Imbatibles Comunidad</h4>
        <p>Todos nuestros paquetes incluyen (Aéreos con equipaje en Bodega, traslados en destino y seguros) con valores por pasajero en habitación doble.</p>
@@ -19,7 +20,7 @@
      <div class="row">
        @php
        $productosCaribe = collect($productos)->filter(function ($producto) {
-        return $producto->ubicacion === 'Caribe';
+        return $producto->ubicacion === 'Argentina';
         });
         $productosAleatorios = $productosCaribe->shuffle();
        @endphp
@@ -50,29 +51,29 @@
        @endif
      @endforeach
     </div>   
-  </div> 
-<div class="container my-3 m-auto productos-detalles home-iconos">
+  </div> -->
+ <div class="container my-3 m-auto productos-detalles home-iconos">
     <!-- Título principal -->
     <div class="titulo text-center">
-        <h4 class="display-4">Busca Otros Paquetes al Caribe</h4>
+        <h4 class="display-4">Busca otros Paquetes por Argentina</h4>
     </div>
     <!-- Contenedor del formulario con estilo de recuadro -->
   @php
-    $destinosCaribeArray = json_decode($destinosCaribe, true);
+    $destinosArgentinaArray = json_decode($destinosArgentina, true);
   @endphp
 
   <div class="row justify-content-center">
     <div class="col-lg-10">
         <div class="p-4 mb-5" style="border: 2px solid #007bff; border-radius: 10px; background-color: #f8f9fa;">
             <h5 class="text-center mb-4" style="color: #007bff;">Encuentra tu Destino Perfecto</h5>
-            <form action="{{ route('paquetes.caribe') }}#resultado" method="GET" id="caribeForm">
+            <form action="{{ route('paquetes.argentina') }}#resultado" method="GET" id="argentinaForm">
                 <div class="row">
                     <!-- Campo País -->
                     <div class="col-md-6 mb-3">
                         <label for="pais" class="form-label">Selecciona un país:</label>
                         <select name="pais" id="pais" class="form-control" onchange="actualizarDestinos()">
                             <option value="">-- Selecciona un país --</option>
-                            @foreach ($destinosCaribeArray as $codigoPais => $pais)
+                            @foreach ($destinosArgentinaArray as $codigoPais => $pais)
                                 <option value="{{ $codigoPais }}">{{ $pais['nombre_pais'] }}</option>
                             @endforeach
                         </select>
@@ -171,43 +172,87 @@
  <div class="container introduction-productos-content">
   <div class="row">
     <div class="col-12 introduction-productos">
-  <h1>DESCUBRE LA MAGIA DEL CARIBE</h1>
-  <p>Sumérgete en un paraíso tropical donde las playas de arena dorada se encuentran con las aguas cristalinas. Desde las icónicas playas de Punta Cana hasta los rincones escondidos de Jamaica, el Caribe te invita a explorar la belleza sin igual de sus costas.</p>
-  <p class="a my-3">
-    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      ¿Quieres saber más?
-    </a>   
-  </p>
-  <div class="collapse" id="collapseExample">
-    <div class="card card-body">        
-      <h4>Paraíso tropical de playas doradas</h4>
-          <p>El Caribe, un paraíso tropical donde las playas de arena dorada se encuentran con las aguas cristalinas. Desde las icónicas playas de Punta Cana hasta los rincones escondidos de Jamaica, el Caribe te invita a sumergirte en la belleza sin igual de sus costas.</p>
+        <h1>DESCUBRE LA MAGIA DE ARGENTINA</h1>
+        <p>Argentina, un país que cautiva con su diversidad única y ofrece un abanico de experiencias turísticas
+          inolvidables. Desde las animadas calles de Buenos Aires hasta los paisajes remotos de la Patagonia,
+          Argentina se presenta como un mosaico de contrastes y emociones.
+        </p>
+        <p class="a my-3">
+          <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            ¿Quieres saber más?
+          </a>   
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">             
+        <h4>Herencia Cultural y Pasión</h4>
+        <p>Argentina es hogar de una rica herencia cultural, donde la pasión por el tango, la música y el arte impregna
+          la vida cotidiana. En sus ciudades, especialmente en Buenos Aires, se puede sentir la energía vibrante de la
+          danza, la arquitectura elegante y la intensidad de la vida nocturna.</p>
 
-          <h4>Exploración de arrecifes de coral</h4>
-          <p>Descubre la riqueza submarina del Caribe a través de sus arrecifes de coral. Snorkeling en los Cayos de Cuba o buceo en las Islas Caimán, cada rincón ofrece una experiencia única para admirar la vida marina y los coloridos corales.</p>
+        <h4>Naturaleza Asombrosa</h4>
+        <p>Desde las selvas tropicales del norte hasta los glaciares imponentes del sur, la naturaleza argentina sorprende
+          por su variedad y belleza. Las Cataratas del Iguazú, la cordillera de los Andes y los paisajes infinitos de la
+          Pampa ofrecen una muestra de la majestuosidad natural que caracteriza al país.</p>
 
-          <h4>Cultura vibrante y festivales caribeños</h4>
-          <p>Sumérgete en la cultura vibrante del Caribe, donde la música y los festivales llenan las calles de alegría. Desde el carnaval en Trinidad y Tobago hasta las festividades de Junkanoo en las Bahamas, la alegría y la música caribeña te envuelven.</p>
+        <h4>Gastronomía Auténtica</h4>
+        <p>La cocina argentina es una mezcla única de influencias europeas y latinoamericanas, destacando por sus carnes
+          asadas, empanadas y vinos excepcionales. Explorar los mercados locales y disfrutar de una parrillada es
+          sumergirse en una experiencia culinaria que celebra los sabores auténticos del país.</p>
 
-          <h4>Gastronomía isleña y sabores exóticos</h4>
-          <p>La gastronomía del Caribe es una explosión de sabores exóticos. Desde el jerk jamaicano hasta el mofongo en Puerto Rico, cada isla tiene su propia especialidad culinaria. Disfruta de pescados frescos y frutas tropicales en un festín que deleitará tu paladar.</p>
+        <h4>Aventura en la Patagonia</h4>
+        <p>Para los amantes de la aventura, la Patagonia argentina ofrece un escenario épico. Desde excursiones en kayak
+          por lagos cristalinos hasta caminatas entre glaciares milenarios, esta región garantiza una dosis de
+          adrenalina y la oportunidad de conectar con la naturaleza en su forma más pura.</p>
 
-          <h4>Aventuras en la selva y cascadas secretas</h4>
-          <p>Explora la exuberante selva del Caribe y descubre cascadas secretas. Desde las selvas de Dominica hasta las rutas de senderismo en Santa Lucía, cada isla ofrece aventuras en la naturaleza que te acercarán a la auténtica belleza del Caribe.</p>
+        <h4>Hospitalidad Inigualable</h4>
+        <p>La hospitalidad de los argentinos es conocida en todo el mundo. Aquí, los visitantes son recibidos con una
+          calidez única, haciendo que cada encuentro sea más que una simple transacción; es un intercambio de sonrisas,
+          historias y conexiones genuinas.</p>
 
-          <h4>Hospitalidad isleña y bienvenida cálida</h4>
-          <p>Experimenta la hospitalidad única del Caribe, donde la bienvenida es cálida y cada visita se convierte en una experiencia inolvidable. Desde los resorts de lujo hasta las acogedoras posadas, cada rincón te invita a disfrutar de la serenidad isleña.</p>
+        <h4>Explora la Autenticidad Argentina</h4>
+        <p>Argentina, con su mezcla de culturas, su naturaleza impresionante y su hospitalidad sincera, invita a los
+          viajeros a explorar un territorio diverso donde cada rincón cuenta una historia única.</p>
 
-          <h4>Explora la magia del Caribe</h4>
-          <p>El Caribe, con su combinación de playas paradisíacas, cultura vibrante y hospitalidad isleña, te invita a explorar un mundo de maravillas tropicales y experiencias únicas.</p>
-    </div>
+          </div>
+        </div>
+      </div>
   </div>
  </div>
+  <div class="container my-3 m-auto productos-detalles home-iconos">
+     <div class="titulo text-center">
+       <h4 class="display-4"></h4>
+     </div>
+     <div class="row">            
+       @php
+        $productosArg = $productos->filter(function ($producto) {
+            return $producto->ubicacion === 'Tur-Arg';
+        });
+        $productosAleatorios = $productosArg->shuffle();
+       @endphp
+       @foreach ($productosAleatorios as $producto)
+       @if($producto->tipo_producto !== 'Aéreo')
+       <div class="col-md-4 p-2">
+        <div class="card productosCrucero">
+            <div class="" style="position: relative; overflow: hidden;">
+                <div style="padding-top: 100%;"></div>
+                <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                <div class="card-img-overlay titulo-prod-cruceros">
+                    <p><i class="fa-solid fa-location-dot me-1"></i> {{ $producto->destinos->ciudad_destino }}, {{ $producto->pais->nombre }}</p>                                     
+                    <p><span class="usd">{{ $producto->moneda }} </span> {{ $producto->precio_total }}</p>
+                </div>
+            </div>
+            <div class="w-100 btn-crucero">
+                <a href="{{ route('producto.detalles', $producto->id) }}" class="btn btn-primary w-100">VER MÁS</a>
+            </div>
+        </div>
+       </div>
+       @endif
+     @endforeach
+    </div>   
   </div>
- </div>
- <script>
+  <script>
   // Variables de destinos traídas desde el backend
-  const destinosCaribe = @json($destinosCaribeArray);
+  const destinosArgentina = @json($destinosArgentinaArray);
 
    function actualizarDestinos() {
     const paisSelect = document.getElementById('pais');
@@ -220,8 +265,8 @@
     const paisSeleccionado = paisSelect.value;
 
     // Validar si el país seleccionado tiene destinos
-    if (destinosCaribe[paisSeleccionado]) {
-        const ciudades = destinosCaribe[paisSeleccionado].ciudades;
+    if (destinosArgentina[paisSeleccionado]) {
+        const ciudades = destinosArgentina[paisSeleccionado].ciudades;
 
         // Crear opciones para cada ciudad
         ciudades.forEach(ciudad => {
@@ -233,7 +278,6 @@
     }
  }
  </script> 
- <!-- Inyecta el array de paquetes en JavaScript -->
  <script>
     const paquetes = {!! json_encode($paquetes) !!};
  </script>
@@ -313,8 +357,4 @@
         new bootstrap.Modal(document.getElementById('paqueteModal')).show();
     }
 </script>
-
 @endsection
-
-
-

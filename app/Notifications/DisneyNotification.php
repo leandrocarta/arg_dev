@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CotizacionPaqueteNotification extends Notification
+class DisneyNotification extends Notification
 {
     use Queueable;
 
@@ -16,7 +16,7 @@ class CotizacionPaqueteNotification extends Notification
     
     public function __construct($paqueteData)
     {
-       $this->paqueteData = $paqueteData;
+        $this->paqueteData = $paqueteData;
     }
 
     /**
@@ -36,19 +36,16 @@ class CotizacionPaqueteNotification extends Notification
     {
         return (new MailMessage)
         ->subject('Nueva Solicitud')
-        ->greeting('Cotización de Paquete !!!')
-        ->line('nombre: ' . $this->paqueteData['nombre'])
-        ->line('email: ' . $this->paqueteData['email'])
-        ->line('Fecha salida: ' . $this->paqueteData['fecha'])
-        ->line('Días de estadia: ' . $this->paqueteData['dias'])
-        ->line('Destino Elegido: ' . $this->paqueteData['destino'])
-        ->line('Cantidad de adultos: ' . $this->paqueteData['adultos'])
-        ->line('Cantidad de menores: ' . $this->paqueteData['menores'])
-        ->line('Edad de los menores: ' . $this->paqueteData['edad_menores'])
-        ->line('Cantidad de habitaciones: ' . $this->paqueteData['habitaciones'])
-        ->line('Status del viaje: ' . $this->paqueteData['servicio'])
-        ->line('Info General?: ' . $this->paqueteData['info'])
-        ->line('Estado: ' . $this->paqueteData['estado']);   
+        ->greeting('Consulta de Disney!!!')
+        ->line('Nombre: ' . $this->paqueteData['name'])  
+        ->line('Email: ' . $this->paqueteData['email'])  
+        ->line('Destino Elegido: ' . $this->paqueteData['disney'])  
+        ->line('Fecha de salida: ' . $this->paqueteData['fecha'])  
+        ->line('Método de contacto: ' . $this->paqueteData['contacto'])  
+        ->line('Número de móvil: ' . $this->paqueteData['movil'])  
+        ->line('Comentario adicional: ' . $this->paqueteData['comentario'])  
+        ->line('Promotor de ventas: ' . $this->paqueteData['promotor_ventas']);  
+
     }
 
     /**

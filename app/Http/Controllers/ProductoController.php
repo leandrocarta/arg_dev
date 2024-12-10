@@ -97,7 +97,7 @@ class ProductoController extends Controller
             $producto->estadia = $request->estadia;
             $producto->habitacion = $request->habitacion;
             $producto->precio_total = $request->precio_total;
-            $producto->descto = $request->descto;
+            $producto->descto = 0;
             $producto->moneda = $request->moneda;
             $producto->origen_salida = $request->origen_salida;
             $producto->tipo_producto = $request->tipo_producto;
