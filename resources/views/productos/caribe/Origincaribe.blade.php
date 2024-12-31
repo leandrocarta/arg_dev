@@ -13,7 +13,7 @@
 </div>
 <div class="container my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
-       <h4 class="display-4">Nuestros Paquetes Imbatibles</h4>
+       <h4 class="display-4">Paquetes Imbatibles Comunidad</h4>
        <p class="text-start">Todos nuestros paquetes incluyen (Aéreos con equipaje en Bodega, traslados Privados en destino y seguros hasta usd 300.000) con valores por pasajero en habitación doble.</p>
        <p class="text-start">Consultanos por otros Hoteles o tipo de habitación!!</p>
      </div>
@@ -57,7 +57,7 @@
 <div class="container my-3 m-auto productos-detalles home-iconos">
     <!-- Título principal -->
     <div class="titulo text-center">
-        <h4 class="display-4">Busca Otros Paquetes al Caribe</h4>        
+        <h4 class="display-4">Busca Otros Paquetes al Caribe</h4>
     </div>
     <!-- Contenedor del formulario con estilo de recuadro -->
   @php
@@ -66,8 +66,6 @@
 
   <div class="row justify-content-center">
     <div class="col-lg-10">
-        <p class="text-start">Incluyen (Aéreos con equipaje en Bodega, traslados regular en destino + seguros) valores para dos pasajeros en habitación doble.</p>
-       <p class="text-start">¿Son más de dos? Consultanos!!</p>
         <div class="p-4 mb-5" style="border: 2px solid #007bff; border-radius: 10px; background-color: #f8f9fa;">
             <h5 class="text-center mb-4" style="color: #007bff;">Encuentra tu Destino Perfecto</h5>
             <form action="{{ route('paquetes.caribe') }}#resultado" method="GET" id="caribeForm">
@@ -75,7 +73,7 @@
                     <!-- Campo País -->
                     <div class="col-md-6 mb-3">
                         <label for="pais" class="form-label">Selecciona un país:</label>
-                        <select name="pais" id="pais" class="form-control" onchange="actualizarDestinos()" required>
+                        <select name="pais" id="pais" class="form-control" onchange="actualizarDestinos()">
                             <option value="">-- Selecciona un país --</option>
                             @foreach ($destinosCaribeArray as $codigoPais => $pais)
                                 <option value="{{ $codigoPais }}">{{ $pais['nombre_pais'] }}</option>
@@ -86,7 +84,7 @@
                     <!-- Campo Destino -->
                     <div class="col-md-6 mb-3">
                         <label for="destino" class="form-label">Selecciona un destino:</label>
-                        <select name="destino" id="destino" class="form-control" required>
+                        <select name="destino" id="destino" class="form-control">
                             <option value="">-- Selecciona un destino --</option>
                         </select>
                     </div>
@@ -94,12 +92,12 @@
                     <!-- Campo Fecha de inicio y fin -->
                     <div class="col-md-6 mb-3">
                         <label for="fecha_inicio" class="form-label">Fecha de inicio:</label>
-                        <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" min="{{ date('Y-m-d') }}" required>
+                        <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" min="{{ date('Y-m-d') }}">
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="fecha_fin" class="form-label">Fecha de fin:</label>
-                        <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" min="{{ date('Y-m-d') }}" required>
+                        <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" min="{{ date('Y-m-d') }}">
                     </div>
 
                     <!-- Botón de búsqueda -->
@@ -116,68 +114,66 @@
     <div class="titulo text-center">
         <h4 class="display-4"></h4>
     </div>
-
     <div class="row">
         @foreach ($paquetes as $index => $paquete)
-            <!-- Producto -->
             <div class="col-md-3 p-2">
                 <div class="card productosCrucero">
                     <div style="position: relative; overflow: hidden;">
                         <div style="padding-top: 100%;"></div>
-                        <img src="{{ $paquete['imagenes'][0] ?? 'ruta/a/imagen/default.jpg' }}" class="card-img-top img-fluid" alt="{{ $paquete['titulo'] }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                        <img src="{{ $paquete['imagenes'][0] ?? 'ruta/a/imagen/default.jpg' }}" class="card-img-top img-fluid" alt="{{ $paquete['titulo'] }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">                        
                         <div class="card-img-overlay titulo-prod-cruceros">
                             <p><i class="fa-regular fa-calendar-days"></i> {{ $paquete['fecha_salida'] ?? 'Fecha no disponible' }}</p>
                             <h5><i class="fa-solid fa-location-dot me-1"></i> {{ $paquete['titulo'] }}</h5>
-                            <p>{{ ucwords(strtolower($paquete['nombre_pais'])) }}</p>
-                            <p>Desde, {{ ucwords(strtolower($paquete['ciudad_origen_nombre'])) }}</p>
+                            <p> {{ ucwords(strtolower($paquete['nombre_pais'])) }} </p>
+                            <p> Desde, {{ ucwords(strtolower( $paquete['ciudad_origen_nombre'] ))}}</p>                            
                             <p class="precio_home"><span class="usd">{{ $paquete['moneda'] }} </span> {{ number_format($paquete['precio'], 2) }}</p>
                         </div>
                     </div>
                     <div class="w-100 btn-crucero">
-                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalPaquete{{ $index }}">
-                            VER MÁS
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal para el paquete -->
-            <div class="modal fade" id="modalPaquete{{ $index }}" tabindex="-1" aria-labelledby="modalPaqueteLabel{{ $index }}" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalPaqueteLabel{{ $index }}">{{ $paquete['titulo'] }}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p><strong>REF:</strong> {{ $paquete['codigo_paquete'] }}</p>
-                            <p><strong>Noches:</strong> {{ $paquete['noches'] ?? 'No disponible' }}</p>
-                            <p><strong>Precio:</strong> {{ $paquete['moneda'] }} {{ number_format($paquete['precio'], 2) }}</p>
-                            <p><strong>Salida:</strong> {{ $paquete['fecha_salida'] ?? 'Fecha no disponible' }}</p>
-                            <p><strong>Incluye Aéreos:</strong> {{ $paquete['incluye_aereo'] ? 'Sí' : 'No' }}</p>
-                            @if (!empty($paquete['hoteles']))
-                                @foreach ($paquete['hoteles'] as $hotel)
-                                    <p><strong>Hotel:</strong> {{ $hotel['nombre'] }}</p>
-                                @endforeach
-                            @else
-                                <p>No hay hoteles disponibles para este paquete.</p>
-                            @endif
-                            <p class="text-center my-4">
-                                <a href="https://api.whatsapp.com/send?phone=543413672066" target="_blank" class="btn-whatsapp">
-                                    <i class="whatsapp fab fa-whatsapp"></i> ¡Haz clic aquí y envíanos tu consulta con el N° de REF: {{ $paquete['codigo_paquete'] }}!
-                                </a>
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
+                        <a class="btn btn-primary w-100" data-bs-toggle="collapse" data-bs-target="#detallesPaquete{{ $index }}" aria-expanded="false" aria-controls="detallesPaquete{{ $index }}">VER MÁS</a>                                
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
-</div>
+  </div>
+  <div class="container">
+    <div class="accordion mt-3" id="accordionPaquetes">
+    @foreach ($paquetes as $index => $paquete)
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ $index }}"></h2>
+            <div id="detallesPaquete{{ $index }}" class="accordion-collapse collapse" data-bs-parent="#accordionPaquetes">
+                <div class="accordion-body">
+                    <h5>{{ $paquete['titulo'] }}</h5>
+                    <p><strong>REF:</strong> {{ $paquete['codigo_paquete'] }}</p>
+                    <p><strong>Noches:</strong> {{ $paquete['noches'] ?? 'No disponible' }}</p>
+                   <!-- <p><strong>Precio:</strong> {{ $paquete['moneda'] }} {{ number_format($paquete['precio'], 2) }}</p> 
+                    <p><strong>Salida:</strong> {{ $paquete['fecha_salida'] ?? 'Fecha no disponible' }}</p>                                                             
+                    <p><strong>Incluye Aéreos:</strong> {{ $paquete['incluye_aereo'] ? 'Sí' : 'No' }}</p>
+                    @if (!empty($paquete['origen_aereo']))
+                        <p><strong>Origen de Vuelos:</strong> {{ $paquete['origen_aereo'] }}</p>
+                    @endif
+                    <p><strong>Seguro viajero:</strong> {{ $paquete['seguro_medico'] ?? 'No especificado' }}</p>
+                    <p><strong>Traslados:</strong> {{ $paquete['traslados'] ?? 'No especificado' }}</p> -->
 
+                    @if (!empty($paquete['hoteles']))
+                        @foreach ($paquete['hoteles'] as $hotel)
+                            <p><strong>Hotel:</strong> {{ $hotel['nombre'] }}</p>
+                        @endforeach
+                    @else
+                        <p>No hay hoteles disponibles para este paquete.</p>
+                    @endif
+                    <p class="text-center my-4">
+                       <a href="https://api.whatsapp.com/send?phone=543413672066" target="_blank" class="btn-whatsapp">
+                       <i class="whatsapp fab fa-whatsapp"></i> ¡Haz clic aquí y envíanos tu consulta con el N° de REF:!</a>
+                    </p>
+                    <!-- <p><strong>Notas:</strong> {{ $paquete['notas'] ?? 'No disponible' }}</p> -->
+                </div>
+            </div>
+        </div>
+    @endforeach
+ </div>
+ </div>
 
  <div class="container introduction-productos-content">
   <div class="row">

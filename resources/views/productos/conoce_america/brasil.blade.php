@@ -6,11 +6,11 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">      
-      <img src="assets/img_banner/Brasil-min.png" class="d-block w-100" alt="...">
+      <img src="{{ asset ('assets/img_banner/Brasil-min.png') }}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h1></h1>
           <p></p>
-        </div>     
+        </div>  
     </div>    
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
@@ -22,6 +22,119 @@
     <span class="visually-hidden">Next</span>
   </button>
  </div> 
+ <div class="container my-3 m-auto productos-detalles home-iconos">
+    <!-- Título principal -->
+    <div class="titulo text-center">
+        <h4 class="display-4">Busca los mejores Paquetes por Brasil</h4>  
+           
+    </div>
+    <!-- Contenedor del formulario con estilo de recuadro -->
+  @php
+    $destinosBrasilArray = json_decode($destinosBrasil, true);
+  @endphp
+
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+        <p class="text-start">Incluyen (Aéreos con equipaje en Bodega, traslados regular en destino + seguros) valores para dos pasajeros en habitación doble.</p>
+       <p class="text-start">¿Son más de dos? Consultanos!!</p>   
+        <div class="p-4 mb-5" style="border: 2px solid #007bff; border-radius: 10px; background-color: #f8f9fa;">
+            <h5 class="text-center mb-4" style="color: #007bff;">Encuentra tu Destino Perfecto</h5>
+            <form action="{{ route('paquetes.brasil') }}#resultado" method="GET" id="argentinaForm">
+                <div class="row">
+                    <!-- Campo Destino -->
+                    <div class="col-md-12 mb-3">
+                        <label for="destino" class="form-label">Selecciona un destino:</label>
+                        <select name="destino" id="destino" class="form-control">
+                            <option value="">-- Selecciona un destino --</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo Fecha de inicio y fin -->
+                    <div class="col-md-6 mb-3">
+                        <label for="fecha_inicio" class="form-label">Fecha de inicio:</label>
+                        <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" min="{{ date('Y-m-d') }}">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="fecha_fin" class="form-label">Fecha de fin:</label>
+                        <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" min="{{ date('Y-m-d') }}">
+                    </div>
+
+                    <!-- Botón de búsqueda -->
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary mt-3 px-4">Buscar Paquetes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+  <div class="container my-3 m-auto productos-detalles home-iconos" id="resultado">
+    <div class="titulo text-center">
+        <h4 class="display-4"></h4>
+    </div>
+
+    <div class="row">
+        @foreach ($paquetes as $index => $paquete)
+            <!-- Producto -->
+            <div class="col-md-3 p-2">
+                <div class="card productosCrucero">
+                    <div style="position: relative; overflow: hidden;">
+                        <div style="padding-top: 100%;"></div>
+                        <img src="{{ $paquete['imagenes'][0] ?? 'ruta/a/imagen/default.jpg' }}" class="card-img-top img-fluid" alt="{{ $paquete['titulo'] }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                        <div class="card-img-overlay titulo-prod-cruceros">
+                            <p><i class="fa-regular fa-calendar-days"></i> {{ $paquete['fecha_salida'] ?? 'Fecha no disponible' }}</p>
+                            <h5><i class="fa-solid fa-location-dot me-1"></i> {{ $paquete['titulo'] }}</h5>
+                            <p>{{ ucwords(strtolower($paquete['nombre_pais'])) }}</p>
+                            <p>Desde, {{ ucwords(strtolower($paquete['ciudad_origen_nombre'])) }}</p>
+                            <p class="precio_home"><span class="usd">{{ $paquete['moneda'] }} </span> {{ number_format($paquete['precio'], 2) }}</p>
+                        </div>
+                    </div>
+                    <div class="w-100 btn-crucero">
+                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalPaquete{{ $index }}">
+                            VER MÁS
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para el paquete -->
+            <div class="modal fade" id="modalPaquete{{ $index }}" tabindex="-1" aria-labelledby="modalPaqueteLabel{{ $index }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalPaqueteLabel{{ $index }}">{{ $paquete['titulo'] }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>REF:</strong> {{ $paquete['codigo_paquete'] }}</p>
+                            <p><strong>Noches:</strong> {{ $paquete['noches'] ?? 'No disponible' }}</p>
+                            <p><strong>Precio:</strong> {{ $paquete['moneda'] }} {{ number_format($paquete['precio'], 2) }}</p>
+                            <p><strong>Salida:</strong> {{ $paquete['fecha_salida'] ?? 'Fecha no disponible' }}</p>
+                            <p><strong>Incluye Aéreos:</strong> {{ $paquete['incluye_aereo'] ? 'Sí' : 'No' }}</p>
+                            @if (!empty($paquete['hoteles']))
+                                @foreach ($paquete['hoteles'] as $hotel)
+                                    <p><strong>Hotel:</strong> {{ $hotel['nombre'] }}</p>
+                                @endforeach
+                            @else
+                                <p>No hay hoteles disponibles para este paquete.</p>
+                            @endif
+                            <p class="text-center my-4">
+                                <a href="https://api.whatsapp.com/send?phone=543413672066" target="_blank" class="btn-whatsapp">
+                                    <i class="whatsapp fab fa-whatsapp"></i> ¡Haz clic aquí y envíanos tu consulta con el N° de REF: {{ $paquete['codigo_paquete'] }}!
+                                </a>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
  <div class="container introduction-productos-content">
   <div class="row">
     <div class="col-12 introduction-productos">
@@ -149,4 +262,144 @@
      @endforeach
     </div>   
   </div>
+<script>
+  // Variables de destinos traídas desde el backend
+  const destinosBrasil = @json($destinosBrasilArray);
+
+  function actualizarDestinos() {
+    const destinoSelect = document.getElementById('destino');
+
+    // Limpiar opciones de destino
+    destinoSelect.innerHTML = '<option value="">-- Selecciona un destino --</option>';
+
+    // Validar si Brasil ('BR') tiene destinos
+    if (destinosBrasil['BR']) {
+      const ciudades = destinosBrasil['BR'].ciudades;
+
+      // Crear opciones para cada ciudad
+      ciudades.forEach(ciudad => {
+        const option = document.createElement('option');
+        option.value = ciudad.codigo_ciudad;
+        option.text = ciudad.nombre_ciudad;
+        destinoSelect.appendChild(option);
+      });
+    } else {
+      console.error("No se encontraron destinos para Brasil.");
+    }
+  }
+
+  // Llamar a la función automáticamente al cargar la página
+  document.addEventListener('DOMContentLoaded', actualizarDestinos);
+</script>
+
+
+  <!-- Original
+  <script>
+  // Variables de destinos traídas desde el backend
+  const destinosBrasil = @json($destinosBrasilArray);
+
+   function actualizarDestinos() {
+    const paisSelect = document.getElementById('pais');
+    const destinoSelect = document.getElementById('destino');
+
+    // Limpiar opciones de destino
+    destinoSelect.innerHTML = '<option value="">-- Selecciona un destino --</option>';
+
+    // Obtener el país seleccionado
+    const paisSeleccionado = paisSelect.value;
+
+    // Validar si el país seleccionado tiene destinos
+    if (destinosBrasil[paisSeleccionado]) {
+        const ciudades = destinosBrasil[paisSeleccionado].ciudades;
+
+        // Crear opciones para cada ciudad
+        ciudades.forEach(ciudad => {
+            const option = document.createElement('option');
+            option.value = ciudad.codigo_ciudad;
+            option.text = ciudad.nombre_ciudad;
+            destinoSelect.appendChild(option);
+        });
+    }
+ }
+ </script> 
+--> 
+ <script>
+    const paquetes = {!! json_encode($paquetes) !!};
+ </script>
+
+ <!-- Script para manejar el collapse y mostrar detalles -->
+ <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const botonesVerMas = document.querySelectorAll('.ver-mas-btn');
+        
+        botonesVerMas.forEach((boton, index) => {
+            boton.addEventListener('click', () => {
+                mostrarDetalles(paquetes[index]);
+            });
+        });
+    });
+
+    function mostrarDetalles(paquete) {
+        const contenedorDetalles = document.getElementById('contenidoPaquete');
+        if (!contenedorDetalles) {
+            console.error("El elemento 'contenidoPaquete' no se encontró en el DOM.");
+            return;
+        }
+
+        let contenido = `
+            <h5>${paquete.titulo}</h5>
+            <p><strong>REF:</strong> ${paquete.codigo_paquete}</p>
+            <p><strong>Precio:</strong> ${paquete.moneda} ${parseFloat(paquete.precio).toFixed(2)}</p>
+            <p><strong>Salida:</strong> ${paquete.fecha_salida || 'Fecha no disponible'}</p>
+            <p><strong>Noches:</strong> ${paquete.noches || 'No disponible'}</p>
+            <p><strong>Notas:</strong> ${paquete.notas || 'No disponible'}</p>
+            <h6>Hoteles Incluidos:</h6>
+        `;
+
+        if (paquete.hoteles && paquete.hoteles.length > 0) {
+            paquete.hoteles.forEach(hotel => {
+                contenido += `
+                    <p><strong>Hotel:</strong> ${hotel.nombre}</p>
+                    <p><strong>Precio:</strong> ${paquete.moneda} ${parseFloat(hotel.precio).toFixed(2)}</p>
+                    <div class="hotel-images">
+                `;
+                hotel.imagenes.forEach(imagen => {
+                    contenido += `<img src="${imagen}" class="img-thumbnail" style="width: 50px; height: auto;">`;
+                });
+                contenido += '</div><hr>';
+            });
+        } else {
+            contenido += `<p>No hay hoteles disponibles para este paquete.</p>`;
+        }
+
+        contenedorDetalles.innerHTML = contenido;
+    }
+</script>
+<script>
+    function mostrarDetalles(paquete) {
+        let contenido = `
+            <h5>${paquete.titulo ?? 'Título no disponible'}</h5>
+            <p><strong>Precio:</strong> ${paquete.moneda} ${parseFloat(paquete.precio).toFixed(2)}</p>
+            <p><strong>Salida:</strong> ${paquete.fecha_salida ?? 'Fecha no disponible'}</p>
+            <p><strong>Noches:</strong> ${paquete.noches ?? 'No disponible'}</p>
+            <p><strong>Notas:</strong> ${paquete.notas ?? 'No disponible'}</p>
+            <h6>Hoteles Incluidos:</h6>`;
+
+        if (paquete.hoteles) {
+            paquete.hoteles.forEach(hotel => {
+                contenido += `
+                    <p><strong>Hotel:</strong> ${hotel.nombre}</p>
+                    <p><strong>Precio:</strong> ${paquete.moneda} ${parseFloat(hotel.precio).toFixed(2)}</p>
+                    <div>`;
+                hotel.imagenes.forEach(imagen => {
+                    contenido += `<img src="${imagen}" class="img-thumbnail" style="width: 50px; height: auto;">`;
+                });
+                contenido += `</div><hr>`;
+            });
+        }
+
+        document.getElementById('modalContenido').innerHTML = contenido;
+        new bootstrap.Modal(document.getElementById('paqueteModal')).show();
+    }
+</script>
 @endsection

@@ -34,9 +34,27 @@ use App\Http\Controllers\MisViajesController;
 use App\Http\Controllers\ContactoCursoItalianoController;
 use App\Http\Controllers\DisneyController;
 use App\Http\Controllers\PaquetesController;
+use App\Http\Controllers\AerolineaController;
+use App\Http\Controllers\ItinerarioCupoController;
 
 Route::get('/obtener-paquetes', [PaquetesController::class, 'obtenerPaquetes']);
 Route::get('/paquetes1', [PaquetesController::class, 'obtenerPaquetes']);
+
+// Aerolineas
+Route::get('/aerolineas', [AerolineaController::class, 'index']);
+Route::get('/aerolineas_news', [AerolineaController::class, 'create'])->name('aerolineas.news');
+Route::post('/aerolineas', [AerolineaController::class, 'store'])->name('aerolineas.store');
+Route::get('/aerolineas/{id}/editar', [AerolineaController::class, 'edit'])->name('aerolineas.edit');
+Route::put('/aerolineas/{id}', [AerolineaController::class, 'update'])->name('aerolineas.update');
+Route::post('/aerolineas/{id}/delete', [AerolineaController::class, 'destroy'])->name('aerolineas.destroy');
+
+// Listar itinerarios
+Route::get('/itinerario-cupos', [ItinerarioCupoController::class, 'index'])->name('itinerario_cupos.index');
+Route::get('/itinerario-cupos-news', [ItinerarioCupoController::class, 'create'])->name('itinerario_cupos.news');
+Route::post('/itinerario-cupos', [ItinerarioCupoController::class, 'store'])->name('itinerario_cupos.store');
+Route::get('/itinerario-cupos/{id}/editar', [ItinerarioCupoController::class, 'edit'])->name('itinerario_cupos.edit');
+Route::post('/itinerario-cupos/{id}', [ItinerarioCupoController::class, 'update'])->name('itinerario_cupos.update');
+Route::post('/itinerario-cupos/{id}/delete', [ItinerarioCupoController::class, 'destroy'])->name('itinerario_cupos.destroy');
 
 Route::get('/disney', [DisneyController::class, 'welcome']);
 Route::get('/disney-usa', [DisneyController::class, 'disneyUSA'])->name('disney.usa');
@@ -109,7 +127,8 @@ Route::post('/italy', [ContactoCursoItalianoController::class, 'store']);
 // Promociones productos turisticos
 Route::get('/argentina', [PromocionController::class, 'mostrarDisponibilidadArgentina']);
 Route::get('/argentina/paquetes', [PromocionController::class, 'consultarPaquetesArgentina'])->name('paquetes.argentina');
-Route::get('/brasil', [PromocionController::class, 'cookie_brasil']);
+Route::get('/brasil', [PromocionController::class, 'mostrarDisponibilidadBrasil']);
+Route::get('/brasil/paquetes', [PromocionController::class, 'consultarPaquetesBrasil'])->name('paquetes.brasil');
 Route::get('/caribe', [PaquetesController::class, 'mostrarDisponibilidadCaribe'])->name('productos.caribe');
 Route::get('/caribe/paquetes', [PaquetesController::class, 'consultarPaquetesCaribe'])->name('paquetes.caribe');
 

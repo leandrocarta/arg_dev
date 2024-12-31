@@ -681,7 +681,7 @@ padding-top: 12px;
   color: #ffffff;
 }
 .home-iconos, .fa-sun, .fa-bed, .fa-utensils,
-.fa-hot-tub-person, .fa-dumbbell, .fa-cloud-moon, .fa-bus, .fa-plane-departure {
+.fa-hot-tub-person, .fa-dumbbell, .fa-bus, .fa-plane-departure {
   color: #474646;
 } 
 .fa-star {
@@ -1027,7 +1027,7 @@ padding-top: 12px;
   width: 99%;
 }
   .banner_movil img {
-    height: 180px;
+    height: 580px;
   }
   .exclusivo-detalles {  
   padding: 0;
@@ -1096,5 +1096,25 @@ padding-top: 12px;
     transition: transform 0.2s ease;
 }
 .whatsapp {
-  color: rgb(2, 188, 2);
+  color: rgb(253, 253, 253);
+}
+// Boton de whatsApp para consultas de paquetes
+.btn-whatsapp {
+    display: inline-block;
+    background-color: #25D366; /* Color verde de WhatsApp */
+    color: white; /* Texto blanco */
+    font-size: 18px; /* Tamaño del texto */
+    font-weight: bold; /* Texto en negrita */
+    text-decoration: none; /* Quitar subrayado */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transición para el hover */
+}
+
+/* Efecto hover */
+.btn-whatsapp:hover {
+    transform: translateY(-2px); /* Elevar ligeramente el botón */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Intensificar la sombra */
+    text-decoration: none; /* Asegurar que no aparezca subrayado */
 }

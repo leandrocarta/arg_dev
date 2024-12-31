@@ -69,7 +69,7 @@
         @guest()
           @if (Auth::guard('client')->check())
           @else
-          <p class="inicia_sesion"><i class="fa-solid fa-right-to-bracket"></i><a href="/login_client">THE CLUB</a></p>
+          <p class="inicia_sesion"><i class="fa-solid fa-right-to-bracket"></i><a href="/login_client">CLIENTES</a></p>
           @endif
         @endguest 
         @if (Auth::check())
@@ -89,7 +89,8 @@
                      <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
                      <li><a class="dropdown-item" href="#">Mi Equipo</a></li>
                      <li><a class="dropdown-item" href="/read_producto">Alta Paquetes</a></li>
-                     <li><a class="dropdown-item" href="/read_crucero">Alta Cruceros</a></li>
+                     <li><a class="dropdown-item" href="/aerolineas">Cupos Aereos</a></li>
+                     <li><a class="dropdown-item" href="/itinerario-cupos">Cupos Itinerarios</a></li>
                      <li><a class="dropdown-item" href="/excursiones_arg">Excursiones Arg.</a></li>
                      <li><a class="dropdown-item" href="/read_vuelos">Vuelos</a></li>
                      <li><a class="dropdown-item" href="/read_destinos">Destinos</a></li>

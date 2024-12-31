@@ -8,6 +8,8 @@ use App\Models\Producto;
 use App\Models\Service;
 use App\Models\Itinerario;
 use App\Models\Destino;
+use App\Models\Aerolinea;
+use App\Models\ItinerarioCupo;
 use App\Models\Pais;
 use App\Models\ProveedorMayorista;
 use Intervention\Image\Facades\Image;
@@ -209,9 +211,11 @@ class ProductoController extends Controller
 
         return redirect('/read_producto')->with('success', 'EL PRODUCTO SE CREÓ CORRECTAMENTE');
     }
-    public function detalle_producto($id)
+   /* public function detalle_producto($id)
 {
-    $productos = Producto::with(['hotel', 'service', 'destinos'])->find($id);
+   // $productos = Producto::with(['hotel', 'service', 'destinos'])->find($id);
+    $productos = Producto::with(['hotel', 'service', 'destinos', 'aerolinea.itinerarios'])->find($id);
+
 
     if (!$productos) {
 
@@ -220,6 +224,21 @@ class ProductoController extends Controller
         return view('productos.detalles.detalles_productos', compact('productos'));
     }
     
+} */
+public function detalle_producto($id)
+{
+    $productos = Producto::with([
+        'hotel', 
+        'service', 
+        'destinos', 
+        'aerolinea.itinerarios' 
+    ])->find($id);
+
+    if (!$productos) {
+        return redirect()->route('productos.index')->withErrors('El producto no fue encontrado.');
+    }
+
+    return view('productos.detalles.detalles_productos', compact('productos'));
 }
 
     public function deleteProductos($id)

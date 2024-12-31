@@ -16,75 +16,69 @@ use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
-    {                
-       $productos = Producto::with(['hotel', 'service', 'itinerario', 'destinos', 'pais'])->get();
-    
-       // $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();
-        $mostrarModal = false;
-        if ($request->hasCookie('promotor_ventas')) {            
-    $userId = $request->cookie('promotor_ventas'); 
-    $cliente = auth()->guard('client')->user();
+   public function index(Request $request)
+{
+    /*
+    if ($request->hasCookie('promotor_ventas')) {
+        // dd('Entre en hasCookie');
+        $userId = $request->cookie('promotor_ventas');
+        $elim_cookie = 'promotor_ventas';
+        setcookie($elim_cookie, '', time() - 3600, '/');
+        dd('se eliminoooo la cookie n°: ', $userId);
+    }    */
+    // Eliminar cookie solo si se solicita
+    if ($request->query('clear_cookie') === 'true') {        
+        $elim_cookie = 'promotor_ventas';
+        setcookie($elim_cookie, '', time() - 3600, '/');
 
+        // Obtener el ID actual o generar uno aleatorio para mostrarlo
+        $userId = $request->cookie('promotor_ventas') ?? User::inRandomOrder()->first()->id;
+
+        // Obtener productos relacionados para la vista
+        $productos = Producto::with(['hotel', 'service', 'itinerario', 'destinos', 'pais'])->get();
+
+        return response()->view('home', ['mensaje' => 'Cookie eliminada para pruebas. Último ID asignado: ' . $userId, 'productos' => $productos]);
+    }
+
+    // Obtención del userId de la cookie o generación aleatoria
+    $userId = $request->cookie('promotor_ventas') ?? $request->query('promotor_ventas');
+    if (empty($userId) || !User::find($userId)) {
+        $userId = User::inRandomOrder()->first()->id ?? 1; // Usuario por defecto si no hay registros
+    }
+
+    // Crear o renovar la cookie con el ID del promotor
+    $cookie = cookie('promotor_ventas', $userId, 60 * 24 * 30 * 12); // Duración de 1 año
+
+    // Si hay un cliente autenticado, vincularlo al promotor si aún no está asociado
+    $cliente = auth()->guard('client')->user();
     if ($cliente && $cliente->fk_users_id === null) {
         $cliente->fk_users_id = $userId;
         try {
             $cliente->save();
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return response()->view('error', ['message' => $e->getMessage()]);
         }
     }
 
-    if ($request->has('promotor_ventas')) {
-        $mostrarModal = true;
-    }
-
+    // Obtener información del promotor para mostrar en la vista
     $user = User::find($userId);
-    if ($user) {    
-        $nombreUsuario = $user->usuario;
-    } else {    
-        $nombreUsuario = 'Argtravels';
-    }
+    $nombreUsuario = $user ? $user->usuario : 'Argtravels';
 
-    return view('home', compact('productos', 'mostrarModal', 'nombreUsuario'));
-} else {            
-    $userId = $request->query('promotor_ventas') ?? 1;
-    $user = User::find($userId);
+    // Obtener productos relacionados
+    $productos = Producto::with(['hotel', 'service', 'itinerario', 'destinos', 'pais'])->get();
 
-    if ($user) {    
-        $nombreUsuario = $user->usuario;
-    } else {    
-        $nombreUsuario = 'Argtravels';
-    }
+    // Determinar si mostrar el modal (puedes ajustar la lógica según necesidad)
+    $mostrarModal = $request->has('promotor_ventas');
 
-    if (!$user) {
-        $userId = 1;
-    }
-
-    $cookie = cookie('promotor_ventas', $userId, 60 * 24 * 30 * 12);
-    $cliente = auth()->guard('client')->user();
-
-    if ($cliente && $cliente->fk_users_id === null) {
-        $cliente->fk_users_id = $userId;
-        try {
-            $cliente->save();
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-        }
-    }
-
-    if ($request->has('promotor_ventas')) {               
-        $mostrarModal = true;
-    }
-
+    // Retornar la vista con la cookie adjunta
     return response()
         ->view('home', compact('productos', 'mostrarModal', 'nombreUsuario'))
         ->withCookie($cookie);
 }
 
-    }
-     public function index2(Request $request)
+    public function index2(Request $request)
     {                
+        dd('entro normal sin promotor de ventas');
        $productos = Producto::with(['hotel', 'service', 'itinerario', 'destinos', 'pais'])->get();
     
        // $productos = Producto::with(['hotel', 'service', 'itinerario','destinos'])->get();

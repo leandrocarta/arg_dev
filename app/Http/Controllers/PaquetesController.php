@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Package;
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
+
 
 
 class PaquetesController extends Controller
@@ -62,22 +65,22 @@ class PaquetesController extends Controller
 
 private function dispo_consultarDestinosCaribeAPI()
 {
-    $url = "https://aws-qa1.ola.com.ar/qa/wsola/endpoint";
+    $url = "https://admin.ola.com.ar/wsola/endpoint.php";
     $requestXml = <<<XML
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
                        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                        xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-                       xmlns:tns="http://aws-qa1.ola.com.ar/qa/wsola/endpoint"
+                       xmlns:tns="https://admin.ola.com.ar/wsola/endpoint.php"
                        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
         <SOAP-ENV:Body>
-            <tns:GetPackagesFaresDestinations xmlns:tns="http://aws-qa1.ola.com.ar/qa/wsola/endpoint">
+            <tns:GetPackagesFaresDestinations xmlns:tns="https://admin.ola.com.ar/wsola/endpoint.php">
                 <Request xsi:type="xsd:string">
                     <![CDATA[
                         <GetPackagesFaresDestinationsRequest>
                             <GeneralParameters>
-                                <Username>argtravelsweb</Username>
-                                <Password>Vdxd2vOhYU08cUb</Password>
+                                <Username>argtravels</Username>
+                                <Password>uNKx4YW59i6rWye</Password>
                                 <CustomerIp>181.165.55.94</CustomerIp>
                             </GeneralParameters>
                             <Outlet>1</Outlet>
@@ -95,7 +98,7 @@ private function dispo_consultarDestinosCaribeAPI()
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         "Content-Type: text/xml; charset=ISO-8859-1",
-        "SOAPAction: \"http://aws-qa1.ola.com.ar/qa/wsola/endpoint#GetPackagesFaresDestinations\"",
+        "SOAPAction: \"https://admin.ola.com.ar/wsola/endpoint.php#GetPackagesFaresDestinations\"",
         "Content-Length: " . strlen($requestXml)
     ]);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $requestXml);
@@ -111,28 +114,64 @@ private function dispo_consultarDestinosCaribeAPI()
         //$destinos = $this->parsearDestinosCaribe($response);
         //dd($destinos); // Muestra los datos obtenidos de la API para inspección
 
-return $destinos;
+      return $destinos;
     }
 }
 
+
  private function dispo_parsearDestinosCaribe($response)
-{    
+{
     $destinos = [];
+    // Convertir la respuesta a UTF-8
+    $response = mb_convert_encoding($response, 'UTF-8', 'ISO-8859-1');
+
+    // Manejar errores de XML al cargar
+    libxml_use_internal_errors(true);
     $xml = simplexml_load_string($response);
-    $internalXmlString = (string) $xml->xpath('//*[local-name()="Response"]')[0];
+
+    if ($xml === false) {
+        // Registrar errores de carga de XML
+        foreach (libxml_get_errors() as $error) {
+            error_log("XML Error: {$error->message}");
+        }
+        libxml_clear_errors();
+        dd("Error al procesar el XML. Verifica la respuesta: ", $response); // Inspecciona la respuesta
+    }
+
+    // Extraer la sección 'Response'
+    $responseNodes = $xml->xpath('//*[local-name()="Response"]');
+    if (empty($responseNodes)) {
+        error_log("No se encontró el nodo 'Response' en el XML proporcionado.");
+        dd("XML recibido no contiene el nodo 'Response': ", $response); // Verifica si está el nodo
+    }
+
+    // Asignar el XML interno
+    $internalXmlString = (string) $responseNodes[0];
     $internalXml = simplexml_load_string($internalXmlString);
 
+    if ($internalXml === false) {
+        foreach (libxml_get_errors() as $error) {
+            error_log("XML Internal Error: {$error->message}");
+        }
+        libxml_clear_errors();
+        dd("Error al procesar el XML interno: ", $internalXmlString);
+    }
+
+    // Procesar las zonas y países
     foreach ($internalXml->xpath('//Zone') as $zone) {
+        // Filtrar solo la región 'CARIBE Y CENTROAMERICA'
         if ((string)$zone->Name === 'CARIBE Y CENTROAMERICA') {
             foreach ($zone->Countries->Country as $country) {
                 $nombrePais = (string) $country->Name;
                 $codigoPais = (string) $country->Code;
 
-                // Inicializa el array de ciudades para cada país
-                $destinos[$codigoPais] = [
-                    'nombre_pais' => $nombrePais,
-                    'ciudades' => []
-                ];
+                if (!isset($destinos[$codigoPais])) {
+                    $destinos[$codigoPais] = [
+                        'nombre_pais' => $nombrePais,
+                        'zona' => 'CARIBE Y CENTROAMERICA',
+                        'ciudades' => []
+                    ];
+                }
 
                 foreach ($country->Cities->City as $city) {
                     $destinos[$codigoPais]['ciudades'][] = [
@@ -145,7 +184,129 @@ return $destinos;
     }
 
     return $destinos;
-} 
+}
+
+
+private function dispo_consultarDestinosCaribe_pruebas()
+{
+    $url = "https://admin.ola.com.ar/wsola/endpoint.php"; // Nueva URL del endpoint
+    $requestXml = <<<XML
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+                       xmlns:tns="https://admin.ola.com.ar/wsola/endpoint.php"
+                       SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+        <SOAP-ENV:Body>
+            <tns:GetPackagesFaresDestinations xmlns:tns="https://admin.ola.com.ar/wsola/endpoint.php">
+                <Request xsi:type="xsd:string">
+                    <![CDATA[
+                        <GetPackagesFaresDestinationsRequest>
+                            <GeneralParameters>
+                                <Username>argtravels</Username>
+                                <Password>uNKx4YW59i6rWye</Password>
+                                <CustomerIp>181.165.55.94</CustomerIp>
+                            </GeneralParameters>
+                            <Outlet>1</Outlet>
+                            <PackageType>ALL</PackageType>
+                        </GetPackagesFaresDestinationsRequest>
+                    ]]>
+                </Request>
+            </tns:GetPackagesFaresDestinations>
+        </SOAP-ENV:Body>
+    </SOAP-ENV:Envelope>
+    XML;
+
+    // Configuración de cURL
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Content-Type: text/xml; charset=ISO-8859-1",
+        "SOAPAction: \"https://admin.ola.com.ar/wsola/endpoint.php#GetPackagesFaresDestinations\"",
+        "Content-Length: " . strlen($requestXml)
+    ]);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $requestXml);
+
+    // Ejecutar la solicitud cURL
+    $response = curl_exec($ch);
+
+    // Verificar errores cURL
+    if (curl_errno($ch)) {
+        dd("Error cURL: " . curl_error($ch));
+    }
+
+    curl_close($ch);
+
+    // Llamar al método para analizar la respuesta
+    $this->dispo_analizarResponse($response);
+}
+
+private function dispo_parsearDestinosCaribe_anterior($response)
+{
+    $destinos = [];
+    // Convertir la respuesta a UTF-8
+    $response = mb_convert_encoding($response, 'UTF-8', 'ISO-8859-1');
+
+    // Manejar errores de XML al cargar
+    libxml_use_internal_errors(true);
+    $xml = simplexml_load_string($response);
+
+    if ($xml === false) {
+        // Registrar errores de carga de XML
+        foreach (libxml_get_errors() as $error) {
+            error_log("XML Error: {$error->message}");
+        }
+        libxml_clear_errors();
+        dd("Error al procesar el XML. Verifica la respuesta: ", $response); // Inspecciona la respuesta
+    }
+
+    // Extraer la sección 'Response'
+    $responseNodes = $xml->xpath('//*[local-name()="Response"]');
+    if (empty($responseNodes)) {
+        error_log("No se encontró el nodo 'Response' en el XML proporcionado.");
+        dd("XML recibido no contiene el nodo 'Response': ", $response); // Verifica si está el nodo
+    }
+
+    // Asignar el XML interno
+    $internalXmlString = (string) $responseNodes[0];
+    $internalXml = simplexml_load_string($internalXmlString);
+
+    if ($internalXml === false) {
+        foreach (libxml_get_errors() as $error) {
+            error_log("XML Internal Error: {$error->message}");
+        }
+        libxml_clear_errors();
+        dd("Error al procesar el XML interno: ", $internalXmlString);
+    }
+
+    // Procesar las zonas y países
+    foreach ($internalXml->xpath('//Zone') as $zone) {
+        $nombreZona = (string) $zone->Name;
+
+        foreach ($zone->Countries->Country as $country) {
+            $nombrePais = (string) $country->Name;
+            $codigoPais = (string) $country->Code;
+
+            if (!isset($destinos[$codigoPais])) {
+                $destinos[$codigoPais] = [
+                    'nombre_pais' => $nombrePais,
+                    'zona' => $nombreZona,
+                    'ciudades' => []
+                ];
+            }
+
+            foreach ($country->Cities->City as $city) {
+                $destinos[$codigoPais]['ciudades'][] = [
+                    'codigo_ciudad' => (string) $city->Code,
+                    'nombre_ciudad' => (string) $city->Name
+                ];
+            }
+        }
+    }
+
+    return $destinos;
+}
 
 public function consultarPaquetesCaribe(Request $request)
 {
@@ -156,7 +317,7 @@ public function consultarPaquetesCaribe(Request $request)
     $fechaFin = $request->input('fecha_fin');
     
     // URL del endpoint
-    $url = "https://aws-qa1.ola.com.ar/qa/wsola/endpoint";
+    $url = "https://admin.ola.com.ar/wsola/endpoint.php";
 
     // Generar el XML de la solicitud
     $requestXml = <<<XML
@@ -166,8 +327,8 @@ public function consultarPaquetesCaribe(Request $request)
                 <Request><![CDATA[
                     <GetPackagesFaresRequest>
                         <GeneralParameters>
-                            <Username>argtravelsweb</Username>
-                            <Password>Vdxd2vOhYU08cUb</Password>
+                            <Username>argtravels</Username>
+                            <Password>uNKx4YW59i6rWye</Password>
                             <CustomerIp>181.165.55.94</CustomerIp>
                         </GeneralParameters>
                         <DepartureDate>
@@ -212,6 +373,7 @@ public function consultarPaquetesCaribe(Request $request)
 
     // Procesar la respuesta XML y obtener los paquetes
     $paquetes = $this->parsearPaquetesXMLCaribe($response);
+ 
 
     // Obtener productos personales
     $productos = Producto::where('ubicacion', 'Caribe')->get();
@@ -315,8 +477,21 @@ private function obtenerImagenes($imagenes)
 
     return $listaImagenes;
 }
-
 private function obtenerNotas($notas)
+{
+    $listaNotas = [];
+
+    // Validar si $notas es iterable
+    if (is_iterable($notas)) {
+        foreach ($notas as $nota) {
+            $listaNotas[] = (string) $nota;
+        }
+    }
+
+    return implode(" ", $listaNotas);
+}
+
+private function obtenerNotas_anterior($notas)
 {
     $listaNotas = [];
     foreach ($notas as $nota) {

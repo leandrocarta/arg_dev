@@ -8,6 +8,16 @@
             <p>ALTA DE HOTELES</p>       
                  <form class="form-horizontal" method="POST" action="{{ route('hotel.store') }}" enctype="multipart/form-data">
                      {{ csrf_field() }}
+                     <div class="mb-3 form-floating">
+                       <select name="id_prov" class="form-select">                        
+                          @foreach ($proveedores as $proveedor)                       
+                            <option value="{{ $proveedor->id }}" data-nombre-img="{{ $proveedor->empresa }}">
+                            {{ $proveedor->empresa }}
+                            </option>
+                          @endforeach                          
+                       </select>
+                       <label for="pais" class="form-label">Proveedor</label>
+                     </div>
                      <div class="mb-3 form-group form-floating">
                         <input type="text" class="form-control" name="nombre" placeholder="Nombre Hotel" required>
                         <label for="nombre" class="control-label">Nombre Hotel</label>
@@ -36,16 +46,6 @@
                        </select>
                        <label for="pais" class="form-label">País</label>
                      </div>
-                   <!--  <div class="mb-3 form-group form-floating">       
-                         <select name="comidas" class="form-select" aria-label="Default select example">  
-                            <option value="All Inclusive">All Inclusive</option>
-                            <option value="Desayuno">Desayuno</option>
-                            <option value="Media Pensión">Media Pensión</option>
-                            <option value="Solo Hospedaje">Solo Hospedaje</option>
-                         </select>  
-                         <label for="comidas" class="col-md-4 control-label">¿Servicio de Gastronomía?</label>
-                     </div>  -->                
-                       
                      <div class="mb-3 form-group form-floating">       
                          <select name="tipo_publico" class="form-select" aria-label="Default select example">  
                             <option value="Apto todo Publico">Apto todo Publico</option>
@@ -61,87 +61,7 @@
                      <div class="mb-3 form-group form-floating">
                         <input type="file" class="form-control" placeholder="Imagenes (Max. 15)" name="imagenes[]" accept="image/*" value="{{ old('imagenes') }}" multiple> 
                         <label for="imagenes" class="col-md-12 control-label">Imagenes (Max. 15)</label>    
-                     </div> 
-                    <!-- <div class="col-md-12 d-flex">
-                         <div class="col-md-4">
-                            <div class="mb-3 form-group form-floating">
-                               <div class="form-check">                            
-                                  <label class="form-check-label" for="WIFI">
-                                      WIFI?
-                                  </label>
-                                <input class="form-check-input" type="checkbox" name="wifi" value="WIFI">
-                               </div>
-                            </div>                          
-                            <div class="mb-3 form-group form-floating">
-                               <div class="form-check">                            
-                                   <label class="form-check-label" for="gym">
-                                       Gimnasio?
-                                   </label>
-                                   <input class="form-check-input" type="checkbox" name="gym" value="GIMNACIO">
-                               </div>
-                            </div>                      
-                            <div class="mb-3 form-group form-floating">
-                               <div class="form-check">
-                                   <input class="form-check-input" type="checkbox" name="spa" value="SPA">
-                                   <label class="form-check-label" for="spa">
-                                       SPA?
-                                   </label>
-                               </div>
-                            </div> 
-                         </div>
-                         <div class="col-md-4">
-                            <div class="mb-3 form-group form-floating">
-                               <div class="form-check">                            
-                                  <label class="form-check-label" for="parking">
-                                      PARKING?
-                                  </label>
-                                <input class="form-check-input" type="checkbox" name="parking" value="WIFI">
-                               </div>
-                            </div>                          
-                            <div class="mb-3 form-group form-floating">
-                               <div class="form-check">                            
-                                   <label class="form-check-label" for="traslados">
-                                       TRASLADOS?
-                                   </label>
-                                   <input class="form-check-input" type="checkbox" name="traslados" value="GIMNACIO">
-                               </div>
-                            </div>                      
-                            <div class="mb-3 form-group form-floating">
-                               <div class="form-check">
-                                   <input class="form-check-input" type="checkbox" name="spa" value="SPA">
-                                   <label class="form-check-label" for="spa">
-                                      
-                                   </label> 
-                               </div>
-                            </div> 
-                         </div>
-                         <div class="col-md-4">
-                            <div class="mb-3 form-group form-floating">
-                               <div class="form-check">                            
-                                 <label class="form-check-label" for="WIFI">
-                                     
-                                  </label>
-                                <input class="form-check-input" type="checkbox" name="wifi" value="WIFI"> 
-                               </div>
-                            </div>                          
-                            <div class="mb-3 form-group form-floating">
-                               <div class="form-check">                            
-                                   <label class="form-check-label" for="gym">
-                                       
-                                   </label>
-                                   <input class="form-check-input" type="checkbox" name="gym" value="GIMNACIO"> 
-                               </div>
-                            </div>                      
-                            <div class="mb-3 form-group form-floating">
-                               <div class="form-check">
-                                   <input class="form-check-input" type="checkbox" name="spa" value="SPA"> 
-                                   <label class="form-check-label" for="spa">
-                                       
-                                   </label> 
-                               </div>
-                            </div> 
-                         </div>                     
-                     </div>   -->        
+                     </div>                     
                      <div class="form-group">
                         <label for="detalles" class="col-md-4 control-label">Info del Hotel</label>
                         <div class="">

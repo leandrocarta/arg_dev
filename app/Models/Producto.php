@@ -39,9 +39,15 @@ class Producto extends Model
     return $this->hasOne(Service::class, 'id_prod', 'id');
 }
  public function destinos()
-    {
-        return $this->belongsTo(Destino::class, 'id_destino'); 
-    }
+{
+    return $this->belongsTo(Destino::class, 'id_destino'); 
+}
+public function aerolinea()
+{
+    return $this->belongsTo(Aerolinea::class, 'id_aerolinea'); // Ajusta 'aerolinea_id' si es necesario
+}
+
+
  /*public function paises()
     {
         return $this->belongsTo(Pais::class, 'id_pais_destino'); 

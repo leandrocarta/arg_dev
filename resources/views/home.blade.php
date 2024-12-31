@@ -9,7 +9,7 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">      
-      <img src="assets/img_banner/Agente_iberostar-min.png" class="d-block w-100" alt="...">
+      <img src="assets/img_banner/banner_navidad.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h1></h1>
           <p></p>
@@ -32,7 +32,8 @@
   <div class="container my-3 m-auto productos-detalles home-iconos">
      <div class="titulo text-center">
        <h4 class="display-4">Paquetes Imbatibles Comunidad</h4>
-       <p>Todos nuestros paquetes incluyen (Aéreos con equipaje en Bodega, traslados en destino y seguros) con valores por pasajero en habitación doble.</p>
+        <p class="text-start">Todos nuestros paquetes incluyen (Aéreos con equipaje en Bodega, traslados Privados en destino y seguros hasta usd 300.000) con valores por pasajero en habitación doble.</p>
+       <p class="text-start">Consultanos por otros Hoteles o tipo de habitación!!</p>
      </div>
      <div class="row">                     
        @php
@@ -51,9 +52,11 @@
                     @endif 
                 <img src="{{ asset('assets/img_paquetes/' . $producto->imagen) }}" class="card-img-top img-fluid" alt="{{ $producto->nombre }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 <div class="card-img-overlay titulo-prod-cruceros">
-                    <p>REF: N° {{ $producto->id }} - <i class="fa-regular fa-calendar-days"></i> {{ $producto->fecha_salida }}</p>
+                    <p>REF: N° {{ $producto->id }} - <i class="fa-solid fa-cloud-moon"></i> {{ $producto->estadia }} Noches</p>
+                    <p><i class="fa-regular fa-calendar-days"></i> {{ $producto->fecha_salida }}</p>
                     <h5><i class="fa-solid fa-location-dot me-1"></i> {{ $producto->destinos->ciudad_destino }}</h5> 
-                    <p>{{ $producto->titulo }}</p>                                    
+                    <p>{{ $producto->titulo }}</p>   
+                    <p><i class="fa-solid fa-hotel"></i> {{ $producto->hotel->nombre }} </p>                                 
                      <h3 class="precio_home"><span class="usd">{{ $producto->moneda }} </span> {{ $producto->precio_total }}</h3>
                     </div>
             </div>
@@ -143,11 +146,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="padding-bottom: 0">
-        <h5 class="modal-title"><i>Precios y Ofertas exclusivas para la comunidad de Viajeros</i></h5> 
+        <h5 class="modal-title"><i>¡¡¡Si te registras AHORA Ganas!!!. Hace clic en la imagen</i></h5> 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <a href="http://127.0.0.1:8000/register_client">
+        <a href="https://www.argtravels.tur.ar/register_client">
             <img src="assets/img/comunidad-min.png" alt="Probanos!!!" class="img-fluid">
         </a>
       </div>       

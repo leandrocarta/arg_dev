@@ -62,40 +62,30 @@ class PaquetesController extends Controller
 
 private function dispo_consultarDestinosCaribeAPI()
 {
-    $url = "https://aws-qa1.ola.com.ar/qa/wsola/endpoint";
-    $requestXml = <<<XML
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-                       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-                       xmlns:tns="http://aws-qa1.ola.com.ar/qa/wsola/endpoint"
-                       SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-        <SOAP-ENV:Body>
-            <tns:GetPackagesFaresDestinations xmlns:tns="http://aws-qa1.ola.com.ar/qa/wsola/endpoint">
-                <Request xsi:type="xsd:string">
-                    <![CDATA[
-                        <GetPackagesFaresDestinationsRequest>
-                            <GeneralParameters>
-                                <Username>argtravelsweb</Username>
-                                <Password>Vdxd2vOhYU08cUb</Password>
-                                <CustomerIp>181.165.55.94</CustomerIp>
-                            </GeneralParameters>
-                            <Outlet>1</Outlet>
-                            <PackageType>ALL</PackageType>
-                        </GetPackagesFaresDestinationsRequest>
-                    ]]>
-                </Request>
-            </tns:GetPackagesFaresDestinations>
-        </SOAP-ENV:Body>
-    </SOAP-ENV:Envelope>
-    XML;
+$url = "https://admin.ola.com.ar/wsola/help";
+$requestXml = <<<XML
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:tns="http://admin.ola.com.ar/wsola/help"
+SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+SOAP-ENV:Body
+<tns:GetPackagesFaresDestinations xmlns:tns="http://admin.ola.com.ar/wsola/help">
+
+
+
+</tns:GetPackagesFaresDestinations>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+XML;
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         "Content-Type: text/xml; charset=ISO-8859-1",
-        "SOAPAction: \"http://aws-qa1.ola.com.ar/qa/wsola/endpoint#GetPackagesFaresDestinations\"",
+        "SOAPAction: \"https://admin.ola.com.ar/wsola/help#GetPackagesFaresDestinations\"",
         "Content-Length: " . strlen($requestXml)
     ]);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $requestXml);
@@ -114,7 +104,76 @@ private function dispo_consultarDestinosCaribeAPI()
 return $destinos;
     }
 }
+    
+private function dispo_parsearDestinosCaribe($response)
+{
+    $destinos = [];
 
+    // Intentar convertir el contenido a UTF-8 si es necesario
+    $response = mb_convert_encoding($response, 'UTF-8', 'auto');
+
+    // Manejar errores de XML al cargar
+    libxml_use_internal_errors(true);
+    $xml = simplexml_load_string($response);
+
+    if ($xml === false) {
+        // Registrar errores para depuración
+        foreach (libxml_get_errors() as $error) {
+            error_log("XML Error: {$error->message}");
+        }
+        libxml_clear_errors();
+        return []; // Devuelve un array vacío en caso de error
+    }
+
+    // Extraer la sección interna de la respuesta
+    $responseNode = $xml->xpath('//*[local-name()="Response"]');
+    if (empty($responseNode)) {
+        error_log("No se encontró el nodo 'Response' en el XML proporcionado.");
+        return []; // Devuelve un array vacío si no se encuentra el nodo
+    }
+
+    $internalXmlString = (string) $responseNode[0];
+    $internalXml = simplexml_load_string($internalXmlString);
+
+    if ($internalXml === false) {
+        foreach (libxml_get_errors() as $error) {
+            error_log("XML Internal Error: {$error->message}");
+        }
+        libxml_clear_errors();
+        return [];
+    }
+
+    // Recorre todas las zonas disponibles sin filtrar
+    foreach ($internalXml->xpath('//Zone') as $zone) {
+        $nombreZona = (string) $zone->Name;
+
+        foreach ($zone->Countries->Country as $country) {
+            $nombrePais = (string) $country->Name;
+            $codigoPais = (string) $country->Code;
+
+            // Inicializa el array de ciudades para cada país dentro de la zona
+            if (!isset($destinos[$codigoPais])) {
+                $destinos[$codigoPais] = [
+                    'nombre_pais' => $nombrePais,
+                    'zona' => $nombreZona, // Asigna la zona al país
+                    'ciudades' => []
+                ];
+            }
+
+            foreach ($country->Cities->City as $city) {
+                $destinos[$codigoPais]['ciudades'][] = [
+                    'codigo_ciudad' => (string) $city->Code,
+                    'nombre_ciudad' => (string) $city->Name
+                ];
+            }
+        }
+    }
+
+    return $destinos;
+}
+
+
+/*
  private function dispo_parsearDestinosCaribe($response)
 {
     $destinos = [];
@@ -150,7 +209,7 @@ return $destinos;
 
     return $destinos;
 }
-
+*/
 
 public function consultarPaquetesCaribe(Request $request)
 {
@@ -161,7 +220,7 @@ public function consultarPaquetesCaribe(Request $request)
     $fechaFin = $request->input('fecha_fin');
     
     // URL del endpoint
-    $url = "https://aws-qa1.ola.com.ar/qa/wsola/endpoint";
+    $url = "https://admin.ola.com.ar/wsola/help";
 
     // Generar el XML de la solicitud
     $requestXml = <<<XML
@@ -171,8 +230,8 @@ public function consultarPaquetesCaribe(Request $request)
                 <Request><![CDATA[
                     <GetPackagesFaresRequest>
                         <GeneralParameters>
-                            <Username>argtravelsweb</Username>
-                            <Password>Vdxd2vOhYU08cUb</Password>
+                            <Username>argtravels</Username>
+                            <Password>uNKx4YW59i6rWye</Password>
                             <CustomerIp>181.165.55.94</CustomerIp>
                         </GeneralParameters>
                         <DepartureDate>

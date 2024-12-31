@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use Intervention\Image\Facades\Image;
 use App\Models\Pais;
 use App\Models\Destino;
+use App\Models\ProveedorMayorista;
 
 class HotelController extends Controller
 {
@@ -21,8 +22,8 @@ class HotelController extends Controller
     {
         $ciudades = Destino::all();
         $paises = Pais::all();
-        return view('productos.hotel.hotel_news', compact('paises', 'ciudades'));
-    }
+        $proveedores = ProveedorMayorista::all();
+        return view('productos.hotel.hotel_news', compact('ciudades', 'paises', 'proveedores'));    }
 
     public function createHotel(Request $request)
     {        
@@ -47,39 +48,14 @@ class HotelController extends Controller
         $image->save(public_path('assets/img_hoteles/' . $originalFileName));
         // Crea un nuevo hotel en la base de datos
         $hotel = new Hotel;
+        $hotel->id_prov = $request->id_prov;
         $hotel->nombre = $request->nombre;
         $hotel->categoria = $request->categoria;
         $hotel->id_ciudad = $request->id_ciudad;
         $hotel->id_pais = $request->id_pais;        
         $hotel->tipo_publico = $request->tipo_publico;
         $hotel->img_banner = $originalFileName;
-        $hotel->detalles = $request->detalles;
-       /* if ($request->has('wifi')) {
-        $hotel->wifi = true; 
-        } else {
-        $hotel->wifi = false; 
-        }
-        if ($request->has('gym')) {
-        $hotel->gym = true; 
-        } else {
-        $hotel->gym = false; 
-        }
-        if ($request->has('spa')) {
-        $hotel->spa = true; 
-        } else {
-        $hotel->spa = false; 
-        }
-        if ($request->has('parking')) {
-        $hotel->parking = true; 
-        } else {
-        $hotel->parking = false; 
-        }
-        if ($request->has('traslados')) {
-        $hotel->traslados = true; 
-        } else {
-        $hotel->traslados = false; 
-        }
-        */
+        $hotel->detalles = $request->detalles;       
         $hotel->save();
         
       if ($request->hasFile('imagenes')) {

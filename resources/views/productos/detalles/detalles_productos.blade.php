@@ -56,39 +56,10 @@
     <div class="row datos-generales">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 muy-importante">
-                    <p class="mb-2">                       
-                        <a style="color: white" data-bs-toggle="collapse" href="#grupos" role="button" aria-expanded="false" aria-controls="collapseExample">
-                         <h2 style="background-color: red" class="muy-importante mb-1"><span class="me-2"><i class="fa-solid fa-arrow-pointer"></i></span>MUY IMPORTANTE</h2>
-                        </a>                       
-                    </p>
-                </div>
-            </div>            
-            <div class="row datos-generales mb-3">
-               <div class="collapse" id="grupos">
-                  <div class="container">
-                      <div class="row">
-                          <div class="col-md-12">
-                             <p>¿Sabías que algunos hoteles regalan estadías por compras grupales? ¡Nosotros sorteamos esas estadías entre nuestros pasajeros! Tú podrías ser el próximo en ganar una estadía completa.</p>
-                             <p>Con el objetivo de mejorar las condiciones generales de nuestros viajes, recomendamos a nuestros pasajeros registrarse en <strong>“THE CLUB”</strong>. THE CLUB es un programa de compras mayoristas que permite obtener las mejores tarifas y servicios en cada destino. ¿Cómo funciona? Es muy simple. Si estás interesado en alguna de nuestras publicaciones, solo debes acceder a tu panel <strong>“MIS VIAJES”</strong> (una vez registrado) y anotarte en el destino de tu interés. Una vez completado el grupo, te avisaremos de inmediato para avanzar con la compra o desestimar la misma. Registrarse en un destino no conlleva obligación de compra, pero sí un cierto grado de compromiso para no ocupar lugares innecesariamente.</p>
-                             <p><strong>Beneficios de las compras grupales:</strong></p>
-                             <ul>
-                               <li>Mejores tarifas y condiciones en hoteles</li>
-                               <li>Mejores tarifas y condiciones en vuelos</li>
-                               <li>Mejores tarifas y condiciones en seguros y traslados</li>
-                               <li><strong>Sorteos</strong> de estadías completas</li>
-                             </ul>
-                             <p><strong>¡No pierdas la oportunidad de aprovechar estos increíbles beneficios!</strong> Únete a <strong>“THE CLUB”</strong> hoy mismo, regístrate en tu panel <strong>“MIS VIAJES”</strong> y comienza a planificar tu próximo viaje al mejor precio. ¡El siguiente sorteo podría ser tuyo!</p>
-                          </div>
-                      </div>
-                  </div>            
-               </div>
-            </div>            
-            <div class="row">
-                <div class="col-md-5 icon-detalles mb-2">
-                   <div class="col-md-12">
-                    <h2 class="mb-4">SERVICIO DEL PAQUETE</h2>
-                   </div>
+                <div class="col-md-7 icon-detalles mb-2">
+                    <div class="col-md-12">
+                        <h2 class="mb-4">SERVICIO DEL PAQUETE</h2>
+                    </div>
                     @if ($productos->service)
                         @php
                             $transporteAereo = $productos->service->transporte_int;
@@ -98,59 +69,96 @@
                                 <i class="fas fa-plane-departure me-1"></i>
                                 {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->ciudad_destino }} NO INCLUYE AEREOS
                             @elseif ($transporteAereo == 'Aéreos con escala')
-                                <i class="fas fa-plane-departure me-1"></i>
-                                {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->ciudad_destino }}
+                                <i class="fas fa-plane-departure me-1"></i> Vuelos desde {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->ciudad_destino }} <a
+                                    href="#modalItinerario" data-bs-toggle="modal" style="color: rgb(255, 145, 0)">
+                                    Ver itinerario aquí
+                                </a>
+                                <div class="modal fade" id="modalItinerario" tabindex="-1" aria-labelledby="modalItinerarioLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary text-white">
+                                                <h5 class="modal-title" id="modalItinerarioLabel">
+                                                    Itinerario: {{ $productos->origen_salida }} ⮂ {{ $productos->destinos->ciudad_destino }} ({{ $productos->aerolinea->compania }})
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @if ($productos->aerolinea && $productos->aerolinea->itinerarios->isNotEmpty())
+                                                    <div class="row">
+                                                        @foreach ($productos->aerolinea->itinerarios as $itinerario)
+                                                            <div class="col-12 col-md-3 mb-3">
+                                                                <div class="card shadow-sm border-0">
+                                                                    <div class="card-header bg-light">
+                                                                        <strong>Vuelo: {{ $itinerario->num_vuelo }}</strong>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <p><strong>Origen:</strong> {{ $itinerario->origen }}</p>
+                                                                        <p><strong>Destino:</strong> {{ $itinerario->destino }}</p>
+                                                                        <p><strong>Fecha:</strong> {{ $itinerario->fecha_salida }}</p>
+                                                                        <p><strong>Hora Salida:</strong> {{ $itinerario->hora_salida }}</p>
+                                                                        <p><strong>Hora Llegada:</strong> {{ $itinerario->hora_llegada }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                @else
+                                                    <p class="text-muted">No hay itinerarios disponibles para esta aerolínea.</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @elseif ($transporteAereo == '')
                                 <i class="fas fa-plane-departure me-1"></i>
                                 <span>SE COTIZARA POR GRUPO</span>
                             @elseif ($transporteAereo == 'Micro - Vans')
                                 <i class="fas fa-bus"></i>
                             @endif
-                        @endif
                         </p>
-                        <p class="mb-1"><i class="fas fa-bus me-1"></i> {{ $productos->service->traslados_dest }} <span>TRASLADOS IN-OUT</span></p>
+                        <p class="mb-1"><i class="fas fa-bus me-1"></i> {{ $productos->service->traslados_dest }} <span>TRASLADOS PRIVADOS IN-OUT</span></p>
                         <p class="mb-1"><i class="fa-solid fa-cloud-moon"></i> INCLUYE ESTADIA de {{ $productos->estadia }} NOCHES.</p>
                         <p class="mb-1"><i class="fa-solid fa-kit-medical me-1"></i> {{ $productos->service->seguro }}</p>
-                  </div>
-                  <div class="col-md-7 icon-detalles mb-2">
-                        @if (!empty($productos->youtube))
+                    @endif
+                </div>
+                <div class="col-md-5 icon-detalles mb-2">
+                    @if (!empty($productos->youtube))
                         @php
-                         // Extraer el ID del video de YouTube a partir del enlace completo
-                         preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $productos->youtube, $matches);
-                         $youtube_id = $matches[1] ?? null;
+                            preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $productos->youtube, $matches);
+                            $youtube_id = $matches[1] ?? null;
                         @endphp
 
                         @if ($youtube_id)
-                       <div class="embed-responsive embed-responsive-16by9">
-                           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $youtube_id }}" allowfullscreen></iframe>
-                       </div>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $youtube_id }}" allowfullscreen></iframe>
+                            </div>
                         @else
-                           <p>Video no disponible.</p>
+                            <p>Video no disponible.</p>
                         @endif
-                        @else
+                    @else
                         <p>No se proporcionó un enlace de YouTube.</p>
-                        @endif
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="container-fuid">
+            <div class="row">
+                <div class="col-md-12 info-paquete d-flex flex-column">
+                    <div class="bg-light-detalles px-2 flex-grow-1">
+                        <h4 class="mb-2">{{ $productos->destinos->ciudad_destino }}</h4>
+                        <p class="mb-2">
+                            @if($productos->destinos->detalle_gral)
+                                {{ $productos->destinos->detalle_gral }}
+                                <a data-bs-toggle="collapse" href="#collapseExample" style="color: orange" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Leer más
+                                </a>
+                            @endif
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="container-fuid">
-              <div class="row">
-                 <div class="col-md-12 info-paquete d-flex flex-column">
-                   <div class="bg-light-detalles px-2 flex-grow-1">
-                    <h4 class="mb-2">{{ $productos->destinos->ciudad_destino }}</h4>
-                    <p class="mb-2">
-                        @if($productos->destinos->detalle_gral)
-                            {{ $productos->destinos->detalle_gral }}
-                            <a data-bs-toggle="collapse" href="#collapseExample" style="color: orange" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                Leer más
-                            </a>
-                        @endif
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-      </div>    
+        </div>
+    </div>
 </div>
 <div class="container mt-4">
     <div class="row datos-generales">
@@ -272,7 +280,7 @@
             <hr>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-12">
                         <p>
                             @php
                                 $descto_comunidad = $productos->descto;
@@ -287,21 +295,15 @@
                                 <strong>PRECIO: </strong> ({{ $productos->moneda }} {{ $productos->precio_total }})
                                 <p class="a-confirmar">Por Pax en Habitación doble</p>
                                 <p class="a-confirmar">Consultar por otro tipo de habitación</p>
+                                <p class="text-center my-4">
+                                    <a href="https://api.whatsapp.com/send?phone=543413672066" target="_blank" class="btn-whatsapp">
+                                        <i class="whatsapp fab fa-whatsapp"></i> ¡Haz clic aquí y envíanos tu consulta con el N° de REF: {{ $productos->id }}!
+                                    </a>
+                                </p>
                             @endif
                         </p>
                     </div>
-                    <div class="col-md-5">
-                        <a href="#modalVuelos" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#modalVuelos">Consultar Lugares!!!</a>
-                    </div>
                 </div>
-                @if ($productos->detalles)
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p><strong>NOTA: </strong> {{ $productos->detalles }}</p>
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
         <div class="col-md-7 mt-2-movil">
@@ -314,7 +316,6 @@
                 <div class="carousel-inner img-prod-banner rounded">
                     @foreach ($productos->hotel->getImagenes() as $key => $imagen)
                         <div class="carousel-item {{ $key === 0 ? 'active' : '' }}" data-bs-interval="3000">
-                            {{-- Acceder a los campos del hotel --}}
                             <img src="{{ asset('assets/img_hoteles/' . $imagen) }}" class="d-block w-100" alt="Imagen Hotel">
                         </div>
                     @endforeach
@@ -328,6 +329,18 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @if ($productos->detalles)
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><strong>NOTA: </strong> {{ $productos->detalles }}</p>
+                        </div>
+                    </div>
+                @endif
         </div>
     </div>
 </div>
