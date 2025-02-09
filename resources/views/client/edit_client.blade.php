@@ -66,33 +66,77 @@
                       <input type="text" name="apellido" placeholder="Apellido" class="form-control" value="{{Auth::guard('client')->user()->apellido}}">
                       <label for="apellido" class="form-label">Apellido</label>                                            
                     </div>    
-                    <div class="mb-3">                            
-                         <select name="documento" class="form-select">  
-                          <option value="">--- Tipo de Documento ---</option>
-                            <option value="PASAPORTE">PASAPORTE</option>
-                            <option value="DNI">DNI</option>
-                         </select>                           
+                    <div class="mb-3">
+                       <select name="documento" class="form-select">
+                           <option value=" {{ Auth::guard('client')->user()->documento == null ? 'selected' : '' }}">--- Tipo de Documento ---</option>
+                           <option value="Pasaporte" {{ Auth::guard('client')->user()->documento == 'Pasaporte' ? 'selected' : '' }}>PASAPORTE</option>
+                           <option value="Dni" {{ Auth::guard('client')->user()->documento == 'Dni' ? 'selected' : '' }}>DNI</option>
+                       </select>
+                       <div class="form-text">
+                        <i class="fas fa-exclamation-triangle me-1" style="color: rgb(255, 145, 0);"></i>  
+                            <a href="#modalItinerario" data-bs-toggle="modal" style="color: rgb(255, 145, 0);">
+                                  Advertencia!!
+                              </a>
+                                <div class="modal fade" id="modalItinerario" tabindex="-1" aria-labelledby="modalItinerarioLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalAdvertenciaLabel">
+                                                    ⚠️ Advertencia Importante
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                    ⚠️ <strong>¡Atención! Esto es muy importante:</strong>
+                                                </p>
+                                                <p>
+                                                    🛂 Para viajar al **exterior**, debes contar con tu <strong>pasaporte vigente o ciudadanía</strong>.                      
+                                                <p>
+                                                  🌍 En el caso de **Brasil**, puedes viajar únicamente con tu **DNI**. Sin embargo, para destinos en el **Caribe** u otros países del mundo, el DNI no servirá.
+                                                </p>
+                                                <p>
+                                                    🚨 <strong>¡Nunca, pero nunca actualices tus documentos días o semanas previas al viaje!</strong>  
+                                                    Si lo haces, el **RENAPER** anulará tu documento actual y **no podrás salir del país**.                      
+                                                </p>
+                                                <p>
+                                                  📅 Asegúrate de que tu pasaporte o DNI esté vigente al momento de planificar tu viaje.
+                                               </p>
+                                                <p>
+                                                    ✅ **Consejo:** Verifica tus documentos con suficiente anticipación para evitar inconvenientes.
+                                                </p>
+                                                <p>
+                                                  📞 **Si necesitas ayuda, no dudes en llamarnos.** <strong> Estamos aquí para ayudarte en todo.</strong>
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+                                           </div>
+                                        </div>
+                                    </div>
+                                </div>
+                       </div>
                     </div>
                     <div class="mb-3 form-floating">
-                      <input type="text" name="numero_doc" placeholder="numero_doc" class="form-control" value="">
+                      <input type="text" name="numero_doc" placeholder="numero_doc" class="form-control" value="{{Auth::guard('client')->user()->numero_doc}}">
                       <label for="numero_doc" class="form-label">Número del documento</label>                                            
                     </div>
                     <div class="mb-3 form-floating">
-                        <input type="date" name="fecha_nacimiento" placeholder="Fecha de Nacimiento" class="form-control" value="">
+                        <input type="date" name="fecha_nacimiento" placeholder="Fecha de Nacimiento" class="form-control" value="{{Auth::guard('client')->user()->fecha_nacimiento}}">
                        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
                     </div>
                     <div class="mb-3 form-floating">
-                        <input type="date" name="fecha_vencimiento" placeholder="Fecha de Vencimiento del Documento" class="form-control" value="">
+                        <input type="date" name="fecha_vencimiento" placeholder="Fecha de Vencimiento del Documento" class="form-control" value="{{Auth::guard('client')->user()->fecha_vencimiento}}">
                          <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento del Documento</label>
-                    </div>
-                    <div class="mb-3 form-floating">
-                      <input type="number" name="cuil" placeholder="cuil" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->cod_area}}">
-                      <label for="cuil" class="form-label">Número de Cuil o DNI</label>                                            
-                    </div>                  
+                    </div>                                   
                     <div class="mb-3 form-floating">
                       <input type="number" name="movil" placeholder="Numero móvil" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="{{Auth::guard('client')->user()->movil}}">
                       <label for="movil" class="form-label">WhatsApp (Incluir codigo de area) </label>                                            
-                    </div>                    
+                    </div>   
+                    <div class="mb-3 form-floating">
+                      <input type="text" name="direccion" placeholder="direccion" class="form-control" value="{{Auth::guard('client')->user()->direccion}}">
+                      <label for="direccion" class="form-label">Dirección</label>                                            
+                    </div>                  
                     <div class="mb-3 form-floating">
                       <input type="text" name="ciudad" placeholder="Ciudad" class="form-control" value="{{Auth::guard('client')->user()->ciudad}}">
                       <label for="ciudad" class="form-label">Ciudad</label>                                            

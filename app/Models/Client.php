@@ -52,7 +52,12 @@ class Client extends Model implements Authenticatable
         'email',
         'nombre',
         'apellido',
+        'documento',
+        'numero_doc',
+        'fecha_nacimiento',
+        'fecha_vencimiento',
         'movil',
+        'direccion',
         'ciudad',
         'provincia',
         'pais',
@@ -86,4 +91,9 @@ class Client extends Model implements Authenticatable
        $this->password = $newPassword;
     $this->save();
     }
+    public function pagos()
+    {
+    return $this->hasMany(Pago::class, 'client_id');
+    }
+
 }

@@ -30,12 +30,13 @@ use App\Http\Controllers\NombreBarcoController;
 use App\Http\Controllers\ExcursionesArgController; 
 use App\Http\Controllers\HotelsRoomController;
 use App\Http\Controllers\ReciboPagoController;
-use App\Http\Controllers\MisViajesController;
+use App\Http\Controllers\MisViajeController;
 use App\Http\Controllers\ContactoCursoItalianoController;
 use App\Http\Controllers\DisneyController;
 use App\Http\Controllers\PaquetesController;
 use App\Http\Controllers\AerolineaController;
 use App\Http\Controllers\ItinerarioCupoController;
+use App\Http\Controllers\PagoController;
 
 Route::get('/obtener-paquetes', [PaquetesController::class, 'obtenerPaquetes']);
 Route::get('/paquetes1', [PaquetesController::class, 'obtenerPaquetes']);
@@ -112,9 +113,33 @@ Route::get('/recover_password_client', [ClientLoginController::class, 'recover']
 Route::post('/recover_password_client', [ClientLoginController::class, 'recoverPassword']);
 Route::get('/reclamos', [ContactosController::class, 'showForm'])->name('client.reclamos.form');
 Route::post('/reclamos/{id}', [ContactosController::class, 'reclamo_save'])->name('client.reclamos');
-Route::get('/mis_viajes', [MisViajesController::class, 'index'])->name('client.misViajes');
-Route::post('/mis_viajes', [MisViajesController::class, 'store']);
-Route::delete('/mis_viajes/{id}', [MisViajesController::class, 'destroy'])->name('mis_viajes.destroy');
+Route::get('/mis_viajes', [MisViajeController::class, 'index'])->name('client.misViajes');
+// Clientes Admin
+Route::middleware(['auth', 'admin'])->group(function () {    
+    // Listado de viajes en el admin
+    Route::get('/admin/mis_viajes', [MisViajeController::class, 'adminIndex'])->name('admin.misViajes');    
+    // Crear un nuevo viaje
+    Route::get('/admin/mis_viajes/create', [MisViajeController::class, 'create'])->name('mis_viajes.create');
+    Route::post('/admin/mis_viajes/store', [MisViajeController::class, 'store'])->name('mis_viajes.store');
+    // Editar un viaje
+    Route::get('/admin/mis_viajes/{id}/edit', [MisViajeController::class, 'edit'])->name('mis_viajes.edit');
+    Route::post('/admin/mis_viajes/{id}/update', [MisViajeController::class, 'update'])->name('mis_viajes.update');
+    // Eliminar un viaje
+    Route::post('/admin/mis_viajes/{id}/delete', [MisViajeController::class, 'destroy'])->name('mis_viajes.destroy');
+});
+// Pagos clients
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Listado de pagos en el admin
+    Route::get('/admin/pagos', [PagoController::class, 'index'])->name('admin.pagos');
+    // Crear un nuevo pago
+    Route::get('/admin/pagos/create', [PagoController::class, 'create'])->name('admin.pagos.create');
+    Route::post('/admin/pagos', [PagoController::class, 'store'])->name('admin.pagos.store');
+    // Editar un pago
+    Route::get('/admin/pagos/{id}/edit', [PagoController::class, 'edit'])->name('admin.pagos.edit');
+    Route::post('/admin/pagos/{id}/update', [PagoController::class, 'update'])->name('admin.pagos.update');
+    // Eliminar un pago
+    Route::delete('/admin/pagos/{id}', [PagoController::class, 'destroy'])->name('admin.pagos.destroy');
+});
 
 Route::get('/contacto', [ContactosController::class, 'contactForm'])->name('client.contacto');
 Route::post('/contacto/{id?}', [ContactosController::class, 'contactAccion'])->name('client.contacto.save');

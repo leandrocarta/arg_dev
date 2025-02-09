@@ -40,7 +40,6 @@ class ItinerarioCupoController extends Controller
             'hora_salida' => 'required|date_format:H:i',
             'fecha_llegada' => 'required|date',
             'hora_llegada' => 'required|date_format:H:i',
-            'cupos' => 'required|integer|min:0',
         ]);
         ItinerarioCupo::create($request->all());
          return redirect('/itinerario-cupos')->with('success', 'Aerolínea creada correctamente.');
@@ -86,7 +85,6 @@ class ItinerarioCupoController extends Controller
             'hora_llegada' => 'required|date_format:H:i',
             'fecha_salida' => 'required|date',
             'fecha_llegada' => 'required|date|after_or_equal:fecha_salida',
-            'cupos' => 'required|integer|min:0',
         ]);
     } catch (ValidationException $e) {
         return redirect()
@@ -105,7 +103,6 @@ class ItinerarioCupoController extends Controller
     $itinerario->hora_llegada = $request->hora_llegada;
     $itinerario->fecha_salida = $request->fecha_salida;
     $itinerario->fecha_llegada = $request->fecha_llegada;
-    $itinerario->cupos = $request->cupos;
 
     // Guarda los cambios
     $itinerario->save();

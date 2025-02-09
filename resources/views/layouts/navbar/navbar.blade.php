@@ -1,7 +1,7 @@
  @if (Auth::guard('client')->check() || Auth::check())
   @else
   <div class="promo-container">
-    <p class="promo-text">"THE CLUB" Regístrate y podrás acceder a promociones exclusivas únicamente para nuestra comunidad.</p>
+    <p class="promo-text">¡Ahorra! Financiando nuestros paquetes hasta el 125%.</p>
   </div>
  @endif
 <nav class="navbar navbar-expand-lg">
@@ -102,6 +102,8 @@
                      <li><a class="dropdown-item" href="/read_barcos">Alta Barcos</a></li>
                      <li><a class="dropdown-item" href="{{ route('user.presentation', ['reclutador' => Auth::user()->id]) }}">Mi Presentación</a></li>
                      <li><hr class="dropdown-divider"></li>
+                     <li><a class="dropdown-item" href="{{ route('admin.pagos') }}">Gestión de Pagos</a></li>
+                     <li><a class="dropdown-item" href="{{ route('admin.misViajes') }}">Gestión de Viajes</a></li>
                      <li><a class="dropdown-item" href="{{ route('recibo_pagos') }}">Recibos</a></li>
                      <li><a class="dropdown-item" href="/logout">Salir</a></li>
                    </ul>

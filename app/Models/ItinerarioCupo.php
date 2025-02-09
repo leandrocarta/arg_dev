@@ -17,8 +17,7 @@ class ItinerarioCupo extends Model
         'hora_salida',
         'hora_llegada',        
         'fecha_salida',
-        'fecha_llegada',        
-        'cupos',
+        'fecha_llegada', 
     ];
 
     public function aerolinea()

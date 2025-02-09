@@ -38,6 +38,7 @@ class CotizacionPaqueteNotification extends Notification
         ->subject('Nueva Solicitud')
         ->greeting('Cotización de Paquete !!!')
         ->line('nombre: ' . $this->paqueteData['nombre'])
+        ->line('WhatsApp: ' . $this->paqueteData['whatsapp'])
         ->line('email: ' . $this->paqueteData['email'])
         ->line('Fecha salida: ' . $this->paqueteData['fecha'])
         ->line('Días de estadia: ' . $this->paqueteData['dias'])

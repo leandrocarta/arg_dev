@@ -61,13 +61,7 @@
         <div class="mb-3">
             <label for="fecha_llegada" class="form-label">Fecha Llegada</label>
             <input type="date" name="fecha_llegada" id="fecha_llegada" class="form-control" value="{{ $itinerario->fecha_llegada }}" required>
-        </div>       
-
-        <div class="mb-3">
-            <label for="cupos" class="form-label">Cupos</label>
-            <input type="number" name="cupos" id="cupos" class="form-control" value="{{ $itinerario->cupos }}" required>
-        </div>
-
+        </div>     
         <button type="submit" class="btn btn-success">Actualizar</button>
     </form>
 </div>

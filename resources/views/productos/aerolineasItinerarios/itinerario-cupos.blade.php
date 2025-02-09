@@ -23,7 +23,6 @@
                 <th>Hora Salida</th>
                 <th>Fecha Llegada</th>
                 <th>Hora Llegada</th>
-                <th>Cupos</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -38,7 +37,6 @@
                 <td>{{ $itinerario->hora_salida }}</td>
                 <td>{{ $itinerario->fecha_llegada }}</td>
                 <td>{{ $itinerario->hora_llegada }}</td>
-                <td>{{ $itinerario->cupos }}</td>
                 <td>
                     <a href="{{ route('itinerario_cupos.edit', $itinerario->id) }}" class="btn btn-primary btn-sm">Editar</a>
                     <form action="{{ route('itinerario_cupos.destroy', $itinerario->id) }}" method="POST" style="display:inline;">

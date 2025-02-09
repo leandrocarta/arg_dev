@@ -12,6 +12,7 @@ class ViajeAMedida extends Model
 
     protected $fillable = [
         'nombre',
+        'whatsapp',
         'email',
         'fecha',
         'dias',

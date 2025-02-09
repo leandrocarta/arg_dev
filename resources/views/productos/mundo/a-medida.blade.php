@@ -36,11 +36,15 @@
                 @endif
         <div class="form-floating mb-1">
             <input type="text" placeholder="" name="nombre" class="form-control" required>
-            <label for="nombre" class="form-label">¿Nos darías tu Nombre y Apellido?</label>
+            <label for="nombre" class="form-label">¿Nos darías tu Nombre?</label>
+        </div>
+        <div class="form-floating mb-1">
+          <input type="tel" name="whatsapp" class="form-control" placeholder="" pattern="[0-9]+" required>
+          <label for="whatsapp" class="form-label">¿Nos pasas tu WhatsApp para contactarte?</label>
         </div>
         <div class="form-floating mb-1">
             <input type="email" placeholder="" name="email" class="form-control" required>
-            <label for="email" class="form-label">Y tú correo electrónico para contactarte!!</label>
+            <label for="email" class="form-label">Y tú correo electrónico, cual es!!</label>
         </div>
         <div class="form-floating mb-1">
             <input type="date" placeholder="" name="fecha" class="form-control" required>
@@ -76,7 +80,7 @@
                     <option value="Priorizo la Calidad y Servicio " @if(old('servicio') == 'Priorizo la Calidad y Servicio ') selected @endif>Priorizo la Calidad y Servicio </option>
                     <option value="Busco Hoteles de Lujo" @if(old('servicio') == 'Busco Hoteles de Lujo') selected @endif>Busco Hoteles de Lujo</option>
                 </select>  
-                <label for="servicio" class="control-label">¿Que priorizas?</label>             
+                <label for="servicio" class="control-label">¿Que priorizas, selecciona una opción?</label>             
         </div>   
         <div class="form-floating mb-1">
             <textarea name="info" class="form-control" placeholder=""></textarea>

@@ -1027,7 +1027,7 @@ padding-top: 12px;
   width: 99%;
 }
   .banner_movil img {
-    height: 580px;
+    height: 380px;
   }
   .exclusivo-detalles {  
   padding: 0;
@@ -1039,7 +1039,7 @@ padding-top: 12px;
     font-size: 13px;
   }
   .titulo-barra-movil h1 {
-    font-size: 11px; 
+    font-size: 9px; 
     color: gray;
     padding: 10px;
     text-align: center;
@@ -1075,7 +1075,20 @@ padding-top: 12px;
   margin-bottom: 5px;
 }
 }
+@media (max-width: 468px) {
 
+  .promo-text {  
+  font-size: 13px;  
+}
+ 
+  .muy-importante h2 {
+    font-size: 15px;
+  }
+  
+  .banner_movil img {
+    height: 220px;
+  }
+}
 // Fin Medias Querys
 
 // Scroll
@@ -1117,4 +1130,15 @@ padding-top: 12px;
     transform: translateY(-2px); /* Elevar ligeramente el botón */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Intensificar la sombra */
     text-decoration: none; /* Asegurar que no aparezca subrayado */
+}
+.banner_movil {
+  width: 100%; /* El banner ocupa todo el ancho */
+ // height: 50vh; /* El banner ocupa el 50% de la altura de la pantalla */
+  overflow: hidden; /* Oculta cualquier parte de la imagen fuera del contenedor */
+}
+
+.banner_movil img {
+  width: 100%; /* La imagen se adapta al ancho del contenedor */
+  height: 100%; /* La imagen se adapta a la altura del contenedor */
+  object-fit: cover; /* Ajusta la imagen para que ocupe el espacio sin deformarse */
 }

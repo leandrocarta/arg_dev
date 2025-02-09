@@ -43,10 +43,7 @@
             <label for="hora_llegada" class="form-label">Hora Llegada</label>
             <input type="time" name="hora_llegada" id="hora_llegada" class="form-control" required>
         </div>
-        <div class="mb-3">
-            <label for="cupos" class="form-label">Cupos</label>
-            <input type="number" name="cupos" id="cupos" class="form-control" required>
-        </div>
+        
         <button type="submit" class="btn btn-success">Guardar</button>
     </form>
 </div>

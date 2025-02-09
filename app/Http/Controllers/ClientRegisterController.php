@@ -85,7 +85,12 @@ class ClientRegisterController extends Controller
        
         $client->nombre = ucwords(strtolower($request->input('nombre')));
         $client->apellido = ucwords(strtolower($request->input('apellido')));
+        $client->documento = ucwords(strtolower($request->input('documento')));
+        $client->numero_doc = ucwords(strtolower($request->input('numero_doc')));
+        $client->fecha_nacimiento = $request->input('fecha_nacimiento');
+        $client->fecha_vencimiento = ucwords(strtolower($request->input('fecha_vencimiento')));        
         $client->movil = $request->input('movil');
+        $client->direccion = $request->input('direccion');
         $client->ciudad = ucwords(strtolower($request->input('ciudad')));
         $client->provincia = ucwords(strtolower($request->input('provincia')));
         $client->pais = ucwords(strtolower($request->input('pais')));

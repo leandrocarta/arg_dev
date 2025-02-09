@@ -30,6 +30,7 @@ class ViajeAMedidaController extends Controller
         ]);
         $paqueteData = [            
             'nombre' => $request->nombre,
+            'whatsapp' => $request->whatsapp,
             'email' => $request->email, 
             'fecha' => $request->fecha, 
             'dias' => $request->dias,  
