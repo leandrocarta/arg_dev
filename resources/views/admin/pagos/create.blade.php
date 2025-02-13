@@ -1,7 +1,7 @@
 @extends('layouts.app-master')
 
-@if (Auth::check() && Auth::user()->id_rango === 1)
 @section('content')
+@if (Auth::check() && Auth::user()->id_rango === 1)
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
@@ -12,39 +12,35 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.pagos.store') }}">
                         @csrf
-
                         <!-- Cliente -->
-                        <!-- Cliente -->
-<div class="mb-3">
-    <label for="client_id" class="form-label"><i class="fas fa-user"></i> Cliente</label>
-    <select name="client_id" id="client_id" class="form-select" required>
-        <option value="">Seleccione un cliente</option>
-        @foreach ($clientes as $cliente)
-        <option value="{{ $cliente->id }}">{{ $cliente->nombre }} {{ $cliente->apellido }}</option>
-        @endforeach
-    </select>
-</div>
+                        <div class="mb-3">
+                            <label for="client_id" class="form-label"><i class="fas fa-user"></i> Cliente</label>
+                            <select name="client_id" id="client_id" class="form-select" required>
+                                <option value="">Seleccione un cliente</option>
+                                @foreach ($clientes as $cliente)
+                                    <option value="{{ $cliente->id }}">{{ $cliente->nombre }} {{ $cliente->apellido }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-<!-- Viaje -->
-<div class="mb-3">
-    <label for="mis_viajes_id" class="form-label"><i class="fas fa-map-marker-alt"></i> Viaje</label>
-    <select name="mis_viajes_id" id="mis_viajes_id" class="form-select" required>
-        <option value="">Seleccione un viaje</option>
-        @foreach ($viajes as $viaje)
-        <option value="{{ $viaje->id }}" data-client="{{ $viaje->client_id }}" data-total="{{ $viaje->valor_viaje }}">
-            ID: {{ $viaje->id }} - Destino: {{ $viaje->destino->ciudad_destino }}
-        </option>
-        @endforeach
-    </select>
-</div>
-
+                        <!-- Viaje -->
+                        <div class="mb-3">
+                            <label for="mis_viajes_id" class="form-label"><i class="fas fa-map-marker-alt"></i> Viaje</label>
+                            <select name="mis_viajes_id" id="mis_viajes_id" class="form-select" required>
+                                <option value="">Seleccione un viaje</option>
+                                @foreach ($viajes as $viaje)
+                                    <option value="{{ $viaje->id }}" data-client="{{ $viaje->client_id }}" data-total="{{ $viaje->valor_viaje }}">
+                                        ID: {{ $viaje->id }} - Paquete: {{ $viaje->producto ? $viaje->producto->titulo : 'No asignado' }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <!-- Total del Viaje -->
                         <div class="mb-3">
-                            <label for="total_viaje" class="form-label"><i class="fas fa-dollar-sign"></i> Total del Viaje</label>
-                            <input type="text" id="total_viaje" class="form-control" readonly>
+                        <label for="total_viaje" class="form-label"><i class="fas fa-dollar-sign"></i> Total del Viaje</label>
+                          <input type="number" step="0.01" id="total_viaje" name="total_viaje" class="form-control">
                         </div>
-
                         <!-- Tipo de Pago -->
                         <div class="mb-3">
                             <label for="tipo_pago" class="form-label"><i class="fas fa-list"></i> Tipo de Pago</label>
@@ -108,7 +104,6 @@
     </div>
 </div>
 @else
-@section('content')
 <div class="container text-center mt-5">
     <div class="alert alert-danger">
         <h4><i class="fas fa-ban"></i> Acceso Denegado</h4>
@@ -116,6 +111,7 @@
     </div>
 </div>
 @endif
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const clientSelect = document.getElementById("client_id");
@@ -125,21 +121,29 @@ document.addEventListener("DOMContentLoaded", function() {
     // Filtrar los viajes cuando cambia el cliente
     clientSelect.addEventListener("change", function() {
         const selectedClient = this.value;
+
         Array.from(viajeSelect.options).forEach(option => {
-            if (option.value === "") {
-                option.hidden = false;
-            } else {
-                option.hidden = option.getAttribute("data-client") !== selectedClient;
-            }
+            option.hidden = option.value !== "" && option.getAttribute("data-client") !== selectedClient;
         });
+
         viajeSelect.value = ""; // Reset de selección de viajes
-        totalViajeInput.value = "";
+        totalViajeInput.value = ""; // Reset del total del viaje
     });
 
-    // Mostrar el total del viaje al seleccionar un viaje
+    // Mostrar el total del viaje al seleccionar un viaje, pero permitir edición manual
     viajeSelect.addEventListener("change", function() {
         const selectedOption = viajeSelect.options[viajeSelect.selectedIndex];
-        totalViajeInput.value = selectedOption.getAttribute("data-total") || "";
+        const valorPaquete = selectedOption.getAttribute("data-total") || "";
+
+        // Solo establecer el valor si el usuario no lo ha modificado manualmente
+        if (!totalViajeInput.value || totalViajeInput.value == valorPaquete) {
+            totalViajeInput.value = valorPaquete;
+        }
+    });
+
+    // Asegurar que el valor ingresado por el usuario se envíe correctamente
+    document.querySelector("form").addEventListener("submit", function() {
+        document.getElementById('total_viaje').value = totalViajeInput.value;
     });
 });
 </script>

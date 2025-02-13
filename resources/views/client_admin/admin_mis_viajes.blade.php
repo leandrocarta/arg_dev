@@ -4,32 +4,32 @@
 @if (Auth::check() && Auth::user()->id_rango === 1)
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="text-primary fw-bold">Gestión de Viajes</h2>
+        <h2 class="text-primary fw-bold">Gestión de Viajes</h2>
 
-    <div class="mb-3 d-flex align-items-center">
-        <!-- Select para Filtrar Pagos por Cliente -->
-        <label for="filter_client" class="me-2 fw-bold">Filtrar por Cliente:</label>
-        <select id="filter_client" class="form-select me-3" style="width: 200px;">
-            <option value="">Todos los Clientes</option>
-            @foreach ($clientes as $cliente)
-                <option value="{{ $cliente->id }}">{{ $cliente->nombre }} {{ $cliente->apellido }}</option>
-            @endforeach
-        </select>
-        <!-- Botón para Crear un Nuevo Pago -->
-        <a href="{{ route('mis_viajes.create') }}" class="btn btn-success">
-            <i class="fas fa-plus-circle"></i> Nuevo Viaje
-        </a>
-    </div>        
-</div>   
- @if(session('success'))
+        <div class="d-flex align-items-center">
+            <!-- Select para Filtrar Viajes por Cliente -->
+            <label for="filter_client" class="me-2"><i class="fas fa-user"></i> Cliente:</label>
+            <select id="filter_client" class="form-select me-3" style="width: 200px;">
+                <option value="">Todos los Clientes</option>
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id }}">{{ $cliente->nombre }} {{ $cliente->apellido }}</option>
+                @endforeach
+            </select>
+            <!-- Botón para Crear un Nuevo Viaje -->
+            <a href="{{ route('mis_viajes.create') }}" class="btn btn-success">
+                <i class="fas fa-plus-circle"></i> Nuevo Viaje
+            </a>
+        </div>
+    </div>
+
+    @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
-    
 
     <div class="table-responsive">
-        <table class="table table-bordered table-hover shadow-sm">
+        <table class="table table-bordered table-hover shadow-sm" id="mis_viajes_table">
             <thead class="table-dark text-center">
                 <tr>
                     <th>ID</th>
@@ -44,14 +44,14 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($viajes as $viaje)
+                @foreach ($viajes as $viaje)
                 <tr data-client-id="{{ $viaje->client->id }}">
-                    <td class="text-center">{{ $viaje->id }}</td>
+                     <td class="text-center">{{ $viaje->id }}</td>
                     <td>{{ $viaje->client->nombre }} {{ $viaje->client->apellido }}</td>
                     <td class="text-center">{{ $viaje->producto->titulo }}</td>
                     <td>{{ $viaje->producto->id_hotel ? $viaje->producto->hotel->nombre : 'No asignado' }}</td>
                     <td class="text-center">
-                     ${{ number_format($viaje->valor_viaje, 2) }}  <!-- Toma el precio actualizado de mis_viajes -->
+                        ${{ number_format($viaje->valor_viaje, 2) }}  
                     </td>
                     <td class="text-center">{{ $viaje->fecha_inicio }}</td>
                     <td class="text-center">{{ $viaje->fecha_fin }}</td>
@@ -66,19 +66,14 @@
                         </a>
                         <form action="{{ route('mis_viajes.destroy', $viaje->id) }}" method="POST" class="d-inline">
                             @csrf
+                            @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este viaje?');">
                                 <i class="fas fa-trash-alt"></i> Eliminar
                             </button>
                         </form>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="9" class="text-center text-muted">
-                        <i class="fas fa-info-circle"></i> No hay viajes registrados
-                    </td>
-                </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -91,18 +86,26 @@
     </div>
 </div>
 @endif
-@endsection
 
 <script>
-document.getElementById('filter_client').addEventListener('change', function() {
-    let selectedClient = this.value;
-    document.querySelectorAll('tbody tr').forEach(row => {
-        if (!selectedClient || row.getAttribute('data-client-id') === selectedClient) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none';
-        }
+document.addEventListener("DOMContentLoaded", function() {
+    const clientFilter = document.getElementById("filter_client");
+    const tableRows = document.querySelectorAll("#mis_viajes_table tbody tr");
+
+    clientFilter.addEventListener("change", function() {
+        const selectedClientId = this.value;
+
+        tableRows.forEach(row => {
+            const rowClientId = row.getAttribute("data-client-id");
+
+            if (!selectedClientId || rowClientId === selectedClientId) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
     });
 });
 </script>
 
+@endsection

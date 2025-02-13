@@ -155,7 +155,7 @@
               </a>
                <ul class="dropdown-menu menu-login">
                    <li><a class="dropdown-item" href="{{ route('client.edit') }}">Mi Perfil</a></li>
-                   <li><a class="dropdown-item" href="{{ route('client.misViajes') }}">Mis Viajes</a></li>
+                   <li><a class="dropdown-item" href="{{ route('client.misViajes') }}">Mis Viajes</a></li>                   
                    <li><hr class="dropdown-divider"></li>
                    <li><a class="dropdown-item" href="/logout">Salir</a></li>
                </ul>

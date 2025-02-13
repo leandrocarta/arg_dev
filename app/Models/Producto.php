@@ -14,6 +14,7 @@ class Producto extends Model
         'id_hotel',
         'id_destino',
         'id_pais',
+        'id_aerolinea',
         'estadia',
         'habitacion',
         'precio_total',

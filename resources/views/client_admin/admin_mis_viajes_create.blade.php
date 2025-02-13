@@ -47,7 +47,7 @@
                         <!-- Precio del Paquete (se llena automáticamente) -->
                         <div class="mb-3">
                             <label for="valor_viaje" class="form-label"><i class="fas fa-dollar-sign"></i> Precio del Viaje</label>
-                            <input type="text" id="valor_viaje" class="form-control">
+                            <input type="number" step="0.01" id="valor_viaje" class="form-control" required>
                             <input type="hidden" name="valor_viaje" id="valor_viaje_hidden">
                         </div>
 

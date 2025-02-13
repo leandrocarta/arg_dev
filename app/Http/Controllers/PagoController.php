@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pago;
 use App\Models\Client;
 use App\Models\MisViaje;
+use Illuminate\Support\Facades\Auth;
 
 class PagoController extends Controller
 {
@@ -28,10 +29,11 @@ class PagoController extends Controller
 
    public function store(Request $request)
 {
-    // Validación de los datos recibidos
+    //dd($request->all());
     $request->validate([
         'client_id' => 'required|exists:clients,id',
         'mis_viajes_id' => 'required|exists:mis_viajes,id',
+        'total_viaje' => 'required|numeric|min:0',
         'monto_pagado' => 'required|numeric|min:0',
         'tipo_pago' => 'required|in:reserva,cuota',
         'numero_cuota' => 'nullable|integer',
@@ -39,29 +41,31 @@ class PagoController extends Controller
         'metodo_pago' => 'required|string',
         'estado' => 'required|in:pendiente,confirmado,rechazado',
     ]);
-    // Obtener el viaje asociado
-    $viaje = MisViaje::findOrFail($request->mis_viajes_id);
-    
-    // Calcular el total de pagos previos con precisión
-    $pagosPrevios = round(Pago::where('mis_viajes_id', $request->mis_viajes_id)->sum('monto_pagado'), 2);
+        
+$viaje = MisViaje::findOrFail($request->mis_viajes_id);
 
-    // Calcular el saldo pendiente asegurando precisión
-    $saldoPendiente = round($viaje->valor_viaje - ($pagosPrevios + $request->monto_pagado), 2);
+// Usamos el valor del input en lugar del de la BD
+$total_viaje = $request->total_viaje;
+
+// Calcular el total de pagos previos con precisión
+$pagosPrevios = round(Pago::where('mis_viajes_id', $request->mis_viajes_id)->sum('monto_pagado'), 2);
+
+// Calcular el saldo pendiente asegurando precisión
+$saldoPendiente = round($total_viaje - ($pagosPrevios + $request->monto_pagado), 2);
 
     // Crear el nuevo pago con valores redondeados
-    $pago = Pago::create([
-        'client_id' => $request->client_id,
-        'mis_viajes_id' => $request->mis_viajes_id,
-        'total_viaje' => round($viaje->valor_viaje, 2),  // Redondeamos el valor del viaje
-        'monto_pagado' => round($request->monto_pagado, 2),
-        'tipo_pago' => $request->tipo_pago,
-        'numero_cuota' => $request->numero_cuota,
-        'fecha_pago' => $request->fecha_pago,
-        'metodo_pago' => $request->metodo_pago,
-        'estado' => $request->estado,
-        'saldo_pendiente' => $saldoPendiente, // Guardamos el saldo actualizado con precisión
-    ]);
-
+  $pago = Pago::create([
+    'client_id' => $request->client_id,
+    'mis_viajes_id' => $request->mis_viajes_id,
+    'total_viaje' => round($request->total_viaje ?? $viaje->valor_viaje, 2),  // Usa el input, si no, el de BD
+    'monto_pagado' => round($request->monto_pagado, 2),
+    'tipo_pago' => $request->tipo_pago,
+    'numero_cuota' => $request->numero_cuota,
+    'fecha_pago' => $request->fecha_pago,
+    'metodo_pago' => $request->metodo_pago,
+    'estado' => $request->estado,
+    'saldo_pendiente' => round(bcsub($request->total_viaje ?? $viaje->valor_viaje, bcmul($pagosPrevios + $request->monto_pagado, 1, 2), 2), 2), // Precisión exacta
+]); 
     return redirect()->route('admin.pagos')->with('success', 'Pago registrado correctamente.');
 }
 public function edit($id)
@@ -113,6 +117,20 @@ public function update(Request $request, $id)
     ]);
 
     return redirect()->route('admin.pagos')->with('success', 'Pago actualizado correctamente.');
+}
+public function misPagosCliente()
+{
+    // Obtener el cliente autenticado
+    $cliente = Auth::guard('client')->user();
+
+    // Obtener solo los pagos del cliente autenticado
+    $pagos = Pago::where('client_id', $cliente->id)
+                 ->with(['misViaje']) // Traemos la relación con mis_viajes
+                 ->orderBy('fecha_pago', 'desc')
+                 ->get();
+
+    // Retornar la vista con los pagos
+    return view('client.mis_pagos', compact('pagos'));
 }
 
 

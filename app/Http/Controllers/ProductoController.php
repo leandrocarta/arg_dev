@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
-    // Paquetes turisticos
     public function mostrarProductos()
     {       
         $productos = Producto::all();
@@ -42,7 +41,8 @@ class ProductoController extends Controller
         $hoteles = Hotel::all();
         $paises = Pais::all();
         $destinos = Destino::all();
-        return view('productos.crud.create_producto', compact('proveedores', 'paises', 'hoteles', 'destinos')); // Esto asume que tienes una vista llamada 'productos.create'
+        $aerolineas = Aerolinea::all();
+        return view('productos.crud.create_producto', compact('proveedores', 'paises', 'hoteles', 'destinos','aerolineas')); // Esto asume que tienes una vista llamada 'productos.create'
     }
     public function formUpdateProductos($id)
     {
@@ -51,10 +51,11 @@ class ProductoController extends Controller
         $hoteles = Hotel::all();
         $paises = Pais::all();
         $producto = Producto::find($id);
+        $aerolineas = Aerolinea::all();
         if (!$producto) {
             // Manejo del caso en que el producto no existe
         } else {
-            return view('productos.crud.update_producto', compact('producto', 'paises', 'hoteles', 'destinos', 'proveedores'));
+            return view('productos.crud.update_producto', compact('producto', 'paises', 'hoteles', 'destinos', 'proveedores', 'aerolineas'));
             
         }
     }
@@ -72,7 +73,7 @@ class ProductoController extends Controller
             }
         } 
             $extension = strtolower($uploadedFile->getClientOriginalExtension());
-            if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {
+            if (!in_array($extension, ['jpeg', 'jpg', 'png','webp'])) {
                 Session::flash('error_message', 'Ooops!!! Hubo un error, revisa el formulario.');
                 return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
             } else {
@@ -96,6 +97,7 @@ class ProductoController extends Controller
             $producto->id_hotel = $request->id_hotel;
             $producto->id_destino = $request->id_destino;
             $producto->id_pais = $request->id_pais;
+            $producto->id_aerolinea = $request->id_aerolinea;
             $producto->estadia = $request->estadia;
             $producto->habitacion = $request->habitacion;
             $producto->precio_total = $request->precio_total;
@@ -117,29 +119,30 @@ class ProductoController extends Controller
 
     public function createProd(Request $request)
     {
+       //dd($request->all());
         $messages = [
             'codigo.unique' => 'EL CÓDIGO DEL PRODUCTO INGRESADO YA EXISTE.',
         ];
         $this->validate($request, [
             'titulo' => 'string',
             'proveedor' => 'string',
-            'imagen' => 'image|mimes:jpeg,png,jpg',
+            'imagen' => 'image|mimes:jpeg,png,jpg,webp',
             'habitacion' => 'string',
             'tipo_producto' => 'string',
             'destinoGral' => 'string',
             'id_pais_destino' => 'integer',
+            'id_aerolinea' => 'integer',
             'ciudad_destino' => 'integer',
             'origen_salida' => 'string',
             'precio_total' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
             'descto' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
             'moneda' => 'string', 
-            'detalles' => 'string',
             'hotel_principal' => 'string',
             'estadia_principal' => 'integer',
             'fecha_vencimiento' => 'date',
         ], $messages);
         $uploadedFile = $request->file('imagen');
-
+        // dd($request->all());
         $timestamp = time();
         $originalFileName = $timestamp . '_' . $uploadedFile->getClientOriginalName();
 
@@ -150,7 +153,7 @@ class ProductoController extends Controller
             $image->fit(1080, 720);
         }    
         $extension = strtolower($uploadedFile->getClientOriginalExtension());
-        if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {
+        if (!in_array($extension, ['jpeg', 'jpg', 'png', 'webp'])) {
             Session::flash('error_message', 'Ooops10!!! Hubo un error, revisa el formulario.');
             return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
         } else {
@@ -162,19 +165,20 @@ class ProductoController extends Controller
             $producto->id_hotel = $request->id_hotel;
             $producto->id_destino = $request->id_destino;
             $producto->id_pais = $request->id_pais;
+            $producto->id_aerolinea = $request->id_aerolinea;
             $producto->estadia = $request->estadia;
             $producto->habitacion = $request->habitacion;
             $producto->precio_total = $request->precio_total;
             $producto->descto = 0;
             $producto->moneda = $request->moneda;
             $producto->origen_salida = $request->origen_salida;
-            $producto->tipo_producto = $request->tipo_producto;
-            if($uploadedFile){
-            $producto->imagen = $originalFileName;
-            }           
+            $producto->tipo_producto = $request->tipo_producto;                  
             $producto->detalles = $request->detalles;
             $producto->comidas = $request->comidas;
             $producto->ubicacion = $request->ubicacion;
+            if($uploadedFile){
+            $producto->imagen = $originalFileName;
+            }     
             //$producto->solo_adultos = $request->has('solo_adultos') ? true : false;
             $producto->save();
         }
@@ -211,20 +215,7 @@ class ProductoController extends Controller
 
         return redirect('/read_producto')->with('success', 'EL PRODUCTO SE CREÓ CORRECTAMENTE');
     }
-   /* public function detalle_producto($id)
-{
-   // $productos = Producto::with(['hotel', 'service', 'destinos'])->find($id);
-    $productos = Producto::with(['hotel', 'service', 'destinos', 'aerolinea.itinerarios'])->find($id);
-
-
-    if (!$productos) {
-
-    } else {     
-
-        return view('productos.detalles.detalles_productos', compact('productos'));
-    }
-    
-} */
+   
 public function detalle_producto($id)
 {
     $productos = Producto::with([

@@ -52,6 +52,19 @@
         </div>
     </div>
 </div>
+@if(Auth::guard('client')->check())
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="d-grid">
+                <a href="{{ route('client.misViajes') }}" class="btn btn-secondary btn-lg shadow-sm">
+                    <i class="fas fa-arrow-left"></i> Regresar a Mis Viajes
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 <div class="container my-2">
     <div class="row datos-generales">
         <div class="container">

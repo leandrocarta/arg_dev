@@ -70,6 +70,17 @@
                                 </select>                           
                             </div>
                         </div>  
+                        <div class="form-group pe-1">
+                          <label for="id_aerolinea" class="col-form-label">Aerolínea</label>
+                          <select name="id_aerolinea" class="form-select" required>
+                             <option value="">Seleccione una aerolínea</option>
+                             @foreach ($aerolineas as $aerolinea)
+                                 <option value="{{ $aerolinea->id }}" {{ $producto->id_aerolinea == $aerolinea->id ? 'selected' : '' }}>
+                                     {{ $aerolinea->compania }} Fecha: {{ $aerolinea->fecha_inicio }}
+                                 </option>
+                             @endforeach
+                           </select>
+                        </div>
                         <div class="form-group">
                             <label for="estadia" class="col-md-4 control-label">Estadía Principal</label>
                             <div class="">

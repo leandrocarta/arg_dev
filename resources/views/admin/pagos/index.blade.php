@@ -21,8 +21,6 @@
         </a>
     </div>
 </div>
-
-
     @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -49,34 +47,43 @@
     <tbody>
         @foreach ($pagos as $pago)
         <tr data-client-id="{{ $pago->client->id }}">
-            <td class="text-center">{{ $pago->id }}</td>
-            <td>{{ $pago->client->nombre }} {{ $pago->client->apellido }}</td>
-            <td class="text-center">{{ $pago->misViaje ? 'ID: '.$pago->misViaje->id : 'No asignado' }}</td>
-            <td class="text-end fw-bold">${{ number_format($pago->misViaje->valor_viaje ?? 0, 2) }}</td>
-            <td class="text-end text-success fw-bold">${{ number_format($pago->monto_pagado, 2) }}</td>
-            <td class="text-end text-danger fw-bold">${{ number_format($pago->saldo_pendiente, 2) }}</td>
-            <td class="text-center">{{ $pago->fecha_pago }}</td>
-            <td class="text-center">
-                <span class="badge bg-info text-dark">{{ $pago->metodo_pago }}</span>
-            </td>
-            <td class="text-center">
-                <span class="badge bg-{{ $pago->estado == 'confirmado' ? 'success' : 'warning' }}">
-                    {{ ucfirst($pago->estado) }}
-                </span>
-            </td>
-            <td class="text-center">
-                <a href="{{ route('admin.pagos.edit', $pago->id) }}" class="btn btn-primary btn-sm">
-                    <i class="fas fa-edit"></i> Editar
-                </a>
-                <form action="{{ route('admin.pagos.destroy', $pago->id) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este pago?');">
-                        <i class="fas fa-trash-alt"></i> Eliminar
-                    </button>
-                </form>
-            </td>
-        </tr>
+             <td class="text-center">{{ $pago->id }}</td>
+             <td>{{ $pago->client->nombre }} {{ $pago->client->apellido }}</td>
+             <td class="text-center">
+                 {{ $pago->misViaje ? 'ID: '.$pago->misViaje->id : 'No asignado' }}
+             </td>
+             <td class="text-end fw-bold">
+              ${{ number_format($pago->total_viaje ?? 0, 2) }}
+             </td>
+
+             <td class="text-end text-success fw-bold">
+                 ${{ number_format($pago->monto_pagado, 2) }}
+             </td>
+             <td class="text-end text-danger fw-bold">
+                 ${{ number_format($pago->saldo_pendiente, 2) }}
+             </td>
+             <td class="text-center">{{ $pago->fecha_pago }}</td>
+             <td class="text-center">
+                 <span class="badge bg-info text-dark">{{ $pago->metodo_pago }}</span>
+             </td>
+             <td class="text-center">
+                 <span class="badge bg-{{ $pago->estado == 'confirmado' ? 'success' : 'warning' }}">
+                     {{ ucfirst($pago->estado) }}
+                 </span>
+             </td>
+             <td class="text-center">
+                 <a href="{{ route('admin.pagos.edit', $pago->id) }}" class="btn btn-primary btn-sm">
+                     <i class="fas fa-edit"></i> Editar
+                 </a>
+                 <form action="{{ route('admin.pagos.destroy', $pago->id) }}" method="POST" class="d-inline">
+                     @csrf
+                     @method('DELETE')
+                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este pago?');">
+                         <i class="fas fa-trash-alt"></i> Eliminar
+                     </button>
+                 </form>
+             </td>
+         </tr>
         @endforeach
     </tbody>
 </table>

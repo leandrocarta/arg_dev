@@ -106,14 +106,18 @@ Route::get('/register_client', [ClientRegisterController::class, 'show'])->name(
 Route::get('/verification_success', [ClientRegisterController::class, 'verification'])->name('verification.success');
 Route::get('/login_client', [ClientLoginController::class, 'showLogin']);
 Route::post('/login_client', [ClientLoginController::class, 'login']);
-Route::get('/edit_client', [ClientRegisterController::class, 'editForm'])->name('client.edit');
-Route::put('/update/{id}', [ClientRegisterController::class, 'update'])->name('client.update');
+
 Route::get('/logout_client', [ClientLoginController::class, 'logout']);
 Route::get('/recover_password_client', [ClientLoginController::class, 'recover']);
 Route::post('/recover_password_client', [ClientLoginController::class, 'recoverPassword']);
 Route::get('/reclamos', [ContactosController::class, 'showForm'])->name('client.reclamos.form');
 Route::post('/reclamos/{id}', [ContactosController::class, 'reclamo_save'])->name('client.reclamos');
-Route::get('/mis_viajes', [MisViajeController::class, 'index'])->name('client.misViajes');
+Route::get('/mis_viajes', [MisViajeController::class, 'misViajesCliente'])->name('client.misViajes');
+Route::get('/mis_pagos', [PagoController::class, 'misPagosCliente'])->name('client.misPagos');
+Route::get('/edit_client', [ClientRegisterController::class, 'editForm'])->name('client.edit');
+Route::put('/update/{id}', [ClientRegisterController::class, 'update'])->name('client.update');
+
+
 // Clientes Admin
 Route::middleware(['auth', 'admin'])->group(function () {    
     // Listado de viajes en el admin

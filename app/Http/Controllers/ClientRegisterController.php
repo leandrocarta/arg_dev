@@ -53,7 +53,9 @@ class ClientRegisterController extends Controller
     }
     public function editForm()
     {
-        $client = Auth::user(); // Obtener el usuario autenticado
+        //dd('Aqui');
+       // dd(Auth::guard('client')->user());
+        $client = Auth::guard('client')->user(); // Obtener el usuario autenticado
         $paises = Pais::all();
         $provincias = Provincia::all();
         $id_pais = $client->provincia->id_pais ?? null;
@@ -83,10 +85,10 @@ class ClientRegisterController extends Controller
         $client->updatePassword($newPassword);
        }
        
-        $client->nombre = ucwords(strtolower($request->input('nombre')));
-        $client->apellido = ucwords(strtolower($request->input('apellido')));
-        $client->documento = ucwords(strtolower($request->input('documento')));
-        $client->numero_doc = ucwords(strtolower($request->input('numero_doc')));
+        $client->nombre = strtolower($request->input('nombre'));
+        $client->apellido = strtolower($request->input('apellido'));
+        $client->documento = strtolower($request->input('documento'));
+        $client->numero_doc = strtoupper($request->input('numero_doc'));
         $client->fecha_nacimiento = $request->input('fecha_nacimiento');
         $client->fecha_vencimiento = ucwords(strtolower($request->input('fecha_vencimiento')));        
         $client->movil = $request->input('movil');

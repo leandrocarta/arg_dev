@@ -1142,3 +1142,6 @@ padding-top: 12px;
   height: 100%; /* La imagen se adapta a la altura del contenedor */
   object-fit: cover; /* Ajusta la imagen para que ocupe el espacio sin deformarse */
 }
+.oculto {
+    display: none !important;
+}

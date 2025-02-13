@@ -30,7 +30,7 @@
                             <select name="mis_viajes_id" id="mis_viajes_id" class="form-select" required>
                                 @foreach ($viajes as $viaje)
                                 <option value="{{ $viaje->id }}" {{ $pago->mis_viajes_id == $viaje->id ? 'selected' : '' }}>
-                                    ID: {{ $viaje->id }} - Destino: {{ $viaje->destino->ciudad_destino }}
+                                   ID: {{ $viaje->id }} - Paquete: {{ $viaje->producto->titulo ?? 'No asignado' }}
                                 </option>
                                 @endforeach
                             </select>

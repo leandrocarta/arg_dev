@@ -2,7 +2,7 @@
 @section('content')
 @if (@auth())             
       @if (Auth::guard('client')->check())
-    <div class="container w-50 form-edit form-movil">
+      <div class="container w-50 form-edit form-movil">
         <div class="row px-3">
             <div class="col conten-login">              
                <form action="{{ route('client.update', [Auth::guard('client')->user()->id]) }}" method="post">

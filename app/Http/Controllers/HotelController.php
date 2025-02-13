@@ -41,7 +41,7 @@ class HotelController extends Controller
         $originalFileName = $uploadedFile->getClientOriginalName();
         $image = Image::make($uploadedFile);
         $extension = strtolower($uploadedFile->getClientOriginalExtension());
-        if (!in_array($extension, ['jpeg', 'jpg', 'png'])) {
+        if (!in_array($extension, ['jpeg', 'jpg', 'png','webp'])) {
             Session::flash('error_message', 'Ooops10!!! Hubo un error, revisa el formulario.');
             return back()->withErrors(['profile_image' => 'El archivo debe ser una imagen JPEG, JPG o PNG.']);
         } else {
